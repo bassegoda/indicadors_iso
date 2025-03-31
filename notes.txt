@@ -1,0 +1,11 @@
+-- VAP: Agafar les dades del ENVIN i revisar aquells dos mesos manualment. 
+
+Revisar VAP. Revisar infecció urinària. 
+
+Crear indicador temps entre prescripció i administració dels antibiòtics.
+
+Indicador retirada de via central i retirada de TOT. 
+
+Afegir indicador estada a urgències. 
+
+
