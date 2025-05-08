@@ -29,7 +29,7 @@ icu_true_dates AS(
         CASE WHEN icu_discharge = 1 THEN end_date END AS icu_discharge_date
     FROM icu_adm_disch
 ),
--- Identify the beginning of each ICU stay with a stay_id
+-- Identify the beginning of each ICU stay with a stay_id that increases only when a new admission occurs
 icu_stay_markers AS (
     SELECT
         *,
