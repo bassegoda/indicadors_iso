@@ -2,3 +2,5 @@ otros/
 output/
 data/
 credencials/
+.DS_Store
+.vscode/
