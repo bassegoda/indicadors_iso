@@ -1,3 +1,5 @@
+-- Deliris a les UCIs primer quadrimestre 2025
+
 WITH deliris as(
 	SELECT 
 		patient_ref
@@ -23,4 +25,4 @@ WHERE
 	,'E043', 'I043'						-- UCIQ	
 	,'E057', 'I057', 'E037', 'I037'		-- UVIR 
 	,'E016', 'I016')					-- Coronaria
-	AND result_date BETWEEN  '2024-01-01 00:00:00' AND '2024-12-31 23:59:59'
+	AND result_date BETWEEN  '2025-01-01 00:00:00' AND '2025-04-31 23:59:59'
