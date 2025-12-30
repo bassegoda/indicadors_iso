@@ -2,12 +2,12 @@ WITH raw_moves AS (
     SELECT 
         patient_ref,
         episode_ref,
-        ou_loc_ref,      -- <--- ADDED: Needed to identify the unit later
+        ou_loc_ref,
         start_date,
         end_date
     FROM g_movements
     WHERE ou_loc_ref IN ('E073', 'I073')
-      AND start_date BETWEEN '2024-01-01' AND '2024-12-31 23:59:59'
+      AND start_date BETWEEN '2025-01-01' AND '2025-12-31 23:59:59'
 ),
 flagged_starts AS (
     SELECT 
@@ -63,7 +63,7 @@ cirrhosis_dx AS (
 SELECT 
     c.patient_ref,
     c.episode_ref,
-    c.ou_loc_ref,        -- <--- Included in final output for Table 2
+    c.ou_loc_ref,        
     c.true_start_date,
     c.true_end_date,
     c.total_hours,
