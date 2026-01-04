@@ -7,7 +7,7 @@ WITH raw_moves AS (
         end_date
     FROM g_movements
     WHERE ou_loc_ref IN ('E073', 'I073')
-      AND start_date BETWEEN '2025-01-01' AND '2025-12-31 23:59:59'
+      AND start_date BETWEEN '2025-01-01' AND '2025-10-31 23:59:59'
 ),
 flagged_starts AS (
     SELECT 
