@@ -1,9 +1,13 @@
 import pandas as pd
 from tableone import TableOne
 import sys
-import os
 from pathlib import Path
 
+# Añadir directorio raíz al path
+root_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(root_dir))
+
+from connection import execute_query
 
 # ==========================================
 # 1. SQL TEMPLATE
@@ -111,18 +115,8 @@ ORDER BY c.episode_ref, c.true_start_date;
 # ==========================================
 # 2. ANALYSIS LOGIC
 # ==========================================
-def generate_table(csv_path, year, unit_list):
+def generate_table(df, year, unit_list):
     """Genera una taula descriptiva a partir de les dades de cohort."""
-    print(f"\n--- Processing Data for {year} ---")
-    df = pd.read_csv(csv_path)
-
-    # Safety Check
-    if 'ou_loc_ref' not in df.columns:
-        print("ERROR: CSV missing 'ou_loc_ref'. "
-              "Please check your SQL export.")
-        return
-
-    # Dynamic Pre-processing
     df['unit'] = 'Unit ' + df['ou_loc_ref'].astype(str)
     df['los_days'] = df['total_hours'] / 24.0
     df['sex'] = df['sex'].map({1: 'Male', 2: 'Female'})
@@ -148,7 +142,6 @@ def generate_table(csv_path, year, unit_list):
         ordered=True
     )
 
-    # Variables
     columns = [
         'age_at_start',
         'sex',
@@ -179,7 +172,6 @@ def generate_table(csv_path, year, unit_list):
         'readmission_at_72h': 'Readmission (72h)'
     }
 
-    # Generate Table
     table_two = TableOne(
         df,
         columns=columns,
@@ -191,11 +183,13 @@ def generate_table(csv_path, year, unit_list):
         missing=False
     )
 
-    # Export
+    # Crear carpeta output si no existe
+    output_dir = Path(__file__).parent / 'output'
+    output_dir.mkdir(exist_ok=True)
+    
     units_str = "-".join(unit_list).replace(" ", "")
-    output_filename = f"cohort_table_{year}_{units_str}.html"
+    output_filename = output_dir / f"cohort_table_{year}_{units_str}.html"
 
-    # Create valid HTML with Title
     title_text = f"Analysis of {', '.join(unit_list)} in {year}"
     full_html = (
         f"<html><head><style>"
@@ -213,67 +207,36 @@ def generate_table(csv_path, year, unit_list):
     with open(output_filename, "w", encoding='utf-8') as f:
         f.write(full_html)
 
-    print(f"Success! Table saved to: {output_filename}")
+    print(f"Tabla guardada en: {output_filename}")
 
 
 # ==========================================
-# 3. MAIN INTERACTIVE FLOW
+# 3. MAIN FLOW
 # ==========================================
 def main():
-    """Flux principal d'execució interactiva."""
+    """Flux principal d'execució."""
     print("========================================")
     print("   ICU COHORT ANALYSIS GENERATOR")
     print("========================================")
 
-    # 1. Ask for User Input
     year_input = input("Enter Year (e.g., 2024): ").strip()
     units_input = input(
         "Enter Units separated by commas (e.g., E073, I073): "
     ).strip()
 
-    # Clean up units list
     unit_list = [u.strip() for u in units_input.split(',')]
     sql_units_formatted = ", ".join([f"'{u}'" for u in unit_list])
-
-    # 2. Modify and Save SQL Query
-    query_content = SQL_TEMPLATE.format(
+    
+    query = SQL_TEMPLATE.format(
         year=year_input,
         units_formatted=sql_units_formatted
     )
-
-    query_filename = "generated_query.sql"
-    with open(query_filename, "w") as f:
-        f.write(query_content)
-
-    csv_filename = f"data_{year_input}.csv"
-
-    print("\n----------------------------------------")
-    print(f"1. A new SQL query has been saved to: '{query_filename}'")
-    print(f"2. Please run this query in your database manager.")
-    print(f"3. Export the result as a CSV file named: '{csv_filename}'")
-    print(f"   (Make sure it is in the same folder as this script)")
-    print("----------------------------------------")
-
-    # 3. Wait for User Confirmation
-    while True:
-        confirm = input(
-            f"\nHave you saved '{csv_filename}'? (yes/no): "
-        ).lower()
-        if confirm in ['y', 'yes']:
-            if os.path.exists(csv_filename):
-                break
-            else:
-                print(
-                    f"ERROR: Could not find file '{csv_filename}'. "
-                    f"Please check the name and location."
-                )
-        elif confirm in ['n', 'no']:
-            print("Exiting. Please run the script again when you "
-                  "have the data.")
-            sys.exit()
-
-    # 4. Run Analysis
-    generate_table(csv_filename, year_input, unit_list)
+    
+    df = execute_query(query)
+    
+    print(f"Datos obtenidos: {len(df)} registros")
+    
+    generate_table(df, year_input, unit_list)
 
 
 if __name__ == "__main__":
