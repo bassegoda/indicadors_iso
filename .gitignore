@@ -4,3 +4,5 @@ data/
 credencials/
 .DS_Store
 .vscode/
+venv/
+.env

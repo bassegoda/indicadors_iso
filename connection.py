@@ -21,14 +21,29 @@ def get_config_path():
             return path1
         elif os.path.exists(path2):
             return path2
-    else:  # Path hardcodejat per Mac
-        return "/Users/octavi/Documents/.sql_config/config.ini"
+    else:  # Path dinàmic per Mac
+        home_dir = os.path.expanduser('~')
+        config_path = os.path.join(home_dir, 'Documents', '.sql_config', 'config.ini')
+        if os.path.exists(config_path):
+            return config_path
+        else:
+            raise FileNotFoundError(f"No se encontró el archivo de configuración en: {config_path}")
     
 
 def get_connection(db_name=None):
     """Returns a MySQL connection with credentials from config file"""
+    config_path = get_config_path()
     config = configparser.ConfigParser()
-    config.read(get_config_path())
+    config.read(config_path)
+    
+    # Verificar que el archivo tiene las claves necesarias
+    if 'DEFAULT' not in config:
+        raise KeyError(f"El archivo de configuración {config_path} no tiene una sección [DEFAULT]")
+    
+    required_keys = ['host', 'user', 'password', 'database']
+    missing_keys = [key for key in required_keys if key not in config['DEFAULT']]
+    if missing_keys:
+        raise KeyError(f"El archivo de configuración {config_path} no tiene las siguientes claves: {', '.join(missing_keys)}")
     
     # Create MySQL connection
     conn = mysql.connector.connect(
