@@ -115,9 +115,23 @@ ORDER BY c.episode_ref, c.true_start_date;
 # ==========================================
 # 2. ANALYSIS LOGIC
 # ==========================================
-def generate_table(df, year, unit_list):
+def _add_semester_columns(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+    df["true_start_date"] = pd.to_datetime(df["true_start_date"], errors="coerce")
+    df["semester"] = df["true_start_date"].dt.month.map(lambda m: "H1" if m <= 6 else "H2")
+    return df
+
+
+def generate_table(df, year, unit_list, split_semesters: bool = False):
     """Genera una taula descriptiva a partir de les dades de cohort."""
     df['unit'] = 'Unit ' + df['ou_loc_ref'].astype(str)
+    if split_semesters:
+        df = _add_semester_columns(df)
+        df["unit_group"] = df["unit"] + " - " + df["semester"]
+        groupby_col = "unit_group"
+    else:
+        groupby_col = "unit"
+
     df['los_days'] = df['total_hours'] / 24.0
     df['sex'] = df['sex'].map({1: 'Male', 2: 'Female'})
 
@@ -176,7 +190,7 @@ def generate_table(df, year, unit_list):
         df,
         columns=columns,
         categorical=categorical,
-        groupby='unit',
+        groupby=groupby_col,
         nonnormal=nonnormal,
         rename=labels,
         pval=False,
@@ -188,9 +202,12 @@ def generate_table(df, year, unit_list):
     output_dir.mkdir(exist_ok=True)
     
     units_str = "-".join(unit_list).replace(" ", "")
-    output_filename = output_dir / f"cohort_table_{year}_{units_str}.html"
+    suffix = "_semesters" if split_semesters else ""
+    output_filename = output_dir / f"cohort_table_{year}_{units_str}{suffix}.html"
 
     title_text = f"Analysis of {', '.join(unit_list)} in {year}"
+    if split_semesters:
+        title_text += " (H1 vs H2)"
     full_html = (
         f"<html><head><style>"
         f"body{{font-family:Arial;margin:40px;}}"
@@ -223,6 +240,8 @@ def main():
     units_input = input(
         "Enter Units separated by commas (e.g., E073, I073): "
     ).strip()
+    split_semesters_input = input("Split analysis by semesters (H1/H2)? [y/N]: ").strip().lower()
+    split_semesters = split_semesters_input in ("y", "yes", "s", "si")
 
     unit_list = [u.strip() for u in units_input.split(',')]
     sql_units_formatted = ", ".join([f"'{u}'" for u in unit_list])
@@ -236,7 +255,7 @@ def main():
     
     print(f"Datos obtenidos: {len(df)} registros")
     
-    generate_table(df, year_input, unit_list)
+    generate_table(df, year_input, unit_list, split_semesters=split_semesters)
 
 
 if __name__ == "__main__":
