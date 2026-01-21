@@ -9,25 +9,18 @@ import os
 
 def get_config_path():
     """Sets the path to the config.init file which should be in the Documents folder
-    inside a .sql_connection directory
+    inside a .sql_config directory
     """
-    if platform.system() == 'Windows':
-        # Primer path hardcodejat de PC ANACONDA
-        path1 = r"C:\Users\User\Documents\.sql_config\config.ini"
-        # Segon path hardcodejat Clínic
-        path2 = r"C:\Users\bassegoda\Documents\.sql_config\config.ini"
-        # Determinar quina ruta existeix
-        if os.path.exists(path1):
-            return path1
-        elif os.path.exists(path2):
-            return path2
-    else:  # Path dinàmic per Mac
-        home_dir = os.path.expanduser('~')
-        config_path = os.path.join(home_dir, 'Documents', '.sql_config', 'config.ini')
-        if os.path.exists(config_path):
-            return config_path
-        else:
-            raise FileNotFoundError(f"No se encontró el archivo de configuración en: {config_path}")
+    home_dir = os.path.expanduser('~')
+    config_path = os.path.join(home_dir, 'Documents', '.sql_config', 'config.ini')
+    
+    if os.path.exists(config_path):
+        return config_path
+    else:
+        raise FileNotFoundError(
+            f"No se encontró el archivo de configuración en: {config_path}\n"
+            f"Por favor, crea el archivo con las credenciales de la base de datos."
+        )
     
 
 def get_connection(db_name=None):
