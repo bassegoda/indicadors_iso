@@ -1,11 +1,12 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 df = pd.read_excel('incidents_nucli_UCIH_2025.xlsx')
 print(df.info())
 
-import pandas as pd
-import matplotlib.pyplot as plt
+OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+OUTPUT_DIR.mkdir(exist_ok=True)
 
 def plot_pie_from_column(df, column_name):
     """
@@ -52,14 +53,15 @@ def plot_pie_from_column(df, column_name):
     # Equal aspect ratio ensures that pie is drawn as a circle.
     plt.axis('equal')
 
-    # Save the figure
+    # Save the figure into output subfolder
     # Replace spaces in column name with underscores for a valid filename
     output_filename = f'{column_name.replace(" ", "_")}_pie_chart.png'
-    plt.savefig(output_filename)
+    output_path = OUTPUT_DIR / output_filename
+    plt.savefig(output_path)
     plt.close()
 
-    print(f"Pie chart saved as {output_filename}")
-    return output_filename
+    print(f"Pie chart saved as {output_path}")
+    return output_path
 
 plot_pie_from_column(df, 'Risc')
 plot_pie_from_column(df, 'Categ. prof. notificant')

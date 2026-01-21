@@ -7,8 +7,11 @@ sys.path.append(str(project_root))
 
 from connection import execute_query
 
-SQL_PATH = Path(__file__).resolve().parent / "deaths_by_month.sql"
-OUTPUT_CSV = Path(__file__).resolve().parent / "deaths_by_month.csv"
+SCRIPT_DIR = Path(__file__).resolve().parent
+SQL_PATH = SCRIPT_DIR / "deaths_by_month.sql"
+OUTPUT_DIR = SCRIPT_DIR / "output"
+OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_CSV = OUTPUT_DIR / "deaths_by_month.csv"
 
 
 def build_date_filter(start_date: str, end_date: str) -> str:

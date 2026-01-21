@@ -199,13 +199,13 @@ def main() -> None:
     query = DELIRIUM_ASSESSMENTS_SQL.format(year=year, units_formatted=sql_units_formatted)
     df = eq(query)
 
-# Check if data exists
+    # Check if data exists
     if df.empty:
         print("No data returned from the query.")
         return
 
-# 3. Clean & Map Data (Do this globally first)
-# Using a dictionary map is faster and cleaner than 3 separate .loc calls
+    # 3. Clean & Map Data (Do this globally first)
+    # Using a dictionary map is faster and cleaner than 3 separate .loc calls
     result_mapping = {
         'DELIRIO_CAM-ICU_1': 'Absent',
         'DELIRIO_CAM-ICU_2': 'Present',
@@ -213,17 +213,17 @@ def main() -> None:
     }
     df['result_txt'] = df['result_txt'].replace(result_mapping)
 
-# 4. Prepare Plot Data
-# Sorting by count descending makes the chart easier to read
+    # 4. Prepare Plot Data
+    # Sorting by count descending makes the chart easier to read
     icu_counts = df['ou_loc_ref'].value_counts().reset_index()
     icu_counts.columns = ['ICU', 'Count']
     icu_counts = icu_counts.sort_values('Count', ascending=False)
 
-# 5. Plotting
+    # 5. Plotting
     plt.figure(figsize=(10, 6))
     sns.set_theme(style="whitegrid")
 
-# Create the plot object (ax) to manipulate it later
+    # Create the plot object (ax) to manipulate it later
     ax = sns.barplot(
         data=icu_counts,
         x="ICU",
@@ -234,23 +234,25 @@ def main() -> None:
         order=icu_counts['ICU'] # Ensure plot follows our sorted order
     )
 
-# Title and Labels
+    # Title and Labels
     plt.title(f"Recompte d'avaluacions de delirium (CAM-ICU) {year}", fontsize=16, fontweight='bold', color='#333')
     plt.xlabel("Unitat (ICU)", fontsize=12)
     plt.ylabel("Nombre de registres", fontsize=12)
 
-# Modern way to add labels (No need for manual loops/calculations)
+    # Modern way to add labels (No need for manual loops/calculations)
     ax.bar_label(ax.containers[0], padding=3, fontsize=10)
 
     plt.tight_layout()
 
-# Save plot
+    # Save plot
     units_str = "-".join(unit_list).replace(" ", "")
-    output_path = project_root / "deliris" / f"icu_delirium_counts_{year}_{units_str}.png"
+    output_dir = project_root / "deliris" / "output"
+    output_dir.mkdir(exist_ok=True)
+    output_path = output_dir / f"icu_delirium_counts_{year}_{units_str}.png"
     plt.savefig(output_path, dpi=400)
     print(f"Plot saved to: {output_path}")
 
-# 6. Specific Statistics for Hepàtica (E073, I073)
+    # 6. Specific Statistics for Hepàtica (E073, I073)
     print("\n" + "=" * 72)
     print(f"Recompte d'avaluacions de delirium (CAM-ICU) a {', '.join(unit_list)}")
     print("=" * 72)

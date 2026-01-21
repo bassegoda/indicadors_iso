@@ -1,5 +1,6 @@
 otros/
 output/
+**/output/
 data/
 credencials/
 .DS_Store
