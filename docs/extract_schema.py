@@ -1,28 +1,31 @@
 # This script extracts the schema of the database and saves it to a text file
 # dic_ tables are excluded
 
-import mysql.connector
+import sys
 from pathlib import Path
+import mysql.connector
 
-# --- CONFIGURACIÓN ---
-config = {
-    'user': 'DSC_bassegoda',
-    'password': '{password}',
-    'host': '172.26.6.27',
-    'database': 'datascope4'
-}
+# Añadir directorio raíz al path para importar connection
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
 
-password = input("Introduce la contraseña de la base de datos: ")
-config['password'] = password
+from connection import get_connection
 
 # Definir ruta de salida
 script_dir = Path(__file__).parent
-OUTPUT_TXT = script_dir / 'schema_documentation.txt'
+output_dir = script_dir / 'output'
+output_dir.mkdir(exist_ok=True)
+OUTPUT_TXT = output_dir / 'schema_documentation.txt'
 
 try:
-    conn = mysql.connector.connect(**config)
+    # Usar connection.py para obtener la conexión (lee credenciales del .env)
+    conn = get_connection()
     cursor = conn.cursor()
-
+    
+    # Obtener el nombre de la base de datos desde la conexión
+    cursor.execute("SELECT DATABASE()")
+    database_name = cursor.fetchone()[0]
+    
     # Obtener vistas y columnas (excluyendo tablas que empiezan por 'dic_')
     query = """
     SELECT 
@@ -41,12 +44,12 @@ try:
     ORDER BY t.TABLE_NAME, c.ORDINAL_POSITION;
     """
     
-    cursor.execute(query, (config['database'],))
+    cursor.execute(query, (database_name,))
     results = cursor.fetchall()
 
     # Preparar encabezado
     txt_lines = [
-        f"DATABASE DOCUMENTATION: {config['database']}",
+        f"DATABASE DOCUMENTATION: {database_name}",
         "=" * 50,
         "Generated via Python Auto-Discovery",
         ""
