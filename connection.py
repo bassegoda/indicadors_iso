@@ -1,50 +1,121 @@
 # Cross-platform connection to be stored in each project root directory
 
-import platform
-import configparser
+import os
 import time
 import mysql.connector
 import pandas as pd
-import os
+from pathlib import Path
+from dotenv import load_dotenv
 
-def get_config_path():
-    """Sets the path to the config.init file which should be in the Documents folder
-    inside a .sql_config directory
+def find_onedrive_path():
     """
-    home_dir = os.path.expanduser('~')
-    config_path = os.path.join(home_dir, 'Documents', '.sql_config', 'config.ini')
+    Encuentra la ruta de OneDrive en Windows o Mac.
+    Busca en múltiples ubicaciones comunes.
+    """
+    home_dir = Path.home()
+    system = os.name
     
-    if os.path.exists(config_path):
-        return config_path
+    # Windows
+    if system == 'nt':
+        # Opción 1: Variable de entorno OneDrive
+        onedrive_env = os.getenv('OneDrive') or os.getenv('OneDriveCommercial')
+        if onedrive_env:
+            onedrive_path = Path(onedrive_env)
+            if onedrive_path.exists():
+                return onedrive_path
+        
+        # Opción 2: Buscar en el perfil del usuario
+        possible_paths = [
+            home_dir / 'OneDrive',
+            home_dir / 'OneDrive - Hospital Clínic de Barcelona',
+            Path(os.getenv('USERPROFILE', '')) / 'OneDrive',
+            Path(os.getenv('USERPROFILE', '')) / 'OneDrive - Hospital Clínic de Barcelona',
+        ]
+        
+        for path in possible_paths:
+            if path.exists() and path.is_dir():
+                return path
+    
+    # macOS
     else:
+        # Opción 1: CloudStorage (OneDrive moderno en macOS)
+        cloud_storage = home_dir / 'Library' / 'CloudStorage'
+        if cloud_storage.exists():
+            for item in cloud_storage.iterdir():
+                if 'OneDrive' in item.name:
+                    return item
+        
+        # Opción 2: OneDrive directo en home
+        possible_paths = [
+            home_dir / 'OneDrive',
+            home_dir / 'OneDrive - Hospital Clínic de Barcelona',
+        ]
+        
+        for path in possible_paths:
+            if path.exists() and path.is_dir():
+                return path
+    
+    return None
+
+def get_env_path():
+    """
+    Busca el archivo .env en la raíz de OneDrive.
+    """
+    onedrive_path = find_onedrive_path()
+    
+    if not onedrive_path:
         raise FileNotFoundError(
-            f"No se encontró el archivo de configuración en: {config_path}\n"
-            f"Por favor, crea el archivo con las credenciales de la base de datos."
+            "No se pudo encontrar la carpeta de OneDrive.\n"
+            "Por favor, asegúrate de que OneDrive esté instalado y configurado.\n"
+            "O crea el archivo .env manualmente en la raíz de OneDrive."
         )
     
+    env_path = onedrive_path / '.env'
+    
+    if not env_path.exists():
+        raise FileNotFoundError(
+            f"No se encontró el archivo .env en: {env_path}\n"
+            f"Por favor, crea el archivo .env en la raíz de OneDrive con las siguientes variables:\n"
+            f"DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT"
+        )
+    
+    return env_path
 
 def get_connection(db_name=None):
-    """Returns a MySQL connection with credentials from config file"""
-    config_path = get_config_path()
-    config = configparser.ConfigParser()
-    config.read(config_path)
+    """Returns a MySQL connection with credentials from .env file"""
+    env_path = get_env_path()
+    load_dotenv(env_path)
     
-    # Verificar que el archivo tiene las claves necesarias
-    if 'DEFAULT' not in config:
-        raise KeyError(f"El archivo de configuración {config_path} no tiene una sección [DEFAULT]")
+    # Obtener valores del .env
+    host = os.getenv('DB_HOST')
+    user = os.getenv('DB_USER')
+    password = os.getenv('DB_PASSWORD')
+    database = os.getenv('DB_DATABASE', db_name)
+    port = int(os.getenv('DB_PORT', '3306'))
     
-    required_keys = ['host', 'user', 'password', 'database']
-    missing_keys = [key for key in required_keys if key not in config['DEFAULT']]
-    if missing_keys:
-        raise KeyError(f"El archivo de configuración {config_path} no tiene las siguientes claves: {', '.join(missing_keys)}")
+    # Validar que existen los valores requeridos
+    required = {
+        'DB_HOST': host,
+        'DB_USER': user,
+        'DB_PASSWORD': password,
+        'DB_DATABASE': database
+    }
+    missing = [k for k, v in required.items() if not v]
+    
+    if missing:
+        raise ValueError(
+            f"Faltan las siguientes variables en {env_path}:\n"
+            f"{', '.join(missing)}\n"
+            f"Por favor, añade estas variables al archivo .env"
+        )
     
     # Create MySQL connection
     conn = mysql.connector.connect(
-        host=config['DEFAULT']['host'],
-        user=config['DEFAULT']['user'],
-        password=config['DEFAULT']['password'],
-        database=db_name or config['DEFAULT']['database'],
-        port=3306
+        host=host,
+        user=user,
+        password=password,
+        database=database,
+        port=port
     )
     
     return conn
