@@ -20,8 +20,11 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_colwidth', None)
 
-def get_nutrition_query(start_date, end_date, unit1, unit2):
+def get_nutrition_query(start_date, end_date, unit_list):
     """Genera la query SQL para el análisis de nutrición"""
+    # Generar la lista de unidades formateada para SQL
+    units_formatted = ", ".join([f"'{u}'" for u in unit_list])
+    
     query = f"""
     WITH movement_data AS (
         SELECT 
@@ -34,7 +37,7 @@ def get_nutrition_query(start_date, end_date, unit1, unit2):
         FROM
             g_movements AS m
         WHERE 
-            m.ou_loc_ref IN ('{unit1}', '{unit2}') 
+            m.ou_loc_ref IN ({units_formatted}) 
             AND m.start_date BETWEEN '{start_date} 00:00:00' AND '{end_date} 23:59:59'
             AND m.start_date != m.end_date
             AND TIMESTAMPDIFF(hour, m.start_date, m.end_date) > 1
@@ -161,15 +164,12 @@ def main():
     
     # Solicitar unidades
     units_input = input(
-        "Enter Units separated by commas (e.g., E073, I073): "
+        "Enter Units separated by commas (e.g., E073 or E073, I073): "
     ).strip()
     unit_list = [u.strip() for u in units_input.split(',') if u.strip()]
     
-    if len(unit_list) < 2:
-        raise ValueError("Debes indicar al menos dos unidades (p.ej. E073, I073).")
-    
-    unit1 = unit_list[0]
-    unit2 = unit_list[1]
+    if len(unit_list) < 1:
+        raise ValueError("Debes indicar al menos una unidad (p.ej. E073).")
     
     # Generar fechas basadas en el año
     start_date = f"{year}-01-01"
@@ -180,7 +180,7 @@ def main():
     print(f"Período: {start_date} a {end_date}\n")
     
     # Generar y ejecutar query
-    query = get_nutrition_query(start_date, end_date, unit1, unit2)
+    query = get_nutrition_query(start_date, end_date, unit_list)
     df = execute_query(query)
     
     # Mostrar información básica del dataframe
