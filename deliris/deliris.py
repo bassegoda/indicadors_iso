@@ -246,7 +246,7 @@ def main() -> None:
 
     # Save plot
     units_str = "-".join(unit_list).replace(" ", "")
-    output_dir = project_root / "deliris" / "output"
+    output_dir = current_file.parent / "output"
     output_dir.mkdir(exist_ok=True)
     output_path = output_dir / f"icu_delirium_counts_{year}_{units_str}.png"
     plt.savefig(output_path, dpi=400)

@@ -1,5 +1,5 @@
 """
-Análisis de nutrición enteral y parenteral para 2025
+Análisis de nutrición enteral y parenteral
 """
 
 import sys
@@ -12,15 +12,13 @@ sys.path.append(str(project_root))
 
 from connection import execute_query
 
+# Configurar carpeta de output
+OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+OUTPUT_DIR.mkdir(exist_ok=True)
+
 # Configuración de pandas
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_colwidth', None)
-
-# Configuración para 2025
-START_DATE = '2023-01-01'
-END_DATE = '2023-12-31'
-UNIT1 = 'E073'
-UNIT2 = 'I073'
 
 def get_nutrition_query(start_date, end_date, unit1, unit2):
     """Genera la query SQL para el análisis de nutrición"""
@@ -97,14 +95,14 @@ def get_nutrition_query(start_date, end_date, unit1, unit2):
     return query
 
 
-def analyze_nutrition(df):
+def analyze_nutrition(df, year, unit_list, start_date, end_date):
     """Analiza los datos de nutrición y muestra estadísticas"""
     if df.empty:
         print("No se encontraron datos para el período analizado.")
         return
     
     print(f"\n{'='*60}")
-    print(f"ANÁLISIS DE NUTRICIÓN 2025")
+    print(f"ANÁLISIS DE NUTRICIÓN {year}")
     print(f"{'='*60}\n")
     print(f"Total de episodios con nutrición: {len(df)}\n")
     
@@ -138,17 +136,51 @@ def analyze_nutrition(df):
             print(f"Tiempo medio hasta inicio nutrición parenteral: {temps_parenteral:.0f} horas")
     
     print(f"\n{'='*60}\n")
+    
+    # Guardar resultados en CSV
+    units_str = "-".join(unit_list).replace(" ", "")
+    output_csv = OUTPUT_DIR / f"nutritions_analysis_{year}_{units_str}.csv"
+    df.to_csv(output_csv, index=False, encoding='utf-8')
+    print(f"Resultados guardados en: {output_csv}")
+    
     return df
 
 
 def main():
     """Función principal"""
-    print("Ejecutando análisis de nutrición para 2025...")
-    print(f"Unidades: {UNIT1}, {UNIT2}")
-    print(f"Período: {START_DATE} a {END_DATE}\n")
+    print("========================================")
+    print("   ANÁLISIS DE NUTRICIÓN")
+    print("========================================")
+    
+    # Solicitar año
+    year_input = input("Enter Year (e.g., 2024): ").strip()
+    try:
+        year = int(year_input)
+    except ValueError:
+        raise ValueError(f"Año inválido: {year_input!r}")
+    
+    # Solicitar unidades
+    units_input = input(
+        "Enter Units separated by commas (e.g., E073, I073): "
+    ).strip()
+    unit_list = [u.strip() for u in units_input.split(',') if u.strip()]
+    
+    if len(unit_list) < 2:
+        raise ValueError("Debes indicar al menos dos unidades (p.ej. E073, I073).")
+    
+    unit1 = unit_list[0]
+    unit2 = unit_list[1]
+    
+    # Generar fechas basadas en el año
+    start_date = f"{year}-01-01"
+    end_date = f"{year}-12-31"
+    
+    print(f"\nEjecutando análisis de nutrición para {year}...")
+    print(f"Unidades: {', '.join(unit_list)}")
+    print(f"Período: {start_date} a {end_date}\n")
     
     # Generar y ejecutar query
-    query = get_nutrition_query(START_DATE, END_DATE, UNIT1, UNIT2)
+    query = get_nutrition_query(start_date, end_date, unit1, unit2)
     df = execute_query(query)
     
     # Mostrar información básica del dataframe
@@ -156,7 +188,7 @@ def main():
     print(df.info())
     
     # Realizar análisis
-    analyze_nutrition(df)
+    analyze_nutrition(df, year, unit_list, start_date, end_date)
     
     return df
 

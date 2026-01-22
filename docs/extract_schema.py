@@ -1,3 +1,6 @@
+# This script extracts the schema of the database and saves it to a text file
+# dic_ tables are excluded
+
 import mysql.connector
 from pathlib import Path
 
@@ -14,7 +17,7 @@ config['password'] = password
 
 # Definir ruta de salida
 script_dir = Path(__file__).parent
-OUTPUT_TXT = script_dir / 'db_documentation.txt'
+OUTPUT_TXT = script_dir / 'schema_documentation.txt'
 
 try:
     conn = mysql.connector.connect(**config)
