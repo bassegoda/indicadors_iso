@@ -970,6 +970,7 @@ ACR_QS:Levitronix CentriMag
 ## Query Examples
 
 ### Example 1: Patients with specific diagnosis
+
 ```sql
 WITH diagnosis_search AS (
     SELECT DISTINCT patient_ref, episode_ref, diag_descr

@@ -45,11 +45,11 @@ grouped_stays AS (
     FROM flagged_starts
 ),
 cohort AS (
-    SELECT 
+    SELECT
         patient_ref,
         episode_ref,
         stay_id,
-        MIN(ou_loc_ref) as ou_loc_ref, 
+        SUBSTRING_INDEX(GROUP_CONCAT(ou_loc_ref ORDER BY start_date SEPARATOR ','), ',', 1) as ou_loc_ref,
         MIN(start_date) as true_start_date,
         MAX(end_date) as true_end_date,
         TIMESTAMPDIFF(HOUR, MIN(start_date), MAX(end_date)) AS total_hours
