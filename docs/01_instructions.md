@@ -14,10 +14,10 @@
 
 - Always explain how the query works before showing it
 - Search using 'ref' fields, not 'descr'
+- **Exception for diagnoses**: Do NOT use `diag_ref` to link `dic_diagnostic` with `g_diagnostics`. The `diag_ref` fields in these tables are independent systems. Search directly by `diag_descr` in `g_diagnostics` table.
 - Use Common Table Expressions (CTEs) for optimization
 - Do not explain optimizations, just do them
-- For laboratory data, search in dic_lab dictionary
-- For diagnoses, search in dic_diagnostic dictionary
+- For laboratory data, search in dic_lab dictionary using `lab_sap_ref`
 
 ## Database Overview
 

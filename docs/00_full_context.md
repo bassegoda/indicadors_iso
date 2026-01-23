@@ -17,10 +17,10 @@ Your task: Create SQL queries from natural language questions.
 ### Rules:
 - Always explain how the query works before showing it
 - Search using 'ref' fields, not 'descr'
+- **Exception for diagnoses**: Do NOT use `diag_ref` to link `dic_diagnostic` with `g_diagnostics`. Search directly by `diag_descr` in `g_diagnostics` table when looking for specific diagnostics. 
 - Use Common Table Expressions (CTEs) for optimization
 - Do not explain optimizations, just do them
-- For laboratory data, search in dic_lab dictionary
-- For diagnoses, search in dic_diagnostic dictionary
+```
 
 ---
 
@@ -155,6 +155,8 @@ Contains information about the diagnoses for each episode.
 | class | VARCHAR(2) | | **P** (primary diagnosis validated), **S** (secondary diagnosis validated), **H** (diagnosis not validated), **E** (emergency diagnosis), **A** (outpatient diagnosis). A hospitalization episode has only one P diagnosis and zero or more S or H diagnoses |
 | poa | VARCHAR(2) | | Present on Admission indicator: **Y** (present at admission), **N** (not present at admission), **U** (unknown), **W** (clinically undetermined), **E** (exempt), **-** (unreported) |
 | load_date | DATETIME | | Date of update |
+
+> ⚠️ **Enlace con dic_diagnostic**: No usar `diag_ref` para enlazar con el diccionario. Buscar directamente por `diag_descr` en esta tabla.
 
 ---
 
@@ -659,11 +661,13 @@ Contains all Pathology diagnoses associated with each case.
 
 Diagnosis dictionary for searching diagnoses by reference code.
 
+> ⚠️ **IMPORTANTE**: El campo `diag_ref` de esta tabla NO coincide con el `diag_ref` de `g_diagnostics`. Son sistemas de identificación independientes. Además, este diccionario no cubre todos los catálogos usados en la práctica clínica. Para buscar diagnósticos, buscar directamente por `diag_descr` en `g_diagnostics`.
+
 | Attribute | Data type | Key | Definition |
 |-----------|-----------|-----|------------|
-| diag_ref | INT | PK | Diagnosis reference number |
+| diag_ref | INT | PK | Diagnosis reference number (internal ID, not linked to g_diagnostics.diag_ref) |
 | catalog | INT | | Catalog code |
-| code | VARCHAR(45) | | ICD code |
+| code | VARCHAR(45) | | ICD code (use with catalog to link to g_diagnostics) |
 | diag_descr | VARCHAR(256) | | Diagnosis description (nullable) |
 
 ---
@@ -966,7 +970,6 @@ ACR_QS:Levitronix CentriMag
 ## Query Examples
 
 ### Example 1: Patients with specific diagnosis
-
 ```sql
 WITH diagnosis_search AS (
     SELECT DISTINCT patient_ref, episode_ref, diag_descr

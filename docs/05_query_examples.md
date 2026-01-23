@@ -2,6 +2,8 @@
 
 Use Common Table Expressions (CTEs) for optimization. Always search using 'ref' fields from dictionaries.
 
+> ⚠️ **Exception for diagnoses**: Do NOT use `diag_ref` to link `dic_diagnostic` with `g_diagnostics`. Search directly by `diag_descr` in `g_diagnostics`.
+
 ---
 
 ## Example 1: Patients with specific diagnosis

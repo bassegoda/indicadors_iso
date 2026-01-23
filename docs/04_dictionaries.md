@@ -2,17 +2,21 @@
 
 **Usage**: Use 'descr' to find corresponding 'ref' code for searches. Always search using 'ref' fields, not 'descr'.
 
+> ⚠️ **Exception for dic_diagnostic**: The `diag_ref` field in this table does NOT match the `diag_ref` field in `g_diagnostics`. They are independent identification systems. Do NOT use `diag_ref` to link these tables. Search directly by `diag_descr` in `g_diagnostics`.
+
 ---
 
 ## Dictionary Tables Schema
 
 ### dic_diagnostic
 
+> ⚠️ **IMPORTANTE**: El campo `diag_ref` de esta tabla NO coincide con el `diag_ref` de `g_diagnostics`. Son sistemas de identificación independientes. Además, este diccionario no cubre todos los catálogos usados en la práctica clínica. Para buscar diagnósticos, buscar directamente por `diag_descr` en `g_diagnostics`.
+
 | Attribute | Data type | Key | Definition |
 |-----------|-----------|-----|------------|
-| diag_ref | INT | PK | Diagnosis reference number |
+| diag_ref | INT | PK | Diagnosis reference number (internal ID, not linked to g_diagnostics.diag_ref) |
 | catalog | INT | | Catalog code |
-| code | VARCHAR(45) | | ICD code |
+| code | VARCHAR(45) | | ICD code (use with catalog to link to g_diagnostics) |
 | diag_descr | VARCHAR(256) | | Diagnosis description (nullable) |
 
 ### dic_lab

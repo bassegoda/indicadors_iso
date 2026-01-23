@@ -17,6 +17,8 @@ Contains information about the diagnoses for each episode.
 | poa | VARCHAR(2) | | Present on Admission: **Y** (yes), **N** (no), **U** (unknown), **W** (undetermined), **E** (exempt), **-** (unreported) |
 | load_date | DATETIME | | Date of update |
 
+> ⚠️ **Enlace con dic_diagnostic**: No usar `diag_ref` para enlazar con el diccionario. El campo `diag_ref` de `dic_diagnostic` NO coincide con el `diag_ref` de `g_diagnostics` (son sistemas de identificación independientes). Además, el diccionario no cubre todos los catálogos usados en la práctica clínica. Para buscar diagnósticos, buscar directamente por `diag_descr` en esta tabla.
+
 ---
 
 ## g_diagnostic_related_groups
