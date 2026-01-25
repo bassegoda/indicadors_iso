@@ -23,6 +23,7 @@ WITH raw_moves AS (
     FROM g_movements
     WHERE ou_loc_ref IN ({units_formatted})
       AND start_date BETWEEN '{year}-01-01' AND '{year}-12-31 23:59:59'
+      AND place_ref IS NOT NULL
 ),
 flagged_starts AS (
     SELECT 

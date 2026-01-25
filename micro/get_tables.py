@@ -21,7 +21,9 @@ try:
         query = file.read()
     df = eq(query)
     print(f"Length of micro data: {len(df)}")
-    df.to_csv(output_dir / "micro_data.csv", index=False)
+    # Eliminar datos identificativos antes de guardar
+    df_safe = df.drop(columns=['patient_ref', 'episode_ref'], errors='ignore')
+    df_safe.to_csv(output_dir / "micro_data.csv", index=False)
 except FileNotFoundError:
     print(f"Error: Could not find micro sql file at {micro_file_path}")
     sys.exit(1)
@@ -32,7 +34,9 @@ try:
         query = file.read()
     df = eq(query)
     print(f"Length of antibiogram data: {len(df)}")
-    df.to_csv(output_dir / "antibiogram_data.csv", index=False)
+    # Eliminar datos identificativos antes de guardar
+    df_safe = df.drop(columns=['patient_ref', 'episode_ref'], errors='ignore')
+    df_safe.to_csv(output_dir / "antibiogram_data.csv", index=False)
 except FileNotFoundError:
     print(f"Error: Could not find antibiogram sql file at {antibiogram_file_path}")
     sys.exit(1)

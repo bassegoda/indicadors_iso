@@ -140,10 +140,11 @@ def analyze_nutrition(df, year, unit_list, start_date, end_date):
     
     print(f"\n{'='*60}\n")
     
-    # Guardar resultados en CSV
+    # Guardar resultados en CSV (sin datos identificativos)
     units_str = "-".join(unit_list).replace(" ", "")
+    df_safe = df.drop(columns=['episode_ref'], errors='ignore')
     output_csv = OUTPUT_DIR / f"nutritions_analysis_{year}_{units_str}.csv"
-    df.to_csv(output_csv, index=False, encoding='utf-8')
+    df_safe.to_csv(output_csv, index=False, encoding='utf-8')
     print(f"Resultados guardados en: {output_csv}")
     
     return df
