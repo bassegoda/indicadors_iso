@@ -7,3 +7,6 @@ credencials/
 .vscode/
 venv/
 .env
+
+# Diccionarios (generados desde la base de datos)
+docs/dictionaries/*.csv
