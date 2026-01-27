@@ -88,16 +88,18 @@ The database has two parallel table sets:
 - Use `patient_ref` (INT) as patient identifier
 - Use `episode_ref` (INT) as episode identifier
 - Examples: `g_movements`, `g_prescriptions`, `g_exitus`, `g_episodes`
+- **ALWAYS USE BY DEFAULT**
 
 ### val_* Tables (Validated/Alternative)
 - Use `nhc` as patient identifier
 - Use `episode_sap` as episode identifier
 - Examples: `val_movements`, `val_prescriptions`, `val_exitus`
+- **Only use when explicitly requested by user**
 
 **When to use which:**
-- Most scripts use `g_*` tables (standard)
-- Some validation/analysis scripts use `val_*` tables
-- Always check which table set a script expects before modifying
+- **Always use g_* tables by default**
+- Only use val_* tables when user specifically asks for them
+- Check which table set a script expects before modifying existing code
 
 ## DataNex Database Schema
 
@@ -128,6 +130,37 @@ Episodes (admissions, visits)
 - `treatment_ref`: Links prescriptions, administrations, perfusions
 - `place_ref`: Room/bed assignment (NULL = no bed assigned)
 
+### Standard ICU Stay Detection Pattern
+```sql
+WITH raw_moves AS (
+    SELECT patient_ref, episode_ref, ou_loc_ref, start_date, end_date
+    FROM g_movements
+    WHERE ou_loc_ref IN ({units_formatted})  -- Prompt user for units
+      AND start_date BETWEEN '{year}-01-01' AND '{year}-12-31 23:59:59'
+      AND place_ref IS NOT NULL  -- Has assigned bed
+),
+flagged_starts AS (
+    SELECT *,
+        CASE WHEN LAG(end_date) OVER (PARTITION BY episode_ref ORDER BY start_date) = start_date
+        THEN 0 ELSE 1 END AS is_new_stay
+    FROM raw_moves
+),
+grouped_stays AS (
+    SELECT *, SUM(is_new_stay) OVER (PARTITION BY episode_ref ORDER BY start_date) as stay_id
+    FROM flagged_starts
+),
+cohort AS (
+    SELECT patient_ref, episode_ref, stay_id,
+        MIN(start_date) as true_start_date,
+        MAX(end_date) as true_end_date,
+        TIMESTAMPDIFF(HOUR, MIN(start_date), MAX(end_date)) AS total_hours
+    FROM grouped_stays
+    GROUP BY patient_ref, episode_ref, stay_id
+    HAVING TIMESTAMPDIFF(HOUR, MIN(start_date), MAX(end_date)) >= {threshold}  -- Adjustable
+)
+```
+**Key**: LAG detects consecutive movements, stay_id groups them. Always prompt for units and thresholds.
+
 ### Important Fields
 - **place_ref**: Encrypted reference for patient's room and bed. NULL means patient has no bed assigned.
 - **exitus_date**: Date of death (DATE format, not DATETIME)
@@ -151,19 +184,19 @@ Episodes (admissions, visits)
 ## Admissions Module - ICU Admission Identification
 
 ### Overview
-The `admissions/` module contains a laboratory for testing different strategies to identify "real" ICU admissions in units E073 and I073.
+The `admissions/` module contains a laboratory for testing different strategies to identify "real" ICU admissions.
 
 ### Scripts
 
 #### `lab_admissions.py` (g_* tables version)
 - Uses `g_movements`, `g_prescriptions`, `g_exitus`
 - Fields: `patient_ref`, `episode_ref`
-- Units: E073, I073
+- **Prompts user for organizational units** (ou_loc_ref) — common examples: E073, I073 for ICU
 
 #### `lab_admissions_val.py` (val_* tables version)
 - Uses `val_movements`, `val_prescriptions`, `val_exitus`
 - Fields: `nhc`, `episode_sap`
-- Units: E073, I073
+- **Only use when user explicitly requests val_* tables**
 
 ### Strategies
 
@@ -231,10 +264,12 @@ python nutritions/nutritions.py
 ```
 
 Scripts typically:
-1. Request interactive parameters (year, units, etc.)
+1. **Prompt user for parameters**: year, organizational units (ou_loc_ref), duration thresholds, etc.
 2. Execute SQL queries via `execute_query()`
 3. Generate output files in `output/` subfolder
 4. Remove identifying data before saving
+
+**Important**: Scripts use `input()` to ask users for parameters. Never hardcode units or thresholds.
 
 ### Output Format
 - Results saved in respective `output/` folders
@@ -333,10 +368,12 @@ Key dependencies:
 ## ICU Admission Analysis Workflow
 
 ### Understanding Stay Identification
-- **Movements** are grouped into **stays** using window functions
+- **Movements** are grouped into **stays** using window functions (LAG/LEAD)
 - Consecutive movements with `end_date = next_start_date` are part of the same stay
 - Each stay is assigned to the **first unit** where the patient entered
 - A patient can have multiple stays in the same year (multiple admissions)
+- **Duration thresholds are flexible** — 10 hours is common but adjust per analysis needs
+- **Always prompt user for organizational units** — don't hardcode E073/I073
 
 ### Year Overlap Handling
 - Use overlap filtering to capture stays crossing year boundaries
