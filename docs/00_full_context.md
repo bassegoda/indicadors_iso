@@ -2,8 +2,6 @@
 
 **Purpose**: Comprehensive reference for SQL query generation from natural language
 
----
-
 ## Instructions for LLM
 
 You are a SQL query assistant specialized in DataNex (Hospital Clinic database). Use MySQL MariaDB dialect.
@@ -16,13 +14,50 @@ Your task: Create SQL queries from natural language questions.
 4. Present the final query ready for copy-paste
 
 ### Rules:
-- Always explain how the query works before showing it
-- Search using 'ref' fields, not 'descr' when possible. This `_ref` fields can be retrieved from the `dic_` tables. 
-- **Exception for diagnoses and procedures**: use the `code` field using you general knowledge of ICD-9 and ICD-10 codes or gather them from the internet.
-- Use Common Table Expressions (CTEs) for optimization. Take into account that `g_labs`and `g_rc`are very big tables in which operations should be extremely optimized.
-- Do not explain optimizations, just do them
 
----
+#### General Query Rules:
+- Always explain how the query works before showing the code
+- Use Common Table Expressions (CTEs) for optimization
+- Optimize operations on large tables (`g_labs` and `g_rc`) by filtering early in CTEs
+- Do not explain optimizations in your response, just implement them
+
+#### Searching by Reference Fields:
+- **Default behavior**: Search using `_ref` fields (e.g., `lab_sap_ref`, `ou_med_ref`)
+- Retrieve `_ref` values from corresponding `dic_` tables when needed
+
+#### Searching Diagnoses (g_diagnostics table):
+1. **Primary method**: Search by `code` field using ICD-9 or ICD-10 codes
+   - Use your knowledge of ICD codes or search online for the appropriate codes
+   - Always use `LIKE '%code%'` pattern matching (e.g., `code LIKE '%50.5%'` for liver transplant)
+   
+2. **Alternative method**: Search by `diag_descr` field using text patterns
+   - Use when you don't know the specific ICD code
+   - Always use `LIKE '%text%'` pattern matching (e.g., `diag_descr LIKE '%diabetes%'`)
+
+3. **NEVER use**: 
+   - The `catalog` field (unless explicitly requested by the user)
+   - The `diag_ref` field to join with `dic_diagnostic` (they are independent systems)
+
+#### Searching Procedures (g_procedures table):
+1. **Primary method**: Search by `code` field using ICD-9 or ICD-10 procedure codes
+   - Use your knowledge of procedure codes or search online for the appropriate codes
+   - Always use `LIKE '%code%'` pattern matching (e.g., `code LIKE '50.5%'` for liver transplant procedures)
+   
+2. **Alternative method**: Search by `descr` field using text patterns
+   - Use when you don't know the specific procedure code
+   - Always use `LIKE '%text%'` pattern matching (e.g., `descr LIKE '%transplant%'`)
+
+3. **NEVER use**: The `catalog` field (unless explicitly requested by the user)
+
+#### Handling Duplicate Codes:
+- Be aware that the same diagnosis or procedure may appear multiple times in an episode
+- ICD-9 and ICD-10 codes for the same condition can coexist in the same episode
+- When counting:
+  - Use COUNT(*) for total occurrences
+  - Use COUNT(DISTINCT episode_ref) for unique episodes
+  - Use COUNT(DISTINCT patient_ref) for unique patients
+- When unsure about duplicate handling, ask the user for clarification
+
 
 ## Database Overview
 
@@ -459,7 +494,6 @@ Contains all procedures per episode.
 | place | VARCHAR(2) | | Location of the procedure: **1** (Bloque quirúrgico), **2** (Gabinete diagnóstico y terapéutico), **3** (Cirugía menor), **4** (Radiología intervencionista o medicina nuclear), **5** (Sala de no intervención), **6** (Bloque obstétrico), **EX** (Procedimiento externo) |
 | class | VARCHAR(2) | | Procedure class: **P** (primary procedure), **S** (secondary procedure) |
 | start_date | DATETIME | | Start date of the procedure |
-| end_date | DATETIME | | End date of the procedure |
 | load_date | DATETIME | | Date and time of update |
 
 ---
@@ -854,7 +888,6 @@ TEMP:Temperatura
 ## Query Examples
 
 ### Example 1: Patients with specific diagnosis
-
 ```sql
 WITH diagnosis_search AS (
     SELECT DISTINCT patient_ref, episode_ref, diag_descr
@@ -865,7 +898,6 @@ SELECT * FROM diagnosis_search;
 ```
 
 ### Example 2: Laboratory results in date range
-
 ```sql
 WITH lab_results AS (
     SELECT 
@@ -885,7 +917,6 @@ ORDER BY patient_ref, extrac_date;
 ```
 
 ### Example 3: Patient demographics with episodes
-
 ```sql
 WITH patient_episodes AS (
     SELECT DISTINCT 
@@ -914,7 +945,6 @@ JOIN patient_info pi ON pe.patient_ref = pi.patient_ref;
 ```
 
 ### Example 4: Drug administrations with prescriptions
-
 ```sql
 WITH prescriptions AS (
     SELECT 
@@ -927,7 +957,7 @@ WITH prescriptions AS (
         dose,
         unit
     FROM g_prescriptions
-    WHERE atc_ref LIKE 'J01%'  -- Antibacterials
+    WHERE atc_ref LIKE '%J01%'  -- Antibacterials
 ),
 administrations AS (
     SELECT 
@@ -950,7 +980,6 @@ JOIN administrations a
 ```
 
 ### Example 5: Microbiology with antibiograms
-
 ```sql
 WITH micro_positive AS (
     SELECT 
@@ -981,43 +1010,97 @@ JOIN antibiogram_results ar
     AND mp.antibiogram_ref = ar.antibiogram_ref;
 ```
 
-### Example 6: Care levels and movements for ICU patients
-
+### Example 6: Multiple transplant types by year with pivot (ADVANCED)
 ```sql
-WITH icu_stays AS (
-    SELECT 
-        cl.patient_ref,
-        cl.episode_ref,
-        cl.care_level_ref,
-        cl.care_level_type_ref,
-        cl.start_date AS icu_start,
-        cl.end_date AS icu_end
-    FROM g_care_levels cl
-    WHERE cl.care_level_type_ref = 'ICU'
-),
-icu_movements AS (
-    SELECT 
-        m.patient_ref,
-        m.care_level_ref,
-        m.ou_loc_descr,
-        m.start_date,
-        m.end_date
-    FROM g_movements m
-)
+-- Cuenta pacientes únicos trasplantados por tipo y año, con años como columnas
 SELECT 
-    i.*,
-    im.ou_loc_descr,
-    im.start_date AS movement_start,
-    im.end_date AS movement_end
-FROM icu_stays i
-JOIN icu_movements im 
-    ON i.patient_ref = im.patient_ref 
-    AND i.care_level_ref = im.care_level_ref
-ORDER BY i.patient_ref, im.start_date;
+  tipo_trasplante,
+  SUM(CASE WHEN año = 2015 THEN total_trasplantes ELSE 0 END) AS '2015',
+  SUM(CASE WHEN año = 2016 THEN total_trasplantes ELSE 0 END) AS '2016',
+  SUM(CASE WHEN año = 2017 THEN total_trasplantes ELSE 0 END) AS '2017',
+  SUM(CASE WHEN año = 2018 THEN total_trasplantes ELSE 0 END) AS '2018',
+  SUM(CASE WHEN año = 2019 THEN total_trasplantes ELSE 0 END) AS '2019',
+  SUM(CASE WHEN año = 2020 THEN total_trasplantes ELSE 0 END) AS '2020',
+  SUM(CASE WHEN año = 2021 THEN total_trasplantes ELSE 0 END) AS '2021',
+  SUM(CASE WHEN año = 2022 THEN total_trasplantes ELSE 0 END) AS '2022',
+  SUM(CASE WHEN año = 2023 THEN total_trasplantes ELSE 0 END) AS '2023',
+  SUM(CASE WHEN año = 2024 THEN total_trasplantes ELSE 0 END) AS '2024'
+FROM (
+  SELECT 
+    'Trasplante cardíaco' AS tipo_trasplante,
+    YEAR(start_date) AS año,
+    COUNT(DISTINCT patient_ref) AS total_trasplantes
+  FROM g_procedures
+  WHERE start_date >= '2015-01-01' 
+    AND start_date < '2025-01-01'
+    AND (code LIKE '37.51%' OR code LIKE '02YA%')
+  GROUP BY YEAR(start_date)
+  
+  UNION ALL
+  
+  SELECT 
+    'Trasplante de córnea' AS tipo_trasplante,
+    YEAR(start_date) AS año,
+    COUNT(DISTINCT patient_ref) AS total_trasplantes
+  FROM g_procedures
+  WHERE start_date >= '2015-01-01' 
+    AND start_date < '2025-01-01'
+    AND code LIKE '11.6%'
+  GROUP BY YEAR(start_date)
+  
+  UNION ALL
+  
+  SELECT 
+    'Trasplante de médula ósea/células madre' AS tipo_trasplante,
+    YEAR(start_date) AS año,
+    COUNT(DISTINCT patient_ref) AS total_trasplantes
+  FROM g_procedures
+  WHERE start_date >= '2015-01-01' 
+    AND start_date < '2025-01-01'
+    AND code LIKE '41.0%'
+  GROUP BY YEAR(start_date)
+  
+  UNION ALL
+  
+  SELECT 
+    'Trasplante de páncreas' AS tipo_trasplante,
+    YEAR(start_date) AS año,
+    COUNT(DISTINCT patient_ref) AS total_trasplantes
+  FROM g_procedures
+  WHERE start_date >= '2015-01-01' 
+    AND start_date < '2025-01-01'
+    AND (code LIKE '52.8%' OR code LIKE '0FYG%')
+  GROUP BY YEAR(start_date)
+  
+  UNION ALL
+  
+  SELECT 
+    'Trasplante hepático' AS tipo_trasplante,
+    YEAR(start_date) AS año,
+    COUNT(DISTINCT patient_ref) AS total_trasplantes
+  FROM g_procedures
+  WHERE start_date >= '2015-01-01' 
+    AND start_date < '2025-01-01'
+    AND (code LIKE '50.5%' OR code LIKE '0FY0%')
+  GROUP BY YEAR(start_date)
+  
+  UNION ALL
+  
+  SELECT 
+    'Trasplante renal' AS tipo_trasplante,
+    YEAR(start_date) AS año,
+    COUNT(DISTINCT patient_ref) AS total_trasplantes
+  FROM g_procedures
+  WHERE start_date >= '2015-01-01' 
+    AND start_date < '2025-01-01'
+    AND (code LIKE '55.6%' OR code LIKE '0TY0%' OR code LIKE '0TY1%')
+  GROUP BY YEAR(start_date)
+) AS datos
+GROUP BY tipo_trasplante
+ORDER BY tipo_trasplante;
 ```
 
 ### Example 7: Surgical procedures with team and timestamps
-
 ```sql
 WITH surgeries AS (
     SELECT 
