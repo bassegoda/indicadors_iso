@@ -48,6 +48,7 @@ WITH raw_moves AS (
     WHERE ou_loc_ref IN ({units_formatted})
       AND start_date <= '{year}-12-31 23:59:59'
       AND end_date >= '{year}-01-01 00:00:00'
+      AND end_date > start_date
 ),
 flagged_starts AS (
     SELECT 
@@ -95,6 +96,7 @@ WITH raw_moves AS (
       AND start_date <= '{year}-12-31 23:59:59'
       AND end_date >= '{year}-01-01 00:00:00'
       AND place_ref IS NOT NULL
+      AND end_date > start_date
 ),
 flagged_starts AS (
     SELECT 
@@ -142,6 +144,7 @@ WITH raw_moves AS (
       AND start_date <= '{year}-12-31 23:59:59'
       AND end_date >= '{year}-01-01 00:00:00'
       AND place_ref IS NOT NULL
+      AND end_date > start_date
 ),
 flagged_starts AS (
     SELECT 
@@ -211,6 +214,7 @@ WITH raw_moves AS (
       AND start_date <= '{year}-12-31 23:59:59'
       AND end_date >= '{year}-01-01 00:00:00'
       AND place_ref IS NOT NULL
+      AND end_date > start_date
 ),
 flagged_starts AS (
     SELECT 
@@ -284,6 +288,7 @@ WITH raw_moves AS (
       AND start_date <= '{year}-12-31 23:59:59'
       AND end_date >= '{year}-01-01 00:00:00'
       AND place_ref IS NOT NULL
+      AND end_date > start_date
 ),
 flagged_starts AS (
     SELECT 
@@ -368,6 +373,7 @@ WITH raw_moves AS (
       AND start_date <= '{year}-12-31 23:59:59'
       AND end_date >= '{year}-01-01 00:00:00'
       AND place_ref IS NOT NULL
+      AND end_date > start_date
 ),
 flagged_starts AS (
     SELECT 
