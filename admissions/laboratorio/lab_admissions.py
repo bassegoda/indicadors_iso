@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 # Añadir directorio raíz al path
-root_dir = Path(__file__).resolve().parent.parent
+root_dir = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(root_dir))
 
 from connection import execute_query
