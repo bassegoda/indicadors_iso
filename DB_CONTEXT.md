@@ -37,13 +37,48 @@ Your task: Create SQL queries from natural language questions or generate full P
 3. **NEVER use**: 
    - The `catalog` field (unless explicitly requested by the user)
    - The `diag_ref` field to join with `dic_diagnostic` (they are independent systems)
+   - The `care_level' related fields because they are under development in the database. 
 
 #### Searching Procedures (g_procedures table):
 1. **Primary method**: Search by `code` field using ICD-9 or ICD-10 procedure codes
    - Use your knowledge of procedure codes or search online for the appropriate codes
    - Always use `LIKE '%code%'` pattern matching (e.g., `code LIKE '50.5%'` for liver transplant procedures)
    
-2. **Alternative method**: Search by `descr` field using text patterns
+2. **Alternative method**: Search by `descr` field usinWITH episodios_biliar AS (
+    SELECT DISTINCT
+        e.episode_ref,
+        DATE_FORMAT(e.start_date, '%Y-%m') AS mes,
+        e.start_date,
+        d.diag_descr,
+        d.code
+    FROM g_episodes e
+    INNER JOIN g_diagnostics d 
+        ON e.episode_ref = d.episode_ref
+    WHERE e.start_date >= '2024-01-01' 
+        AND e.start_date < '2025-01-01'
+        AND e.episode_type_ref IN ('HOSP', 'HOSP_IQ', 'HOSP_RN')
+        AND (
+            d.diag_descr LIKE '%biliar%' 
+            OR d.diag_descr LIKE '%vesicula%'
+            OR d.diag_descr LIKE '%colecist%'
+            OR d.diag_descr LIKE '%coledoc%'
+            OR d.diag_descr LIKE '%colangitis%'
+            OR d.diag_descr LIKE '%colelitiasis%'
+            OR d.code LIKE 'K80%'  -- ICD-10: Colelitiasis
+            OR d.code LIKE 'K81%'  -- ICD-10: Colecistitis
+            OR d.code LIKE 'K82%'  -- ICD-10: Otras enfermedades vesícula biliar
+            OR d.code LIKE 'K83%'  -- ICD-10: Otras enfermedades vías biliares
+            OR d.code LIKE '574%'  -- ICD-9: Colelitiasis
+            OR d.code LIKE '575%'  -- ICD-9: Otras enfermedades vesícula biliar
+            OR d.code LIKE '576%'  -- ICD-9: Otras enfermedades vías biliares
+        )
+)
+SELECT 
+    mes,
+    COUNT(DISTINCT episode_ref) AS total_ingresos_biliar
+FROM episodios_biliar
+GROUP BY mes
+ORDER BY mes;g text patterns
    - Use when you don't know the specific procedure code
    - Always use `LIKE '%text%'` pattern matching (e.g., `descr LIKE '%transplant%'`)
 
