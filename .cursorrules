@@ -1,0 +1,6 @@
+# Database Context
+Siempre lee el archivo @DB_CONTEXT.md antes de escribir consultas SQL.
+
+# Style
+Usa Python con Pandas para el análisis.
+Comenta cada paso complejo.
