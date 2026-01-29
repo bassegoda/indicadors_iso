@@ -1,0 +1,1978 @@
+atc_ref,atc_descr
+A01AA01,Fluoruro de sodio
+A01AB,Antiinfecciosos y antisepticos para el tratamiento oral-local
+A01AB03,Clorhexidina
+A01AB09,Miconazol
+A01AB19,Perborato de sodio
+A01AB91,Nistatina
+A01AC03,Hidrocortisona
+A01AC53,"Hidrocortisona, combinaciones con"
+A01AD02,Bencidamina
+A01AD11,Varios
+A01AD92,Carbenoxolona
+A02AA04,Hidroxido de magnesio
+A02AB02,Algeldrato
+A02AD,"Combinaciones y complejos de compuesto de aluminio, calcio y magnesio"
+A02AD01,Combinaciones de sales simples
+A02AD02,Magaldrato
+A02AD03,Almagato
+A02AD05,Almasilato
+A02AH,Antiacidos con bicarbonato de sodio
+A02AH91,Sodio bicarbonato
+A02AX,Otras combinaciones con antiacidos
+A02BA02,Ranitidina
+A02BA03,Famotidina
+A02BB01,Misoprostol
+A02BC01,Omeprazol
+A02BC02,Pantoprazol
+A02BC03,Lansoprazol
+A02BC04,Rabeprazol
+A02BC05,Esomeprazol
+A02BD08,"Subcitrato de bismuto, tetraciclina y metronidazol"
+A02BX,Otros agentes contra la ulcera peptica y el reflujo gastroesofagico (RGE/GORD)
+A02BX02,Sucralfato
+A02BX05,Subcitrato de bismuto
+A02BX91,Zinc acexamato
+A03AA04,Mebeverina
+A03AA05,Trimebutina
+A03AB06,"Otilonio, bromuro de"
+A03AX,Otros agentes contra padecimientos funcionales del estomago
+A03AX04,Pinaverio
+A03AX13,Siliconas
+A03BA01,Atropina
+A03BB01,Butilescopolamina
+A03DB04,Butilescopolamina y analgesicos
+A03FA01,Metoclopramida
+A03FA03,Domperidona
+A03FA06,Cleboprida
+A03FA51,"Metoclopramida, combinaciones con"
+A03FA56,"Cleboprida, combinaciones con"
+A03FA91,Cinitaprida
+A04AA01,Ondansetron
+A04AA02,Granisetron
+A04AA55,"Palonosetron, combinaciones"
+A04AD,Otros antiemeticos
+A04AD01,Escopolamina
+A04AD11,Nabilona
+A04AD12,Aprepitant
+A04AD91,LEVOSULPIRIDA
+A05AA01,Acido quenodeoxicolico
+A05AA02,Acido ursodeoxicolico
+A05AA04,Acido Obeticolico
+A05AX,Otros farmacos para terapia biliar
+A05BA03,Silimarina
+A06AA01,Parafina liquida
+A06AA51,"Parafina blanda, combinaciones con"
+A06AB,Laxantes de contacto
+A06AB02,Bisacodilo
+A06AB05,Aceite de ricino
+A06AB06,Glicosidos de sena
+A06AB07,Cascara
+A06AB08,Picosulfato de sodio
+A06AB20,Laxantes de contacto en combinacion
+A06AB58,"Picosulfato de sodio, combinaciones con"
+A06AC01,Ispaghula (semillas de psyllium)
+A06AC06,Metilcelulosa
+A06AC51,"Ispaghula, combinaciones con"
+A06AD,Laxantes osmoticos
+A06AD11,Lactulosa
+A06AD12,Lactitol
+A06AD15,Macrogol
+A06AD16,Manitol
+A06AD17,Fosfato de sodio
+A06AD65,"Macrogol, combinaciones con"
+A06AD91,Magnesio hidroxido
+A06AG01,Fosfato de sodio
+A06AG04,Glicerol
+A06AG11,"Laurilsulfato, incluyendo combinaciones"
+A06AG20,"Enemas, combinaciones con"
+A06AH01,Bromuro de metilnaltrexona
+A06AH03,Naloxegol
+A06AH05,Naldemedina
+A06AX01,Glicerol
+A06AX04,Linaclotida
+A06AX05,Prucaloprida
+A07AA01,Neomicina
+A07AA06,Paromomicina
+A07AA11,Rifaximina
+A07AA12,Fidaxomicina
+A07AA51,"Neomicina, combinaciones con"
+A07BA01,Carbon medicinal
+A07CA,Formulaciones de sales de rehidratacion oral
+A07CA91,Sales para rehidratacion oral
+A07DA03,Loperamida
+A07DA53,"Loperamida, combinaciones con"
+A07EA06,Budesonida
+A07EA07,Beclometasona
+A07EA91,Triamcinolona
+A07EC01,Sulfasalazina
+A07EC02,Mesalazina
+A07FA01,"Acido lactico, organismo productores de"
+A07FA02,Saccharomyces boulardii
+A07XA01,Tanato de albumina
+A07XA04,Racecadotrilo
+A08AA62,naltrexona + bupropion
+A08AB01,Orlistat
+A09AA,Preparados enzimaticos
+A09AA02,"Multienzimas (lipasa, proteasa, etc.)"
+A09AA52,Multienzimas asociados a otras sustancias
+A10AB01,Insulina (humana)
+A10AB04,Insulina lispro
+A10AB05,Insulina asparta
+A10AB06,Insulina glulisina
+A10AC01,Insulina (humana)
+A10AC04,Insulina lispro
+A10AD01,Insulina (humana)
+A10AD04,Insulina lispro
+A10AD05,Insulina asparta
+A10AE04,Insulina glargina
+A10AE05,Insulina detemir
+A10AE06,Insulina degludec
+A10BA02,Metformina
+A10BB01,Glibenclamida
+A10BB02,Clorpropamida
+A10BB07,Glipizida
+A10BB08,Gliquidona
+A10BB09,Gliclazida
+A10BB12,Glimepirida
+A10BB91,Glisentida
+A10BD03,Metformina y rosiglitazona
+A10BD05,Metformina y pioglitazona
+A10BD06,Glimepirida y pioglitazona
+A10BD07,Metformina y sitagliptina
+A10BD08,Metformina y vildagliptina
+A10BD09,Pioglitazona y alogliptina
+A10BD10,Metformina y Saxagliptina
+A10BD11,Metformina y linagliptina
+A10BD13,Metformina y Alogliptina
+A10BD15,Metformina y Dapagliflozina
+A10BD16,Metformina i canagliflozina
+A10BD19,Linagliptina y empagliflozina
+A10BD23,Metformina y ertugliflozina
+A10BF01,Acarbosa
+A10BF02,Miglitol
+A10BG02,Rosiglitazona
+A10BG03,Pioglitazona
+A10BH01,Sitagliptina
+A10BH02,Vildagliptina
+A10BH03,Saxagliptina
+A10BH04,Alogliptina
+A10BH05,Linagliptina
+A10BJ02,LIRAGLUTIDA
+A10BJ05,DULAGLUTIDA
+A10BJ06,SEMAGLUTIDA
+A10BK01,DAPAGLIFLOZINA
+A10BK02,CANAGLIFLOZINA
+A10BK04,ERTUGLIFLOZINA
+A10BX,Otros farmacos hipoglucemiantes excluyendo insulinas
+A10BX01,Goma guar
+A10BX02,Repaglinida
+A10BX04,Exenatida
+A10BX10,LIXISENATIDA
+A11,VITAMINAS
+A11AA03,"Multivitaminicos con otros minerales, incluyendo combinaciones"
+A11BA91,"Vitaminas A y E, combinaciones con"
+A11BA92,MULTIVITAMINAS SOLAS
+A11CA01,Retinol (vit A)
+A11CC,Vitamina D y analogos
+A11CC03,Alfacalcidol
+A11CC04,Calcitriol
+A11CC05,Colecalciferol
+A11CC06,Calcifediol
+A11CC07,Paricalcitol
+A11DA01,Tiamina (vit B1)
+A11DA02,Sulbutiamina
+A11DB91,"Vitaminas B1, B6 y B12 combinaciones con"
+A11EB,Vitaminas del complejo B con vitamina C
+A11GA01,Acido ascorbico (vit C)
+A11HA02,Piridoxina (vit B6)
+A11HA03,Tocoferol (vit E)
+A11HA04,Riboflavina (vit B2)
+A11HA05,Biotina
+A11HA30,Dexpantenol
+A11JA,Combinaciones de vitaminas
+A11JA91,Complejos polivitaminicos
+A12AA01,Fosfato de calcio
+A12AA02,Glubionato de calcio
+A12AA03,Gluconato de calcio
+A12AA04,Carbonato de calcio
+A12AA20,Calcio (diferentes sales en combinacion)
+A12AA91,Calcio pidolato
+A12AA92,Complejo oseina-hidroxiapatita
+A12AX,"Calcio, combinaciones con, vitamina D y/o otros farmacos"
+A12AX92,"Calcio lactato y colecalciferol, combinaciones con"
+A12AX93,"Calcio carbonato y colecalciferol, combinaciones con"
+A12AX96,"Calcio pidolato y colecalciferol, combinaciones con"
+A12AX97,Otras asociaciones de calcio
+A12BA,Potasio
+A12BA01,Cloruro de potasio
+A12BA04,Bicarbonato de potasio
+A12BA30,Combinaciones
+A12BA91,Potasio gluceptato
+A12CA,Sodio
+A12CB,Zinc
+A12CC,Magnesio
+A12CC02,Sulfato de magnesio
+A12CC06,Lactato de magnesio
+A12CC08,Pidolato de magnesio
+A12CC30,Magnesio (combinacion de diferentes sales)
+A12CX91,Fosforo
+A13A,TONICOS
+A14AA02,Estanozolol
+A14AA04,Metenolona
+A14AB01,Nandrolona
+A14B,OTROS AGENTES ANABOLICOS
+A15,ESTIMULANTES DEL APETITO
+A15ZZ,Estimulantes del apetito
+A15ZZ91,"Ciproheptadina, combinaciones con"
+A16AA,Aminoacidos y derivados
+A16AA01,Levocarnitina
+A16AA04,Mercaptamina
+A16AA05,Acido carglumico
+A16AA06,Betaina
+A16AB02,Imiglucerasa
+A16AB03,Agalsidasa alfa
+A16AB04,Agalsidasa beta
+A16AB07,Alglucosidasa alfa
+A16AB14,Sebelipasa alfa
+A16AX,Productos varios para el tracto alimentario y el metabolismo
+A16AX03,Fenilbutirato de sodio
+A16AX04,Nitisinona
+A16AX05,Acetato de zinc
+A16AX07,Sapropterina
+A16AX10,eliglustat
+A16AX12,Trientina
+A16AX16,Givosiran
+B01AA03,Warfarina
+B01AA07,Acenocumarol
+B01AB01,Heparina
+B01AB02,Antitrombina III
+B01AB04,Dalterapina
+B01AB05,Enoxaparina
+B01AB06,Nadroparina
+B01AB10,Tinzaparina
+B01AB11,Sulodexida
+B01AB12,Bemiparina
+B01AC,"Inhibidores de la agregacion plaquetaria, excluyendo heparina"
+B01AC04,Clopidogrel
+B01AC05,Ticlopidina
+B01AC06,Acido acetilsalicilico
+B01AC07,Dipiridamol
+B01AC09,Epoprostenol
+B01AC11,Iloprost
+B01AC13,Abciximab
+B01AC14,Anagrelida
+B01AC16,Eptifibatida
+B01AC17,Tirofiban
+B01AC18,Triflusal
+B01AC21,Treprostinilo
+B01AC22,Prasugrel
+B01AC23,Cilostazol
+B01AC24,Ticagrelor
+B01AC25,CANGRELOR
+B01AC27,Selexipag
+B01AC30,Combinaciones
+B01AD01,Estreptoquinasa
+B01AD02,Alteplasa
+B01AD04,Uroquinasa
+B01AD07,Reteplasa
+B01AD10,Drotrecogina alfa (activado)
+B01AE,Inhibidores directos de la trombina
+B01AE01,Desirudina
+B01AE02,Lepirudina
+B01AE03,Argatroban
+B01AE06,Bivalirudina
+B01AE07,Dabigatran etexilato
+B01AF,Inhibidores directos del factor Xa
+B01AF01,Rivaroxaban
+B01AF02,Apixaban
+B01AF03,Edoxabán
+B01AX01,Defibrotida
+B01AX05,Fondaparinux
+B01AX07,CAPLACIZUMAB
+B02AA01,Acido aminocaproico
+B02AA02,Acido tranexamico
+B02AB02,Alfa1 antitripsina
+B02BA01,Fitomenadiona
+B02BB01,Fibrinogeno humano
+B02BC30,Combinaciones
+B02BD01,"Factores de la coagulacion IX, II, VII y X en combinacion"
+B02BD02,Factor VIII de la coagulacion
+B02BD03,Actividad que sobrepasa el inhibidor del factor VIII
+B02BD04,Factor IX de la coagulacion
+B02BD06,Factor Von Willebrand y factor VIII de la coagulacion en combinacion
+B02BD08,Eptacog alfa (activado)
+B02BD09,Nonacog alfa
+B02BD91,"Protrombina, complejo de"
+B02BX,Otros hemostaticos sistemicos
+B02BX04,Romiplostim
+B02BX05,Eltrombopag
+B03AA,"Hierro bivalente, preparados orales"
+B03AA01,Ferroso glicina sulfato
+B03AA03,Ferroso gluconato
+B03AA07,Ferroso sulfato
+B03AA91,Hierro lactato
+B03AB,"Hierro trivalente, preparados orales"
+B03AB02,"Hierro sacarado, oxido de"
+B03AB09,Proteinsuccinilato ferrico
+B03AB92,Hierro manitol (Ferrimanitol)
+B03AB93,Ferrocolinato
+B03AC,"Hierro, preparados parenterales"
+B03AD02,"Ferroso, fumarato"
+B03AD91,"Hierro gluceptato y folico acido, combinaciones con"
+B03BA,Vitamina B12 (cianocobalamina y analogos)
+B03BA01,Cianocobalamina
+B03BA03,Hidroxocobalamina
+B03BA51,"Cianocobalamina, combinaciones con"
+B03BB01,Acido folico
+B03XA01,Eritropoyetina
+B03XA02,Darbepoetina alfa
+B05AA01,Albumina
+B05AA05,Dextran
+B05AA06,"Gelatina, agentes con"
+B05AA07,Hidroxietil almidon
+B05AA92,"Dextrano y sodio cloruro, combinaciones con"
+B05BA03,Carbohidratos
+B05BA91,Suero glucosado
+B05BB01,Electrolitos
+B05BB02,Electrolitos con carbohidratos
+B05BB91,"Sodio cloruro, solucion parenteral"
+B05BB92,Suero glucosalino
+B05BC01,Manitol
+B05XA01,Cloruro de potasio
+B05XA02,Bicarbonato de sodio
+B05XA03,Cloruro de sodio
+B05XA06,"Fosfato de potasio, incluyendo combinaciones con otras sales de potasio"
+B05XA07,Cloruro de calcio
+B05XA08,Acetato de sodio
+B05XA09,Fosfato de sodio
+B05XA14,Glicerofosfato de sodio
+B05XA17,Acetato de potasio
+B06AA91,ESTREPTOQUINASA+ESTREPTODORNASA
+B06AB01,Hematina
+B06AC01,"Inhibidor de C1, derivado del plasma"
+B06AC02,Icatibanto
+C01AA05,Digoxina
+C01AA08,Metildigoxina
+C01BA02,Procainamida
+C01BA03,Disopiramida
+C01BA13,Hidroquinidina
+C01BA92,Hidroquinidina
+C01BB01,Lidocaina
+C01BB02,Mexiletina
+C01BC03,Propafenona
+C01BC04,Flecainida
+C01BD01,Amiodarona
+C01BD07,Dronedarona
+C01BG11,Vernakalant
+C01CA,Agentes adrenergicos y dopaminergicos
+C01CA01,Etilefrina
+C01CA02,Isoprenalina
+C01CA03,Norepinefrina
+C01CA04,Dopamina
+C01CA06,Fenilefrina
+C01CA07,Dobutamina
+C01CA17,Midodrina
+C01CA24,Epinefrina
+C01CA26,Efedrina
+C01CE02,Milrinona
+C01CX08,Levosimendan
+C01DA02,Trinitrato de glicerilo
+C01DA08,Dinitrato de isosorbida
+C01DA14,Mononitrato de isosorbida
+C01DA52,"Trinitrato de glicerilo, combinaciones con"
+C01DX12,Molsidomina
+C01EA01,Alprostadil
+C01EB,Otros preparados para el corazon
+C01EB09,Ubidecarenona
+C01EB10,Adenosina
+C01EB15,Trimetazidina
+C01EB16,Ibuprofeno
+C01EB17,Ivabradina
+C01EB18,Ranolazina
+C02AB01,Metildopa (levogira)
+C02AC01,Clonidina
+C02AC02,Guanfacina
+C02AC05,Moxonidina
+C02CA01,Prazosina
+C02CA04,Doxazosina
+C02CA06,Urapidil
+C02DA01,Diazoxido
+C02DB02,Hidralazina
+C02DC01,Minoxidil
+C02DD01,Nitroprusiato
+C02KX01,Bosentano
+C02KX02,Ambrisentan
+C02KX03,Sitaxentan
+C02KX04,Macitentan
+C02KX05,Riociguat
+C03AA03,Hidroclorotiazida
+C03BA04,Clortalidona
+C03BA10,Xipamida
+C03BA11,Indapamida
+C03CA01,Furosemida
+C03CA02,Bumetanida
+C03CA04,Torasemida
+C03DA01,Espironolactona
+C03DA04,Eplerenona
+C03DB01,Amilorida
+C03EA01,Hidroclorotiazida y agentes ahorradores de potasio
+C03EA04,Altizida y agentes ahorradores de potasio
+C03EA06,Clortalidona y agentes ahorradores de potasio
+C03EB01,Furosemida y agentes ahorradores de potasio
+C03XA01,Tolvaptan
+C03XW91,UREA
+C04AD03,Pentoxifilina
+C04AE02,Nicergolina
+C04AE04,Dihidroergocristina
+C04AE54,"Dihidroergocristina, combinaciones con"
+C04AX02,Fenoxibenzamina
+C04AX20,Buflomedil
+C04AX21,Naftidrofurilo
+C04AX57,"Vincamina, combinaciones con"
+C05AA,Corticosteroides
+C05AA01,Hidrocortisona
+C05AA10,"Fluocinolona, acetonido de"
+C05AA51,"Hidrocortisona, combinaciones con"
+C05AA60,"Fluocinolona acetonido, combinaciones con"
+C05AA91,Beclometasona
+C05AA92,"Beclometasona, combinaciones con"
+C05AA93,"Triamcinolona, combinaciones con"
+C05AD01,Lidocaina
+C05AD03,Benzocaina
+C05AE01,Trinitrato de glicerilo
+C05AE03,OTROS AGENTES USO TOPICO PARA EL TRATAMIENTO DE HEMORROIDES Y FISURAS ANALES
+C05AX,Otros agentes de uso topico para el tratamiento de hemorroides y fisuras anales
+C05AX03,"Otras preparaciones, combinaciones"
+C05BA01,Heparinoides organicos
+C05BA03,Heparina
+C05BA04,Pentosan polisulfato de sodio
+C05BB02,Polidocanol
+C05BX,Otros agentes esclerosantes
+C05BX01,Dobesilato de calcio
+C05CA03,Diosmina
+C05CA04,Troxerutina
+C05CA05,Hidrosmina
+C05CA51,"Rutosido, combinaciones con"
+C05CA53,"Diosmina, combinaciones con"
+C05CX99,Escina
+C07AA02,Oxprenolol
+C07AA05,Propranolol
+C07AA07,Sotalol
+C07AA12,Nadolol
+C07AB02,Metoprolol
+C07AB03,Atenolol
+C07AB07,Bisoprolol
+C07AB08,Celiprolol
+C07AB09,Esmolol
+C07AB12,Nebivolol
+C07AG01,Labetalol
+C07AG02,Carvedilol
+C07BB07,Bisoprolol y tiazidas
+C07BB12,Nebivolol y tiazidas
+C07CB03,Atenolol y otros diureticos
+C07DB01,"Atenolol, tiazidas y otros diureticos"
+C07FB02,Metoprolol y otros antihipertensivos
+C07FX06,CARVEDILOL E IVABRADINA
+C08CA01,Amlodipino
+C08CA02,Felodipino
+C08CA04,Nicardipino
+C08CA05,Nifedipino
+C08CA06,Nimodipino
+C08CA07,Nisoldipino
+C08CA08,Nitrendipino
+C08CA09,Lacidipino
+C08CA11,Manidipino
+C08CA12,Barnidipino
+C08CA13,Lercanidipino
+C08CA16,Clevidipino
+C08DA01,Verapamilo
+C08DB01,Diltiazem
+C09AA01,Captopril
+C09AA02,Enalapril
+C09AA03,Lisinopril
+C09AA04,Perindopril
+C09AA05,Ramipril
+C09AA06,Quinapril
+C09AA07,Benazepril
+C09AA08,Cilazapril
+C09AA09,Fosinopril
+C09AA10,Trandolapril
+C09AA16,Imidapril
+C09BA01,Captopril y diureticos
+C09BA02,Enalapril y diureticos
+C09BA03,Lisinopril y diureticos
+C09BA04,Perindopril y diureticos
+C09BA05,Ramipril y diureticos
+C09BA06,Quinapril y diureticos
+C09BA08,Cilazapril y diureticos
+C09BA09,Fosinopril y diureticos
+C09BB02,Enalapril y lercanidipino
+C09BB04,Perindopril y amlodipino
+C09BB05,Ramipril y felodipino
+C09BB06,Enalapril y nitrendipino
+C09BB07,Ramipril y amlodipino
+C09BB10,Trandolapril y verapamilo
+C09BB12,Delapril y manidipino
+C09BX01,"PERINDOPRIL, AMLODIPINO E INDAPAMIDA"
+C09CA01,Losartan
+C09CA02,Eprosartan
+C09CA03,Valsartan
+C09CA04,Irbesartan
+C09CA06,Candesartan
+C09CA07,Telmisartan
+C09CA08,Olmesartan medoxomilo
+C09DA01,Losartan y diureticos
+C09DA02,Eprosartan y diureticos
+C09DA03,Valsartan y diureticos
+C09DA04,Irbesartan y diureticos
+C09DA06,Candesartan y diureticos
+C09DA07,Telmisartan y diureticos
+C09DA08,Olmesartan medoxomilo y diureticos
+C09DB01,Valsartan y Amlodipino
+C09DB02,Olmesartan medoxomilo y amlodipino
+C09DB04,Telmisartan y amlodipino
+C09DX01,"Valsartan, amlodipino e hidroclorotiazida"
+C09DX03,"Olmesartan medoxomilo, amlodipino e hidroclorotiazida"
+C09DX04,SACUBITRIL/VALSARTAN
+C09XA02,Aliskireno
+C09XA52,Aliskireno e hidroclorotiazida
+C10AA01,Simvastatina
+C10AA02,Lovastatina
+C10AA03,Pravastatina
+C10AA04,Fluvastatina
+C10AA05,Atorvastatina
+C10AA07,Rosuvastatina
+C10AA08,Pitavastatina
+C10AB02,Bezafibrato
+C10AB04,Genfibrozilo
+C10AB05,Fenofibrato
+C10AC01,Colestiramina
+C10AC02,Colestipol
+C10AC04,Colesevelam
+C10AX,Otros agentes modificadores de los lipidos
+C10AX06,"Trigliceridos omega-3, incluidos otros esteres y acidos"
+C10AX09,Ezetimiba
+C10AX13,Evolocumab
+C10AX14,Alirocumab
+C10AX15,Ácido bempedoico
+C10AX18,VOLANESORSEN
+C10AX94,Heparinoide
+C10BA02,Simvastatina y ezetimiba
+C10BA03,Pravastatina y fenofibrato
+C10BA05,Atorvastatina y Ezetimiba
+C10BA06,ROSUVASTATINA Y EZETIMIBA
+C10BA10,Bempedoico ácido y ezetimiba
+C10BX03,Atorvastatina y Amlodipino
+C10BX06,"Atorvastatina, acido acetilsalicilico y ramipril"
+D01AA01,Nistatina
+D01AC,Derivados imidazolicos y triazolicos
+D01AC01,Clotrimazol
+D01AC02,Miconazol
+D01AC07,Tioconazol
+D01AC08,Ketoconazol
+D01AC10,Bifonazol
+D01AC11,Oxiconazol
+D01AC12,Fenticonazol
+D01AC14,Sertaconazol
+D01AC16,Flutrimazol
+D01AC51,"Clotrimazol, combinaciones con"
+D01AC52,"Miconazol, combinaciones con"
+D01AE12,Acido salicilico
+D01AE14,Ciclopirox
+D01AE15,Terbinafina
+D01AE16,Amorolfina
+D01AE20,Combinaciones
+D01AE52,"Metilrosanilina, combinaciones con"
+D01BA01,Griseofulvina
+D01BA02,Terbinafina
+D02AB91,Zinc oxido
+D02AB92,"Zinc oxido, combinaciones con"
+D02AC91,Vaselina
+D03AX14,Centella asiatica planta medicinal
+D03AX94,"Centella asiatica, extracto de"
+D03AX95,"Centella asiatica extracto y neomicina, combinaciones con"
+D03AX96,"Balsamo de Peru, combinaciones con"
+D03BA01,Tripsina
+D03BA52,"Colagenasa, combinaciones con"
+D04A,"ANTIPRURIGINOSOS, INCLUYENDO ANTIHISTAMINICOS, ANESTESICOS, ETC."
+D04AA10,Prometazina
+D04AA13,Dimetindeno
+D04AA32,Difenhidramina
+D04AA91,"Dexclorfeniramina, combinaciones con"
+D04AB01,Lidocaina
+D04AB07,Pramocaina
+D04AX91,Calamina
+D04AX92,"Ictiol, combinaciones con"
+D05AX02,Calcipotriol
+D05AX03,Calcitriol
+D05AX04,Tacalcitol
+D05AX05,Tazaroteno
+D05AX52,"Calcipotriol, combinaciones con"
+D05BA02,Metoxsaleno
+D05BB02,Acitretina
+D05BX90,Dimetil fumarato
+D05BX91,"Calaguala, extracto de (Polipodium leucotomos)"
+D06AA02,Clortetraciclina
+D06AA03,Oxitetraciclina
+D06AX,Otros antibioticos para uso topico
+D06AX01,Acido fusidico
+D06AX04,Neomicina
+D06AX07,Gentamicina
+D06AX09,Mupirocina
+D06AX13,Retapamulina
+D06AX14,OZENOXACINO
+D06BA01,Sulfadiazina argentica
+D06BB01,Idoxuridina
+D06BB03,Aciclovir
+D06BB04,Podofilotoxina
+D06BB06,Penciclovir
+D06BB10,Imiquimod
+D06BB12,Sinecatechines
+D06BB53,"Aciclovir, combinaciones con"
+D06BX,Otros quimioterapicos
+D06BX01,Metronidazol
+D07AA01,Metilprednisolona
+D07AA02,Hidrocortisona
+D07AB01,Clobetasona
+D07AB02,"Hidrocortisona, butirato de"
+D07AB04,Fluocortina
+D07AB92,Diclorisona
+D07AC01,Betametasona
+D07AC04,"Fluocinolona, acetonido de"
+D07AC05,Fluocortolona
+D07AC06,Diflucortolona
+D07AC08,Fluocinonida
+D07AC10,Diflorasona
+D07AC13,Mometasona
+D07AC14,"Metilprednisolona, aceponato de"
+D07AC15,Beclometasona
+D07AC16,"Hidrocortisona, aceponato de"
+D07AC17,Fluticasona
+D07AC18,Prednicarbato
+D07AD01,Clobetasol
+D07BA04,Hidrocortisona con antisepticos
+D07BC91,Beclometasona con antisepticos
+D07CA01,Hidrocortisona con antibioticos
+D07CB01,Triamcinolona con antibioticos
+D07CC01,Betametasona con antibioticos
+D07CC02,Fluocinolona con antibioticos
+D07CC04,Beclometasona con antibioticos
+D07CC05,Fluocinonida con antibioticos
+D07XA01,Hidrocortisona
+D07XB01,Flumetasona
+D07XB02,Triamcinolona
+D07XC01,Betametasona
+D07XC03,Mometasona
+D08AC02,Clorhexidina
+D08AC52,"Clorhexidina, combinaciones con"
+D08AD,Productos con acido borico
+D08AF01,Nitrofural
+D08AG02,Povidona iodada
+D08AK,Productos mercuriales
+D08AL01,Nitrato de plata
+D08AX,Otros antisepticos y desinfectantes
+D08AX01,Peroxido de hidrogeno
+D08AX02,Eosina
+D08AX06,Permanganato de potasio
+D08AX08,Etanol
+D09AA09,Povidona iodada
+D09AX91,"Tul con balsamo de Peru, combinaciones con"
+D10AD,Retinoides para uso topico en acne
+D10AD01,Tretinoina
+D10AD03,Adapaleno
+D10AD06,Trifaroteno
+D10AD53,"Adapaleno, combinaciones con"
+D10AE01,Peroxido de benzoilo
+D10AF,Antiinfecciosos para el tratamiento del acne
+D10AF01,Clindamicina
+D10AF02,Eritromicina
+D10AF51,"Clindamicina, combinaciones con"
+D10AX03,Acido azelaico
+D10BA01,Isotretinoina
+D11AC,Champues medicinales
+D11AC03,"Selenio, compuestos con"
+D11AC30,Champues Medicinales. Otros
+D11AF,Preparados anti-verrugas y callicidas
+D11AH01,Tacrolimus
+D11AH02,Pimecrolimus
+D11AH04,Alitretinoina
+D11AH05,DUPILUMAB
+D11AH07,TRALOKINUMAB
+D11AX,Otros productos dermatologicos
+D11AX01,Minoxidil
+D11AX10,Finasterida
+D11AX11,Hidroquinona
+D11AX14,Tacrolimus
+D11AX15,Pimecrolimus
+D11AX18,Diclofenaco
+D11AX21,Brimonidina
+F0000,FORMULES MAGISTRALS
+G01AA01,Nistatina
+G01AA10,Clindamicina
+G01AC05,"Decualinio, cloruro"
+G01AD02,Acido acetico
+G01AF01,Metronidazol
+G01AF02,Clotrimazol
+G01AF04,Miconazol
+G01AF11,Ketoconazol
+G01AF12,Fenticonazol
+G01AF20,Combinaciones de derivados imidazolicos
+G01AF91,Sertaconazol
+G01AX11,Povidona iodada
+G01AX12,Ciclopirox
+G01AX14,"Lactobacilo, fermento"
+G01AX91,"Benzalconio cloruro de, aluminio y potasio sulfato, combinac"
+G02AB01,Metilergometrina
+G02AD02,Dinoprostona
+G02AD04,Carboprost
+G02AD06,Misoprostol
+G02BA03,DIU de plastico con progestageno
+G02BB01,Anillo vaginal con progestageno y estrogeno
+G02CA01,Ritodrina
+G02CB01,Bromocriptina
+G02CB03,Cabergolina
+G02CB04,Quinagolida
+G02CC03,Bencidamina
+G02CX,Otros productos ginecologicos
+G02CX01,Atosiban
+G03AA07,Levonorgestrel y estrogeno
+G03AA09,Desogestrel y estrogeno
+G03AA10,Gestodeno y estrogeno
+G03AA11,Norgestimato y estrogeno
+G03AA12,Drospirenona y estrogeno
+G03AA13,Norelgestromina y estrogeno
+G03AA14,Nomegestrol y estrogeno
+G03AA15,Clormadinona y etinilestadiol
+G03AA16,Dienogest y etinilestradiol
+G03AB03,Levonorgestrel y estrogeno
+G03AB05,Desogestrel y estrogeno
+G03AB06,Gestodeno y estrogeno
+G03AB08,Dienogest y estrogeno
+G03AC03,Levonorgestrel
+G03AC08,Etonogestrel
+G03AC09,Desogestrel
+G03AC10,Drospirenona
+G03AD01,Levonorgestrel
+G03AD02,Ulipristal
+G03BA03,Testosterona
+G03BB01,Mesterolona
+G03CA03,Estradiol
+G03CA04,Estriol
+G03CA09,Promestrieno
+G03CA57,Estrogenos conjugados
+G03CC07,Estrogenos conjugados y bazedoxifeno
+G03CX01,Tibolona
+G03DA02,Medroxiprogesterona
+G03DA04,Progesterona
+G03DB08,Dienogest
+G03DC02,Noretisterona
+G03DC05,Tibolona
+G03FA,"Progestagenos y estrogenos, combinaciones"
+G03FA01,Norestisterona y estrogeno
+G03FA15,Dienogest y estrogeno
+G03FB01,Norgestrel y estrogeno
+G03FB05,Noretisterona y estrogeno
+G03FB06,Medroxiprogesterona y estrogeno
+G03GA01,Gonadotrofina corionica
+G03GA02,Gonadotrofina humana de menopausicas
+G03GA04,Urofolitropina
+G03GA05,Folitropina alfa
+G03GA06,Folitropina beta
+G03GA07,Lutropina alfa
+G03GA08,Coriogonadotropina alfa
+G03GA09,Corifolitropina alfa
+G03GA10,FOLITROPINA DELTA
+G03GA30,Combinaciones
+G03GB02,Clomifeno
+G03HA01,Ciproterona
+G03HB01,Ciproterona y estrogeno
+G03XA01,Danazol
+G03XB01,Mifepristona
+G03XB02,Ulipristal
+G03XC01,Raloxifeno
+G03XC02,Bazedoxifeno
+G03XX01,Prasterona
+G04BC,Solventes de concreciones urinarias
+G04BC91,"Potasio, citrato de"
+G04BC92,"Potasio citrato  y citrico acido, combinaciones con"
+G04BD02,Flavoxato
+G04BD04,Oxibutinina
+G04BD06,Propiverina
+G04BD07,Tolterodina
+G04BD08,Solifenacina
+G04BD09,"Trospio, cloruro de"
+G04BD11,Fesoterodina
+G04BD12,Mirabegron
+G04BD13,Desfesoterodina
+G04BE,Farmacos usados en disfuncion erectil
+G04BE01,Alprostadil
+G04BE03,Sildenafilo
+G04BE08,Tadalafilo
+G04BE09,Vardenafilo
+G04BX,Otros productos urologicos
+G04BX03,Acido acetohidroxamico
+G04BX14,Dapoxetina
+G04BX16,Tiopronina
+G04CA01,Alfuzosina
+G04CA02,Tamsulosina
+G04CA03,Terazosina
+G04CA04,Silodosina
+G04CA52,Tamsulosina y dutasterida
+G04CA53,Tamsulosina y solifenacina
+G04CB01,Finasterida
+G04CB02,Dutasterida
+G04CX02,Sabalis serrulatae fructus
+G04CX51,Pygeum africanum combinaciones con
+G04CX52,Serenoa repens combinaciones con
+G04CX92,"Antiadenoma prostata, extracto de, combinaciones con"
+H01AA02,Tetracosactida
+H01AC01,Somatotropina
+H01AX01,Pegvisomat
+H01BA02,Desmopresina
+H01BA04,Terlipresina
+H01BB02,Oxitocina
+H01BB03,Carbetocina
+H01CA02,Nafarelina
+H01CB01,Somatostatina
+H01CB02,Octreotida
+H01CB03,Lanreotida
+H01CB05,Pasireotida
+H01CC01,Ganirelix
+H01CC02,Cetrorelix
+H02AA02,Fludrocortisona
+H02AB01,Betametasona
+H02AB02,Dexametasona
+H02AB04,Metilprednisolona
+H02AB06,Prednisolona
+H02AB07,Prednisona
+H02AB08,Triamcinolona
+H02AB09,Hidrocortisona
+H02AB13,Deflazacort
+H02CA02,OSILODROSTAT FOSFATO
+H03AA01,Levotiroxina sodica
+H03BA02,Propiltiouracilo
+H03BB01,Carbimazol
+H03BB02,Tiamazol
+H03CA,Terapia con iodo
+H03CA91,Ioduro potasico
+H04AA01,Glucagon
+H05AA02,Teriparatida
+H05BA01,"Calcitonina (de salmon, sintetica)"
+H05BX01,Cinacalcet
+H05BX02,Paricalcitol
+H05BX04,Etelcalcetida
+J01AA02,Doxiciclina
+J01AA07,Tetraciclina
+J01AA08,Minociclina
+J01AA12,Tigeciclina
+J01CA01,Ampicilina
+J01CA04,Amoxicilina
+J01CE01,Bencilpenicilina
+J01CE02,Fenoximetilpenicilina
+J01CE08,Benzatina bencilpenicilina
+J01CE09,Penicilina procaina
+J01CE30,Combinaciones
+J01CF02,Cloxacilina
+J01CR02,Amoxicilina e inhibidores de la enzima
+J01CR05,Piperacilina e inhibidores de la enzima
+J01D,OTROS ANTIBACTERIANOS BETALACTAMICOS
+J01DB01,Cefalexina
+J01DB04,Cefazolina
+J01DB05,Cefadroxilo
+J01DC01,Cefoxitina
+J01DC02,Cefuroxima
+J01DC04,Cefaclor
+J01DC06,Cefonicida
+J01DC12,Cefminox
+J01DD01,Cefotaxima
+J01DD02,Ceftazidima
+J01DD04,Ceftriaxona
+J01DD08,Cefixima
+J01DD13,Cefpodoxima
+J01DD14,Ceftibuteno
+J01DD16,Cefditoreno
+J01DD52,Ceftazidima combinaciones
+J01DE01,Cefepima
+J01DF01,Aztreonam
+J01DH02,Meropenem
+J01DH03,Ertapenem
+J01DH04,Doripenem
+J01DH51,Imipenem e enzima inhibidora
+J01DI02,Ceftarolina fosamilo
+J01DI54,Ceftolozano/tazobactam
+J01EA01,Trimetoprima
+J01EB20,Combinaciones
+J01EC02,Sulfadiazina
+J01EE01,Sulfametoxazol y trimetoprima
+J01FA01,Eritromicina
+J01FA02,Espiramicina
+J01FA07,Josamicina
+J01FA09,Claritromicina
+J01FA10,Azitromicina
+J01FA11,Miocamicina
+J01FF01,Clindamicina
+J01FF02,Lincomicina
+J01GA01,Estreptomicina
+J01GB01,Tobramicina
+J01GB03,Gentamicina
+J01GB06,Amikacina
+J01MA01,Ofloxacino
+J01MA02,Ciprofloxacino
+J01MA06,Norfloxacino
+J01MA12,Levofloxacino
+J01MA14,Moxifloxacino
+J01MB04,Acido pipemidico
+J01RA04,"Espiramicina, combinacion con otros antibacterianos"
+J01XA01,Vancomicina
+J01XA02,Teicoplanina
+J01XA04,Dalbavancina
+J01XB01,Colistina
+J01XC01,Acido fusidico
+J01XD01,Metronidazol
+J01XE01,Nitrofurantoina
+J01XX01,Fosfomicina
+J01XX04,Espectinomicina
+J01XX05,Metenamina
+J01XX08,Linezolid
+J01XX09,Daptomicina
+J01XX11,Tedizolid
+J02AA01,Amfotericina B
+J02AB02,Ketoconazol
+J02AB14,CASPOFUNGINA
+J02AC01,Fluconazol
+J02AC02,Itraconazol
+J02AC03,Voriconazol
+J02AC04,Posaconazol
+J02AC05,Isavuconazol
+J02AX01,Flucitosina
+J02AX04,Caspofungina
+J02AX05,Micafungina
+J02AX06,Anidulafungina
+J04A,FARMACOS PARA EL TRATAMIENTO DE LA TUBERCULOSIS
+J04AB01,Cicloserina
+J04AB02,Rifampicina
+J04AB04,Rifabutina
+J04AC01,Isoniazida
+J04AC51,"Isoniazida, combinaciones con"
+J04AD03,Etionamida
+J04AK01,Pirazinamida
+J04AK02,Etambutol
+J04AK05,Bedaquilina
+J04AM02,Rifampicina e isoniazida
+J04AM05,"Rifampicina, pirazinamida e isoniazida"
+J04AM06,"Rifampicina, pirazinamida, etambutol e isoniazida"
+J04BA01,Clofazimina
+J04BA02,Dapsona
+J05A,ANTIVIRALES DE ACCION DIRECTA
+J05AB01,Aciclovir
+J05AB04,Ribavirina
+J05AB06,Ganciclovir
+J05AB09,Famciclovir
+J05AB11,Valaciclovir
+J05AB12,Cidofovir
+J05AB14,Valganciclovir
+J05AB15,Brivudina
+J05AB16,REMDESIVIR
+J05AC91,Amantadina
+J05AD01,Foscarnet
+J05AE,Inhibidores de proteasa
+J05AE01,Saquinavir
+J05AE02,Indinavir
+J05AE03,Ritonavir
+J05AE04,Nelfinavir
+J05AE07,Fosamprenavir
+J05AE08,Atazanavir
+J05AE09,Tipranavir
+J05AE10,DARUNAVIR
+J05AE11,Telaprevir
+J05AE12,Boceprevir
+J05AE14,Simeprevir
+J05AE91,Ritonavir+lopinavir
+J05AE94,EMTRICITABINA+TENOFOVIR DISOPROXILO
+J05AF,Nucleosidos y nucleotidos inhibidores de la transcriptasa inversa
+J05AF01,Zidovudina
+J05AF02,Didanosina
+J05AF04,Estavudina
+J05AF05,Lamivudina
+J05AF06,Abacavir
+J05AF07,Tenofovir disoproxilo
+J05AF08,Adefovir dipivoxilo
+J05AF09,Emtricitabina
+J05AF10,Entecavir
+J05AF91,Zidovudina+lamivudina
+J05AF92,Zidovudina+lamivudina+abacavir
+J05AF93,Abacavir+lamivudina
+J05AG,Inhibidores no nucleosidicos de la transcriptasa inversa
+J05AG01,Nevirapina
+J05AG03,Efavirenz
+J05AG04,Etravirina
+J05AG05,Rilpivirina
+J05AG06,DORAVIRINA
+J05AH01,Zanamivir
+J05AH02,Oseltamivir
+J05AJ04,CABOTEGRAVIR
+J05AR,Combinacion de antivirales para el tratamiento de infecciones por VIH
+J05AR01,Zidovudina y lamivudina
+J05AR02,Lamivudina y abacavir
+J05AR03,Tenofovir disoproxilo y emtricitabina
+J05AR06,"Emtricitabina, tenofovir disoproxilo y efavirenz"
+J05AR09,"Emtricitabina, tenofovir dosipril, elvitegravir y cobicistat"
+J05AR10,LOPINAVIR/RITONAVIR
+J05AR13,"Lamivudina, abacavir y dolutegravir"
+J05AR14,Darunavir/Cobicistat
+J05AR15,Atazanavir/Cobicistat
+J05AR17,Emtricitabina/Tenofovir alafenamida
+J05AR18,"Emtricitabina, tenofovir alafenamida, elvitegravir y cobicista"
+J05AR20,Bictegravir/Emtricitabina/Taf
+J05AR21,Dolutegravir/Rilpivirina
+J05AX,Otros antivirales
+J05AX07,Enfuvirtida
+J05AX08,Raltegravir
+J05AX09,Maraviroc
+J05AX10,Maribavir
+J05AX12,Dolutegravir
+J05AX14,Daclatasvir
+J05AX15,Sofosbuvir
+J05AX16,Dasabuvir
+J05AX18,LETERMOVIR
+J05AX24,TECOVIRIMAT
+J05AX65,Sofosbuvir y ledipasvir
+J05AX67,ombitasbir/paritapravir/ritonavir
+J05AX68,Elbasvir/Grazoprevir
+J05AX69,Velpatasvir/Sofosbuvir
+J06BA01,Inmunoglobulinas humanas normales para adm. extravascular
+J06BA02,Inmunoglobulinas humanas normales para adm. intravascular
+J06BB01,Inmunoglobulina anti-D (rh)
+J06BB02,Inmunoglobulina antitetanica
+J06BB04,Inmunoglobulina antihepatitis B
+J06BB16,Palivizumab
+J06BB21,BEZLOTOXUMAB
+J07A,VACUNAS ANTIBACTERIANAS
+J07AE01,"Colera, celula entera inactivada"
+J07AG01,"Haemophilus influenzae B, antigeno purificado conjugado"
+J07AH07,"Meningococo C, antigenos conjugado de polisacaridos purificados"
+J07AH09,"Meningococo B, vacuna multicomponente"
+J07AJ52,"Pertussis, antigeno purificado, combinacion con toxoides"
+J07AL02,"Neumococo, antigenos conjugado constituido por polisacaridos purificados"
+J07AP01,"Tifoidea, viva atenuada, oral"
+J07AP03,"Tifoidea, antigeno constituido por polisacarido purificado"
+J07BA02,"Encefalitis japonesa, virus entero inactivado"
+J07BB,Vacunas contra la gripe
+J07BB02,"Influenza, antigeno purificado"
+J07BC01,"Hepatitis B, antigeno purificado de"
+J07BC02,"Hepatitis A, virus entero inactivado"
+J07BC20,Combinaciones
+J07BD52,"Sarampion, virus vivo atenuado combinado con la vacuna contra la parotiditis y la rubeola"
+J07BH01,"Rotavirus, virus vivo atenuado"
+J07BK01,"Varicela, virus vivo atenuado"
+J07BM01,"Papilomavirus (tipos humanos 6, 11, 16, 18)"
+J07BM02,"Papilomavirus (tipos humanos 16, 18)"
+J07BM03,"Papilomavirus (tipos humanos 6, 11, 16, 18, 31, 33, 45, 52, 58)"
+J07CA09,Difteria-Haemophilus influenzae B- pertussis-poliomielitis- tetanos-hepatitis B
+L01,AGENTES ANTINEOPLASICOS
+L01AA01,Ciclofosfamida
+L01AA02,Clorambucilo
+L01AA03,Melfalan
+L01AA06,Ifosfamida
+L01AA09,Bendamustina
+L01AB01,Busulfano
+L01AC01,Tiotepa
+L01AD01,Carmustina
+L01AD02,Lomustina
+L01AD04,Estreptozocina
+L01AD05,Fotemustina
+L01AX03,Temozolomida
+L01AX04,Dacarbazina
+L01BA01,Metotrexato
+L01BA03,Raltitrexed
+L01BA04,Pemetrexed
+L01BB02,Mercaptopurina
+L01BB03,Tioguanina
+L01BB04,Cladribina
+L01BB05,Fludarabina
+L01BB06,Clofarabina
+L01BB07,Nelarabina
+L01BC,Analogos de las pirimidinas
+L01BC01,Citarabina
+L01BC02,Fluorouracilo
+L01BC03,Tegafur
+L01BC05,Gemcitabina
+L01BC06,Capecitabina
+L01BC07,Azacitidina
+L01BC08,Decitabina
+L01BC52,"Fluorouracilo, combinaciones con"
+L01CA01,Vinblastina
+L01CA02,Vincristina
+L01CA03,Vindesina
+L01CA04,Vinorelbina
+L01CA05,Vinflunina
+L01CB01,Etoposido
+L01CB02,Teniposido
+L01CD01,Paclitaxel
+L01CD02,Docetaxel
+L01CD04,Cabazitaxel
+L01CX01,Trabectedina
+L01DA01,Dactinomicina
+L01DB01,Doxorubicina
+L01DB02,Daunorubicina
+L01DB03,Epirubicina
+L01DB06,Idarubicina
+L01DB07,Mitoxantrona
+L01DC01,Bleomicina
+L01DC03,Mitomicina
+L01ED04,BRIGATINIB
+L01ED05,LORLATINIB
+L01EF03,Abemaciclib
+L01EH03,TUCATINIB
+L01EL01,Ibrutinib
+L01EL02,ACALABRUTINIB
+L01EM03,ALPELISIB
+L01EX17,CAPMATINIB
+L01EX22,SELPERCATINIB
+L01FC02,ISATUXIMAB
+L01FX17,SACITUZUMAB GOVITECAN
+L01FX18,AMIVANTAMAB
+L01X,OTROS AGENTES ANTINEOPLASICOS
+L01XA01,Cisplatino
+L01XA02,Carboplatino
+L01XA03,Oxaliplatino
+L01XB01,Procarbazina
+L01XC,Anticuerpos monoclonales
+L01XC02,Rituximab
+L01XC03,Trastuzumab
+L01XC04,Alemtuzumab
+L01XC06,Cetuximab
+L01XC07,Bevacizumab
+L01XC08,Panitumumab
+L01XC10,Ofatumumab
+L01XC11,Ipilimumab
+L01XC12,Brentuximab vedotina
+L01XC13,Pertuzumab
+L01XC15,Obinutuzumab
+L01XC17,Nivolumab
+L01XC18,Pembrolizumab
+L01XC19,Blinatumomab
+L01XC21,Ramucirumab
+L01XC23,Elotuzumab
+L01XC24,Daratumumab
+L01XC25,MOGAMULIZUMAB
+L01XC26,Inotuzumab
+L01XC27,Olaratumab
+L01XC37,POLATUZUMAB
+L01XD03,Aminolevulinato de metilo
+L01XD04,Acido aminolevulinico
+L01XE,Inhibidores directos de la protein-quinasa
+L01XE01,Imatinib
+L01XE02,Gefitinib
+L01XE03,Erlotinib
+L01XE04,Sunitinib
+L01XE05,Sorafenib
+L01XE06,Dasatinib
+L01XE07,Lapatinib
+L01XE08,Nilotinib
+L01XE10,Everolimus
+L01XE11,Pazopanib
+L01XE12,Vandetanib
+L01XE13,Afatinib
+L01XE14,Bosutinib
+L01XE15,Vemurafenib
+L01XE16,Crizotinib
+L01XE17,Axitinib
+L01XE18,Ruxolitinib
+L01XE21,Regorafenib
+L01XE23,Dabrafenib
+L01XE24,Ponatinib
+L01XE25,Trametinib
+L01XE26,Cabozantinib
+L01XE27,Ibrutinib
+L01XE29,Lenvatinib
+L01XE31,Nintedanib
+L01XE33,Palbociclib
+L01XE35,Osimertinib
+L01XE38,COBIMETINIB
+L01XE39,Midostaurina
+L01XE46,ENCORAFENIB
+L01XE50,ABEMACICLIB
+L01XE52,QUIZARTINIB
+L01XE56,ENTRECTINIB
+L01XJ02,Sonidegib
+L01XK03,Rucaparib
+L01XX,Otros agentes antineoplasicos
+L01XX02,Asparaginasa
+L01XX05,Hidroxicarbamida
+L01XX08,Pentostatina
+L01XX09,Miltefosina
+L01XX11,Estramustina
+L01XX14,Tretinoina
+L01XX17,Topotecan
+L01XX19,Irinotecan
+L01XX23,Mitotano
+L01XX24,Pegaspargasa
+L01XX25,Bexaroteno
+L01XX27,"Arsenico, trioxido de"
+L01XX28,Imatinib
+L01XX32,Bortezomib
+L01XX35,Anagrelida
+L01XX39,Romidepsina
+L01XX41,Eribulina
+L01XX43,Vismodegib
+L01XX44,Aflibercept
+L01XX45,CARFILZOMIB
+L01XX46,Olaparib
+L01XX47,Idelalisib
+L01XX50,Ixazomib
+L01XX51,Talimogen
+L01XX52,Venetoclax
+L01XX54,Niraparib
+L01XX62,IVOSIDENIB
+L01XX90,AXICABTAGEN CELOLEUCEL
+L02AB01,Megestrol
+L02AB02,Medroxiprogesterona
+L02AE01,Buserelina
+L02AE02,Leuprorelina
+L02AE03,Goserelina
+L02AE04,Triptorelina
+L02BA01,Tamoxifeno
+L02BA03,Fulvestrant
+L02BB01,Flutamida
+L02BB03,Bicalutamida
+L02BB04,Enzalutamida
+L02BB05,Apalutamida
+L02BB06,Darolutamida
+L02BG03,Anastrozol
+L02BG04,Letrozol
+L02BG06,Exemestano
+L02BX02,Degarelix
+L02BX03,Abiraterona
+L03AA02,Filgrastim
+L03AA10,Lenograstim
+L03AA13,Pegfilgrastim
+L03AB03,Interferon gamma
+L03AB04,Interferon alfa-2a
+L03AB05,Interferon alfa-2b
+L03AB07,Interferon beta-1a
+L03AB08,Interferon beta-1b
+L03AB10,Peginterferon alfa-2b
+L03AB11,Peginterferon alfa-2a
+L03AB13,Peginterferon beta 1A
+L03AC01,Aldesleukina
+L03AX,Otros inmunoestimulantes
+L03AX03,Vacuna BCG
+L03AX11,Tasonermina
+L03AX13,"Glatiramero, acetato de"
+L03AX16,Plerixafor
+L04A,INMUNOSUPRESORES
+L04AA,Inmunosupresores selectivos
+L04AA01,Ciclosporina
+L04AA04,Inmunoglobulina antitimocitica (conejo)
+L04AA05,Tacrolimus
+L04AA06,Acido micofenolico
+L04AA08,Daclizumab
+L04AA09,Basiliximab
+L04AA10,Sirolimus
+L04AA11,Etanercept
+L04AA12,Infliximab
+L04AA13,Leflunomida
+L04AA14,Anakinra
+L04AA17,Adalimumab
+L04AA18,Everolimus
+L04AA23,Natalizumab
+L04AA24,Abatacept
+L04AA25,Eculizumab
+L04AA26,Belimumab
+L04AA27,Fingolimod
+L04AA28,Belatacept
+L04AA29,Tofacitinib
+L04AA31,Teriflunomida
+L04AA32,Apremilast
+L04AA36,Ocrelizumab
+L04AA37,Baricitinib
+L04AA42,SIPONIMOD
+L04AA43,RAVULIZUMAB
+L04AA44,UPADACITINIB
+L04AA55,SUTIMLIMAB
+L04AA91,INMUNOGLOBULINA ANTITIMOCITICA CABALLO
+L04AB01,Etanercept
+L04AB02,Infliximab
+L04AB04,Adalimumab
+L04AB05,Certolizumab pegol
+L04AB06,Golimumab
+L04AC02,Basiliximab
+L04AC03,Anakinra
+L04AC05,Ustekinumab
+L04AC06,Mepolizumab
+L04AC07,Tocilizumab
+L04AC08,Cankinumab
+L04AC10,Secukinumab
+L04AC11,Siltuximab
+L04AC12,Brodalumab
+L04AC13,Ixekizumab
+L04AC14,SARILUMAB
+L04AC16,GUSELKUMAB
+L04AC18,RISANKIZUMAB
+L04AD01,Ciclosporina
+L04AD02,Tacrolimus
+L04AX01,Azatioprina
+L04AX02,Talidomida
+L04AX03,"Metrotexato, formulaciones orales"
+L04AX04,Lenalidomida
+L04AX05,Pirfenidona
+L04AX06,Pomalidomida
+L04AX08,DARVADSTROCEL
+M01AA01,Fenilbutazona
+M01AB01,Indometacina
+M01AB05,Diclofenaco
+M01AB15,Ketorolaco
+M01AB16,Aceclofenaco
+M01AB55,"Diclofenaco, combinaciones con"
+M01AC01,Piroxicam
+M01AC02,Tenoxicam
+M01AC05,Lornoxicam
+M01AC06,Meloxicam
+M01AE01,Ibuprofeno
+M01AE02,Naproxeno
+M01AE03,Ketoprofeno
+M01AE09,Flurbiprofeno
+M01AE14,Dexibuprofeno
+M01AE17,Dexketoprofeno
+M01AE51,"Ibuprofeno, combinaciones con"
+M01AE52,Naproxeno y esomeprazol
+M01AG01,Acido mefenamico
+M01AH01,Celecoxib
+M01AH05,Etoricoxib
+M01AX,Otros agentes antiinflamatorios y antirreumaticos no esteroideos
+M01AX01,Nabumetona
+M01AX02,Acido niflumico
+M01AX05,Glucosamina
+M01AX21,Diacereina
+M01AX25,Condroitinsulfato
+M01BX91,"Corticosteroides y vitaminas, combinaciones con"
+M01CB01,Aurotiomalato de sodio
+M01CC01,Penicilamina
+M01CX,Otros agentes antirreumaticos especificos
+M02AA05,Bencidamina
+M02AA06,Etofenamato
+M02AA10,Ketoprofeno
+M02AA12,Naproxeno
+M02AA13,Ibuprofeno
+M02AA15,Diclofenaco
+M02AA23,Indometacina
+M02AA25,Aceclofenaco
+M02AA92,Mabruprofeno
+M02AA96,Dexketoprofeno
+M02AA97,Piketoprofeno
+M02AB,Preparados con capsaicina y agentes similares
+M02AB01,Capsaicina
+M02AB91,Capsaicina
+M02AC,Preparados con acido salicilico y derivados
+M02AC92,Salicilico acido combinaciones con
+M02AX,Otros productos topicos para el dolor articular y muscular
+M02AX10,Varios
+M02AX92,Alcohol de romero
+M03AB01,"Suxametonio, cloruro de"
+M03AC03,"Vecuronio, bromuro de"
+M03AC04,"Atracurio, besilato de"
+M03AC09,"Rocuronio, bromuro de"
+M03AC11,"Cisatracurio, besilato de"
+M03AX01,"Botulinica, toxina"
+M03BA02,Carisoprodol
+M03BA03,Metocarbamol
+M03BA53,"Metocarbamol, combinaciones excluyendo psicolepticos"
+M03BX01,Baclofeno
+M03BX02,Tizanidina
+M03BX07,Tetrazepam
+M03BX08,Ciclobenzaprina
+M03BX55,"Tiocolchicosido, combinaciones con"
+M03CA,Dantroleno y derivados
+M04AA01,Alopurinol
+M04AA03,Febuxostat
+M04AB01,Probenecid
+M04AB03,Benzbromarona
+M04AB05,Lesinurad
+M04AC01,Colchicina
+M04AC51,Colchicina combinaciones con
+M04AX,Otros preparados antigotosos
+M05BA01,Acido etidronico
+M05BA03,Acido pamidronico
+M05BA04,Acido alendronico
+M05BA06,Acido ibandronico
+M05BA07,Acido risedronico
+M05BA08,Acido zoledronico
+M05BB02,"Acido risedronico y calcio, preparados secuenciales"
+M05BB03,ACIDO ALENDRONICO Y COLECALCIFEROL
+M05BX03,"Estroncio, ranelato de"
+M05BX04,Denosumab
+M05BX06,Romosozumab
+M09AB02,Colagenasa de clostridium histolitico
+M09AX,Otros farmacos para desordenes del sistema musculoesqueletico
+M09AX01,Acido hialuronico
+M09AX91,"Nucleotidos, combinaciones con"
+N01AB06,Isoflurano
+N01AB07,Desflurano
+N01AB08,Sevoflurano
+N01AF03,Tiopental sodico
+N01AH01,Fentanilo
+N01AH02,Alfentanilo
+N01AH03,Sufentanilo
+N01AH06,Remifentanilo
+N01AX03,Ketamina
+N01AX07,Etomidato
+N01AX10,Propofol
+N01BA02,Procaina
+N01BA03,Tetracaina
+N01BA05,Benzocaina
+N01BB01,Bupivacaina
+N01BB02,Lidocaina
+N01BB03,Mepivacaina
+N01BB04,Prilocaina
+N01BB09,Ropivacaina
+N01BB10,Levobupivacaina
+N01BB20,Combinaciones
+N01BB51,"Bupivacaina, combinaciones con"
+N01BB52,"Lidocaina, combinaciones con"
+N01BX,Otros anestesicos locales
+N01BX01,Cloruro de etilo
+N01BX04,Capsaicina
+N02AA01,Morfina
+N02AA03,Hidromorfona
+N02AA05,Oxicodona
+N02AA55,"Oxicodona, combinaciones con"
+N02AA59,"Codeina, combinaciones excluyendo psicolepticos"
+N02AB02,Petidina
+N02AB03,Fentanilo
+N02AC04,Dextropropoxifeno
+N02AD01,Pentazocina
+N02AE01,Buprenorfina
+N02AJ13,paracetamol + tramadol
+N02AJ14,tramadol + dexketoprofeno
+N02AX02,Tramadol
+N02AX06,Tapentadol
+N02AX52,"Tramadol, combinacion con"
+N02BA01,Acido acetilsalicilico
+N02BA51,"Acido acetilsalicilico, combinaciones excluyendo psicolepticos"
+N02BB,Pirazolonas
+N02BB02,Metamizol sodico
+N02BE01,Paracetamol
+N02BE51,"Paracetamol, combinaciones excluyendo psicolepticos"
+N02BG08,Ziconotida
+N02BG10,Cannabinoides
+N02BG91,Clonixinato de lisina
+N02C,PREPARADOS ANTIMIGRA?OSOS
+N02CA01,Dihidroergotamina
+N02CA51,"Dihidroergotamina, combinaciones con"
+N02CA52,"Ergotamina, combinaciones excluyendo psicolepticos"
+N02CC01,Sumatriptan
+N02CC02,Naratriptan
+N02CC03,Zolmitriptan
+N02CC04,Rizatriptan
+N02CC05,Almotriptan
+N02CC06,Eletriptan
+N02CC07,Frovatriptan
+N02CD01,ERENUMAB
+N02CD03,FREMANEZUMAB
+N02CX01,Pizotifeno
+N03A,ANTIEPILEPTICOS
+N03AA02,Fenobarbital
+N03AA03,Primidona
+N03AB02,Fenitoina
+N03AD01,Etosuximida
+N03AE01,Clonazepam
+N03AF01,Carbamazepina
+N03AF02,Oxcarbazepina
+N03AF03,Rufinamida
+N03AF04,Eslicarbazepina
+N03AG01,Acido valproico
+N03AG02,Valpromida
+N03AG04,Vigabatrina
+N03AG06,Tiagabina
+N03AX09,Lamotrigina
+N03AX11,Topiramato
+N03AX12,Gabapentina
+N03AX14,Levetiracetam
+N03AX15,Zonisamida
+N03AX16,Pregabalina
+N03AX18,Lacosamida
+N03AX22,Perampanel
+N03AX23,Brivaracetam
+N03AX25,CENOBAMATO
+N04AA01,Trihexifenidilo
+N04AA02,Biperideno
+N04AA04,Prociclidina
+N04B,AGENTES DOPAMINERGICOS
+N04BA02,Levodopa con inhibidor de la descarboxilasa
+N04BA03,Levodopa con inhibidor de la descarboxilasa e inhibidor de la COMT
+N04BC01,Bromocriptina
+N04BC02,Pergolida
+N04BC04,Ropinirol
+N04BC05,Pramipexol
+N04BC06,Cabergolina
+N04BC07,Apomorfina
+N04BC09,Rotigotina
+N04BD,Inhibidores de la monoaminoxidasa B
+N04BD01,Selegilina
+N04BD02,Rasagilina
+N04BD03,Safinamida
+N04BX01,Tolcapona
+N04BX02,Entacapona
+N04BX04,Opicapona
+N05AA01,Clorpromazina
+N05AA02,Levomepromazina
+N05AB02,Flufenazina
+N05AB03,Perfenazina
+N05AB06,Trifluoperazina
+N05AC01,Periciazina
+N05AC04,Pipotiazina
+N05AD01,Haloperidol
+N05AD08,Droperidol
+N05AE03,Sertindol
+N05AE04,Ziprasidona
+N05AE05,Lurasidona
+N05AF05,Zuclopentixol
+N05AG02,Pimozida
+N05AH01,Loxapina
+N05AH02,Clozapina
+N05AH03,Olanzapina
+N05AH04,Quetiapina
+N05AH05,Asenapina
+N05AH06,Clotiapina
+N05AL01,Sulpirida
+N05AL03,Tiaprida
+N05AL05,Amisulprida
+N05AN01,Litio
+N05AX,Otros antipsicoticos
+N05AX08,Risperidona
+N05AX09,Clotiapina
+N05AX12,Aripiprazol
+N05AX13,Paliperidona
+N05AX15,Cariprazina
+N05BA01,Diazepam
+N05BA02,Clordiazepoxido
+N05BA05,Clorazepato de potasio
+N05BA06,Lorazepam
+N05BA08,Bromazepam
+N05BA09,Clobazam
+N05BA10,Ketazolam
+N05BA12,Alprazolam
+N05BA13,Halazepam
+N05BA14,Pinazepam
+N05BA21,Clotiazepam
+N05BA51,"Diazepam, combinaciones con"
+N05BA91,Bentazepam
+N05BB01,Hidroxizina
+N05BE01,Buspirona
+N05BX05,"Lavandulae, aceite esencial"
+N05C,HIPNOTICOS Y SEDANTES
+N05CA02,Amobarbital
+N05CD01,Flurazepam
+N05CD03,Flunitrazepam
+N05CD05,Triazolam
+N05CD06,Lormetazepam
+N05CD08,Midazolam
+N05CD09,Brotizolam
+N05CD10,Quazepam
+N05CD11,Loprazolam
+N05CF01,Zopiclona
+N05CF02,Zolpidem
+N05CH01,Melatonina
+N05CM,Otros hipnoticos y sedantes
+N05CM02,Clometiazol
+N05CM09,Valerianae radix
+N05CM18,Dexmedetomidina
+N05CM93,Glutamato magnesico bromhidrato
+N05CX,"Hipnoticos y sedantes en combinacion, excluyendo barbituricos"
+N06AA02,Imipramina
+N06AA04,Clomipramina
+N06AA06,Trimipramina
+N06AA09,Amitriptilina
+N06AA10,Nortriptilina
+N06AA12,Doxepina
+N06AA21,Maprotilina
+N06AB03,Fluoxetina
+N06AB04,Citalopram
+N06AB05,Paroxetina
+N06AB06,Sertralina
+N06AB08,Fluvoxamina
+N06AB10,Escitalopram
+N06AF03,Fenelzina
+N06AF04,Tranilcipromina
+N06AF05,Iproniazida
+N06AG02,Moclobemida
+N06AX,Otros antidepresivos
+N06AX01,Oxitriptan
+N06AX03,Mianserina
+N06AX05,Trazodona
+N06AX11,Mirtazapina
+N06AX12,Bupropion
+N06AX14,Tianeptina
+N06AX16,Venlafaxina
+N06AX18,Reboxetina
+N06AX21,Duloxetina
+N06AX22,Agomelatina
+N06AX23,Desvenlafaxina
+N06AX26,Vortioxetina
+N06B,"PSICOESTIMULANTES, AGENTES UTILIZADOS PARA LA ADHD Y NOOTROPICOS"
+N06BA02,Dexanfetamina
+N06BA04,Metilfenidato
+N06BA07,Modafinilo
+N06BA09,Atomoxetina
+N06BA12,Lisdexanfetamina
+N06BC01,Cafeina
+N06BX,Otros psicoestimulantes y nootropicos
+N06BX03,Piracetam
+N06BX04,Deanol
+N06BX06,Citicolina
+N06BX08,Pirisudanol
+N06BX13,Idebenona
+N06CA01,Amitriptilina y psicolepticos
+N06CA02,Melitraceno y psicolepticos
+N06DA02,Donepezilo
+N06DA03,Rivastigmina
+N06DA04,Galantamina
+N06DX,Otros farmacos anti-demencia
+N06DX01,Memantina
+N06DX02,Ginkgo folium
+N07AA01,Neostigmina
+N07AA02,Piridostigmina
+N07AX01,Pilocarpina
+N07BA01,Nicotina
+N07BA02,Bupropion
+N07BA03,Vareniclina
+N07BA04,Citisina
+N07BB01,Disulfiram
+N07BB02,Carbimida calcica
+N07BB03,Acamprosato
+N07BB04,Naltrexona
+N07BB05,Nalmefeno
+N07BC02,Metadona
+N07BC51,"Buprenorfina, combinaciones con"
+N07CA01,Betahistina
+N07CA02,Cinarizina
+N07CA03,Flunarizina
+N07XX02,Riluzol
+N07XX04,Oxibato de sodio
+N07XX05,Amifampridina
+N07XX06,Tetrabenazina
+N07XX07,Fampridina
+N07XX08,Tafamidis
+N07XX09,Dimetil fumarato
+N07XX11,Pitolisant
+N07XX12,PATISIRAN
+N07XX91,Magnesio sulfato
+P01AB01,Metronidazol
+P01AB02,Tinidazol
+P01AX05,Mepacrina
+P01AX06,Atovacuona
+P01AX11,Nitazoxanida
+P01BA01,Cloroquina
+P01BA02,Hidroxicloroquina
+P01BA03,Primaquina
+P01BA05,Mefloquina
+P01BB01,Proguanil
+P01BB51,"Proguanil, combinaciones con"
+P01BC01,Quinina
+P01BD01,Pirimetamina
+P01BE03,Artesunato
+P01BF,"Artemisinina y derivados, combinaciones"
+P01BF01,Artemetero y lumefantrina
+P01CA02,Benznidazol
+P01CB01,"Meglumina, antimoniato de"
+P01CC01,Nifurtimox
+P01CX01,"Pentamidina, isetionanto de"
+P01CX02,Suramina sodica
+P02BA01,Prazicuantel
+P02BX,Otros agentes antitrematodos
+P02CA01,Mebendazol
+P02CA03,Albendazol
+P02CB02,Dietilcarbamazina
+P02CC01,Pirantel
+P02CF01,Ivermectina
+P02DA01,Niclosamida
+P03AC04,Permetrina
+R01AA04,Fenilefrina
+R01AA05,Oximetazolina
+R01AA07,Xilometazolina
+R01AA09,Tramazolina
+R01AB,"Simpaticomimeticos, combinaciones excluyendo corticosteroides"
+R01AB06,Xilometazolina
+R01AB07,Oximetazolina
+R01AC02,Levocabastina
+R01AC03,Azelastina
+R01AD01,Beclometasona
+R01AD05,Budesonida
+R01AD08,Fluticasona
+R01AD09,Mometasona
+R01AD11,Triamcinolona
+R01AD12,"Fluticasona, furoato de"
+R01AD53,"Dexametasona, combinaciones con"
+R01AD58,"Fluticasona, combinaciones con"
+R01AX02,Retinol
+R01AX03,"Ipratropio, bromuro de"
+R01AX10,Varios
+R01AX30,Combinaciones
+R01BA02,Pseudoefedrina
+R01BA52,"Pseudoefedrina, combinaciones con"
+R01BA53,"Fenilefrina, combinaciones con"
+R02AA,Antisepticos
+R02AA03,Alcohol diclorobencilico
+R02AA05,Clorhexidina
+R02AA15,Povidona iodada
+R02AA20,Varios
+R02AA55,"Clorhexidina, combinaciones con"
+R02AB54,"Bacitracina, combinciones con"
+R02AD,Anestesicos locales
+R02AX01,Flurbiprofeno
+R03AC02,Salbutamol
+R03AC03,Terbutalina
+R03AC12,Salmeterol
+R03AC13,Formoterol
+R03AC18,Indacaterol
+R03AC19,Odolaterol
+R03AK,"Adrenergicos en combinacion con corticosteroides u otras agentes, excluyendo los anticoli"
+R03AK04,Salbutamol y cromoglicato de sodio
+R03AK06,Salmeterol y fluticasona
+R03AK07,Formoterol y budesonida
+R03AK08,formoterol y beclometasona
+R03AK10,Vilanterol y furoato de fluticasona
+R03AK11,Formoterol y fluticasona
+R03AK14,Indacaterol y Mometasona
+R03AL02,"Salbutamol e Ipratropio, bromuro de"
+R03AL03,"Vilanterol y Umeclidinio, bromuro de"
+R03AL04,"Indacaterol y Glicopirronio, bromuro de"
+R03AL05,Formoterol y Bromuro de aclidinio
+R03AL06,Olodaterol y bromuro de tiotropio
+R03AL08,"Vilanterol, bromuro de umeclidinio y fluticasona furoato"
+R03AL09,"FORMOTEROL, GLICOPIRRONIO, BROMURO DE Y BECLOMETASONA"
+R03AL11,"Formoterol, glicopirronio, bromuro de y budesonida"
+R03AL12,"Indacaterol, glicopirronio bromuro y mometasona"
+R03BA01,Beclometasona
+R03BA02,Budesonida
+R03BA05,Fluticasona
+R03BA07,Mometasona
+R03BA08,Ciclesonida
+R03BB01,"Ipratropio, bromuro de"
+R03BB04,"Tiotropio, bromuro de,"
+R03BB05,Bromuro de Aclidinio
+R03BB06,Glicopirronio bromuro
+R03BB07,Umeclidinio bromuro
+R03BC03,Nedocromilo
+R03CA02,Efedrina
+R03CC02,Salbutamol
+R03CC03,Terbutalina
+R03CC12,Bambuterol
+R03CC53,"Terbutalina, combinaciones con"
+R03DA04,Teofilina
+R03DA54,"Teofilina, combinaciones con, excluyendo psicolepticos"
+R03DC01,Zafirlukast
+R03DC03,Montelukast
+R03DX05,Omalizumab
+R03DX07,Roflumilast
+R03DX08,Reslizumab
+R03DX09,Mepolizumab
+R03DX10,benralizumab
+R05CA,Expectorantes
+R05CA03,Guaifenesina
+R05CA10,Combinaciones
+R05CA12,Hederae helicis folium
+R05CB01,Acetilcisteina
+R05CB02,Bromhexina
+R05CB03,Carbocisteina
+R05CB05,Mesna
+R05CB06,Ambroxol
+R05CB10,Combinaciones
+R05CB13,Dornasa alfa (desoxirribonucleasa)
+R05CZ93,Penicilinas asociadas a mucolitico y/o expectorante
+R05CZ95,Sulfonamidas asociadas a mucolitico y/o expectorante
+R05DA04,Codeina
+R05DA07,Noscapina
+R05DA09,Dextrometorfano
+R05DA11,Dimemorfano
+R05DA20,Combinaciones
+R05DA91,Dihidrocodeina
+R05DB21,Cloperastina
+R05DB27,Levodropropizina
+R05FA02,Derivados del opio y expectorantes
+R05FB02,Supresores de la tos y expectorantes
+R05X,OTROS PREPARADOS PARA EL RESFRIADO
+R05X_,OTROS PREPARADOS COMBINADOS PARA EL RESFRIADO
+R06AA,Aminoalquil eteres
+R06AA02,Difenhidramina
+R06AA09,Doxilamina
+R06AA52,"Difenhidramina, combinaciones con"
+R06AA59,"Doxilamina, combinaciones con"
+R06AB02,Dexclorfeniramina
+R06AC01,Mepiramina
+R06AD01,Alimemazina
+R06AD02,Prometazina
+R06AD03,Tietilperazina
+R06AD07,Mequitazina
+R06AE05,Meclozina
+R06AE07,Cetirizina
+R06AE09,Levocetirizina
+R06AE57,Cetirizina en asociacion
+R06AE92,Clocinizina en asociacion
+R06AX02,Ciproheptadina
+R06AX13,Loratadina
+R06AX17,Ketotifeno
+R06AX22,Ebastina
+R06AX25,Mizolastina
+R06AX26,Fexofenadina
+R06AX27,Desloratadina
+R06AX28,Rupatadina
+R06AX29,Bilastina
+R07AA92,Surfactante pulmonar porcino
+R07AX01,Oxido nitrico
+S01AA01,Cloranfenicol
+S01AA02,Clortetraciclina
+S01AA04,Oxitetraciclina
+S01AA11,Gentamicina
+S01AA12,Tobramicina
+S01AA13,Acido fusidico
+S01AA17,Eritromicina
+S01AA26,Azitromicina
+S01AA27,Cefuroxima
+S01AA30,Combinaciones de diferentes antibioticos
+S01AD03,Aciclovir
+S01AD09,Ganciclovir
+S01AE01,Ofloxacino
+S01AE02,Norfloxacino
+S01AE03,Ciprofloxacino
+S01AE07,Moxifloxacino
+S01AX11,Ofloxacino
+S01AX13,Ciprofloxacino
+S01AX14,Dibrompropamidina
+S01AX15,Propamidina
+S01AX18,Povidona iodada
+S01BA01,Dexametasona
+S01BA02,Hidrocortisona
+S01BA04,Prednisolona
+S01BA07,Fluorometolona
+S01BA13,Rimexolona
+S01BA15,Fluocinolona acetonido
+S01BC03,Diclofenaco
+S01BC05,Ketorolaco
+S01BC10,Nepafenaco
+S01BC11,Bromfenaco
+S01CA,Corticosteroides y antiinfecciosos en combinacion
+S01CA01,Dexametasona y antiinfecciosos
+S01CA94,Prednisona asoc. a antiinfecciosos
+S01CC01,Diclofenaco y antiinfecciosos
+S01EA03,Apraclonidina
+S01EA05,Brimonidina
+S01EB01,Pilocarpina
+S01EC01,Acetazolamida
+S01EC02,Diclofenamida
+S01EC03,Dorzolamida
+S01EC04,Brinzolamida
+S01EC54,"Brinzolamida, combinaciones"
+S01ED01,Timolol
+S01ED02,Betaxolol
+S01ED03,Levobunolol
+S01ED05,Carteolol
+S01ED51,"Timolol, combinaciones con"
+S01EE01,Latanoprost
+S01EE03,Bimatoprost
+S01EE04,Travoprost
+S01EE05,Tafluprost
+S01FA01,Atropina
+S01FA04,Ciclopentolato
+S01FA06,Tropicamida
+S01FB01,Fenilefrina
+S01GA02,Tetrizolina
+S01GA04,Oximetazolina
+S01GA51,"Nafazolina, combinaciones con"
+S01GX01,Acido cromoglicico
+S01GX02,Levocabastina
+S01GX03,Acido espaglumico
+S01GX04,Nedocromil
+S01GX06,Emedastina
+S01GX07,Azelastina
+S01GX08,Ketotifeno
+S01GX09,Olopatadina
+S01GX10,Epinastina
+S01GX91,Clorfenamina
+S01HA30,Combinaciones
+S01KA02,Hipromelosa
+S01KA91,Carmelosa (carboximetilcelulosa)
+S01LA01,Verteporfina
+S01LA03,Pegaptanib
+S01LA04,Ranibizumab
+S01LA05,Aflibercept
+S01LA06,BROLUCIZUMAB
+S01XA,Otros oftalmologicos
+S01XA03,"Cloruro de sodio, hipertonico"
+S01XA20,Lagrimas artificiales y otros preparados inertes
+S01XA22,Ocriplasmina
+S01XA52,Retinol en asociacion
+S02AA03,Acido borico
+S02AA15,Ciprofloxacino
+S02AA91,Ciprofloxacina
+S02BA08,"Fluocinolona, acetonido"
+S02CA,Corticosteroides y antiinfecciosos en combinacion
+S02CA03,Hidrocortisona y antiinfecciosos
+S02CA05,"Fluocinolona, acetonido y antiinfecciosos"
+S02CA06,Dexametasona y antiinfecciosos
+S02DA30,Combinaciones
+S02DC91,Preparados indiferentes
+S03CA04,Hidrocortisona y antiinfecciosos
+V01AA02,Polen de plantas
+V01AA03,Acaros de polvo ambiental
+V03AB,Antidotos
+V03AB04,Pralidoxima
+V03AB09,Dimercaprol
+V03AB14,Protamina
+V03AB15,Naloxona
+V03AB19,Fisostigmina
+V03AB23,Acetilcisteina
+V03AB24,Antitoxina digitalica
+V03AB25,Flumazenil
+V03AB33,Hidroxocobalamina
+V03AB34,Fomepizol
+V03AB35,Sugammadex
+V03AB37,Idarucizumab
+V03AC01,Deferoxamina
+V03AC03,Deferasirox
+V03AC91,CALCIO ACETATO
+V03AE,Farmacos para el tratamiento de la hiperpotasemia e hiperfosfatemia
+V03AE01,"Poliestireno, sulfonato de"
+V03AE02,Sevelamero
+V03AE03,"Lantano, carbonato de"
+V03AE04,Acetato anhidro de calcio y carbonato de magnesio
+V03AE05,Oxihidroxido sucroferrico
+V03AE09,PATIROMER CALCICO
+V03AE10,Sodio circonio ciclosilicato
+V03AE91,Calcio acetato
+V03AF,Agentes detoxificantes para tratamientos antineoplasicos
+V03AF01,Mesna
+V03AF02,Dexrazoxano
+V03AF03,Folinato de calcio
+V03AF04,Levofolinato de calcio
+V03AF07,Rasburicasa
+V03AF08,Palifermina
+V03AX,Otros productos terapeuticos
+V03AX91,Trientina
+V03AX92,Silimarina
+V04CD01,Metirapona
+V04CD04,Corticoliberina
+V04CF01,Tuberculina
+V04CJ01,Tirotropina
+V04CK01,Secretina
+V04CX91,Azul patente
+V04CX93,VERDE DE INDOCIANINA
+V06,NUTRIENTES GENERALES
+V07AB92,Sodio cloruro (disolvente/diluyente)
+V07AB93,Agua apirogena esteril
+V07AB94,Agua para preparaciones inyectables
+V07AX93,JABONES DESINFECTANTES
+V08AB10,Iomeprol
+V08DA01,"Albumina humana, microesferas de"
+V09X,OTROS PRODUCTOS RADIOFARMACEUTICOS PARA DIAGNOSTICO
+V10AA,Compuestos con Itrio (90Y)
+V10BX01,Estroncio (89Sr) cloruro de
+V10BX02,Samario (153Sm) lexidronam
+V10XX02,Ibritumomab tiuxetan (90y)
+V10XX03,Radio 223
+V30ZZ,FORMULAS MAGISTRALES
+V30ZZ91,FORMULAS MAGISTRALES
+X0000,MODULO NUTRICIONAL VITAMINAS Y MINERALES
+XXXXXX,NO DISPONIBLE
