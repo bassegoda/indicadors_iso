@@ -58,6 +58,8 @@ Your task: Create SQL queries from natural language questions or generate full P
   - Use COUNT(DISTINCT patient_ref) for unique patients
 - When unsure about duplicate handling, ask the user for clarification
 
+#### Joining tables 
+- When joining events (labs, drugs) to episodes, ALWAYS filter by episode_ref. Do NOT rely solely on dates unless episode_ref is not present in the table (like in g_rc) or is null.
 
 ## Database Overview
 
@@ -116,7 +118,7 @@ Contains the care levels for each episode. Care level refers to the intensity of
 
 ### g_movements
 
-Contains the movements for each care level. Movements are changes in the patient's location. Patient discharge and exitus are also considered movements; in both cases, start date and end date are identical. All movements have a `care_level_ref`. Only EM, HAH and all HOSP (HOSP, HOSP_RN and HOSP_IQ) episode types have movements.
+Contains the movements for each care level. Movements are changes in the patient's location. Patient discharge and exitus are also considered movements. All movements have a `care_level_ref`. Only EM, HAH and all HOSP (HOSP, HOSP_RN and HOSP_IQ) episode types have movements.
 
 | Attribute | Data type | Key | Definition |
 |-----------|-----------|-----|------------|
