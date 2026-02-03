@@ -1,6 +1,6 @@
 # DataNex Database Schema - LLM Context
 
-**Purpose**: Comprehensive reference for SQL query generation from natural language
+**Purpose**: Comprehensive reference for SQL query generation and vibe coding generation from natural language
 
 ## Instructions for LLM
 
