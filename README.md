@@ -20,7 +20,7 @@ Cada análisis genera sus resultados en una subcarpeta `output/` dentro de su re
 
 ## Admissions — Identificación de ingresos reales
 
-El script `admissions/icu_real_admissions.py` extrae los ingresos reales en una unidad física determinada (ej. E073). Un ingreso se considera **real** únicamente si cumple los tres criterios siguientes:
+El script `admissions/hosp_ward_stays.py` extrae los ingresos reales en una unidad física determinada (ej. E073). Un ingreso se considera **real** únicamente si cumple los tres criterios siguientes:
 
 ### Criterios de ingreso real
 
@@ -51,7 +51,7 @@ El episodio de urgencias (EM) tiene un `episode_ref` distinto al de la hospitali
 ### Ejecución
 
 ```bash
-python admissions/icu_real_admissions.py
+python admissions/hosp_ward_stays.py
 ```
 
 El script solicita interactivamente:

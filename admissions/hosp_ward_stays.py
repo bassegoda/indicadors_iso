@@ -1,5 +1,5 @@
 """
-REAL ICU ADMISSIONS IDENTIFIER
+HOSPITALISATION WARD STAYS
 
 Admission criteria (all three must be met):
 1. Bed assigned (place_ref IS NOT NULL)
@@ -45,7 +45,7 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 # ==========================================
 # SQL
 # ==========================================
-SQL_REAL_ADMISSIONS = """
+SQL_WARD_STAYS = """
 WITH raw_moves AS (
     SELECT
         patient_ref,
@@ -164,7 +164,7 @@ def process_unit(unit: str, years: list, timestamp: str):
     min_year = min(years)
     max_year = max(years)
 
-    query = SQL_REAL_ADMISSIONS.format(
+    query = SQL_WARD_STAYS.format(
         unit=unit,
         min_year=min_year,
         max_year=max_year
@@ -195,7 +195,7 @@ def process_unit(unit: str, years: list, timestamp: str):
 # ==========================================
 def main():
     print("\n" + "="*70)
-    print("  REAL ICU ADMISSIONS IDENTIFIER")
+    print("  HOSPITALISATION WARD STAYS")
     print("="*70)
 
     years = get_years_from_user()
