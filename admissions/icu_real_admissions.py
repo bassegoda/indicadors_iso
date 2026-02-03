@@ -18,6 +18,7 @@ root_dir = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(root_dir))
 
 from connection import execute_query
+from origin import classify_origin
 
 
 # ==========================================
@@ -103,9 +104,11 @@ SELECT DISTINCT
         THEN 'Sí'
         ELSE 'No'
     END as exitus_during_stay,
-    ex.exitus_date
+    ex.exitus_date,
+    d.health_area,
+    d.postcode
 FROM cohort c
-LEFT JOIN g_demographics d 
+LEFT JOIN g_demographics d
     ON c.patient_ref = d.patient_ref
 LEFT JOIN g_exitus ex 
     ON c.patient_ref = ex.patient_ref
@@ -170,7 +173,10 @@ def process_unit(unit: str, years: list, timestamp: str):
     
     if len(df) < initial:
         print(f"[{unit}] Se eliminaron {initial - len(df)} registros incoherentes")
-    
+
+    # Clasificación de origen
+    df["origin"] = classify_origin(df)
+
     # Guardar CSV
     year_str = f"{min_year}-{max_year}" if len(years) > 1 else str(min_year)
     filename = OUTPUT_DIR / f"ingresos_{unit}_{year_str}_{timestamp}.csv"
@@ -183,6 +189,7 @@ def process_unit(unit: str, years: list, timestamp: str):
     mortalidad = (fallecidos / total * 100) if total > 0 else 0
     
     print(f"\n[{unit}] {total} estancias | {pacientes} pacientes | {fallecidos} fallecimientos ({mortalidad:.1f}%)")
+    print(f"        Origen: {df['origin'].value_counts().to_dict()}")
     print(f"        Archivo: {filename.name}")
 
 
