@@ -1,0 +1,653 @@
+form_ref,form_descr,class_ref,class_descr
+,N.D.,,N.D.
+ADMING_HD,"hd adultos/perinatal - admin - ingreso
+",AD,Formularios de Registros Administrativos
+ALTA_ADMIN,"motivo de la no alta administrativa
+",AD,Formularios de Registros Administrativos
+ALT_ADMIN,"hd adults /perinatal - admin - alta
+",AD,Formularios de Registros Administrativos
+HAT_TEATCA,"hd general ij/tea/tca - admin - alta
+",AD,Formularios de Registros Administrativos
+HDA_INFJUV,"hd general ij - admin - ingreso
+",AD,Formularios de Registros Administrativos
+HDA_TCA,"hd tca infanto-juvenil - admin - ingreso
+",AD,Formularios de Registros Administrativos
+HDA_TEA,"hd tea infanto-juvenil - admin - ingreso
+",AD,Formularios de Registros Administrativos
+UAD_INCLUS,"inclusion uad
+",AD,Formularios de Registros Administrativos
+ACT_AILL,"activacion aislamiento
+",AL,Alertas
+CAMP_LET,"adecuacion del esfuerzo terapeutico
+",AL,Alertas
+CUI_ATE_PR,"solicitud de continuidad de cuidados
+",AL,Alertas
+SEG_AILL,"seguimiento/confirmacion aislamiento
+",AL,Alertas
+SIVIC_IRA,"servei vigilancia - infeccio respiratoria aguda
+",AL,Alertas
+TIPUS_IRA,"tipus de pacient ira
+",AL,Alertas
+CC_CCR,"curso clinico medico - cribado ccr
+",CC,Formularios CC estructuado
+CC_HDA,"""curso clinico - """"hospital de dia adultos""""""
+",CC,Formularios CC estructuado
+CC_HDG,"""curso clinico - """"hospital de dia general""""""
+",CC,Formularios CC estructuado
+CC_HD_PER,"""curso clinico - """"hospital de dia perinatal""""""
+",CC,Formularios CC estructuado
+CC_OBS,"curso clinico - obs
+",CC,Formularios CC estructuado
+CC_SAVI,"curso clinico medico - savi
+",CC,Formularios CC estructuado
+CC_TCA,"""curso clinico - """"hospital de dia tca""""""
+",CC,Formularios CC estructuado
+CC_TEA,"""curso clinico - """"hospital de dia tea""""""
+",CC,Formularios CC estructuado
+FORM_CCR,"curso clinico enfermera - cribado ccr
+",CC,Formularios CC estructuado
+PUE_BA_RSG,"curso clinico - puerperio bajo riesgo
+",CC,Formularios CC estructuado
+RNS,"curso clinico - control neonatal
+",CC,Formularios CC estructuado
+EXP_NEO,"exploracion fisica neonatologia
+",EF,Formularios de Exploraciones Fisicas
+AGA_NEO,"escala aga de encefalopatia hipoxico isquemica neonatal
+",ES,Formularios de Escalas
+ALDRETE,"escala aldrete
+",ES,Formularios de Escalas
+ALDRETE_PA,"escala de recuperacion post anestesica de aldrete modificada por cma (alta hospital)
+",ES,Formularios de Escalas
+APACHEII,"escala apache ii
+",ES,Formularios de Escalas
+AUDITC,"audit c
+",ES,Formularios de Escalas
+AUTOCURA,"escala europea de autocuidado en insuficiencia cardiaca
+",ES,Formularios de Escalas
+A_CDR,"cdr
+",ES,Formularios de Escalas
+A_GOLDMAN,"adaptacion propia escala goldman
+",ES,Formularios de Escalas
+A_MOCA,"moca (evaluacion cognitiva montreal)
+",ES,Formularios de Escalas
+A_PALS,"pals (evaluacion clinica afasia primaria progresiva)
+",ES,Formularios de Escalas
+A_TAM,"t@m (test de alteracion de memoria)
+",ES,Formularios de Escalas
+BARTHEL,"indice de barthel
+",ES,Formularios de Escalas
+BARTHEL_1,"indice de barthel
+",ES,Formularios de Escalas
+BARTHEL_2,"indice de barthel
+",ES,Formularios de Escalas
+BARTHEL_3,"indice de barthel
+",ES,Formularios de Escalas
+BARTHEL_4,"indice de barthel
+",ES,Formularios de Escalas
+BARTHEL_5,"indice de barthel
+",ES,Formularios de Escalas
+BILIRRUBIN,"bilirrubina tc media
+",ES,Formularios de Escalas
+BRADEN,"escala braden
+",ES,Formularios de Escalas
+BROMA_E,"escala bromage
+",ES,Formularios de Escalas
+CAIGUDES,"risc de caigudes
+",ES,Formularios de Escalas
+CANADENC2,"escala canadiense de ictus
+",ES,Formularios de Escalas
+CANADENCA,"escala canadiense neuro ec
+",ES,Formularios de Escalas
+CAR_T,"escala toxicidad neurologica (terapia) car-t (ice)
+",ES,Formularios de Escalas
+CFS,"escala valoracion de fragilidad clinica
+",ES,Formularios de Escalas
+CHARLSON,"indice de comorbilidad de charlson modificado
+",ES,Formularios de Escalas
+COMFORT,"comfort: escala valoracion del dolor
+",ES,Formularios de Escalas
+DELIRI,"escala diagnostica del delirio - cam
+",ES,Formularios de Escalas
+DIVA,"escala a-diva
+",ES,Formularios de Escalas
+DOLOR_EVA,"grado dolor escala visual analogica
+",ES,Formularios de Escalas
+DOLOR_EVC,"escala visual categorica
+",ES,Formularios de Escalas
+DOLOR_EVN,"escala numerica ordinal per al dolor
+",ES,Formularios de Escalas
+DOLOR_PIPP,"escala pipp
+",ES,Formularios de Escalas
+DOLOR_WB,"grau dolor wong baker
+",ES,Formularios de Escalas
+DOR,"dolor
+",ES,Formularios de Escalas
+DOWNTON,"escala downton
+",ES,Formularios de Escalas
+EASI,"indice easi
+",ES,Formularios de Escalas
+EAT-10,"deteccion de personas que pueden sufrir disfagia
+",ES,Formularios de Escalas
+EAT_SLEEP,"deteccion y evaluacion del sinndrome de abstinencia en neonatos
+",ES,Formularios de Escalas
+ECISACH,"escala ecisach - bcn psmar
+",ES,Formularios de Escalas
+ECOG,"escala ecog
+",ES,Formularios de Escalas
+EDSS,"escala edss
+",ES,Formularios de Escalas
+EFT,"essential frailty toolset (eft)
+",ES,Formularios de Escalas
+ENT_PERS,"entorno personal
+",ES,Formularios de Escalas
+EPDS,"test epds
+",ES,Formularios de Escalas
+ESAS,"escala edmonton sympton assesment system
+",ES,Formularios de Escalas
+ESCID,"escala de conductas indicadoras de dolor o campdell modificada
+",ES,Formularios de Escalas
+ESD,"escala de signos de depresion
+",ES,Formularios de Escalas
+ESTIL_VIDA,"impacto funcional - estilo de vida
+",ES,Formularios de Escalas
+ES_ENDO,"nivel endometriosis
+",ES,Formularios de Escalas
+ES_SALUD,"salud general y calidad de vida
+",ES,Formularios de Escalas
+EVA_AUT_TA,"escala visual analogica de autoeficacia percibida para el abandono del tabaco
+",ES,Formularios de Escalas
+EVA_MOT_TA,"escala visual analogica de motivacion para el abandono del tabaco
+",ES,Formularios de Escalas
+EVENTO_INT,"escala eventos int
+",ES,Formularios de Escalas
+EVENTO_UCI,"escala eventos uci
+",ES,Formularios de Escalas
+EXACTO,"escala exacto
+",ES,Formularios de Escalas
+FAGERSTROM,"escala de dependencia fisica a la nicotina de fagerstrom
+",ES,Formularios de Escalas
+FAT_SUE,"fatiga/sueno
+",ES,Formularios de Escalas
+FEOS,"escala feos
+",ES,Formularios de Escalas
+FINNEGAN,"escala finnegan
+",ES,Formularios de Escalas
+FLEBITIS,"escala valoracion grado flebitis
+",ES,Formularios de Escalas
+FRAGIL_VIG,"indice fragil - vig
+",ES,Formularios de Escalas
+FRAIL,"escala frail
+",ES,Formularios de Escalas
+GERIATRIC8,"escala geriatric 8 (g8)
+",ES,Formularios de Escalas
+GIJON,"escala gijon
+",ES,Formularios de Escalas
+GLASGOW,"escala de coma de glasgow
+",ES,Formularios de Escalas
+GLIM,"criterios glim
+",ES,Formularios de Escalas
+GLO_NIL_NI,"escala de dependencia psicologica a la nicotina de glover-nilsson
+",ES,Formularios de Escalas
+HAD,"escala ansiedad y depresion hospitalaria
+",ES,Formularios de Escalas
+HADS_A,"escala hads ansiedad
+",ES,Formularios de Escalas
+HADS_D,"escala hads depresion
+",ES,Formularios de Escalas
+HEATHERTON,"escala heatherton
+",ES,Formularios de Escalas
+HONOS,"escala honos
+",ES,Formularios de Escalas
+HONOSCA,"escala honosca
+",ES,Formularios de Escalas
+IMP_PSICO,"impacto psicologico
+",ES,Formularios de Escalas
+INUT,"inut renal - cribado al ingreso
+",ES,Formularios de Escalas
+ISCA,"escala isca
+",ES,Formularios de Escalas
+I_DM_I,"indicadores agrsx
+",ES,Formularios de Escalas
+I_DM_P,"indicadores de intoxicacion
+",ES,Formularios de Escalas
+I_HADD,"ichom - escala hads - depresion
+",ES,Formularios de Escalas
+I_HADS,"ichom - escala hads - ansiedad
+",ES,Formularios de Escalas
+I_MERC,"capacidad para caminar
+",ES,Formularios de Escalas
+I_MERD,"dolor
+",ES,Formularios de Escalas
+KSS_OB,"kss 2011 - indicadores objetivos de rodilla
+",ES,Formularios de Escalas
+LAWTON_H,"escala lawton y brody - hombre
+",ES,Formularios de Escalas
+LAWTON_M,"escala lawton y brody
+",ES,Formularios de Escalas
+MADRS,"escala montgomery-asberg depression rating scale (madrs)
+",ES,Formularios de Escalas
+MECV-V,"escala metodo de exploracion clinica volumen
+",ES,Formularios de Escalas
+MEN_ABU,"menstruacion abundante
+",ES,Formularios de Escalas
+MINICOG,"escala mini-cog
+",ES,Formularios de Escalas
+MINNES_TAB,"escala de abstinencia a la nicotina de minnesota
+",ES,Formularios de Escalas
+MIN_MENTAL,"miniexamen cognoscitivo
+",ES,Formularios de Escalas
+MNA,"mini nutritional assessment
+",ES,Formularios de Escalas
+MNAR,"mna cribaje
+",ES,Formularios de Escalas
+MORISKY,"morisky-green
+",ES,Formularios de Escalas
+MUCOSITIS,"escala de la mucositis
+",ES,Formularios de Escalas
+MUST,"escala de malnutricion
+",ES,Formularios de Escalas
+NEO_NSRAS,"escala nsras
+",ES,Formularios de Escalas
+NH_ENOLD,"gramos enol al dia
+",ES,Formularios de Escalas
+NIHSS,"escala para evaluar el deficit neurologico
+",ES,Formularios de Escalas
+NU_DESC,"escala delirio nu-desc
+",ES,Formularios de Escalas
+PAINAD,"escala painad
+",ES,Formularios de Escalas
+PALCOM,"escala palcom
+",ES,Formularios de Escalas
+PFEIFFER,"escala pfeiffer
+",ES,Formularios de Escalas
+PHQ_2,"escala deteccion depresion phq-2
+",ES,Formularios de Escalas
+POR_INTE,"problemas intestinales
+",ES,Formularios de Escalas
+POSSRENAL,"cuestionario sobre sintomatologia uremica
+",ES,Formularios de Escalas
+PPS,"escala pps
+",ES,Formularios de Escalas
+PRUIJA,"escala valoracion intensidad prurito
+",ES,Formularios de Escalas
+PVS,"escala pvs
+",ES,Formularios de Escalas
+RASS,"escala rass
+",ES,Formularios de Escalas
+RESVECH,"escala resvech 2.0
+",ES,Formularios de Escalas
+RICHM_TAB,"escala de motivacion para el abandono del tabaco de richmond
+",ES,Formularios de Escalas
+RIESGO_ENF,"escala riesgo deterioro enfermeria
+",ES,Formularios de Escalas
+RIESGO_MED,"escala riesgo deterioro medico
+",ES,Formularios de Escalas
+RVD_BCN,"escala rvd-bcn
+",ES,Formularios de Escalas
+SED_RAMSAY,"nivel de sedacion escala ramsey
+",ES,Formularios de Escalas
+SILVERMAN,"escala silverman
+",ES,Formularios de Escalas
+SMAQ,"cuestionario de adherencia al tratamiento (smaq)
+",ES,Formularios de Escalas
+SOFA,"escala sofa - sequential organ failure assestment
+",ES,Formularios de Escalas
+SOP_SOC,"escala de soporte social
+",ES,Formularios de Escalas
+SPPB,"short physical performance battery (sppb)
+",ES,Formularios de Escalas
+SUICIDI,"deteccion riesgo de suicidio
+",ES,Formularios de Escalas
+TSO,"escala tso
+",ES,Formularios de Escalas
+UCLA,"escala de soledad de ucla
+",ES,Formularios de Escalas
+WES_HAVEN,"estado mental a la encefalopatia hepatica
+",ES,Formularios de Escalas
+WHOLEY,"cuestionario de wholey
+",ES,Formularios de Escalas
+YESAVAGE,"escala de yesavage abreviada
+",ES,Formularios de Escalas
+ZARIT,"escala zarit
+",ES,Formularios de Escalas
+DATOS_EMC,"dispositivos diabetes
+",OR,Formularios Otros registros
+RHC_PUTPUT,"sesion rhc
+",OR,Formularios Otros registros
+PAT_DEGENE,"documento de priorizacion para artroplastia de cadera y rodilla
+",RC,Formularios de Registros o Informes calculados
+NNT,"recien nacidos
+",RE,Formularios de Registros Especiales
+REGISTRES,"registros especiales
+",RE,Formularios de Registros Especiales
+ADH_TER,"educacion terapeutica sobre adhe erca
+",RG,Formularios de Registros o Informes
+AL_HOS_MED,"hd perinatal/adultos - medico - alta
+",RG,Formularios de Registros o Informes
+A_I_AB,"asma grave - enfermeria - visita de administracion biologica
+",RG,Formularios de Registros o Informes
+A_I_NP,"asma grave - enfermeria/medicina- consulta no programada
+",RG,Formularios de Registros o Informes
+A_M_PV,"asma grave - medicina - primera visita
+",RG,Formularios de Registros o Informes
+A_M_S,"asma grave - medicina - visita seguimiento
+",RG,Formularios de Registros o Informes
+BCLCIT,"oncologia hepatica - enfermeria - inicio tratamiento
+",RG,Formularios de Registros o Informes
+BCLCLL,"oncologia hepatica - enfermeria - llamada telefonica
+",RG,Formularios de Registros o Informes
+BCLCP,"oncologia hepatica - medicina - primera visita
+",RG,Formularios de Registros o Informes
+BCLCPE,"oncologia hepatica - enfermeria - inicio programa educativo
+",RG,Formularios de Registros o Informes
+BCLCPI,"oncologia hepatica - primera visita enfermeria
+",RG,Formularios de Registros o Informes
+BCLCS,"oncologia hepatica - medicina - seguimiento
+",RG,Formularios de Registros o Informes
+BCLCSI,"oncologia hepatica - enfermeria - seguimiento
+",RG,Formularios de Registros o Informes
+BCLCT,"oncologia hepatica - medicina - indicacion tratamiento
+",RG,Formularios de Registros o Informes
+BLIVER,"re*liver
+",RG,Formularios de Registros o Informes
+CATPUL_DRE,"cateterismo pulmonar derecho
+",RG,Formularios de Registros o Informes
+CDB_RE_VA,"reinterpretacion de variante
+",RG,Formularios de Registros o Informes
+CMA_COM_IN,"mama - comite - inclusion
+",RG,Formularios de Registros o Informes
+CMA_COM_RE,"mama - comite - revision
+",RG,Formularios de Registros o Informes
+CMA_G_SE,"mama - ginecologia - visita seguimiento
+",RG,Formularios de Registros o Informes
+CMA_IPO_CC,"mama - ipa oncologia - curas cutaneas
+",RG,Formularios de Registros o Informes
+CMA_IPO_ET,"mama - ipa oncologia - educacion terapeutica
+",RG,Formularios de Registros o Informes
+CMA_IPO_IM,"mama - ipa oncologia - visita imprevista
+",RG,Formularios de Registros o Informes
+CMA_IPO_S1,"mama - ipa oncologia - control sintomas / tolerancia tratamiento / revision hospital dia
+",RG,Formularios de Registros o Informes
+COD_SEPSIS,"codigo sepsis intrahospitalario
+",RG,Formularios de Registros o Informes
+COM_IN,"inclusion a comite de tumores
+",RG,Formularios de Registros o Informes
+COM_RE,"revision en comite de tumores
+",RG,Formularios de Registros o Informes
+CON_NO_PRO,"consulta no programada erca
+",RG,Formularios de Registros o Informes
+CP_COM_REV,"comite toracico - comite - revision
+",RG,Formularios de Registros o Informes
+CP_M_P,"comite toracico - neumologia - primera visita
+",RG,Formularios de Registros o Informes
+CP_M_PV,"comite toracico - neumologia - visita de diagnostico
+",RG,Formularios de Registros o Informes
+CP_M_SEG,"comite toracico - neumologia- visita seguimiento
+",RG,Formularios de Registros o Informes
+CP_OM_REV,"comite toracico - oncologia medica - revision
+",RG,Formularios de Registros o Informes
+CP_ONM_1A,"comite toracico - oncologia medica - 1a visita
+",RG,Formularios de Registros o Informes
+CUARENT,"control cuarentena
+",RG,Formularios de Registros o Informes
+C_MA_MPV,"mama - medicina - primera visita
+",RG,Formularios de Registros o Informes
+C_MA_RAD,"mama - radiologia
+",RG,Formularios de Registros o Informes
+C_NH_AP,"cabeza y cuello - anatomia patologica - diagnostico
+",RG,Formularios de Registros o Informes
+C_NH_APS,"cabeza y cuello - anatomia patologica - post tratamiento
+",RG,Formularios de Registros o Informes
+C_NH_CDR,"cabeza y cuello - medicina - consulta de diagnostico rapido
+",RG,Formularios de Registros o Informes
+C_NH_COM,"cabeza y cuello - medicina - 1a visita comite de tumores
+",RG,Formularios de Registros o Informes
+C_NH_DIS,"cabeza y cuello - logopedia - valoracion disfagia
+",RG,Formularios de Registros o Informes
+C_NH_FTRT,"cabeza y cuello - medicina - fin tratamiento radioterapia
+",RG,Formularios de Registros o Informes
+C_NH_FTS,"cabeza y cuello - medicina - fin tratamiento sistemico
+",RG,Formularios de Registros o Informes
+C_NH_ID,"cabeza y cuello - imagen - diagnostico
+",RG,Formularios de Registros o Informes
+C_NH_IPA,"cabeza y cuello - enfermeria - valoracion ipa
+",RG,Formularios de Registros o Informes
+C_NH_IS,"cabeza y cuello - imagen - seguimiento
+",RG,Formularios de Registros o Informes
+C_NH_LO,"cabeza y cuello - logopedia - primera visita
+",RG,Formularios de Registros o Informes
+C_NH_MS,"cabeza y cuello - medicina - seguimiento
+",RG,Formularios de Registros o Informes
+C_NH_N,"cabeza y cuello - nutricion - visita prehabilitacion
+",RG,Formularios de Registros o Informes
+C_NH_NS,"cabeza y cuello - nutricion - visita de seguimiento
+",RG,Formularios de Registros o Informes
+C_NH_PTT,"cabeza y cuello - medicina - comite de valoracion del tratamiento
+",RG,Formularios de Registros o Informes
+DES_TAB_IN,"deshabituacion tabaquica - visita inicial
+",RG,Formularios de Registros o Informes
+DES_TAB_SG,"deshabituacion tabaquica - seguimiento
+",RG,Formularios de Registros o Informes
+EICH,"seg. largo plazo pacientes alotraspl.
+",RG,Formularios de Registros o Informes
+EM_I_C,"esclerosis multiple - enfermeria - valoracion cognitiva
+",RG,Formularios de Registros o Informes
+EM_I_ES,"esclerosis multiple - enfermeria - visita acogida
+",RG,Formularios de Registros o Informes
+EM_I_ET,"esclerosis multiple - enfermeria - educacion tratamiento
+",RG,Formularios de Registros o Informes
+EM_I_S,"esclerosis multiple - enfermeria - visita seguimiento
+",RG,Formularios de Registros o Informes
+EM_I_TT,"esclerosis multiple - enfermeria - administracion tratamiento
+",RG,Formularios de Registros o Informes
+EM_M_OCT,"esclerosis multiple - medicina - visita oct
+",RG,Formularios de Registros o Informes
+EM_M_PV,"esclerosis multiple - medicina - primera visita
+",RG,Formularios de Registros o Informes
+EM_M_S,"esclerosis multiple - medicina - visita seguimiento
+",RG,Formularios de Registros o Informes
+ENDO_CSI,"endometriosis - csi cuestionario
+",RG,Formularios de Registros o Informes
+ENDO_PRIM,"endometriosis - primera visita
+",RG,Formularios de Registros o Informes
+ENDO_PROM,"endometriosis - prom
+",RG,Formularios de Registros o Informes
+EXT_QMT,"registro extravasacion quimioterapia - inicial
+",RG,Formularios de Registros o Informes
+EXT_QMT_SG,"registro extravasacion quimioterapia - seguimiento
+",RG,Formularios de Registros o Informes
+EX_NPSI_IJ,"exploracion neuropsicologica infantojuvenil
+",RG,Formularios de Registros o Informes
+FORM_PROA,"formulario proa
+",RG,Formularios de Registros o Informes
+GOMET_ACTI,"diabetes segmentacion
+",RG,Formularios de Registros o Informes
+GOMET_DESA,"salir segmentacion diabetes
+",RG,Formularios de Registros o Informes
+HD_INFJUV,"hd general ij/tea/tca - medico - ingreso
+",RG,Formularios de Registros o Informes
+HP_I_PV,"hipertension pulmonar - enfermeria - primera visita
+",RG,Formularios de Registros o Informes
+HP_M_D,"hipertension pulmonar - medicina - diagnostico
+",RG,Formularios de Registros o Informes
+HP_M_I,"hipertension pulmonar - medicina - primera visita
+",RG,Formularios de Registros o Informes
+HP_M_S,"hipertension pulmonar - medicina - seguimiento
+",RG,Formularios de Registros o Informes
+HP_M_T,"hipertension pulmonar - tratamiento
+",RG,Formularios de Registros o Informes
+IAGS,"codigo 003 - agresion sexual
+",RG,Formularios de Registros o Informes
+ICHA,"artritis inflamatoria - visita inicial
+",RG,Formularios de Registros o Informes
+ICHDB,"diabetes - medicina - primera visita
+",RG,Formularios de Registros o Informes
+ICHDEEC,"deterioro cognitivo - enfermeria - educacion terapeutica
+",RG,Formularios de Registros o Informes
+ICHDEIL,"deterioro cognitivo - enfermeria - llamada telefonica
+",RG,Formularios de Registros o Informes
+ICHDEIP,"deterioro cognitivo - enfermeria - primera visita
+",RG,Formularios de Registros o Informes
+ICHDEM,"deterioro cognitivo - medicina - primera visita
+",RG,Formularios de Registros o Informes
+ICHDEMS,"deterioro cognitivo - medicina - seguimiento
+",RG,Formularios de Registros o Informes
+ICHDEN,"deterioro cognitivo - neuropsicologia - visita
+",RG,Formularios de Registros o Informes
+ICHDEP,"diabetes - enfermeria - primera visita
+",RG,Formularios de Registros o Informes
+ICHDES,"diabetes - enfermeria - seguimiento
+",RG,Formularios de Registros o Informes
+ICHDET,"deterioro cognitivo - medicina - diagnostico y tratamiento
+",RG,Formularios de Registros o Informes
+ICHDETP,"trabajo social - primera visita
+",RG,Formularios de Registros o Informes
+ICHDETS,"trabajo social - seguimiento
+",RG,Formularios de Registros o Informes
+ICHDMS,"diabetes - medicina - seguimiento
+",RG,Formularios de Registros o Informes
+ICHDNS,"diabetes - nutricion - seguimiento
+",RG,Formularios de Registros o Informes
+ICHDP,"diabetes - psicologia
+",RG,Formularios de Registros o Informes
+ICHG_I,"protesis rodilla primaria - indicacion 
+",RG,Formularios de Registros o Informes
+ICHG_S,"protesis rodilla primaria - seguimiento
+",RG,Formularios de Registros o Informes
+ICHM,"protesis cadera primaria - medicina - indicacion
+",RG,Formularios de Registros o Informes
+ICHM_C,"rodilla y cadera - enfermeria - ipa control postquirurgico artroplastia
+",RG,Formularios de Registros o Informes
+ICHM_PQ,"1a visita ipa artroplastia rodilla y cadera
+",RG,Formularios de Registros o Informes
+ICHM_R,"protesis cadera primaria - radiologiaprotesis cadera primaria - radiologia
+",RG,Formularios de Registros o Informes
+ICHM_S,"protesis cadera primaria - medicina - seguimiento
+",RG,Formularios de Registros o Informes
+ICHM_T,"""taller educativo",RG,Formularios de Registros o Informes
+ICHS,"artritis inflamatoria - seguimiento
+",RG,Formularios de Registros o Informes
+ICNU_PDP,"pauta de dialisis peritoneal (dpca)
+",RG,Formularios de Registros o Informes
+IDMAE,"dmae - primera visita
+",RG,Formularios de Registros o Informes
+IDMAS,"dmae - visita seguimiento/tratamiento
+",RG,Formularios de Registros o Informes
+IDMAT,"dmae - tratamiento
+",RG,Formularios de Registros o Informes
+IMSE_I,"artroscopia hombro / pti - medicina - visita inclusion
+",RG,Formularios de Registros o Informes
+IMSE_S,"artroscopia hombro / pti - visita seguimiento
+",RG,Formularios de Registros o Informes
+IMSG_I,"artroscopia rodilla - medicina - visita inclusion
+",RG,Formularios de Registros o Informes
+IMSG_S,"artroscopia rodilla - visita seguimiento
+",RG,Formularios de Registros o Informes
+IMS_IQ,"artroscopia rodilla / hombro / pti - hoja quirurgica
+",RG,Formularios de Registros o Informes
+IMS_T,"artroscopia hombro / pti / rodilla - control telefonico post-intervencion
+",RG,Formularios de Registros o Informes
+IND_CR,"indicadores criticos
+",RG,Formularios de Registros o Informes
+INFEC_NOSO,"interconsulta de infecciones nosocomiales
+",RG,Formularios de Registros o Informes
+INGHD_ADU,"hd adultos - medico - ingreso
+",RG,Formularios de Registros o Informes
+INGHD_PERI,"hd perinatal - medico - ingreso
+",RG,Formularios de Registros o Informes
+INT_REN,"valoracion integral paciente renal
+",RG,Formularios de Registros o Informes
+ITU_RECURR,"itu recurrente - primera visita
+",RG,Formularios de Registros o Informes
+ITU_RECUSE,"itu recurrente - seguimiento
+",RG,Formularios de Registros o Informes
+L_IN,"leucemia y neoplasias mieloides - medicina - inclusion en comite de tumores
+",RG,Formularios de Registros o Informes
+L_REV,"leucemia y neoplasias mieloides - medicina - revision en comite de tumores
+",RG,Formularios de Registros o Informes
+PAUTA_TRRC,"pauta trrc
+",RG,Formularios de Registros o Informes
+PIQC,"piqc (priority index quirurgic clinic)
+",RG,Formularios de Registros o Informes
+PRE_ANE,"informe valoracion pre-anestesia
+",RG,Formularios de Registros o Informes
+PRMVIS_ERC,"primera visita enfermeria erca
+",RG,Formularios de Registros o Informes
+REGITIR,"regitir
+",RG,Formularios de Registros o Informes
+RES_RAP,"equipo de respuesta rapida
+",RG,Formularios de Registros o Informes
+RHC_DATOS,"rhc - datos basales
+",RG,Formularios de Registros o Informes
+RHC_FINAL,"rhc - visita final
+",RG,Formularios de Registros o Informes
+RHC_INICIA,"rhc - visita inicial
+",RG,Formularios de Registros o Informes
+RQ_APEN,"apendicitis aguda
+",RG,Formularios de Registros o Informes
+RQ_PVES,"patologia vesicular
+",RG,Formularios de Registros o Informes
+R_NRLCAROT,"visita nrlcarot (patologia carotidea)
+",RG,Formularios de Registros o Informes
+R_NRLSVD,"registro microangiopatia cerebral
+",RG,Formularios de Registros o Informes
+R_NRLVAS,"visita nrlvas (visita neurovascular)
+",RG,Formularios de Registros o Informes
+SAVI_NO,"formulario no viaje
+",RG,Formularios de Registros o Informes
+SAVI_POST,"formulario post-viaje
+",RG,Formularios de Registros o Informes
+SAVI_PRE,"formulario pre-viaje
+",RG,Formularios de Registros o Informes
+SAVI_SEGUI,"formulario seguimiento chagas
+",RG,Formularios de Registros o Informes
+SEG_ERCA,"seguimiento enfermeria erca
+",RG,Formularios de Registros o Informes
+TES_ELE,"test de elegibilidad para tratamiento renal sustitutivo
+",RG,Formularios de Registros o Informes
+TRC_CMA,"registro llamada pacientes cma
+",RG,Formularios de Registros o Informes
+TRUCADA24,"registro llamada 24h cma
+",RG,Formularios de Registros o Informes
+UACC,"unidad de atencion continuada cancer - hdia
+",RG,Formularios de Registros o Informes
+URG_ACOLLI,"ape urgencias
+",RG,Formularios de Registros o Informes
+VAL_FRAG,"valoracion de fragilidad en el paciente hematologico
+",RG,Formularios de Registros o Informes
+VAL_GERIAT,"valoracion geriatrica integral
+",RG,Formularios de Registros o Informes
+VAL_HDOM,"valoracion hdom
+",RG,Formularios de Registros o Informes
+VAL_UAD,"valoracion uad
+",RG,Formularios de Registros o Informes
+VA_HDOM_MN,"valoracion para hdom m-n
+",RG,Formularios de Registros o Informes
+VIS_NTOP,"registro asistencial visita n-top
+",RG,Formularios de Registros o Informes
+V_NTOP_ADM,"n-top administrativo
+",RG,Formularios de Registros o Informes
+V_NTOP_ASI,"n-top asistencial
+",RG,Formularios de Registros o Informes
+TREBALLSOC,"valoracion trabajo social
+",TS,Formularios de Trabajo Social
+CUR_ESTADA,"valoracion corta estancia
+",VA,Formularios de Valoraciones
+ESCALAS,"escalas del paciente
+",VA,Formularios de Valoraciones
+HOSPITALIT,"valoracion hospitalizacion
+",VA,Formularios de Valoraciones
+NEONATS,"valoracion nnt
+",VA,Formularios de Valoraciones
+OBSTETRICA,"valoracion obstetrica
+",VA,Formularios de Valoraciones
+UCI,"valoracion criticos
+",VA,Formularios de Valoraciones
+URPA,"valoracion postanestesica
+",VA,Formularios de Valoraciones
+VAL_FI_VID,"valoracion final de vida
+",VA,Formularios de Valoraciones
+VAL_PSQ_AD,"valoracion psiquiatria adultos
+",VA,Formularios de Valoraciones
+VAL_PSQ_IJ,"valoracion psiquiatria infanto-juvenil
+",VA,Formularios de Valoraciones

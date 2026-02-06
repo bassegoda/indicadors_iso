@@ -1,0 +1,21 @@
+mot_ref,mot_descr,mot_type
+320001,Destino Domicilio,END
+320002,Otro centro,END
+320003,Otro centro médico del estado,END
+320004,Traslado Residencia Social,END
+320005,Alta voluntaria,END
+320006,Defunción,END
+320007,Fuga,END
+320008,Hospital domiciliar,END
+320009,Sociosanitario clinic,END
+320010,Hospital Clinic,END
+320011,Sin especificar,END
+320012,Orden Facultativo,START
+320013,Accidente laboral,START
+320014,Otros Motivos,START
+320015,Accidente de trafico,START
+320016,Reconocimiento de Cadaver,START
+320017,Recien nacido,START
+320018,Orden Juridica,START
+320024,Enfermedad,START
+320028,Altres,START

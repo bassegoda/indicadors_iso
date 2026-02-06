@@ -1,0 +1,9 @@
+code,description
+AM,Outpatient episode (ambulatorio)
+EM,Emergency episode
+DON,Donor
+HOSP_IQ,Hospitalization for surgery
+HOSP_RN,Hospitalization for healthy newborn
+HOSP,Hospitalization (other)
+EXT_SAMP,External sample
+HAH,Hospital at home (home hospitalization)

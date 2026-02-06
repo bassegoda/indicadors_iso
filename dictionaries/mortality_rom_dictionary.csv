@@ -1,0 +1,7 @@
+mortality_risk_ref,mortality_risk_descr
+0,Clase no especificada
+1,Minor
+2,Moderate
+3,Major
+4,Extreme
+X,Excluded

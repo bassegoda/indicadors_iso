@@ -1,0 +1,38 @@
+event_label,event_descr
+ANESTESIOL,tiempo de anestesiologo
+APUNT,final de induccion de anestesia
+BOX2,tiempo de salida de box 2
+ENTQUIR2,entrada quirofano 2
+ENTQUIR3,entrada quirofano 3
+ENTQUIR4,entrada quirofano 4
+ENTQUIR5,entrada quirofano 5
+ENTQUIR6,entrada quirofano 6
+ENTRADA,tiempo de entrada
+ENTRADAAA,entrada area adaptacion
+ENTRADABA,entrada box anestesia
+ENTRADAQ,entrada a quirofano
+ENTRAUCI,hora entrada uci (unidad de cuidados intensivos)
+FINALANES,final de induccion de anestesia
+FINALDES,salida urpa (unidad reanimacion postanestesica)
+INICIANES,inicio de anestesia
+INICIDES,entrada a urpa (unidad reanimacion postanestesica)
+INTERVEN,tiempo de intervencion
+POSTINTERV,tiempo de postintervencion
+PREINTERV,tiempo de preintervencion
+SORTIDA,tiempo de salida
+SORTIDAAA,salida area adaptacion
+SORTIDAAQ,salida del area quirurgica
+SORTIDAAQ2,salida del area quirurgica 2
+SORTIDABA,salida box anestesia
+SORTIDAQ,salida de quirofano
+SORTIDAQP,hora prevista salida quirofano
+SORTQUIR2,salida quirofano 2
+SORTQUIR3,salida quirofano 3
+SORTQUIR4,salida quirofano 4
+SORTQUIR5,salida quirofano 5
+SORTQUIR6,salida quirofano 6
+SUTURA,final de intervencion
+TASENQUIC,solicitud traslado a area quirurgica
+TASENQUII,aceptacion traslado a area quirurgica
+TASSOQUIC,solicitud traslado desde quirofano
+URPAALT,hora altable urpa (unidad reanimacion postanestesica)

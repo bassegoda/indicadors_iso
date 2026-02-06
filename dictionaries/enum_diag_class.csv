@@ -1,0 +1,6 @@
+code,description
+P,Primary diagnosis (validated by documentalist)
+S,Secondary diagnosis (validated by documentalist)
+H,Diagnosis not validated by documentalist
+E,Emergency diagnosis
+A,Outpatient diagnosis

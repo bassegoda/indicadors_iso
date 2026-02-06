@@ -1,0 +1,378 @@
+level_1_ref,level_1_descr,level_2_ref,level_2_descr,level_3_ref,level_3_descr
+,,,,,
+999,otras,001,complementos,000,no aplica
+999,otras,015,servicio de atencion al viajero (savi),000,no aplica
+999,otras,083,dummy,000,no aplica
+999,otras,086,parte fija facturacion scs,000,no aplica
+999,otras,087,extras acompanantes,000,no aplica
+999,otras,088,registro orda,000,no aplica
+999,otras,999,otras,000,no aplica
+APD,otras pruebas diagnosticas,048,cardiologia,058,prueba de esfuerzo
+APD,otras pruebas diagnosticas,048,cardiologia,207,holter
+APD,otras pruebas diagnosticas,048,cardiologia,231,claudicometria
+APD,otras pruebas diagnosticas,048,cardiologia,232,electrocardiograma
+APD,otras pruebas diagnosticas,048,cardiologia,ZZZ,pendiente
+APD,otras pruebas diagnosticas,050,medicina fetal,202,biopsia
+APD,otras pruebas diagnosticas,050,medicina fetal,208,amniocentesis
+APD,otras pruebas diagnosticas,050,medicina fetal,210,cordocentesis
+APD,otras pruebas diagnosticas,050,medicina fetal,999,otras
+APD,otras pruebas diagnosticas,061,pruebas alergia,199,pruebas cutaneas
+APD,otras pruebas diagnosticas,061,pruebas alergia,260,pruebas provocacion
+APD,otras pruebas diagnosticas,061,pruebas alergia,999,otras
+APD,otras pruebas diagnosticas,062,fiv,139,ciclos con dgp
+APD,otras pruebas diagnosticas,062,fiv,202,biopsia
+APD,otras pruebas diagnosticas,062,fiv,203,histeroscopia
+APD,otras pruebas diagnosticas,062,fiv,215,seminograma
+APD,otras pruebas diagnosticas,062,fiv,999,otras
+APD,otras pruebas diagnosticas,063,ginecologia,202,biopsia
+APD,otras pruebas diagnosticas,063,ginecologia,203,histeroscopia
+APD,otras pruebas diagnosticas,063,ginecologia,218,urodinamia
+APD,otras pruebas diagnosticas,063,ginecologia,268,diag. fertilidad
+APD,otras pruebas diagnosticas,063,ginecologia,999,otras
+APD,otras pruebas diagnosticas,064,dermatologia,202,biopsia
+APD,otras pruebas diagnosticas,064,dermatologia,204,exeresi
+APD,otras pruebas diagnosticas,064,dermatologia,999,otras
+APD,otras pruebas diagnosticas,066,endoscopia,135,endoscopia general
+APD,otras pruebas diagnosticas,066,endoscopia,138,endoscopia respiratoria
+APD,otras pruebas diagnosticas,067,gastroenterologia,219,test h2
+APD,otras pruebas diagnosticas,067,gastroenterologia,999,otras
+APD,otras pruebas diagnosticas,068,oftalmologia,250,biometria
+APD,otras pruebas diagnosticas,068,oftalmologia,251,campimetria
+APD,otras pruebas diagnosticas,068,oftalmologia,253,paquimetria
+APD,otras pruebas diagnosticas,068,oftalmologia,254,test de lancaster
+APD,otras pruebas diagnosticas,068,oftalmologia,255,topografia
+APD,otras pruebas diagnosticas,069,pruebas del sueno,220,polisomnografia
+APD,otras pruebas diagnosticas,069,pruebas del sueno,221,test del sueno
+APD,otras pruebas diagnosticas,069,pruebas del sueno,227,poligrafia respiratoria
+APD,otras pruebas diagnosticas,069,pruebas del sueno,228,test latencia multiple
+APD,otras pruebas diagnosticas,069,pruebas del sueno,229,cpap automatica
+APD,otras pruebas diagnosticas,069,pruebas del sueno,999,otras
+APD,otras pruebas diagnosticas,070,urologia,202,biopsia
+APD,otras pruebas diagnosticas,070,urologia,218,urodinamia
+APD,otras pruebas diagnosticas,070,urologia,249,fluximetria
+APD,otras pruebas diagnosticas,070,urologia,999,otras
+APD,otras pruebas diagnosticas,070,urologia,ZZZ,pendiente
+APD,otras pruebas diagnosticas,071,pruebas funcionales respiratorias,058,prueba de esfuerzo
+APD,otras pruebas diagnosticas,071,pruebas funcionales respiratorias,202,biopsia
+APD,otras pruebas diagnosticas,071,pruebas funcionales respiratorias,239,crioterapia
+APD,otras pruebas diagnosticas,071,pruebas funcionales respiratorias,256,espirometria
+APD,otras pruebas diagnosticas,071,pruebas funcionales respiratorias,258,funcionalismo completo
+APD,otras pruebas diagnosticas,071,pruebas funcionales respiratorias,259,gasometria arterial
+APD,otras pruebas diagnosticas,071,pruebas funcionales respiratorias,261,test farmacologico
+APD,otras pruebas diagnosticas,071,pruebas funcionales respiratorias,999,otras
+APD,otras pruebas diagnosticas,072,pruebas otorrinolaringologia,233,audiometria
+APD,otras pruebas diagnosticas,072,pruebas otorrinolaringologia,234,olfatometria/ gustometria
+APD,otras pruebas diagnosticas,072,pruebas otorrinolaringologia,236,laringoestroboscopia
+APD,otras pruebas diagnosticas,072,pruebas otorrinolaringologia,237,rinomanometria
+APD,otras pruebas diagnosticas,072,pruebas otorrinolaringologia,238,video
+APD,otras pruebas diagnosticas,072,pruebas otorrinolaringologia,999,otras
+APD,otras pruebas diagnosticas,073,hemodinamica hepatica,000,no aplica
+APD,otras pruebas diagnosticas,073,hemodinamica hepatica,202,biopsia
+APD,otras pruebas diagnosticas,074,hepatologia,000,no aplica
+APD,otras pruebas diagnosticas,075,motilidad digestiva,000,no aplica
+APD,otras pruebas diagnosticas,080,extraccion,000,no aplica
+APD,otras pruebas diagnosticas,189,pruebas funcionales neurologicas,198,potenciales evocados
+APD,otras pruebas diagnosticas,189,pruebas funcionales neurologicas,240,electroencefalograma
+APD,otras pruebas diagnosticas,189,pruebas funcionales neurologicas,241,electromiografia
+APD,otras pruebas diagnosticas,189,pruebas funcionales neurologicas,279,electroneurografia
+APD,otras pruebas diagnosticas,189,pruebas funcionales neurologicas,291,reflexologia
+APD,otras pruebas diagnosticas,190,neonatologia,190,neonatologia
+APD,otras pruebas diagnosticas,191,hematologia,202,biopsia
+APD,otras pruebas diagnosticas,192,pruebas electrofisiologicas,252,electroretinograma
+APD,otras pruebas diagnosticas,192,pruebas electrofisiologicas,999,otras
+APD,otras pruebas diagnosticas,196,medicina interna,000,no aplica
+APD,otras pruebas diagnosticas,200,psiquiatria y psicologia,243,test salud mental
+APD,otras pruebas diagnosticas,999,otras,000,no aplica
+APD,otras pruebas diagnosticas,999,otras,202,biopsia
+APD,otras pruebas diagnosticas,ZZZ,pendiente,ZZZ,pendiente
+APD_inferido,otras pruebas diagnosticas,,,,
+COM,comite multidisciplinario,047,melanoma,000,no aplica
+COM,comite multidisciplinario,048,cardiologia,000,no aplica
+COM,comite multidisciplinario,049,terapia del dolor,000,no aplica
+COM,comite multidisciplinario,050,medicina fetal,000,no aplica
+COM,comite multidisciplinario,051,isquemicos,000,no aplica
+COM,comite multidisciplinario,200,psiquiatria y psicologia,278,perinatal
+COM,comite multidisciplinario,999,otras,000,no aplica
+DIM,diagnostico imagen,007,anestesia,007,anestesia
+DIM,diagnostico imagen,019,retinografia,068,oftalmologia
+DIM,diagnostico imagen,019,retinografia,108,endocrinologia
+DIM,diagnostico imagen,037,radiologia convencional,101,intervencionismo general
+DIM,diagnostico imagen,037,radiologia convencional,102,intervencionismo terapeutico no vascular
+DIM,diagnostico imagen,037,radiologia convencional,105,radiologia digestiva
+DIM,diagnostico imagen,037,radiologia convencional,106,radiologia simple
+DIM,diagnostico imagen,037,radiologia convencional,152,estudis especifics de pediatria
+DIM,diagnostico imagen,037,radiologia convencional,999,otras
+DIM,diagnostico imagen,037,radiologia convencional,ZZZ,pendiente
+DIM,diagnostico imagen,038,resonancia,149,rm
+DIM,diagnostico imagen,038,resonancia,155,contraste
+DIM,diagnostico imagen,039,escaner,068,oftalmologia
+DIM,diagnostico imagen,039,escaner,101,intervencionismo general
+DIM,diagnostico imagen,039,escaner,102,intervencionismo terapeutico no vascular
+DIM,diagnostico imagen,039,escaner,154,tomografia computarizada
+DIM,diagnostico imagen,039,escaner,155,contraste
+DIM,diagnostico imagen,039,escaner,188,dermatoscopia
+DIM,diagnostico imagen,039,escaner,999,otras
+DIM,diagnostico imagen,040,angioradiologia,098,diagnostico no vascular
+DIM,diagnostico imagen,040,angioradiologia,099,diagnostico vascular
+DIM,diagnostico imagen,040,angioradiologia,101,intervencionismo general
+DIM,diagnostico imagen,040,angioradiologia,102,intervencionismo terapeutico no vascular
+DIM,diagnostico imagen,040,angioradiologia,103,intervencionisme terapeutico vascular
+DIM,diagnostico imagen,040,angioradiologia,104,neuro vascular e intervencionista
+DIM,diagnostico imagen,040,angioradiologia,ZZZ,pendiente
+DIM,diagnostico imagen,041,mamografias,041,mamografias
+DIM,diagnostico imagen,041,mamografias,100,intervencionismo de mama
+DIM,diagnostico imagen,041,mamografias,999,otras
+DIM,diagnostico imagen,042,gammagrafia,001,complementos
+DIM,diagnostico imagen,042,gammagrafia,150,rastreo gammagrafico
+DIM,diagnostico imagen,042,gammagrafia,151,renograma
+DIM,diagnostico imagen,042,gammagrafia,153,spect
+DIM,diagnostico imagen,042,gammagrafia,999,otras
+DIM,diagnostico imagen,043,pet,001,complementos
+DIM,diagnostico imagen,043,pet,157,cerebral
+DIM,diagnostico imagen,043,pet,158,cuerpo entero
+DIM,diagnostico imagen,043,pet,999,otras
+DIM,diagnostico imagen,044,ecografia,036,ecografia general
+DIM,diagnostico imagen,044,ecografia,050,medicina fetal
+DIM,diagnostico imagen,044,ecografia,060,fecundacion in vitro
+DIM,diagnostico imagen,044,ecografia,063,ginecologia
+DIM,diagnostico imagen,044,ecografia,068,oftalmologia
+DIM,diagnostico imagen,044,ecografia,100,intervencionismo de mama
+DIM,diagnostico imagen,044,ecografia,101,intervencionismo general
+DIM,diagnostico imagen,044,ecografia,102,intervencionismo terapeutico no vascular
+DIM,diagnostico imagen,044,ecografia,107,cirurgia general y digestiva
+DIM,diagnostico imagen,044,ecografia,108,endocrinologia
+DIM,diagnostico imagen,044,ecografia,152,estudis especifics de pediatria
+DIM,diagnostico imagen,044,ecografia,155,contraste
+DIM,diagnostico imagen,044,ecografia,196,medicina interna
+DIM,diagnostico imagen,044,ecografia,282,eco doppler cerebral-vascular
+DIM,diagnostico imagen,045,ecocardiograma,050,medicina fetal
+DIM,diagnostico imagen,045,ecocardiograma,190,neonatologia
+DIM,diagnostico imagen,045,ecocardiograma,999,otras
+DIM,diagnostico imagen,046,densitometria,106,radiologia simple
+DIM,diagnostico imagen,064,dermatologia,188,dermatoscopia
+DIM,diagnostico imagen,226,angiografia no radiologica,068,oftalmologia
+DIM,diagnostico imagen,999,otras,068,oftalmologia
+DIM,diagnostico imagen,999,otras,999,otras
+DIM_inferido,diagnostico imagen,,,,
+DON,donacion,005,screening muestras tejido,000,no aplica
+DON,donacion,006,consentimiento,000,no aplica
+DON,donacion,008,deteccion tejido,000,no aplica
+DON,donacion,009,validacion,000,no aplica
+DON,donacion,010,extraccion de organos,000,no aplica
+DON,donacion,222,soporte donacion,000,no aplica
+DON,donacion,999,otras,000,no aplica
+DON,donacion,ZZZ,pendiente,ZZZ,pendiente
+FAR,farmacia,011,tractamientos farmacologicos scs,000,no aplica
+FAR,farmacia,012,banco de sangre,000,no aplica
+FAR,farmacia,013,farmaco,111,hemoderivados y sangre
+FAR,farmacia,013,farmaco,112,med. apar. digest.i metab
+FAR,farmacia,013,farmaco,113,med. sangre y org. hemato
+FAR,farmacia,013,farmaco,114,med. varios otros farm.
+FAR,farmacia,013,farmaco,115,med. varios antiparasit.
+FAR,farmacia,013,farmaco,116,med. varios apar. cardio.
+FAR,farmacia,013,farmaco,117,med. varios apar. locomo.
+FAR,farmacia,013,farmaco,118,med. varios apar. respir.
+FAR,farmacia,013,farmaco,119,med. varios form. magist.
+FAR,farmacia,013,farmaco,120,med. varios mat. pri.far.
+FAR,farmacia,013,farmaco,121,med. varios med. varis
+FAR,farmacia,013,farmaco,122,med. varios med.estranger
+FAR,farmacia,013,farmaco,123,med. varios nutric.parent
+FAR,farmacia,013,farmaco,124,med. varios organs sentis
+FAR,farmacia,013,farmaco,125,med. varios sistema nerv.
+FAR,farmacia,013,farmaco,126,med. varios terap.antiinf
+FAR,farmacia,013,farmaco,127,med. varios terap.antineo
+FAR,farmacia,013,farmaco,128,med. varios terap.dermat.
+FAR,farmacia,013,farmaco,129,med. varios terap.genito.
+FAR,farmacia,013,farmaco,130,med. varios terap.hormon.
+FAR,farmacia,013,farmaco,131,medicamentos dialisis
+FAR,farmacia,013,farmaco,ZZZ,pendiente
+FAR,farmacia,014,dietetico,109,dieteticos farmacia
+FAR,farmacia,014,dietetico,110,nutricion enteral y dieteticos farmacia
+FAR_inferido,farmacia,,,,
+HDD,hospital de dia,052,hospital de dia farmacologico,052,hospital de dia farmacologico
+HDD,hospital de dia,053,hospital de dia procedimental,053,hospital de dia procedimental
+HDD,hospital de dia,054,hospital de dia control,054,hospital de dia control
+HDD,hospital de dia,056,hospital de dia salud mental,280,session hospital de dia sm intensiva
+HDD,hospital de dia,056,hospital de dia salud mental,281,session hospital de dia sm puntual
+HDD,hospital de dia,056,hospital de dia salud mental,999,otras
+HDD,hospital de dia,057,hospital de dia sociosanitario,057,hospital de dia sociosanitario
+HOS,altas y estancias en hospitalizacion,017,alta,089,alta quirurgica
+HOS,altas y estancias en hospitalizacion,017,alta,090,alta medica
+HOS,altas y estancias en hospitalizacion,017,alta,091,alta neonatologia
+HOS,altas y estancias en hospitalizacion,017,alta,092,alta reingreso
+HOS,altas y estancias en hospitalizacion,017,alta,093,cma
+HOS,altas y estancias en hospitalizacion,017,alta,094,alta obstetrica
+HOS,altas y estancias en hospitalizacion,017,alta,095,alta trasplante
+HOS,altas y estancias en hospitalizacion,017,alta,096,alta no catsalut
+HOS,altas y estancias en hospitalizacion,017,alta,097,cma no catsalut
+HOS,altas y estancias en hospitalizacion,018,estancia,000,no aplica
+HOS,altas y estancias en hospitalizacion,999,otras,000,no aplica
+LAB,laboratorio,140,laboratorio medicina nuclear,000,no aplica
+LAB,laboratorio,178,anatomia patologica,000,no aplica
+LAB,laboratorio,179,core biologia molecular,000,no aplica
+LAB,laboratorio,180,transfusiones,273,transfusiones central
+LAB,laboratorio,181,bioquimica y genetica molecular,000,no aplica
+LAB,laboratorio,183,immunologia,000,no aplica
+LAB,laboratorio,184,protocolos,000,no aplica
+LAB,laboratorio,185,hematopatologia,000,no aplica
+LAB,laboratorio,ZZZ,pendiente,ZZZ,pendiente
+LAB_inferido,laboratorio,,,,
+MNS,material no sanitario,032,material de limpieza,132,material de limpieza farmacia
+MNS,material no sanitario,032,material de limpieza,133,material de limpieza general
+MNS,material no sanitario,033,ropero,134,vestuario
+MST,material sanitario,015,servicio de atencion al viajero (savi),000,no aplica
+MST,material sanitario,020,material fungible sanitario general,000,no aplica
+MST,material sanitario,021,"cateteres, sondas, drenajes, puncion, infusion",000,no aplica
+MST,material sanitario,022,protesis e injertos,000,no aplica
+MST,material sanitario,023,material traumatologia,000,no aplica
+MST,material sanitario,024,material neurocirugia,000,no aplica
+MST,material sanitario,025,cobertura quirurgica,000,no aplica
+MST,material sanitario,026,material de curas,000,no aplica
+MST,material sanitario,027,instrumental y pequeno ut.sanitario un solo uso,000,no aplica
+MST,material sanitario,028,recambios,000,no aplica
+MST,material sanitario,029,otro material sanitario,000,no aplica
+MST,material sanitario,030,reactivos,000,no aplica
+MST,material sanitario,031,pack quirurgico,000,no aplica
+MST,material sanitario,257,material neurofisiologia,000,no aplica
+MST,material sanitario,257,material neurofisiologia,283,monitorizacion cerebral
+MST,material sanitario,257,material neurofisiologia,284,monitorizacion periferica
+MST,material sanitario,257,material neurofisiologia,285,monitorizacion pedicle
+MST,material sanitario,257,material neurofisiologia,286,monitorizacion medular
+MST,material sanitario,257,material neurofisiologia,287,monitorizacion mapping
+MST,material sanitario,257,material neurofisiologia,288,monitorizacion supratentorial
+MST,material sanitario,257,material neurofisiologia,289,montorizacion infratentorial
+MST,material sanitario,ZZZ,pendiente,ZZZ,pendiente
+MST_inferido,material sanitario,,,,
+TPT,"tecnicas, procedimientos y tratamientos",001,complementos,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",001,complementos,ZZZ,pendiente
+TPT,"tecnicas, procedimientos y tratamientos",007,anestesia,007,anestesia
+TPT,"tecnicas, procedimientos y tratamientos",035,trasplante,141,trasplante hematologico
+TPT,"tecnicas, procedimientos y tratamientos",035,trasplante,143,trasplante de higado
+TPT,"tecnicas, procedimientos y tratamientos",035,trasplante,145,trasplante de corazon
+TPT,"tecnicas, procedimientos y tratamientos",035,trasplante,146,trasplante de pancreas
+TPT,"tecnicas, procedimientos y tratamientos",035,trasplante,ZZZ,pendiente
+TPT,"tecnicas, procedimientos y tratamientos",048,cardiologia,202,biopsia
+TPT,"tecnicas, procedimientos y tratamientos",048,cardiologia,ZZZ,pendiente
+TPT,"tecnicas, procedimientos y tratamientos",049,terapia del dolor,017,alta
+TPT,"tecnicas, procedimientos y tratamientos",049,terapia del dolor,235,infiltracion
+TPT,"tecnicas, procedimientos y tratamientos",049,terapia del dolor,999,otras
+TPT,"tecnicas, procedimientos y tratamientos",055,hemoterapia,201,procedimientos de aferesi
+TPT,"tecnicas, procedimientos y tratamientos",055,hemoterapia,212,criopreservacion
+TPT,"tecnicas, procedimientos y tratamientos",059,neurologia,242,electroneurologia
+TPT,"tecnicas, procedimientos y tratamientos",059,neurologia,999,otras
+TPT,"tecnicas, procedimientos y tratamientos",061,pruebas alergia,999,otras
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,001,complementos
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,007,anestesia
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,060,fecundacion in vitro
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,065,fiv con semen donante
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,076,fiv con oocitos y semen donante
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,085,vitrificacion de oocitos
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,209,cancelados
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,211,inseminacion
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,212,criopreservacion
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,213,mantenimiento anual criopreservacion
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,214,lavado seminal
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,215,seminograma
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,216,transferencia
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,217,fiv con oocitos donante
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,999,otras
+TPT,"tecnicas, procedimientos y tratamientos",062,fiv,ZZZ,pendiente
+TPT,"tecnicas, procedimientos y tratamientos",063,ginecologia,266,micropigmentacion aureola
+TPT,"tecnicas, procedimientos y tratamientos",064,dermatologia,204,exeresi
+TPT,"tecnicas, procedimientos y tratamientos",064,dermatologia,239,crioterapia
+TPT,"tecnicas, procedimientos y tratamientos",064,dermatologia,999,otras
+TPT,"tecnicas, procedimientos y tratamientos",066,endoscopia,136,endoscopia intervencionista
+TPT,"tecnicas, procedimientos y tratamientos",066,endoscopia,137,endoscopia intervencionista de alta complejidad
+TPT,"tecnicas, procedimientos y tratamientos",066,endoscopia,138,endoscopia respiratoria
+TPT,"tecnicas, procedimientos y tratamientos",066,endoscopia,202,biopsia
+TPT,"tecnicas, procedimientos y tratamientos",066,endoscopia,ZZZ,pendiente
+TPT,"tecnicas, procedimientos y tratamientos",068,oftalmologia,223,tratamiento con laser oftalmologico
+TPT,"tecnicas, procedimientos y tratamientos",068,oftalmologia,224,terapia fotodinamica
+TPT,"tecnicas, procedimientos y tratamientos",068,oftalmologia,225,tratamiento intravitri
+TPT,"tecnicas, procedimientos y tratamientos",070,urologia,084,cistoscopia
+TPT,"tecnicas, procedimientos y tratamientos",070,urologia,999,otras
+TPT,"tecnicas, procedimientos y tratamientos",070,urologia,ZZZ,pendiente
+TPT,"tecnicas, procedimientos y tratamientos",071,pruebas funcionales respiratorias,239,crioterapia
+TPT,"tecnicas, procedimientos y tratamientos",071,pruebas funcionales respiratorias,999,otras
+TPT,"tecnicas, procedimientos y tratamientos",073,hemodinamica hepatica,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",075,motilidad digestiva,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",077,rehabilitacion,168,sesiones
+TPT,"tecnicas, procedimientos y tratamientos",077,rehabilitacion,267,logopedia
+TPT,"tecnicas, procedimientos y tratamientos",077,rehabilitacion,999,otras
+TPT,"tecnicas, procedimientos y tratamientos",078,tecnicas terapeuticas medicina nuclear,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",079,tratamientos de radioterapia,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",081,dialisis,262,dialisi domiciliaria
+TPT,"tecnicas, procedimientos y tratamientos",081,dialisis,263,hemodialisi hospitalaria
+TPT,"tecnicas, procedimientos y tratamientos",081,dialisis,264,dialisi peritoneal ambulataria
+TPT,"tecnicas, procedimientos y tratamientos",081,dialisis,265,hemodialisi asistida
+TPT,"tecnicas, procedimientos y tratamientos",081,dialisis,999,otras
+TPT,"tecnicas, procedimientos y tratamientos",082,bombas de insulina y monitorage continuo de glucosa,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",189,pruebas funcionales neurologicas,241,electromiografia
+TPT,"tecnicas, procedimientos y tratamientos",189,pruebas funcionales neurologicas,242,electroneurologia
+TPT,"tecnicas, procedimientos y tratamientos",189,pruebas funcionales neurologicas,292,monotoritzacion epilepsia
+TPT,"tecnicas, procedimientos y tratamientos",191,hematologia,205,cart
+TPT,"tecnicas, procedimientos y tratamientos",194,desensibilizacion,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",195,autoinmunes,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",196,medicina interna,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",197,pruebas hipertension pulmonar,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",200,psiquiatria y psicologia,290,electroxoc
+TPT,"tecnicas, procedimientos y tratamientos",206,neurocirugia,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",999,otras,000,no aplica
+TPT,"tecnicas, procedimientos y tratamientos",999,otras,999,otras
+TPT,"tecnicas, procedimientos y tratamientos",ZZZ,pendiente,ZZZ,pendiente
+TPT_inferido,"tecnicas, procedimientos y tratamientos",,,,
+URG,urgencias,001,complementos,000,no aplica
+URG,urgencias,003,triaje urgencias,000,no aplica
+URG,urgencias,004,visita urgencias,000,no aplica
+URG,urgencias,999,otras,000,no aplica
+VAC,vacunacion,015,servicio de atencion al viajero (savi),000,no aplica
+VAC,vacunacion,016,vacunas medicina preventiva,000,no aplica
+VAC,vacunacion,ZZZ,pendiente,ZZZ,pendiente
+VIS,visita,015,servicio de atencion al viajero (savi),000,no aplica
+VIS,visita,015,servicio de atencion al viajero (savi),999,otras
+VIS,visita,156,interconsulta hospitalaria,159,visita medica
+VIS,visita,156,interconsulta hospitalaria,163,visita psicologia
+VIS,visita,156,interconsulta hospitalaria,175,visita farmaceutica
+VIS,visita,156,interconsulta hospitalaria,176,visita enfermeria
+VIS,visita,156,interconsulta hospitalaria,277,visita podologia
+VIS,visita,156,interconsulta hospitalaria,ZZZ,pendiente
+VIS,visita,160,primera visita,159,visita medica
+VIS,visita,160,primera visita,161,visita dietista
+VIS,visita,160,primera visita,162,visita optometrista
+VIS,visita,160,primera visita,163,visita psicologia
+VIS,visita,160,primera visita,164,visita trabajo social
+VIS,visita,160,primera visita,165,visita genetista
+VIS,visita,160,primera visita,167,visita terapeuta ocupacional
+VIS,visita,160,primera visita,172,visita logopeda
+VIS,visita,160,primera visita,175,visita farmaceutica
+VIS,visita,160,primera visita,176,visita enfermeria
+VIS,visita,160,primera visita,193,visita educador social
+VIS,visita,160,primera visita,ZZZ,pendiente
+VIS,visita,166,primera visita domiciliaria,159,visita medica
+VIS,visita,168,sesiones,159,visita medica
+VIS,visita,168,sesiones,176,visita enfermeria
+VIS,visita,169,sesiones grupales,159,visita medica
+VIS,visita,169,sesiones grupales,161,visita dietista
+VIS,visita,169,sesiones grupales,163,visita psicologia
+VIS,visita,169,sesiones grupales,176,visita enfermeria
+VIS,visita,169,sesiones grupales,ZZZ,pendiente
+VIS,visita,170,visita salud laboral,159,visita medica
+VIS,visita,170,visita salud laboral,176,visita enfermeria
+VIS,visita,171,visita sucesiva,159,visita medica
+VIS,visita,171,visita sucesiva,161,visita dietista
+VIS,visita,171,visita sucesiva,162,visita optometrista
+VIS,visita,171,visita sucesiva,163,visita psicologia
+VIS,visita,171,visita sucesiva,164,visita trabajo social
+VIS,visita,171,visita sucesiva,165,visita genetista
+VIS,visita,171,visita sucesiva,167,visita terapeuta ocupacional
+VIS,visita,171,visita sucesiva,172,visita logopeda
+VIS,visita,171,visita sucesiva,173,visita tecnico farmacia
+VIS,visita,171,visita sucesiva,175,visita farmaceutica
+VIS,visita,171,visita sucesiva,176,visita enfermeria
+VIS,visita,171,visita sucesiva,193,visita educador social
+VIS,visita,171,visita sucesiva,ZZZ,pendiente
+VIS,visita,174,visita sucesiva domiciliaria,159,visita medica
+VIS,visita,174,visita sucesiva domiciliaria,176,visita enfermeria
+VIS,visita,187,interconsulta hospitalitzacion domicilio,159,visita medica
+VIS,visita,ZZZ,pendiente,ZZZ,pendiente
+VIS_inferido,visita,,,,

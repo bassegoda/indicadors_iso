@@ -1,0 +1,1093 @@
+micro_ref,micro_descr
+MICABAU,Acinetobacter baumannii
+MICABIOTAC,Abiotrophia adiacus
+MICABIOTAD,Abiotrophia adiacens
+MICABIOTDE,Abiotrophia defectiva
+MICABSIDSP,Absidia sp
+MICACAV,Aeromonas caviae
+MICACHANTA,Achanthamoeba sp
+MICACHRDEN,Achromobacter denitrificans
+MICACHRINS,Achromobacter insolitus
+MICACHRMUC,Achromobacter mucicolens
+MICACHRSP,Achromobacter spp
+MICACHRXYD," Achromobacter xylosoxidans subsp denitri
+"
+MICACHRXYL,Achromobacter xylosoxidans
+MICACIDINT,Acidaminococcus intestini
+MICACIDOTE,Acidovorax temperans
+MICACINDIS,Acinetobacter dispersus
+MICACINEBR,Acinetobacter bereziniae
+MICACINECA,Acinetobacter calcoaceticus
+MICACINECO," Acinetobacter courvalinii
+"
+MICACINEDI,Acinetobacter dijkshoorniae
+MICACINEGU,Acinetobacter guillouiae
+MICACINEHH,Acinetobacter haemolyticus
+MICACINEIN," Acinetobacter indicus
+"
+MICACINEJO,Acinetobacter johnsonii
+MICACINEJU,Acinetobacter junii
+MICACINENO,Acinetobacter nosocomialis
+MICACINEPI,Acinetobacter pittii
+MICACINEPR,Acinetobacter proteolyticus
+MICACINERA,Acinetobacter radioresistens
+MICACINESC,Acinetobacter schindleri
+MICACINESP,Acinetobacter sp
+MICACINETO,Acinetobacter towneri
+MICACINEUR,Acinetobacter urginsii
+MICACINEVA,Acinetobacter variabilis
+MICACINEVE,Acinetobacter venetianus
+MICACRESP,Acremonium sp
+MICACTIBAC," Actinobacillus actinomycetemcomitans
+"
+MICACTIBAU," Actinobacillus ureae
+"
+MICACTIMAS,Actinobaculum massiliense
+MICACTIMDT,Actinomyces dentalis
+MICACTIMYE,Actinomyces europaeus
+MICACTIMYF,Actinomyces funkei
+MICACTIMYN,Actinomyces naeslundii
+MICACTIMYO,Actinomyces odontolyticus
+MICACTIMYS,Actinomyces sp
+MICACTIMYT,Actinomyces turicensis
+MICACTIMYU,Actinomyces urogenitalis
+MICACTIMYY,Actinomyces meyeri
+MICACTINEU,Actinomyces neuii
+MICACTINOB," Actinobaculum spp
+"
+MICACTIORI,Actinomyces oris
+MICACTIRAD,Actinomyces radingae
+MICACTISAN,Actinotignum sanguinis
+MICACTISCH,Actinobaculum schaalii
+MICACTSCHA,Actinotignum schaalii
+MICADNA,Ancylostoma duodenale/Necator americanus
+MICADV," Adenovirus
+"
+MICAEROCOS," Aerococcus sp
+"
+MICAEROCOU,Aerococcus urinae
+MICAEROCOV,Aerococcus viridans
+MICAEROMIC," Aeromonas ichthiosmia
+"
+MICAEROMJA,Aeromonas jandaei
+MICAEROMOH,Aeromonas hydrophila
+MICAEROMOO,Aeromonas sobria
+MICAEROMOP,Aeromonas sp
+MICAEROMOV,Aeromonas veronii
+MICAEROSAN,Aerococcus sanguinicola
+MICAFLA,Aspergillus flavus
+MICAFUM,Aspergillus fumigatus
+MICAGGRAPH,Aggregatibacter aphrophilus
+MICAGGREGA," Aggregatibacter actinomycetemcomitans
+"
+MICAGROBRA," Agrobacterium radiobacter
+"
+MICAGROBTU," Agrobacterium tumefaciens
+"
+MICAGROMME,Agromyces mediolanus
+MICALCALIF,Alcaligenes faecalis
+MICALISTFI,Alistipes finegoldii
+MICALISTON,Alistipes onderdonkii
+MICALISTPU,Alistipes putredinis
+MICALISTSH,Alistipes shahii
+MICALLOOMN,Alloscardovia omnicolens
+MICALLOPRA," Alloprevotella rava
+"
+MICALTERAL,Alternaria alternata
+MICALTERSP,Alternaria sp
+MICALWO,Acinetobacter lwoffi
+MICAMEB,Amebas
+MICANAEHYD," Anaerococcus hydrogenalis
+"
+MICANAELAC,Anaerococcus lactolyticus
+MICANAEMUR,Anaerococcus murdochii
+MICANAENAG," Anaerococcus nagyae
+"
+MICANAESP,Anaerococcus sp
+MICANAEVAG,Anaerococcus vaginalis
+MICANATRCO,Anaerotruncus colihominis
+MICANCYLOD,Ancylostoma duodenale
+MICANGITRC,Angiostrongylus cantonensis
+MICANIG,Aspergillus niger
+MICANISAKP," Anisakis sp
+"
+MICARCANHA,Arcanobacterium haemolyticum
+MICARCOBUT,Arcobacter butzleri
+MICARTHSPP,Arthrinium spp
+MICARTRBCI,Arthrobacter citreus
+MICARTROBS,Artrobacter sp
+MICASCALUM,Ascaris lumbricoides
+MICASPERAL,Aspergillus alabamensis
+MICASPERCA," Aspergillus calidoustus
+"
+MICASPERFL," Aspergillus flavipes
+"
+MICASPERGL,Aspergillus glaucus
+MICASPERLE,Aspergillus lentulus
+MICASPERNI,Aspergillus nidulans
+MICASPEROC," Aspergillus ochraceus
+"
+MICASPERRE,Aspergillus restrictus
+MICASPERSP,Aspergillus spp
+MICASPERSY,Aspergillus sydowii
+MICASPERTE,Aspergillus terreus
+MICASPERTU,Aspergillus tubingensis
+MICASPERVE," Aspergillus versicolor
+"
+MICATOPRIM,Atopobium rimae
+MICATOPVAG,Atopobium vaginae
+MICAUREOBA,Aureobasidium pullulans
+MICAUREOBS," Aureobasidium sp
+"
+MICAURIIGN," Auritidibacter ignavus
+"
+MICBABESSP," Babesia sp
+"
+MICBACANAG,Bacilo anaerobio Gram negativo
+MICBACGRN,Bacilo Gram negativo .
+MICBACILAM,Bacillus amyloliquefaciens
+MICBACILAT," Bacillus altitudinis
+"
+MICBACILCE,Bacillus cereus
+MICBACILCI,Bacillus circulans
+MICBACILCU,Bacillus clausii
+MICBACILEN,Bacillus endophyticus
+MICBACILFL,Bacillus flexus
+MICBACILHO," Bacillus horneckiae
+"
+MICBACILLI,Bacillus licheniformis
+MICBACILME,Bacillus megaterium
+MICBACILMO," Bacillus mojavensis
+"
+MICBACILMU,Bacillus muralis
+MICBACILMY,Bacillus mycoides
+MICBACILPU,Bacillus pumilus
+MICBACILSI,Bacillus simplex
+MICBACILSP,Bacillus sp
+MICBACILSU,Bacillus subtilis
+MICBACILTH,Bacillus thuringiensis
+MICBACTEFA,Bacteroides faecis
+MICBACTEPY,Bacteroides pyogenes
+MICBACTERC,Bacteroides caccae
+MICBACTERD,Bacteroides distasonis
+MICBACTERE," Bacteroides eggerthii
+"
+MICBACTERO," Bacteroides coagulans
+"
+MICBACTERR,Bacteroides stercoris
+MICBACTERS,Bacteroides sp
+MICBACTERT,Bacteroides thetaiotaomicron
+MICBACTERU,Bacteroides uniformis
+MICBACTERV,Bacteroides vulgatus
+MICBACTERY,Bacteroides ovatus
+MICBACTESS,Bacteroides salyersiae
+MICBACTEUR," Bacteroides ureolyticus
+"
+MICBARTONS,Bartonella sp
+MICBERGEZO," Bergeyella zoohelcum
+"
+MICBFRA,Bacteroides fragilis
+MICBG(N)AE,Bacilo Gram negativo aerobio
+MICBG(N)AN,Bacilo Gram negativo anaerobio
+MICBG(P)AE,Bacilo Gram positivo aerobio
+MICBG(P)AN,Bacilo Gram positivo anaerobio
+MICBGN,Bacils Gram negatius
+MICBGNEN," BGN tipus enterobacteria
+"
+MICBGNNF,BGN no fermentador de la glucosa.
+MICBGP,Bacil gram positiu
+MICBGPD," Bacil gram positiu difteroid
+"
+MICBGPDA,BGP difteroid aerobi
+MICBGPDN,BGP difteroid anaerobi
+MICBGPL," BGP tipus listeria
+"
+MICBGV," Bacil Gram Variable
+"
+MICBIFIDOA," Bifidobacterium adolescentis
+"
+MICBIFIDOB,Bifidobacterium bifidum
+MICBIFIDOC," Bifidobacterium catenulatum
+"
+MICBIFIDOD,Bifidobacterium dentium
+MICBIFIDOL,Bifidobacterium longum
+MICBIFIDOR,Bifidobacterium breve
+MICBIFIDOS,Bifidobacterium sp
+MICBIPO,Bipolaris spp
+MICBLASTHO,Blastocystis hominis
+MICBLF," Bacilo Fermentador de Lactosa
+"
+MICBMCAT,Moraxella catarrhalis
+MICBNLF,Bacilo No Fermentador de Lactosa
+MICBORDETB,Bordetella bronchiseptica
+MICBORDETS,Bordetella sp
+MICBORREDU,Borrelia duttonii
+MICBRACCON,Brachybacterium conglomeratum
+MICBRACMUR,Brachybacterium muris
+MICBREVAU," Brevundimonas aurantiaca
+"
+MICBREVIBC,Brevibacterium casei
+MICBREVIBR,Brevibacterium ravenspurgense
+MICBREVIBS,Brevibacterium sp
+MICBREVICE,Brevibacterium celere
+MICBREVLUT,Brevibacterium luteolum
+MICBREVUND,Brevundimonas diminuta (= Pseudomonas di
+MICBREVUNV,Brevundimonas vesicularis (= PS vesicula
+MICBRVBACB,Brevibacillus brevis
+MICBRVBACS,Brevibacillus sp
+MICBRVBPAR,Brevibacillus parabrevis
+MICBURK,Burkholderia sp
+MICBURKCEC,Burkholderia cepacea complex
+MICBURKCEN,Burkholderia cenocepacia
+MICBURKCEP,Burkholderia cepacia
+MICBURKGLA,Burkolderia gladioli
+MICBURKMUL," Burkholderia multivorans
+"
+MICCALB,Candida albicans
+MICCAMPYCL,Campylobacter coli
+MICCAMPYCO," Campylobacter concisus
+"
+MICCAMPYFE,Campylobacter fetus
+MICCAMPYHY," Campylobacter hyointestinalis
+"
+MICCAMPYLA," Campylobacter lari
+"
+MICCAMPYRE," Campylobacter rectus
+"
+MICCAMPYSP,Campylobacter sp
+MICCANDAUR,Candida auris
+MICCANDBOI,Candida boidini
+MICCANDBRA,Candida bracarensis
+MICCANDCAT,Candida catenulata
+MICCANDCIF," Candida ciferrii
+"
+MICCANDCOL,Candida colliculosa
+MICCANDDUB,Candida dubliniensis
+MICCANDFAM,Candida famata
+MICCANDGUI,Candida guilliermondii
+MICCANDICO,Candida inconspicua
+MICCANDINT," Candida intermedia
+"
+MICCANDKEF,Candida kefyr
+MICCANDLIP,Candida lipolytica
+MICCANDLUS,Candida lusitaniae
+MICCANDMAG,Candida magnoliae
+MICCANDMET,Candida metapsilosis
+MICCANDNIV,Candida nivariensis
+MICCANDNOR,Candida norvegensis
+MICCANDORT,Candida orthopsilosis
+MICCANDPAR," Candida pararugosa
+"
+MICCANDRUG," Candida rugosa
+"
+MICCANDSP,Candida spp
+MICCANDUTI,Candida utilis
+MICCAPNOGI,Capnocytophaga gingivalis
+MICCAPNOOC,Capnocytophaga ochracea
+MICCAPNOSP," Capnocytophaga sp
+"
+MICCAPNOSS,Capnocytophaga sputigena
+MICCBGP,Cocobacils Grampositius
+MICCCAN,Capnocytophaga canimorsus
+MICCCAY,Cyclospora cayetanensis
+MICCDIV,Citrobacter diversus
+MICCELLUCE,Cellulosimicrobium cellulans
+MICCFRE,Citrobacter freundii
+MICCG(N)AE,Cocos Gram negativos aerobios
+MICCG(N)AN,Cocos Gram negativos anaerobios
+MICCG(P)AE,Cocos Gram positivos aerobios
+MICCG(P)AN,Cocos Gram positivos anaerobios
+MICCGLA,Candida glabrata
+MICCGP,Cocs gram positius
+MICCGPEF,CGP tipus estafilococ
+MICCGPET,CGP tipus estreptococ
+MICCGV,Cocs gram variables
+MICCHAETOG," Chaetomium globosum
+"
+MICCHAETOS,Chaetomium sp
+MICCHLOMES,Chilomastix mesnili
+MICCHRYSAR," Chryseobacterium arthrosphaerae
+"
+MICCHRYSIN,Chryseobacterium indologenes (= Flavobac
+MICCHRYSJO,Chryseobacterium joostei
+MICCHRYSME," Chryseobacterium meningosepticum (= Flav
+"
+MICCHRYSSH,Chryseobacterium shandongense
+MICCHRYSSP,Chryseobacterium spp
+MICCITRAMA,Citrobacter amalonaticus
+MICCITRBRA,Citrobacter braakii
+MICCITRFAR,Citrobacter farmeri
+MICCITRFRE,Citrobacter freundii complex
+MICCITRSED,Citrobacter sedlakii
+MICCITRSP,Citrobacter sp
+MICCITRYOU," Citrobacter youngae
+"
+MICCJEJ,Campylobacter jejuni
+MICCKOS,Citrobacter koseri
+MICCKRU,Candida krusei
+MICCLADOSP,Cladosporium sp
+MICCLOSTBA,Clostridium baratii
+MICCLOSTBU,Clostridium butyricum
+MICCLOSTCA,Clostridium cadaveris
+MICCLOSTDI,Clostridium difficile
+MICCLOSTII,Clostridium innocuum
+MICCLOSTIN," Clostridium indolis
+"
+MICCLOSTLI,Clostridium limosum
+MICCLOSTPA,Clostridium paraputrificum
+MICCLOSTRA,Clostridium ramosum
+MICCLOSTSE,Clostridium septicum
+MICCLOSTSG,Clostridium sporogenes
+MICCLOSTSO,Clostridium sordellii
+MICCLOSTSP,Clostridium sp
+MICCLOSTSU," Clostridium subterminale
+"
+MICCLOSTTE,Clostridium tertium
+MICCMV,Citomegalovirus
+MICCNEO,Cryptococcus neoformans
+MICCOCAN,Coc anaerobi
+MICCOCCISP," Coccidioides sp
+"
+MICCOCS," Cocs
+"
+MICCOMAMAC,Comamonas acidovorans
+MICCOMAMTE," Comamonas testosteroni
+"
+MICCORY,Corynebacterium sp
+MICCORYACC,Corynebacterium accolens
+MICCORYAFE,Corynebacterium afermentans
+MICCORYAMY,Corynebacterium amycolatum
+MICCORYAQ,Corynebacterium aquaticum
+MICCORYAUR,Corynebacterium aurimucosum
+MICCORYBOV," Corynebacterium bovis
+"
+MICCORYCOY,Corynebacterium coyleae
+MICCORYDUR," Corynebacterium durum
+"
+MICCORYFRE,Corynebacterium freneyi
+MICCORYGLU,Corynebacterium glucuronolyticum
+MICCORYIMI,Corynebacterium imitans
+MICCORYJK,Corynebacterium jeikeium
+MICCORYMAC,Corynebacterium macginleyi
+MICCORYMIN,Corynebacterium minutissimum
+MICCORYMUC,Corynebacterium mucifaciens
+MICCORYPRO,Corynebacterium propinquum
+MICCORYPSD,Corynebacterium pseudodiphtheriticum
+MICCORYRIE,Corynebacterium riegelii
+MICCORYSIM,Corynebacterium simulans
+MICCORYSIN,Corynebacterium singulare
+MICCORYSTR,Corynebacterium striatum
+MICCORYTUB,Corynebacterium tuberculostearicum
+MICCORYURE,Corynebacterium urealyticum
+MICCOXIEBU,Coxiella burnetii
+MICCPAR,Candida parapsilosis
+MICCPER,Clostridium perfringens
+MICCRONSP,Cronobacter sp
+MICCRYCONE," Cryptococcus neoformans var. grubii
+"
+MICCRYPPAR,Cryptosporidium parvum
+MICCRYPSP,Cryptosporidium sp
+MICCRYSIND,Chryseobacterium indologenes
+MICCSIT,Chrysonilia sitophila
+MICCTRO,Candida tropicalis
+MICCUPGIL,Cupriavidus gilardii
+MICCUPMET," Cupriavidus metallidurans
+"
+MICCUPSP," Cupriavidus sp.
+"
+MICCURVUSP,Curvularia sp
+MICCUTIACN,Cutibacterium acnes
+MICCUTIAVI,Cutibacterium avidum
+MICCUTINAM,Cutibacterium namnetense
+MICDELACI,Delftia acidovorans
+MICDELFLAC,Delftia lacustris
+MICDEM,Dematiaceos
+MICDER,Dermatofito
+MICDERMAC,Dermacoccus spp
+MICDERMAHO,Dermatobia hominis
+MICDERMHOM,Dermabacter hominis
+MICDIAPNE,Dialister pneumosintes
+MICDIF,Bacil gram positiu difteroid aerobi .
+MICDIPHYLA," Diphyllobotrium latum
+"
+MICDIPHYSP," Diphyllobotrium sp
+"
+MICDIPTER," DIPTERS
+"
+MICDIROFII," Dirofilaria immitis repens
+"
+MICEAER,Enterobacter aerogenes
+MICEBH,Estreptococ beta hemolític
+MICECAS,Enterococcus casseliflavus
+MICECHIGRA,Echinococcus granulosus
+MICECLO,Enterobacter cloacae
+MICECLOC,Enterobacter cloacae complex
+MICECNE,Estafilococ coagulasa negatiu
+MICECOL,Escherichia coli
+MICEDUR,Enterococcus durans
+MICEDWTAR," Edwardsiella tarda
+"
+MICEFAC,Enterococcus faecium
+MICEFAE,Enterococcus faecalis
+MICEIKENCO,Eikenella corrodens
+MICELEN,Eggerthella lenta
+MICELIZAMI,Elizabethkingia miricola
+MICELIZASP,Elizabethkingia spp
+MICEMPEBRE," Empedobacter brevis (= Flavob. brevis)
+"
+MICENDONAN,Endolimax nana
+MICENDOSP," Endolimax sp
+"
+MICENTAHIS,Entamoeba histolytica/ dispar
+MICENTAMCO,Entamoeba coli
+MICENTAMDI,Entamoeba dispar
+MICENTAMHA,Entamoeba hartmanni
+MICENTAMHI,Entamoeba histolytica
+MICENTBAMI,Enterobacter amnigenus
+MICENTBASB,Enterobacter asburiae
+MICENTBBUG,Enterobacter bugandensis
+MICENTBCAN," Enterobacter cancerogenus
+"
+MICENTBGER,Enterobacter gergoviae
+MICENTBHOR,Enterobacter hormaechei
+MICENTBKOB,Enterobacter kobei
+MICENTBSAK," Enterobacter sakazakii
+"
+MICENTBSP,Enterobacter spp
+MICENTCAVI,Enterococcus avium
+MICENTCDUR,Enterococcus durans/hirae
+MICENTCGAL,Enterococcus gallinarum
+MICENTCHIR,Enterococcus hirae
+MICENTCRA,Enterococcus raffinosus
+MICENTERO," Enterococcus
+"
+MICENTEROB," Enterobacter
+"
+MICENTEROC,Enterococcus spp
+MICENTERVE,Enterobius vermicularis
+MICEPIDEFL," Epidermophyton floccosum
+"
+MICESCHFER,Escherichia fergusonii
+MICESCHHER,Escherichia hermanii
+MICESCHVUL,Escherichia vulneris
+MICESTAFIL,Staphylococcus spp
+MICEUBACSA,Eubacterium saborreum
+MICEUBACSP,Eubacterium sp
+MICEVIR,Estreptococ grup viridans
+MICEXOATTE,Exophiala attenuata
+MICEXODER,Exophiala dermatitidis
+MICEXOJEAN,Exophiala jeanselmei
+MICEXOSPP,Exophiala spp
+MICEXOXEN," Exophiala xenobiotica
+"
+MICFACKHOM,Facklamia hominis
+MICFAMENTE,Enterobacteriacaeae
+MICFF,Elem. Fungic Filamentos
+MICFILAM,Filamentosos
+MICFINMAG,Finegoldia magna
+MICFON,Fong
+MICFUOX,Fusarium oxysporum
+MICFUSASO," Fusarium solani
+"
+MICFUSASP,Fusarium sp
+MICFUSOGON,Fusobacterium gonidiaformans
+MICFUSOMOR,Fusobacterium mortiferum
+MICFUSONAV,Fusobacterium naviforme
+MICFUSONEP,Fusobacterium necrophorum
+MICFUSONUC,Fusobacterium nucleatum
+MICFUSOPER,Fusobacterium periodonticum
+MICFUSOSP,Fusobacterium sp
+MICFUSOV," Fusobacterium varium
+"
+MICFUSOVIN," Fusobacterium vincenti
+"
+MICFUVE," Fusarium verticillioides
+"
+MICGARDNSP,Gardnerella sp
+MICGARDNVA,Gardnerella vaginalis
+MICGBRON,Gordonia bronchialis
+MICGEMEHAM,Gemella haemolysans
+MICGEMESP,Gemella sp
+MICGEOTCAN,Geotrichum candidum
+MICGEOTCP,Geotrichum capitatum
+MICGEOTSP,Geotrichum sp
+MICGIARLAM,Giardia lamblia
+MICGLOBSAN,Globicatella sanguinis
+MICGMOR,Gemella morbillorum
+MICGRAADI,Granulicatella adiacens
+MICGRAELE,Granulicatella elegans
+MICHAEMAPR," Haemophilus aphrophilus
+"
+MICHAEMHAE,Haemophilus haemolyticus
+MICHAEMSEG," Haemophilus segnis
+"
+MICHAEMSP,Haemophilus sp
+MICHAFNIAA,Hafnia alvei
+MICHELICPU,Helicobacter pullorum
+MICHELICPY,Helicobacter pylori
+MICHERBAHU,Herbaspirillum huttiense
+MICHIF," Hifas
+"
+MICHINF,Haemophilus influenzae
+MICHISTCAP,Histoplasma capsulatum
+MICHISTOSP," Histoplasma sp
+"
+MICHONGOS," Hongos
+"
+MICHPAR,Haemophilus parainfluenzae
+MICHUMISP," Humicola sp
+"
+MICHUNHAT,Hungatella hathewayi
+MICHYMENAN," Hymenolepis nana
+"
+MICIODABUR,Iodamoeba butschlii
+MICISOSBEL," Isospora belli
+"
+MICJANISP,Janibacter spp
+MICKINGEKI,Kingella kingae
+MICKINGESP," Kingella sp
+"
+MICKLEBAER,Klebsiella aerogenes
+MICKLEBORN,Klebsiella ornithinolytica
+MICKLEBOZ,Klebsiella pneumoniae subsp. Ozaenae
+MICKLEBOZA," Klebsiella ozaenae
+"
+MICKLEBPLN," Klebsiella planticola
+"
+MICKLEBPNE,Klebsiella pneumoniae complex
+MICKLEBSIE," Klebsiella
+"
+MICKLEBSP,Klebsiella sp
+MICKLEBVAR,Klebsiella variicola
+MICKLUYASC,Kluyvera ascorbata
+MICKLUYCRY,Kluyvera cryocrescens
+MICKLUYSP,Kluyvera spp
+MICKOCUPAL,Kocuria palustris
+MICKOCURHI,Kocuria rhizophila
+MICKOCUSP,Kocuria spp
+MICKOKUKRI,Kocuria kristinae
+MICKOKURO,Kocuria rosea
+MICKOKUVA," Kokuria varians
+"
+MICKOXY,Klebsiella oxytoca
+MICKOXYROR,Klebsiella oxytoca/Raoultella ornithynol
+MICKPNE,Klebsiella pneumoniae
+MICLACCGAR,Lactococcus garvieae
+MICLACCLAC,Lactococcus lactis
+MICLACCSP,Lactococcus sp
+MICLACTBAC," Lactobacillus acidophilus
+"
+MICLACTBCR,Lactobacillus crispatus
+MICLACTBDE,Lactobacillus delbrueckii
+MICLACTBFE,Lactobacillus fermentum
+MICLACTBGA,Lactobacillus gasseri
+MICLACTBIN,Lactobacillus iners
+MICLACTBJE,Lactobacillus jensenii
+MICLACTBPA,Lactobacillus paracasei
+MICLACTBRH,Lactobacillus rhamnosus
+MICLACTBRU,Lactobacillus ruminis
+MICLACTBSP,Lactobacillus sp
+MICLECLERA,Leclercia adecarboxylata
+MICLEGIOPN,Legionella pneumophila
+MICLEISHIN," Leishmania infantum
+"
+MICLEISHSP,Leishmania sp
+MICLELLIAM,Lelliottia amnigena
+MICLEUCNCI,Leuconostoc citreum
+MICLEUCNLA,Leuconostoc lactis
+MICLEUCNSP,Leuconostoc sp
+MICLEV,Llevats
+MICLF,Bacil lactosa fermentador
+MICLICHCOR,Lichtheimia corymbifera
+MICLICHRAM,Lichtheimia ramosa
+MICLICO," Lichtheimia corymbifera
+"
+MICLISTSP,Listeria sp
+MICLMON,Listeria monocytogenes
+MICLOALO,Loa loa
+MICLPTOTRT,Leptotrichia trevisanii
+MICLPTOTSP,Leptotrichia sp
+MICLYSINBO,Lysinibacillus boronitolerans
+MICLYSINFU,Lysinibacillus fusiformis
+MICLYSINSP," Lysinibacillus sphaericus
+"
+MICMALFUR,Malassezia furfur
+MICMALSP,Malassezia sp
+MICMANP,Mansonella perstans
+MICMASSITI,Massilia timonae
+MICMETSP,Metagominus sp
+MICMFT," Mixte estafils i estreptococs
+"
+MICMICC,Micrococcus
+MICMICCLUT,Micrococcus luteus
+MICMICCLYL,Micrococcus lylae
+MICMICCSP,Micrococcus sp
+MICMICCTER,Micrococcus terreus
+MICMICO," Micobacterias
+"
+MICMICOABS,Mycobacterium abscessus
+MICMICOBAA,Mycobacterium avium-intracellulare
+MICMICOBAB,Mycobacterium bovis
+MICMICOBAC,Mycobacterium canariasense
+MICMICOBAF,Mycobacterium africanum
+MICMICOBAG," Mycobacterium mucogenicum
+"
+MICMICOBAL,Mycobacterium celatum
+MICMICOBAM,Mycobacterium malmoense
+MICMICOBAN,Mycobacterium peregrinum
+MICMICOBAP,Mycobacterium parascrofulaceum
+MICMICOBAR,Mycobacterium marinum
+MICMICOBAS," Mycobacterium scrofulaceum
+"
+MICMICOBAV,Mycobacterium avium
+MICMICOBAX,Mycobacterium xenopi
+MICMICOBBC,Mycobacterium bovis BCG
+MICMICOBBR,Mycobacterium brisbanense
+MICMICOBCH,Mycobacterium chelonae
+MICMICOBFF,Mycobacterium fortuitum
+MICMICOBFO,Mycobacterium fortuitum complex
+MICMICOBGO,Mycobacterium gordonae
+MICMICOBIC,Mycobacterium intracellulare
+MICMICOBIT," Mycobacterium interjectum
+"
+MICMICOBKA,Mycobacterium kansasii
+MICMICOBLE,Mycobacterium lentiflavum
+MICMICOBPP,Mycobacterium sp
+MICMICOBSH,Mycobacterium shimoidei
+MICMICOBSM," Mycobacterium smegmatis
+"
+MICMICOBT,Mycobacterium terrae complex
+MICMICOINC,Mycobacterium intracellulare-chimaera
+MICMICOTUB,Mycobacterium tuberculosis
+MICMICOTUC,Mycobacterium tuberculosis complex
+MICMICPOSC,Microsporum canis
+MICMICPOSU,Microsporum audouinii
+MICMICPOSY,Microsporum gypseum
+MICMICROSP,Microbacterium sp
+MICMMOR,Morganella morganii
+MICMNR," None)
+"
+MICMORXATL,Moraxella atlantae
+MICMORXLAC,Moraxella lacunata
+MICMORXMON,Moraxella monliquefaciens
+MICMORXOSL,Moraxella osloensis
+MICMORXSP,Moraxella sp
+MICMUCORAL," Especie del grup fongs mucorals
+"
+MICMUCORCI,Mucor circinelloides
+MICMUCORSP,Mucor sp
+MICMUCORVE,Mucor velutinosus
+MICMYCCHI,Mycobacterium chimaera
+MICMYCCOL," Mycobacterium colombiense
+"
+MICMYCMA,Mycobacterium mageritense
+MICMYCPGEN,Mycoplasma genitalium
+MICMYCPHOM,Mycoplasma hominis
+MICMYCPSP," Mycoplasma sp
+"
+MICMYCTRIP," Mycobacterium triplex
+"
+MICMYROODO,Myroides odoratus
+MICMYROODR,Myroides odoratimimus
+MICNABS,Nocardia abscessus
+MICNCYR,Nocardia cyriacigeorgica
+MICNEISBAC,Neisseria bacilliformis
+MICNEISELO,Neisseria elongata
+MICNEISFLA,Neisseria flavescens
+MICNEISMEB,Neisseria meningitidis grupo B
+MICNEISMUC,Neisseria mucosa
+MICNEISSIC," Neisseria sicca
+"
+MICNEISSP,Neisseria sp
+MICNEISSUF,Neisseria subflava
+MICNFAR,Nocardia farcinica
+MICNGON,Neisseria gonorrhoeae
+MICNLF,Bacil No lactosa fermentador
+MICNMEN,Neisseria meningitidis
+MICNOCABRA,Nocardia brasilensis
+MICNOCANOV,Nocardia nova
+MICNOCASP,Nocardia sp
+MICNOCDPSP,Nocardiopsis sp
+MICNTRA," Nocardia transvalensis
+"
+MICNV,.
+MICOCRBACA,Ochrobactrum anthropi
+MICOCRBAIN,Ochrobactrum intermedium
+MICODOSPLA,Odoribacter splanchnicus
+MICOLIGEUR,Oligella urethralis
+MICPAELIL,Paecilomyces lilacinus
+MICPAEM,Pseudomonas aeruginosa (mucoide)
+MICPAENGLU,Paenibacillus glucanolyticus
+MICPAENILL,Paenibacillus illinoisensis
+MICPAENLAC,Paenibacillus lactis
+MICPAENLAU,Paenibacillus lautus
+MICPAENMSO,Paeniclostridium sordelli
+MICPAENRES,Paenibacillus residu
+MICPAENSP,Paenibacillus sp
+MICPAER,Pseudomonas aeruginosa
+MICPAESP,Paecilomyces sp
+MICPAEVAR,Paecilomyces variotii
+MICPAFM,Flora Mixta
+MICPANTCAL,Pantoea calida
+MICPANTDIS,Pantoea dispersa
+MICPANTEUC,Pantoea eucrina
+MICPANTOAG,Pantoea aglomerans
+MICPANTSEP,Pantoea septica
+MICPANTSP,Pantoea sp
+MICPARA,Parásitos
+MICPARABDI,Parabacteroides distasonis
+MICPARACYE,Paracoccus yeei
+MICPARVIMI,Parvimonas micra
+MICPASTBET,Pasteurella bettyae
+MICPASTCAN,Pasteurella canis
+MICPASTDAG,Pasteurella dagmatis
+MICPASTSP,Pasteurella sp
+MICPEDIOSP,Pediococcus sp
+MICPENICIC,Penicillium chrysogenum
+MICPENICIS,Penicillium sp
+MICPEPGOR,Peptoniphilus gorbachii
+MICPEPHAR,Peptoniphilus harei
+MICPEPINDO,Peptoniphilus indolicus
+MICPEPSP,Peptoniphilus sp
+MICPEPSTAN,Peptostreptococcus anaerobius
+MICPEPSTAS,Peptostreptococcus asaccharolyticus
+MICPEPSTIN," Peptostreptococcus indolicus
+"
+MICPEPSTMA,Peptostreptococcus magnus
+MICPEPSTMI,Peptostreptococcus micros
+MICPEPSTSP,Peptostreptococcus sp
+MICPEPSTTE," Peptostreptococcus tetradius
+"
+MICPEPTOCO,Peptoniphilus coxii
+MICPEPTOSP," Peptococcus sp
+"
+MICPHOMSP,Phoma sp
+MICPHTHPUB,Phthirus pubis
+MICPICHIOH,Pichia ohmeri
+MICPLASMFA,Plasmodium falciparum
+MICPLASMMA,Plasmodium malariae
+MICPLASMOV,Plasmodium ovale
+MICPLASMSP,Plasmodium sp
+MICPLASMVI,Plasmodium vivax
+MICPLESISH,Plesiomonas shigelloides
+MICPLURGER,Pluralibacter gergoviae
+MICPMIR,Proteus mirabilis
+MICPMUL,Pasteurella multocida
+MICPNCISJI,Pneumocystis jiroveci.
+MICPNECISJ," Pneumocystis jiroveci
+"
+MICPORPHYG,Porphyromonas gingivalis
+MICPORSP,Porphyromonas sp
+MICPPUT,Pseudomonas putida
+MICPRET,Providencia rettgeri
+MICPREVOBA,Prevotella baroniae
+MICPREVOBI,Prevotella bivia
+MICPREVOBU,Prevotella buccae
+MICPREVOCO,Prevotella corporis
+MICPREVODE,Prevotella denticola
+MICPREVODI,Prevotella disiens
+MICPREVOHE,Prevotella heparinolytica
+MICPREVOIN,Prevotella intermedia
+MICPREVOLO,Prevotella loescheii
+MICPREVOME,Prevotella melaninogenica
+MICPREVONI,Prevotella nigrescens
+MICPREVOOR,Prevotella oralis
+MICPREVOOS,Prevotella oris
+MICPREVOPE," Prevotella penticola
+"
+MICPREVOSP,Prevotella sp
+MICPREVOTI,Prevotella timonensis
+MICPREVOVE," Prevotella veroralis
+"
+MICPROPILY,Propionimicrobium lymphophilum
+MICPROTHAU,Proteus hauseri
+MICPROTPEN,Proteus penneri
+MICPROTSP,Proteus sp
+MICPROVRUS,Providencia rustigianii
+MICPRPBCAC,Propionibacterium acnes
+MICPRPBCAV," Propionibacterium avidum
+"
+MICPRPBCSP,Propionibacterium sp
+MICPSEUAL,Pseudomonas alcaligenes
+MICPSEUBOY," Pseudallescheria boydii
+"
+MICPSEUBRA," Pseudomonas brassicacearum
+"
+MICPSEUCHL,Pseudomonas chlororaphis
+MICPSEUCIT,Pseudomonas citronellonis
+MICPSEUCOM,Pseudomonas composti
+MICPSEUDOP," Pseudoarthrobacter polychromogenes
+"
+MICPSEUFLU,Pseudomonas fluorescens
+MICPSEUFRA,Pseudomonas fragi
+MICPSEUFUL,Pseudomonas fulva
+MICPSEUGUA,Pseudomonas guariconensis
+MICPSEUKOR,Pseudomonas koreensis
+MICPSEULIB,Pseudomonas libanensis
+MICPSEULUT,Pseudomonas luteola
+MICPSEUMEN,Pseudomonas mendocina
+MICPSEUMO,Pseudomonas monteilii
+MICPSEUMOS,Pseudomonas mosselii
+MICPSEUNIT,Pseudomonas nitroreducens
+MICPSEUOLA,Pseudomonas oleovorans
+MICPSEUORY,Pseudomonas oryzihabitans
+MICPSEUPLE,Pseudomonas plecoglossicida
+MICPSEUSP,Pseudomonas sp
+MICPSEUSTU,Pseudomonas stutzeri
+MICPSTU,Providencia stuartii
+MICPSYCPHE,Psychrobacter phenylpyruvicus
+MICPSYCSAN,Psychrobacter sanguinis
+MICPVUL,Proteus vulgaris
+MICPYRESP,Pyrenochaeta sp
+MICRALSPIC,Ralstonia pickettii
+MICRALSSP,Ralstonia spp
+MICRAOUORN,Raoultella ornithinolytica
+MICRAOUPLA,Raoultella planticola
+MICRAOUTER,Raoultella terrigena
+MICRDEN,Rothia dentocariosa
+MICREQU," Rhodococcus equi
+"
+MICRHIMUCO," Rhizomucor sp
+"
+MICRHIZARR,Rhizopus arrhizus
+MICRHIZMIC,Rhizopus microsporus
+MICRHIZORA,Rhizobium radiobacter
+MICRHIZORY," Rhizopus oryzae
+"
+MICRHIZPUS,Rhizomucor pusillus
+MICRHIZSP,Rhizopus sp.
+MICRHODOSP," Rhodococcus sp
+"
+MICRHOR,Rhizopus oryzae
+MICRHOTOMU,Rhodotorula mucilaginosa
+MICRHOTORU,Rhodotorula rubra
+MICRHOTOSP,Rhodotorula sp
+MICRINOVIR,Rinovirus
+MICROSAER,Roseomonas aerofrigidensis
+MICROSMUC,Roseomonas mucosa
+MICROSSPP," Roseomonas spp
+"
+MICROTMUC,Rothia mucilaginosa
+MICROTTERR,Rothia terrae
+MICRUMGNA," Ruminococcus gnavus
+"
+MICSACCCER,Saccharomyces cerevisiae
+MICSACCKLU,Saccharomyces kluyverii
+MICSACCSP,Saccharomyces sp
+MICSAGA,Streptococcus agalactiae
+MICSALM,Salmonella spp
+MICSALMCHO,Salmonella cholerasuis
+MICSALMDUB," Salmonella dublin
+"
+MICSALMENT,Salmonella enteritidis
+MICSALMGR2,Salmonella grupo C2/C3
+MICSALMGRB,Salmonella grupo B
+MICSALMGRC," Salmonella grupo C1
+"
+MICSALMGRD,Salmonella grupo D
+MICSALMPAB,Salmonella paratyphi B
+MICSALMPAR,Salmonella paratyphi A
+MICSALMSP,Salmonella sp
+MICSARCOHO," Sarcocystis hominis
+"
+MICSAUR,Staphylococcus aureus
+MICSBOV,Streptococcus bovis
+MICSCEDOAP,Scedosporium apiospermum
+MICSCEDOBO,Scedosporium boydii
+MICSCEDOSP,Scedosporium spp
+MICSCHHAE,Schistosoma haematobium
+MICSCHINT," Schistosoma intercalatum
+"
+MICSCHMAN,Schistosoma mansoni
+MICSCHSP,Schistosoma sp
+MICSCHTURI," Schaalia turicensis
+"
+MICSCOPBRE,Scopulariopsis brevicaulis
+MICSCOPSP,Scopulariopsis sp
+MICSCYTDI," Scytalidium dimidiatum
+"
+MICSERRFIC,Serratia ficaria
+MICSERRFON,Serratia fonticola
+MICSERRODO,Serratia odorifera
+MICSERRRUB," Serratia rubidaea
+"
+MICSERRSP,Serratia sp
+MICSERRURE,Serratia ureilytica
+MICSFLE,Shigella flexneri
+MICSHEWALG,Shewanella algae
+MICSHIGSP,Shigella sp
+MICSLIQ,Serratia liquefaciens
+MICSMAL,Stenotrophomonas maltophilia
+MICSMAR,Serratia marcescens
+MICSOLMOO,Solobacterium moorei
+MICSPGMONA,Sphingomonas aerolata
+MICSPGMONK,Sphingomonas koreensis
+MICSPGMONP,Sphingomonas paucimobilis
+MICSPGMONS,Sphingomonas sp
+MICSPHINBM,Sphingobacterium mizutaii
+MICSPHINBS," Sphingobacterium spiritivorum
+"
+MICSPHINYA,Sphingobium yanoikuyae
+MICSPNE,Streptococcus pneumoniae
+MICSPOKOR,Sporosarcina koreensis
+MICSPORXSK," Sporothrix schenckii
+"
+MICSPOSPP,Sporosarcina spp
+MICSPUT,Shewanella putrefaciens
+MICSPYO,Streptococcus pyogenes
+MICSSAP,Staphylococcus saprophyticus
+MICSSON,Shigella sonnei
+MICSTACAPR,Staphylococcus caprae
+MICSTACOND,Staphylococcus condimenti
+MICSTAPARC,Staphylococcus auricularis
+MICSTAPAST,Staphylococcus pasteuri
+MICSTAPBO," Staphylococcus borealis
+"
+MICSTAPCAP,Staphylococcus capitis
+MICSTAPCOH," Staphylococcus cohnii-cohnii
+"
+MICSTAPCOI,Staphylococcus cohnii
+MICSTAPCON,Staphylococcus coagulasa negativo
+MICSTAPCOP,Staphylococcus coagulasa positiva
+MICSTAPCOU,Staphylococcus cohnii-urealitycum
+MICSTAPCRO," Staphylococcus chromogenes
+"
+MICSTAPEPI,Staphylococcus epidermidis
+MICSTAPETR,Staphylococcus petrasii
+MICSTAPHAE,Staphylococcus haemolyticus
+MICSTAPHOH,Staphylococcus hominis hominis
+MICSTAPHOM,Staphylococcus hominis
+MICSTAPINT,Staphylococcus intermedius
+MICSTAPLUG,Staphylococcus lugdunensis
+MICSTAPPET,Staphylococcus pettenkoferi
+MICSTAPPSE,Staphylococcus pseudointermedius
+MICSTAPSAC,Staphylococcus saccharolyticus
+MICSTAPSCH,Staphylococcus schleiferi
+MICSTAPSCI," Staphylococcus sciuri
+"
+MICSTAPSIM,Staphylococcus simulans
+MICSTAPSP,Staphylococcus sp
+MICSTAPWAR,Staphylococcus warneri
+MICSTAPXYL,Staphylococcus xylosus
+MICSTMYSP,Streptomyces sp
+MICSTNTROA,Stenotrophomonas acidaminiphila
+MICSTNTROM,Rothia mucilaginosa
+MICSTNTRON,Stenotrophomonas nitritireducens
+MICSTNTROS,Stenotrophomonas sp.
+MICSTPH,Salmonella typhimurium
+MICSTROSTE,Strongyloides stercoralis
+MICSTRPAHE," Estreptococ Alfa Hemolitic
+"
+MICSTRPANG,Streptococcus anginosus
+MICSTRPCON,Streptococcus constellatus
+MICSTRPCRS,Sterptococcus cristatus
+MICSTRPDYD," Streptococcus dysgalactiae-dysgalactiae
+"
+MICSTRPDYE,Streptococcus dysgalactiae-equisimilis
+MICSTRPDYS,Streptococcus dysgalactiae
+MICSTRPEQI,Streptococcus equinus
+MICSTRPEQU," Streptococcus equi
+"
+MICSTRPGAG," S. gallolyticus ssp gallolyticus
+"
+MICSTRPGAL,Streptococcus gallolyticus
+MICSTRPGAP,S. gallolyticus ssp pasteurianus
+MICSTRPGOR,Streptococcus gordonii
+MICSTRPGRA," Streptococcus A-hemolitico grupo A
+"
+MICSTRPGRC," Streptococcus A-hemolitico Grupo C
+"
+MICSTRPGRF," Streptococcus A-hemolitico Grupo F
+"
+MICSTRPGRG," Streptococcus A-hemolitico Grupo G
+"
+MICSTRPGVI,Streptococcus grupo viridans
+MICSTRPINT,Streptococcus intermedius
+MICSTRPLUT,Streptococcus lutetiensis
+MICSTRPMIT,Streptococcus mitis
+MICSTRPMIY,Streptococcus grupo mitis
+MICSTRPMLY,Streptococcus grupo milleri
+MICSTRPMUT,Streptococcus mutans
+MICSTRPORA,Streptococcus oralis
+MICSTRPPAR,Streptococcus parasanguis
+MICSTRPPEO,Streptococcus peroris
+MICSTRPPSE,Streptococcus pseudopneumoniae
+MICSTRPSAL,Streptococcus salivarius
+MICSTRPSAN,Streptococcus sanguis
+MICSTRPSP,Streptococcus sp
+MICSTRPURI,Streptococcus urinalis
+MICSTRPVES,Streptococcus vestibularis
+MICSTRPZOO," Streptococcus zooepidemicus
+"
+MICSTYP,Salmonella typhi
+MICSYNRAC,Syncephalastrum racemosum
+MICTAENSAG,Taenia saginata
+MICTAENSP,Taenia sp
+MICTPEN,Tunga penetrans
+MICTRCHOHO,Trichomonas hominis
+MICTRCHOVA,Trichomonas vaginalis
+MICTREPPAL," Treponema pallidum
+"
+MICTRICHMT,Trichophyton mentagrophytes
+MICTRICHRU,Trichophyton rubrum
+MICTRICHSO,Trichophyton soudanense
+MICTRICHSP,Trichophyton sp
+MICTRICHTO,Trichophyton tonsurans
+MICTRICHTR," Trichuris trichiura
+"
+MICTRICHVI,Trichophyton violaceum
+MICTRIDERS,Trichoderma sp
+MICTRIN,Trichophyton interdigitale
+MICTRIPOAS,Trichosporon asahii
+MICTRIPOIN,Trichosporon inkin
+MICTRIPOMU," Trichosporon mucoides
+"
+MICTRIPOSP,Trichosporon sp
+MICTROPHWH,Tropheryma whipplei
+MICTRUBER,Trueperella bernardiae
+MICTRYPBRR," Trypanosoma brucei rhodesiense
+"
+MICTRYPBRU," Trypanosoma brucei
+"
+MICTRYPCRU," Trypanosoma cruzi
+"
+MICTURIOTI,Turicella otitidis
+MICUREAPAR,Ureaplasma parvum
+MICUREAPSP,Ureaplasma sp
+MICUREAPUR,Ureaplasma urealyticum
+MICVEB," Virus dEpstein Barr
+"
+MICVEILLAT,Veillonella atypica
+MICVEILLDI,Veillonella dispar
+MICVEILLPA,Veillonella parvula
+MICVEILLSP,Veillonella sp
+MICVERGAL,Verruconis gallopava
+MICVGA,Virus Grip A
+MICVGB,Virus Grip B
+MICVHS1,Virus Herpes Simple 1
+MICVHS2,Virus Herpes Simple 2
+MICVIBRALG,Vibrio alginolyticus
+MICVIBRCHL," Vibrio cholerae
+"
+MICVIBRFLU,Vibrio fluvialis
+MICVIBRPAR," Vibrio parahaemolyticus
+"
+MICVIBRSP,Vibrio sp
+MICVPI2," Virus Parainfluenza 2
+"
+MICVPI3,Virus Parainfluenza 3
+MICVRS,Virus Respiratori Sincitial
+MICWEEKVIR," Weeksella virosa
+"
+MICWEICON," Weissella confusa
+"
+MICWEISVIR,Weissella viridescens
+MICWOHLCHI,Wohlfahrtiimonas chitiniclastica
+MICYERSENT," Yersinia enterocolitica
+"
+MICYERSPES,Yersinia pestis
+MICZIGO," Zigomiceto
+"
+MYCMASS," Mycobacterium massiliense
+"
+NV,No valorable

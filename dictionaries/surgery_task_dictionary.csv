@@ -1,0 +1,21 @@
+task_ref,task_descr
+AA,anestesista ayudante
+AC,tcai (tecnico auxiliar de enfermeria)
+AN,anestesista
+CA,cirujano ayudante
+CI,cirujano
+CTA,coordinador cta (coordinacion de trasplantes)
+EA,enfermera de anestesia
+EB,enfermera de box
+EC,enfermera circulante
+ECTA,extractor cta (coordinacion de trasplantes)
+EI,enfermera instrumentista
+EM,matronas
+EP,enfermera perfusionista
+EP2,segunda enfermera perfusionista
+MCDI,medico radiologo
+MTE,medico especialista
+MTNE,medico tecnico no especialista
+TCDI,tecnico radiologo
+TCTA,tecnico cta (coordinacion de trasplantes)
+TNRL,tecnico neurologia

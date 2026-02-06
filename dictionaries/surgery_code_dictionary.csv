@@ -1,0 +1,2517 @@
+surgery_code,surgery_code_descr
+Q00001,laparoscopia diagnostica | laparoscopia diagnostica | laparoscopia diagnostica
+Q00002,biopsia cerebral endoscopica | biopsia cerebral endoscopica
+Q00003,biopsia cerebral percutania (estereotactica) | biopsia cerebral percutania (estereoatactica)
+Q00004,biopsia cerebral oberta | biopsia cerebral oberta
+Q00005,monitoritzacio de pressio intracranial (pic) <local> | monitoritzacio de pressio intracranial (pic) <local>
+Q00006,monitoritzacio de pressio intracranial (pic) | monitoritzacio de pressio intracranial (pic)
+Q00007,craniotomia descomprensiva | craniotomia descompressiva
+Q00008,cirurgia del talem o del subtalem | cirurgia del talem o del subtalem
+Q00009,cirurgia del globus pal.lid | cirurgia del globus pal.lid
+Q00010,excisio d arees cerebrals epiloptogenes | excisio d arees cerebrals epiloptogenes
+Q00011,excision de tumor cerebral por endoscopia | excisio de tumor cerebral per endoscopia | excisio de tumor cerebral per endoscopia
+Q00012,excision de tumor cerebral | excisio de tumor cerebral
+Q00013,excision de tumor de fosa posterior delcraneo | excisio de tumor de fossa posterior delcrani | excisio de tumor de fossa posterior delcrani
+Q00014,elevacio de fragments de fractura cranial | elevacio de fragments de fractura cranial
+Q00015,derivacion ventriculo-peritoneal | derivacio ventriculo-peritoneal | derivacio ventriculo-peritoneal
+Q00016,derivacio ventricular externa | derivacio ventricular externa
+Q00017,revisio de derivacio ventriculo-peritoneal | revisio de derivacio ventriculo-peritoneal
+Q00018,implantacion dbs trastornos del movimiento | implantacio d electrodes cerebrals al subtalem per parkinson | implantacio dbs trastorns del moviment
+Q00019,procediment endoscopic per a hidrocefalia | procediment endoscopic per a hidrocefalia
+Q00020,laminectomia lumbar | laminectomia lumbar
+Q00021,descompressio de conducte raquidi per tumor | descompressio de conducte raquidi per tumor
+Q00022,laminectomia cervical | laminectomia cervical
+Q00023,test de infusion por hidrocefalia (local) | test d infusio per hidrocefalia <local> | test d infusio per hidrocefalia <local>
+Q00024,neurolisi del trigemin [tecnica de mullan] | neurolisi del trigemin [tecnica de mullan]
+Q00025,exeresis de neurinoma del acustico ( por craniotomia de fosa posterior ) | excisio de neurinoma de l acustic (per craniotomia de fossa posterior) | excisio de neurinoma de l acustic (per craniotomia de fossa posterior)
+Q00026,neurolisi del trigemin (per craniotomiade fossa posterior) | neurolisi del trigemin (per craniotomiade fossa posterior)
+Q00027,alliberament de canal carpiana <local> | alliberament de canal carpiana <local>
+Q00028,alliberament de nervi ciatic popliti extern | alliberament de nervi ciatic popliti extern
+Q00029,alliberament de nervi cubital | alliberament de nervi cubital
+Q00031,simpatectomia toracica bilateral ( por vtc ) | simpatectomia toracica bilateral (per vtc) | simpatectomia toracica bilateral (per vtc)
+Q00032,simpatectomia toracica bilateral (per toracotomia) | simpatectomia toracica bilateral (per toracotomia)
+Q00033,hemitiroidectomia
+Q00034,tiroidectomia total | tiroidectomia total
+Q00035,excision del conducto tiro-glos | excisio de conducte tiro-glos | excisio de conducte tiro-glos
+Q00036,hipofisectomia transesfenoidal | hipofisectomia transesfenoidal | hipofisectomia transesfenoidal
+Q00037,dacriocisto-rinostomia (dcr)
+Q00038,liberamiento de adherencias peritoneales ( laparoscopia ) | alliberament d adherencies peritoneals (per laparoscopia) | alliberament d adherencues peritoneals (laparoscopia)
+Q00039,excisio de si preauricular | excisio de si preauricular
+Q00040,excisio d exostosi de conducte auditiu extern | excisio d exostosi de conducte auditiu extern
+Q00041,excisio de tumor maligne d orella externa | excisio de tumor maligne d orella externa
+Q00042,otoplastia bilateral | otoplastia bilateral | otoplastia bilateral
+Q00043,estapedectomia
+Q00044,reconstruccio de cadena ossicular | reconstruccio de cadena ossicular
+Q00045,miringoplastia ( timpanoplastia tipo i ) | miringoplastia (timpanoplastia tipus i) | miringoplastia (timpanoplastia tipus i)
+Q00046,"timpanoplastia (tipo ii,iii,iv o v) | timpanoplastia (tipus ii, iii, iv o v) | timpanoplastia (tipus ii, iii, iv o v)"
+Q00049,drenaje transtimpanico<local> | drenatge transtimpanic <local> | drenatge transtimpanic <local>
+Q00050,drenatge transtimpanic | drenatge transtimpanic
+Q00051,alliberament d adherencies d orella mitjana | alliberament d adherencies d orella mitjana
+Q00052,mastoidectomia atico-antrostomia | mastoidectomia. atico-antrostomia
+Q00053,excisio de glom timpanic | excisio de glom timpanic
+Q00054,drenatge de sac endolimfatic | drenatge de sac endolimfatic
+Q00055,control d epistaxi per cauteritzacio | control d epistaxi
+Q00056,polipectomia nasal endoscopica | polipectomia nasal endoscopica | polipectomia nasal endoscopica
+Q00057,excision de tumor rino-sinusal (trs) | excisio de tumor rino-sinusal (trs) | excisio de tumor rino-sinusal (trs)
+Q00058,septoplastia | septoplastia
+Q00059,turbinectomia
+Q00060,reduccio (tancada) de fractura nasal | reduccio de fractura nasal
+Q00061,sutura de laceracio nasal | sutura de ferida nasal
+Q00062,rino-septoplastia | rino-septoplastia
+Q00063,"excisio de tumor de si frontal (osteoma, mucocele) | excisio de tumor de si frontal (osteoma, mucocele)"
+Q00064,sinusectomia maxil.lar (caldwell-luc)
+Q00065,antrotomia endoscopia | antrotomia endoscopica
+Q00066,excisio de tumor gingival | excisio de tumor gingival
+Q00067,glosectomia parcial | glossectomia parcial
+Q00068,submaxil.lectomia
+Q00069,parotidectomia | parotidectomia
+Q00070,drenatge d absces cervical | drenatge d absces cervical
+Q00071,implant osteointegrat
+Q00072,uvulo-palatoplastia  (uppp) | uvulo-palatoplastia (uppp)
+Q00073,uvuloplastia amb laser <local> | uvuloplastia amb laser (laup) <local>
+Q00074,drenatge d absces periamigdali | drenatge d absces periamigdali
+Q00075,amigdalectomia | amigdalectomia
+Q00076,adeno-amigdalectomia
+Q00077,adenoidectomia | adenoidectomia
+Q00078,control d hemorragia postadeno-amigdalectomia | control d hemorragia postadeno-amigdalectomia
+Q00079,excision de quiste branquial | excisio de quist branquial | excisio de quist branquial
+Q00080,excisio de diverticle de zencker | excisio de diverticle de zencker
+Q00081,faringectomia parcial
+Q00082,correccio d atresia nasofaringia | correccio d atresia nasofaringia
+Q00083,alliberament d adherencies peritoneals | alliberament d adherencies peritoneals
+Q00084,microcirugia de laringe | microcirurgia de laringe
+Q00085,laringuectomia parcial endoscopica con laser | laringectomia parcial endoscopica amb laser | laringectomia parcial endoscopica amb laser
+Q00086,laringectomia parcial oberta | laringectomia parcial oberta
+Q00087,laringectomia total
+Q00088,medialitzacio de corda vocal | medialitzacio de corda vocal
+Q00089,traqueostomia transitoria | traqueostomia transitoria | traqueostomia transitoria
+Q00090,reparacio de fractura de laringe | reparacio de fractura de laringe
+Q00091,revisio de traqueostomia per hemorragia | revisio de traqueostomia per hemorragia
+Q00092,reseccio d anastomosi traqueal | reseccio d anastomosi traqueal
+Q00093,alliberament d adherencies de laringe | alliberament d adherencies de laringe
+Q00094,broncoscopia rigida + protesi bronquial | broncoscopia rigida + implantacio de protesi bronquial
+Q00095,broncoscopia rigida + protesi bronquial+ biopsia bronquial | broncoscopia rigida + implantacio de protesi bronquial + biopsia bronquial
+Q00096,dilatacio d estenosi de laringe | dilatacio d estenosi de laringe
+Q00097,implantacio de protesi traqueal de montgomery | implantacio de protesi traqueal de montgomery
+Q00098,broncoscopia rigida + fotoreseccio amb laser | broncoscopia rigida + fotoreseccio amb laser
+Q00099,broncoscopia rigida + fotoreseccio amb laser + biopsia bronquial | broncoscopia rigida + fotoreseccio amb laser + biopsia bronquial
+Q00100,excisio de bul.les + abrasio pleurl  (per vtc) | excisio de bul.les + abrasio pleural (per vtc)
+Q00101,excisio de bul.les + abrasio pleural | excisio de bul.les + abrasio pleural
+Q00102,excisio de bul.les d emfisema pulmonar | excisio de bul.les d emfisema pulmonar
+Q00103,excisio de bu.les d efisema pulmonar (per vtc) | excisio de bul.les d emfisema pulmonar (per vtc)
+Q00104,reduccio de volum pulmonar bilateral (per vtc) | reduccio de volum pulmonar bilateral (per vtc)
+Q00105,reduccio de volum pulmonar unilateral (per vtc) | reduccio de volum pulmonar unilateral (per vtc)
+Q00107,reduccio de volum pulmonar bilateral (per toracotomia) | reduccio de volum pulmonar bilateral (per toracotomia)
+Q00108,reduccio de volum pulmonar unilateral (per toracotomia) | reduccio de volum pulmonar unilateral (per toracotomia)
+Q00109,segmentectomia pulmonar unilateral  (per vtc) | segmentectomia pulmonar unilateral (pervtc)
+Q00110,segmentectomia pulmonar atipica | segmentectomia pulmonar atipica
+Q00111,segmentectomia pulmonar unilateral tipica | segmentectomia pulmonar unilateral tipica
+Q00112,segmentectomia pulmonar bilateral (per esternotomia transversa) | segmentectomia pulmonar bilateral (per esternotomia transversa)
+Q00113,segmentectomia pulmonar bilateral (per esternotomia) | segmentectomia pulmonar bilateral (per esternotomia)
+Q00114,segmentectomia pulmonar bilateral (per toracotomia)
+Q00115,bilobectomia pulmonar de lm+lid (assistida per vtc) | bilobectomia pulmonar de lm+lid (assistida per vtc)
+Q00116,bilobectomia pulmonar de lsd+lm (assistida per vtc) | bilobectomia pulmonar de lsd+lm (assistida per vtc)
+Q00117,lobectomia pulmonar (asistida por vtc) | lobectomia pulmonar (assistida per vtc) | lobectomia pulmonar  (assistida per  vtc)
+Q00118,lobectomia pulmonar de lid (assistida per vtc) | lobectomia pulmonar de lid (assistida per vtc)
+Q00119,lobectomia pulmonar de lie (assistida per vtc)
+Q00120,lobectomia pulmonar de lm (assistida per vtc) | lobectomia pulmonar de lm (assistida per vtc)
+Q00121,lobectomia pulmonar de lsd (assistida per  vtc) | lobectomia pulmonar de lsd (assistida per vtc)
+Q00122,lobectomia pulmonar de lsel (assistida per vtc) | lobectomia pulmonar de lse (assistida per vtc)
+Q00123,bilobectomia pulmonar de lm+lid
+Q00124,bilobectomia pulmonar de lsd+lm | bilobectomia pulmonar de lsd+lm
+Q00125,lobectomia pulmonar
+Q00126,lobectomia pulmonar de lid
+Q00127,lobectomia pulmonar de lie
+Q00128,lobectomia pulmonar de | lobectomia pulmonar de lm
+Q00129,lobectomia pulmonar de lsd
+Q00130,lobectomia pulmonar de lse
+Q00131,pneumonectomia dreta
+Q00132,pneumonectomia esquerra
+Q00133,pneumonectomia dreta de totalitzacio pulmonar | pneumonectomia dreta de totalitzacio pulmonar
+Q00134,pneumonectomia esquerra de totalitzaciopulmonar | pneumonectomia esquerra de totalitzaciopulmonar
+Q00135,broncoscopia rigida | broncoscopia rigida
+Q00136,broncoscopia rigida + biopsia bronquial | broncoscopia rigida + biopsia bronquial
+Q00137,biopsia pulmonar (per vtc) | biopsia pulmonar (per vtc)
+Q00138,biopsia pulmonar (per toracotomia) | biopsia pulmonar (per toracotomia)
+Q00139,broncoplastia | broncoplastia
+Q00140,toracotomia aerostatica | toracotomia aerostatica
+Q00141,toracotomia diagnostica | toracotomia diagnostica
+Q00142,toracotomia hemostatica | toracotomia hemostatica
+Q00143,drenatge pleural | drenatge pleural
+Q00144,desbridament d empiema pleural  (per vtc) | desbridament d empiema pleural (per vtc)
+Q00145,toracostomia (finestra toracica) | toracostomia (finestra toracica)
+Q00146,desbridament d empiema pleural | desbridament d empiema pleural
+Q00147,mediastinotomia anterior diagnostica | mediastinotomia anterior diagnostica
+Q00148,toracoscopia diagnostica | toracoscopia diagnostica | toracoscopia diagnostica
+Q00149,mediastinoscopia diagnostica | mediastinoscopia diagnostica
+Q00150,mediastinoscopia per a estadiatge | mediastinoscopia per a estadiatge
+Q00151,biopsia de paret toracica per malformacions | biopsia de paret toracica per malformacions
+Q00152,biopsia de paret toracica per tumor | biopsia de paret toracica per tumor
+Q00153,biopsia pleural (per vtc) <sense intubacio> | biopsia pleural (per vtc) <sense intubacio>
+Q00154,biopsia pleural (per vtc) <intubacio endotraqueal> | biopsia pleural (per vtc) <intubacio endotraqueal>
+Q00155,biopsia pleural (per vtc) <intubacio selectiva> | biopsia pleural (per vtc) <intubacio selectiva>
+Q00156,reseccio de tumor de mediasti  (per vtc) | reseccio de tumor de mediasti (per vtc)
+Q00157,reseccion tumor de mediastino | reseccio de tumor de mediasti | reseccio de tumor de mediasti
+Q00158,reseccio de paret toracica | reseccio de paret toracica
+Q00159,decorticacio pleural | decorticacio pleural
+Q00160,escarificacio pleural (per vtc) | escarificacio pleural (per vtc)
+Q00161,escarificacio pleural | escarificacio pleural
+Q00162,tancament esternal
+Q00163,toracoplastia o toracomioplastia | toracoplastia o toracomioplastia
+Q00164,biopsia pleural i talcatge (per vtc) <sense intubacio> | biopsia pleural i talcatge (per vtc) <sense intubacio>
+Q00165,talcatge pleural (per vtc) <sense intubacio> | talcatge pleural (per vtc) <sense intubacio>
+Q00166,biopsoia pleural i talcatge (per vtc) <iintubacio endotraqueall> | biopsia pleural i talcatge (per vtc) <intubacio endotraqueal>
+Q00167,talcatge pleural (per vtc)<intubacio endotraqueal> | talcatge pleural (per vtc) <intubacio endotraqueal>
+Q00168,biopsia pleural i talcatge (per vtc) <intubacio selectiva> | biopsia pleural i talcatge (per vtc) <intubacio selectiva>
+Q00169,talcatge pelural (per vtc)  <intubacio selectiva> | talcatge pleural (per vtc) <intubacio selectiva>
+Q00170,reseccio cuneiforme d ovari | reseccio cuneiforme d ovari
+Q00171,comissurotomia de valvula mitral (oberta) | comissurotomia de valvula mitral (oberta)
+Q00172,comissurotomia de valvula tricuspide (oberta) | comissurotomia de valvula tricuspide (oberta)
+Q00173,substitucion de valvula aortica | reemplacament de valvula aortica amb autoempelt [ross] | reemplacament de valvula aortica
+Q00174,reemplacament de valvula aortica amb homoempelt | reemplacament de valvula aortica amb homoempelt
+Q00175,reemplacament de valvula aortica amb protesi biologica | reemplacament de valvula aortica amb protesi biologica
+Q00176,reemplacament de valvula aortica + empelt biol d arrel d aorta [bentall] | reemplacament de valvula aortica + empelt biologic d arrel d aorta [bentall]
+Q00177,sustitucion valvula mitral | reemplacament de valvula mitral amb protesi biologica | reemplacament de valvula mitral
+Q00178,reemplacament de la valvula mitral amb protesi mecanica | reemplacament de valvula mitral amb protesi mecanica
+Q00179,reemplacament de valvula aortica + empeit sint d arrel d aorta [bentall] | reemplacament de valvula aortica + empelt sintetic d arrel d aorta [bentall]
+Q00180,reemplacament de valvula pulmonar | reemplacament de valvula pulmonar amb empelt biologic
+Q00181,reemplacament de valvula tricuspide ambhomoempelt | reemplacament de valvula tricuspide ambhomoempelt
+Q00182,reemplacament de valvula tricuspide ambprotesi biologica | reemplacament de valvula tricuspide ambprotesi biologica
+Q00183,reparacio d aneurisma de si de valsalva | reparacio d aneurisma de si de valsalva
+Q00184,tancament de civ amb empelt sintetic | tancament de civ amb empelt sintetic
+Q00185,cierre de cia | tancament de cia
+Q00186,derivacio coronaria | derivacio aorto-coronaria amb arteria radial: dues o mes coronaries
+Q00187,tancament de civ
+Q00188,derivacio aorto-coronaria amb safena: una coronaria | derivacio aorto-coronaria amb safena: una coronaria
+Q00189,derivacio aorto-coronaria amb safena: dues coronaries | derivacio aorto-coronaria amb safena: dues coronaries
+Q00190,derivacio aorto-coronaria amb safena  tres coronaries | derivacio aorto-coronaria amb safena: tres coronaries
+Q00191,derivacio aorto-coronaria amb safena: quatre o mes coronaries | derivacio aorto-coronaria amb safena: quatre o mes coronaries
+Q00192,derivacio mamario-coronaria: una coronaria | derivacio mamario-coronaria: una coronaria
+Q00193,derivacio mamario-coronaria dues coronaries | derivacio mamario-coronaria: dues coronaries
+Q00195,derivacio aorto-coronaria amb arteria radial: una coronaria | derivacio aorto-coronaria amb arteria radial: una coronaria
+Q00196,reparacio de fistula coronaria | reparacio de fistula coronaria
+Q00197,reseccio cuneiforme d ovari (laparoscopia) | reseccio cuneiforme d ovari (per laparoscopia)
+Q00198,pericardiectomia | pericardiotomia | pericardiotomia
+Q00199,pericardiectomia (finestra pericardica) | pericardiectomia (finestra pericardica)
+Q00200,reparacion de aneurisma ventricular | reparacio d aneurisma ventricular | reparacio d aneurisma ventricular
+Q00201,reseccio de tumor cardiac | reseccio de tumor cardiac
+Q00202,reseccio de tumor cardiac [heart-port] | reseccio de tumor cardiac [tecnica de heart-port]
+Q00203,reparacio de ferida cardiaca | reparacio de ferida cardiaca [sense cec]
+Q00204,reparacio de ferida cardiaca [amb cec] | reparacio de ferida cardiaca [amb cec]
+Q00205,reparacio de ruptura de paret ventricular | reparacio de ruptura de paret ventricular
+Q00206,trasplantament de cor
+Q00207,implantacio de sistema d assistencia circulatoria | implantacio de sistema d assistencia circulatoria
+Q00208,revisio de sistema d assistencia circulatoria | revisio de sistema d assistencia circulatoria
+Q00209,extraccio de sistema d assistencia circulatoria | extraccio de sistema d assistencia circulatoria
+Q00210,implantacio d electrode ventricular | implantacio d electrode ventricular <local>
+Q00211,implantacio d electrode auricular i ventricular <local> | implantacio d electrode auricular i ventricular <local>
+Q00212,implantacio d electrode auricular | implantacio d electrode auricular <local>
+Q00213,canvi d electrode epicardic per toracotomia | canvi d electrode epicardic per toracotomia
+Q00214,implantacio d electrode epicardic per toracotomia | implantacio d electrode epicardic per toracotomia
+Q00215,revisio o recol.locacio d electrode de marcapas /dai | revisio o recol.locacio d electrode de marcapas <local>
+Q00216,canvi d electrode de marcapas auricularo ventricular <local> | canvi d electrode auricular o ventricular <local>
+Q00217,retirada d electrode de marcapas/dai | retirada d electrode de marcapas <local>
+Q00218,retirada d electrode de marcapas per infeccio <local> | retirada d electrode de marcapas per infeccio <local>
+Q00219,col.locacio de marcapas temporal <local> | col.locacio de marcapas temporal <local>
+Q00220,revisio de ferida o bossa de marcapas/dai | revisio de ferida o bossa de marcapas <local>
+Q00221,implantacio de marcapas vvi <local> | implantacio de marcapas vvi <local>
+Q00222,implantacio de marcapas vvir <local> | implantacio de marcapas vvir <local>
+Q00223,implantacio de marcapas ddd/vdd <local> | implantacio de marcapas ddd/vdd <local>
+Q00224,canvi de generador de marcapas vvi <local> | canvi de generador de marcapas vvi <local>
+Q00225,canvi de generador de marcapas vvir <local> | canvi de generador de marcapas vvir <local>
+Q00226,canvi de generador de marcapas ddd/vdd <local> | canvi de generador de marcapas ddd/vdd <local>
+Q00227,retirada de generador de marcapas/dai | revisio o retirada de generador de marcapas <local>
+Q00228,implantacio de desfibril.lador automatic (dai) <local> | implantacio de desfibril.lador automatic (dai) <local>
+Q00229,implantacio de desfibril.lador automatic (dai) | implantacio de desfibril.lador automatic (dai)
+Q00230,implantacio d electrode de dai | implantacio d electrode de desfibril.lador automatic (dai) <local>
+Q00231,implant de generador de marcapas/dai | implantacio de generador de desfibril.lador automatic (dai) <local>
+Q00232,canvi d electrode de desfibril.lador automatic (dai) <local> | canvi d electrode de desfibril.lador automatic (dai) <local>
+Q00233,canvi de generador de desfibril.lador automatic (dai) <local> | canvi de generador de desfibril.lador automatic (dai) <local>
+Q00234,canvi de generador de desfibril.lador automatic (dai) | canvi de generador de desfibril.lador automatic (dai)
+Q00235,embolectomia d extremitat superior
+Q00236,embolectomia aorto-iliaca | embolectomia aorto-iliaca
+Q00237,embolectomia pulmonar | embolectomia pulmonar
+Q00239,endarterectomia carotidea | endarterectomia carotidia | endarterectomia carotidia
+Q00240,endarterectomia pulmonar
+Q00241,reparacio d aneurisma de carotide | reparacio d aneurisma de carotide
+Q00242,reparacio d aneurisma d extremitat superior | reparacio d aneurisma d extremitat superior
+Q00243,reparacio d aneurisma d aorta abdominal | reparacio d aneurisma d aorta abdominal
+Q00244,reparacio d aorta ascendent amb homoempelt | reparacio d aorta ascendent amb homoempelt
+Q00245,reparacion aorta ascendente | reparacio d aorta ascendent amb protesi | reparacio d aorta ascendent
+Q00246,reparacio d aorta descendent | reparacio d aorta descendent
+Q00247,reparacio d aorta toraco-abdominal | reparacio d aorta toraco-abdominal
+Q00248,reparacio de l arc aortic | reparacio de l arc aortic
+Q00249,reparacio de troncs supraaortics | reparacio de troncs supraaortics
+Q00250,reparacio d aneurisma d iliaca | reparacio d aneurisma d iliaca
+Q00251,reparacio d aneurisma visceral | reparacio d aneurisma visceral
+Q00252,reparacio d aneurisma de femoral | reparacio d aneurisma de femoral
+Q00253,reparacio d aneurisma de poplitia | reparacio d aneurisma de poplitia
+Q00254,flebectomia d extremitat inferior tipusmuller
+Q00255,fleboesclerosis quirurgica (feq-local) | fleboextraccio de safena interna
+Q00256,lligadura i exquincament de varius d extremitat inferior (anestesia) | lligadura i esquincament de varices d extremitat inferior
+Q00257,reseccion de paquetes varicoso de extremidad inferior | reseccio de paquets varicosos d extremitat inferior | reseccio de paquets varicoso d extremitat inferior
+Q00258,derivacio carotido-subclavia | derivacio carotido-subclavia
+Q00259,derivacio aorto-renal | derivacio aorto-renal
+Q00260,derivacio iliaco-femoral | derivacio iliaco-femoral
+Q00262,derivacio aorto-femoral | derivacio aorto-femoral
+Q00263,derivacio aorto-iliaca | derivacio aorto-iliaca
+Q00264,derivacio aorto-mesenterica | derivacio aorto-mesenterica
+Q00265,derivacio aorto-bifemoral | derivacio aorto-bifemoral
+Q00266,arterio-venostomia per a dialisi (favi)<local> | arterio-venostomia per a dialisi (favi)<local>
+Q00267,arterio-venostomia per a dialisi (favi)al carp <local> | arterio-venostomia per a dialisi (favi)al carp <local>
+Q00268,arterio-venostomia per a dialisi (favi)al colze <local> | arterio-venostomia per a dialisi (favi)al colze <local>
+Q00269,arterio-venostomia per a dialisi (favi)amb anestesia | arterio-venostomia per a dialisi (favi)
+Q00270,arterio-venostomia per a dialisi (favi)al carp | arterio-venostomia per a dialisi (favi)al carp
+Q00271,arterio-venostomia per a dialisi (favi)al colze | arterio-venostomia per a dialisi (favi)al colze
+Q00272,derivacio femoro-distal | derivacio femoro-distal
+Q00273,derivacio femoro-femoral | derivacio femoro-femoral
+Q00274,derivacio femoro-poplitia distal (3a porcio) | derivacio femoro-poplitia distal (3a porcio)
+Q00275,derivacio femoro-poplitia proximal  (1aporcio) | derivacio femoro-poplitia proximal (1a porcio)
+Q00276,derivacio axil.lo-bifemoral | derivacio axil.lo-bifemoral
+Q00277,derivacio axilo-femoral | derivacio axil.lo-femoral
+Q00278,revisio d arterio-venostomia per a dialisi (favi) <local> | revisio d arterio-venostomia per a dialisi (favi) <local>
+Q00279,revisio d arterio-venostomia per a dialisi (favi) | revisio d arterio-venostomia per a dialisi (favi)
+Q00280,tancament d arterio-venostomia per a dialisi (favi) <local> | tancament d arterio-venostomia per a dialisi (favi) <local>
+Q00281,tancament d arterio-venostomia per a dialisi (favi) | tancament d arterio-venostomia per a dialisi (favi)
+Q00282,angioplastia (atp) de femoral o femoro-poplitia | angioplastia transluminal percutania (atp) de femoral
+Q00283,angiopastia ( atp ) de poplitia y troncos distales | angioplastia transluminal percutania (atp) de poplitia | angioplastia (atp) de poplitia i troncsdistals
+Q00284,angioplastia (atp) de subclavia | angioplastia transluminal percutania (atp) de subclavia
+Q00285,angioplastia (atp) de iliaca | angioplastia transluminal percutania (atp) d iliaca | angioplastia (atp) d iliaca
+Q00286,angioplastia (atp) de carotida | angioplastia transluminal percutania (atp) de carotide
+Q00287,profundoplastia | profundoplastia
+Q00288,reparacio arterial de coll | reparacio arterial de coll
+Q00289,reparacio arterial d extremitat inferior | reparacio arterial d extremitat inferior
+Q00290,reparacio arterial d extremitat superior | reparacio arterial d extremitat superior
+Q00291,reparacio arterial d abdomen | reparacio arterial d abdomen
+Q00292,reparacio arterial de torax | reparacio arterial de torax
+Q00293,reparacio de coartacio d aorta | reparacio de coartacio d aorta
+Q00294,reparacio de malformacio vascular cerebral (per craniotomia) | reparacio de malformacio vascular cerebral (per craniotomia)
+Q00295,reparacio d aneurisma d iliaca amb endoprotesi | reparacio d aneurisma d iliaca amb endoprotesi
+Q00296,reparacion de aneurisma de aorta abdominal con endoprotesi | reparacio d aneurisma d aorta abdominalamb endoprotesi | reparacio d aneurisma d aorta abdominalamb endoprotesi
+Q00297,reparacion de aneurisma de aorta toracica con endoprotesis | reparacio d aneurisma d aorta toracica amb endoprotesi | reparacio d aneurisma d aorta toracia amb endoprotesi
+Q00298,excision de ganglio limfatico : cervical | excisio de gangli limfatic cervical | excisio de gangli limfatic: cervical
+Q00299,limfadenectomia radical cervical unilateral
+Q00300,limfadectomia radical cervical bilateral | limfadenectomia  radical cervical bilateral
+Q00301,lligadura de conducte toracic | lligadura de conducte toracic
+Q00302,esofagoscopia | esofagoscopia
+Q00303,dilatacio d esofag | dilatacio d esofag
+Q00304,mandibulectomia parcial (hemimandibulectomia)
+Q00305,recanvi generador dbs per trastorns delmoviment | canvi de generador de marcapas per parkinson <local>
+Q00306,canvi de generador de marcapas per parkinson | canvi de generador de marcapas per parkinson
+Q00307,segundo tiempo implantacion dbs | implantacio de generador de marcapas per parkinson | segon temps implantacio dbs
+Q00308,microdiscectomia lumbar
+Q00309,microdiscectomia dorsal (per toracotomia)
+Q00310,microdiscectomia cervical +artrodesi (via anterior) | microdiscectomia cervical + artrodesi (via anterior)
+Q00311,artrodesis lumbar | artrodesi lumbar | artrodesi lumbar
+Q00312,amputacio de dits de la ma <local> | amputacio de dits de la ma <local>
+Q00313,amputacion dedos de la mano | amputacio de dits de la ma | amputacio de dits de la ma
+Q00314,amputacio de la ma | amputacio de la ma
+Q00315,amputacio de l avantbrac (cubit i radi) | amputacio de l avantbrac (cubit i radi)
+Q00316,amputacio d extremitat superior | amputacio del brac (humer)
+Q00317,amputacio de dits del peu <local> | amputacio de dits del peu <local>
+Q00318,amputacio de dits del peu | amputacio de dits del peu
+Q00319,amputacio transmetarsiana | amputacio transmetatarsiana
+Q00320,amputacio infracondilia de la cama | amputacio infracondilia de la cama
+Q00321,amputacio supracondilia de la cama | amputacio supracondilia de la cama
+Q00324,reparacio plastica de coll amb empelt pediculat de pectoral | reparacio plastica de coll amb empelt pediculat de pectoral
+Q00325,dilatacio de conducte fronto-nasal ( infundibulectomia) | dilatacio de conducte fronto-nasal (infundibulectomia)
+Q00326,extraccio de cos estrany d esofag | extraccio de cos estrany d esofag
+Q00327,extraccio de cos estrany orella | extraccio de cos estrany d orella
+Q00328,extraccio de cos extrany de nas | extraccio de cos estrany de nas
+Q00329,extraccio de cos estrany de laringe | extraccio de cos estrany de laringe
+Q00330,excisio de quist d ovari (laparoscopia) | excisio de quist d ovari (laparoscopia)
+Q00331,excisio de quist d ovari (laparotomia) | excisio de quist d ovari
+Q00332,oforectomia unilateral (laparoscopia) | ooforectomia unilateral (per laparoscopia)
+Q00333,ooforectomia unilateral (laparotomia) | ooforectomia unilateral
+Q00334,annexectomia unilateral (laparoscopia) | annexectomia unilateral (laparoscopia) | annexectomia unilateral (laparoscopia)
+Q00335,annexectomia unilateral (laparotomia) | annexectomia unilateral
+Q00336,ooforectomia bilateral (laparotomia) | ooforectomia bilateral
+Q00337,ooforectomia bilateral (laparoscopia) | ooforectomia bilateral (per laparoscopia)
+Q00338,annexectomia bilateral (laparotomia) | annexectomia bilateral
+Q00339,annexectomia bilateral (laparoscopia) | annexectomia bilateral (laparoscopia)
+Q00340,oclusio tubaria bilateral (laparoscopia)
+Q00341,salpingectomia unilateral | salpingectomia unilateral
+Q00342,salpingectomia unilateral (laparoscopia) | salpingectomia unilateral (laparoscopia)
+Q00343,salpingectomia bilateral | salpingectomia bilateral
+Q00344,salpingectomia bilateral (laparoscopia) | salpingectomia bilateral (laparoscopia)
+Q00345,annexectomia bilateral (vaginal) | annexectomia unilateral amb extirpacio d embaras ectopic
+Q00346,annexectomia unilateral amb extiroacio d embaras ectopic (laparoscopia) | annexectomia unilateral amb extirpacio d embaras ectopic (per laparoscopia)
+Q00347,salpingectomia unilateral amb extirpacio d embaras ectopic | salpingectomia unilateral amb extirpacio d embaras ectopic
+Q00348,salpingectomia unilateral amb extirpacio d embaras ectopic (laparoscopia) | salpingectomia unilateral amb extirpacio d embaras ectopic (per laparoscopia)
+Q00350,plastia tubaria (laparoscopia) | plastia tubaria (per laparoscopia)
+Q00351,histeroscopia diagnostica | histeroscopia diagnostica
+Q00352,seccio de septe uteri (histeroscopia)
+Q00353,ablacio endometrial (histeroscopia) | ablacio endometrial (per histeroscopia)
+Q00354,polipectomia histeroscopia | excisio de polip uteri (histeroscopia)
+Q00355,miomectomia uterina | miomectomia uterina
+Q00356,miomectomia histeroscopia | miomectomia uterina (histeroscopia)
+Q00357,miomectomia uterina  (laparoscopia) | miomectomia uterina (laparoscopia)
+Q00358,histerectomia subtotal (laparotomia) | histerectomia abdominal subtotal
+Q00359,histerectomia total (laparotomia) | histerectomia abd total
+Q00360,histerectomia abd total + annexectomia bilateral | histerectomia abd total + annexectomia bilateral
+Q00361,histerectomia vag (assistida per laparoscopia) | histerectomia vag (assistida per laparoscopia)
+Q00362,histerectomia vag + annexectomia bilateral (assistida per laparoscopia) | histerectomia vag + annexectomia bilateral (assistida per laparoscopia)
+Q00363,histerectomia vaginal | histerectomia vag
+Q00364,histerectomia vag + plasties vaginals anteriors | histerectomia vag + plasties vaginals anteriors
+Q00365,histerectomia vag + plasties vaginals anteriors i posteriors
+Q00366,histerectomia vag + plasties vaginals posteriors
+Q00367,histerectomia abd radical [wertheim-meigs] | histerectomia abdominal radical [wertheim-meigs]
+Q00368,histerectomia vag.  radical [schauta] | histerectomia vaginal radical [schauta]
+Q00369,curetatge uteri despres de part o avortament | curetatge uteri despres de part o avortament
+Q00370,curetatge uteri per metrorragies | curetatge uteri per metrorragies
+Q00371,plasties vaginals anteriors i posteriors | plasties vaginals anteriors i posteriors
+Q00372,plasties vaginals anteriors | plasties vaginals anteriors
+Q00373,plasties vaginals posteriors
+Q00374,construccio de neovagina | construccio de neovagina
+Q00375,fixacio vaginal [richter] | fixacio vaginal (richter)
+Q00376,suspensio vaginal abdominal | suspensio vaginal abdominal
+Q00377,reparacio para-vaginal (laparoscopia) | suspensio vaginal abdominal (per laparoscopia)
+Q00378,colpo-perineoplastia | colpo-perineoplastia per a correccio d esquincada perineal
+Q00379,reparacio d enterocele vaginal | reparacio d enterocele vaginal
+Q00380,drenatge de la glandula de bartholin | drenatge de glandula de bartholin
+Q00381,marsupialitzacio de quist de glandula de bartholin | marsupialitzacio de quist de glandula de bartholin
+Q00382,escisio de quist de glandula de bartholin | excisio de quist de glandula de bartholin
+Q00383,biopsia de mama
+Q00384,biopsia de mama dirigida (marcatge amb aguelles) | biopsia de mama dirigida (marcatge amb agulles)
+Q00385,segmentectomia de mama | segmentectomia de mama
+Q00386,tumerectomia de mama | tumorectomia de mama | tumorectomia de mama
+Q00387,tumorectomia de mama <local> | tumorectomia de mama <local>
+Q00388,tumorectomia de mama + limfadenectomia axil.lar | tumorectomia de mama + limfadenectomia axil.lar
+Q00389,tumerectomia de mama  + excisio de gangli centinella | tumorectomia de mama + excisio de gangli centinella
+Q00390,quadrantectomia de mama
+Q00391,mastectomia simple unilateral
+Q00392,mastectomia simple bilateral
+Q00393,mastectomia radical unilateral modificada (madden) | mastectomia radical unilateral modificada [madden]
+Q00395,mastectomia radical bilateral modificada [madden] | mastectomia radical bilateral modificada [madden]
+Q00397,trombectomia de vena cava inferior | trombectomia de vena cava inferior
+Q00399,descens de vena renal esquerra | descens de vena renal esquerra
+Q00400,derivacio espleno-renal per hipertensiovasculorenal | derivacio espleno-renal per hipertensiovasculorenal
+Q00401,plastia arterial (amb empelt congelat) en ronyo trasplantat | plastia arterial (amb empelt congelat) en ronyo trasplantat
+Q00402,reanastomosi vascular en ronyo trasplantat | reanastomosi vascular en ronyo trasplantat
+Q00403,marsupialitzacio de limfocele posttrasplantament renal  (laparoscopia) | marsupialitzacio de limfocele posttrasplantament renal (per laparoscopia)
+Q00404,marsupialitzacio de limfocele posttrasplantament renal | marsupialitzacio de limfocele posttrasplantament renal
+Q00405,drenatge d absces renal | drenatge d absces renal
+Q00406,drenatge d absces renal (percutani) | drenatge d absces renal (percutani)
+Q00407,drenatge d absces renal (percutani) <local> | drenatge d absces renal (percutani) <local>
+Q00408,nefrostomia bilateral | nefrostomia bilateral
+Q00409,nefrostomia unilateral
+Q00410,nefrostomia ecodirigida (percutania) <local> | nefrostomia ecodirigida (percutania) <local>
+Q00411,nefrostomia ecodirigida (percutania) enronyo trasplantat <local> | nefrostomia ecodirigida (percutania) enronyo trasplantat <local>
+Q00412,drenatge perirenal (percutani) posttrasplantament renal <local> | drenatge perirenal (percutani) posttrasplantament renal <local>
+Q00413,pielolitotomia
+Q00414,biopsia renal (percutania) | biopsia renal (percutania)
+Q00415,biopsia renal (percutania) <local> | biopsia renal (percutania) <local>
+Q00418,marsupialitzacio de quist renal | marsupialitzacio de quist renal
+Q00419,excisio de tumor de pelvis renal (uretero-renoscopia) | excisio de tumor de pelvis renal (per uretero-renoscopia)
+Q00420,nefrectomia parcial
+Q00421,nefrectomia + ureterectomia parcial ambuna incisio | nefrectomia + ureterectomia parcial ambuna incisio
+Q00422,nefrectomia de donante vivo (laparoscopia) | nefrectomia de donant viu (per laparoscopia) | nefrectomia de donant viu (laparoscopia)
+Q00423,nefrectomia de donant viu (per lumbotomia) | nefrectomia de donant viu (per lumbotomia)
+Q00424,nefrectomia extracapsular | nefrectomia extracapsular
+Q00425,nefretectomia radical | nefrectomia radical
+Q00426,nefrectomia radical (laparoscopia) | nefrectomia radical (per laparoscopia) | nefrectomia radical (laparoscopia)
+Q00427,nefrectomia subcapsular | nefrectomia subcapsular
+Q00428,nefro-ureterectomia radical + reseccio de meat ureteral (stripping) | nefro-ureterectomia radical + reseccio de meat ureteral (stripping)
+Q00429,nefro-ureterectomia radical amb dues incisions | nefro-ureterectomia radical amb dues incisions
+Q00430,nefrectomia de ronyo unic | nefrectomia de ronyo unic
+Q00432,trasplantectomia renal subcapsular | trasplantectomia renal subcapsular
+Q00433,nefrectomia bilateral | nefrectomia bilateral
+Q00434,autotrasplantament renal | autotrasplantament renal
+Q00435,tx renal cadaver obert | trasplantament renal heterotopic de donant cadaver
+Q00436,tx renal donant viu obert | trasplantament renal heterotopic de donant viu
+Q00437,tx renal cadaver ortotopic obert | trasplantament renal ortotopic de donant cadaver
+Q00438,tx renal donant viu ortotopic obert | trasplantament renal ortotopic de donant viu
+Q00439,revisio quirurgica i sutura de ronyo trasplantat | revisio quirurgica i sutura de ronyo trasplantat
+Q00442,anastomosi pielo-ureteral (uretero-pielostomia) | anastomosi pielo-ureteral
+Q00444,pieloplastia | pieloplastia
+Q00445,"""reparacio de ruptura en ronyo trasplantat [tecnica de """"corsetaje""""] | """"reparacio de ruptura en ronyo trasplantat [tecnica de """"""""corsetaje""""""""]"""""""
+Q00446,extraccio de calcul uretral  (uretero-renoscopia) | extraccio de calcul ureteral (per uretero-renoscopia)
+Q00447,reparacio de fistula d ureter | reparacio de fistula d ureter
+Q00448,ureterolitotomia | ureterolitotomia | ureterolitotomia
+Q00449,urs semirigida | uretero-renoscopia
+Q00450,excisio de tumor ureteral (uretero-renoscopia) | excisio de tumor ureteral (per uretero-renoscopia)
+Q00451,excisio d ureterocele | excisio d ureterocele
+Q00452,derivacio urinaria heterotopica no continent [bricker] | derivacio urinaria heterotopica no continent [bricker]
+Q00453,derivacio urinaria ortotopica continent(neobufeta ileal padovana) | derivacio urinaria ortotopica continent(neobufeta ileal padovana)
+Q00455,anastomosi uretero-vesical | anastomosi uretero-vesical
+Q00456,anastomosi uretero-ureteral | anastomosi uretero-ureteral
+Q00457,reanastomosi uretero-vesical posttrasplantament renal | reanastomosi uretero-vesical posttrasplantament renal
+Q00458,cistostomia suprapubica | cistostomia suprapubica
+Q00459,cistolitotomia | cistolitotomia
+Q00460,cistoscopia | cistoscopia
+Q00461,citoscopia  <local> | cistoscopia <local>
+Q00462,biospsia vesical multiple (por cistoscopia) | biopsia vesical multiple (per cistoscopia) | biopsia vesical multiple (per citoscopia)
+Q00463,reseccio transuretral (rtu) de bufeta | reseccio transuretral (rtu) de bufeta
+Q00464,cistectomia parcial
+Q00465,cistectomia parcial + reimplantacio ureteral | cistectomia parcial + reimplantacio ureteral
+Q00466,cistectomia radical
+Q00467,cisto-prostato-vesiculectomia radical | cisto-prostato-vesiculectomia radical
+Q00468,exenteracio pelviana a l home | exenteracio pelviana a l home
+Q00469,cistorrafia posttrasplantament renal | cistorrafia posttrasplantament renal
+Q00470,reparacio de fistula vesico-rectal | reparacio de fistula vesico-rectal
+Q00471,reparacio de fistula vesico-uterina | reparacio de fistula vesico-uterina
+Q00472,reparacio de fistula vesico-vaginal | reparacio de fistula vesico-vaginal
+Q00473,ampliacio vesical | ampliacio vesical
+Q00474,cervicotomia vesical
+Q00475,uretrotomia interna (sachse) | uretrotomia interna [sachse]
+Q00476,biopsia uretral | biopsia uretral
+Q00477,excisio de caruncula uretral <local> | excisio de caruncula uretral <local>
+Q00478,excisio de fistula uretral | excisio de fistula uretral
+Q00479,anastomosi uretral | anastomosi uretral
+Q00480,reparacio d hipospadies | reparacio d hipospadies
+Q00481,construccio de meat urinari perineal | construccio de meat urinari perineal
+Q00482,meatoplastia uretral | meatoplastia uretral
+Q00483,uretroplastia con injerto | uretroplastia amb empelt | uretroplastia amb empelt
+Q00484,uretroplastia amb empelt pediculat | uretroplastia amb empelt pediculat
+Q00485,uretroplastia amb teixit heteroleg | uretroplastia amb teixit heteroleg
+Q00486,uretroplastia termino-terminal | uretroplastia termino-terminal
+Q00487,meatotomia uretral
+Q00488,uretrolisi per via vaginal
+Q00489,uretrolisi suprapubica | uretrolisi suprapubica
+Q00490,dilatacion uretral | dilatacio uretral | dilatacio uretral
+Q00491,ureterolisi | ureterolisi
+Q00492,implantacio d esfinter uretral artificial a la dona | implantacio d esfinter uretral artificial a la dona
+Q00493,implantacio d esfinter uretral artificial a l home | implantacio d esfinter uretral artificial a l home
+Q00494,canvi de cateter ureteral (per citoscopia) | canvi de cateter ureteral (per cistoscopia)
+Q00495,canvi de cateter ureteral de doble j (per citoscopia) | canvi de cateter ureteral de doble j (per cistoscopia)
+Q00496,cateterisme uretral (per citoscopia) | cateterisme ureteral (per cistoscopia)
+Q00497,cateterisme ureteral (per cistoscopia) en ronyo trasplantat | cateterisme ureteral (per cistoscopia) en ronyo trasplantat
+Q00498,cateterisme uretral amb doble j (per citoscopia) | cateterisme ureteral amb doble j (per cistoscopia)
+Q00499,drenatge d absces prostatic | drenatge d absces prostatic
+Q00500,drenatge d absces prostatic <local> | drenatge d absces prostatic <local>
+Q00501,biopsia prostatica (percutania) | biopsia prostatica (percutania)
+Q00502,biopsia prostatica (percutania) <local> | biopsia prostatica (percutania) <local>
+Q00503,reseccion prostatica transuretral (rtup) | reseccio prostatica transuretral (rtup) | reseccio prostatica transuretral (rtup)
+Q00504,prostatectomia radical (laparoscopica) | prostatectomia radical (per laparoscopia) | prostatectomia radical (laparoscopia)
+Q00505,prostatectomia radical perineal
+Q00506,prostatectomia radical retropubica
+Q00508,miocapsulotomia prostatica | miocapsulotomia prostatica
+Q00509,escrototomia diagnostica | escrototomia diagnostica
+Q00510,eversio de tunica vaginal | eversio de tunica vaginal
+Q00511,drenatge d absces testicular | drenatge d absces testicular
+Q00512,drenatge d absces testicular <local> | drenatge d absces testicular <local>
+Q00513,biopsia testicular (percutania) | biopsia testicular (percutania)
+Q00514,biopsia testicular (percutania) <local> | biopsia testicular (percutania) <local>
+Q00515,excisio d apendixs testiculars | excisio d apendixs testiculars
+Q00516,orquiectomia escrotal
+Q00517,orquiectomia inguinal | orquiectomia inguinal
+Q00518,orquiectomia escrotal bilateral | orquiectomia escrotal bilateral
+Q00519,orquiectomia inguinal bilateral
+Q00520,orquio-funiculolisi + orquiopexia | orquio-funiculolisi + orquiopexia
+Q00521,orquiopexia | orquiopexia
+Q00522,sutura de laceracio testicular per traumatisme | sutura de laceracio testicular per traumatisme
+Q00523,implantacio de protesi testicular | implantacio de protesi testicular
+Q00524,espermatocelectomia | espermatocelectomia
+Q00525,excisio de quist d epididim | excisio de quist d epididim
+Q00526,excisio de quist de cordo | excisio de quist de cordo
+Q00527,reduccio de torsio testicular | reduccio de torsio testicular
+Q00528,vaso-vasostomia | vaso-vasostomia
+Q00529,vasectomia | vasectomia | vasectomia
+Q00530,vasectomia <local> | vasectomia <local>
+Q00531,vaso-epididimostomia | vaso-epididimostomia
+Q00532,circumcision <local> | circumcisio <local> | circumcisio <local>
+Q00534,fal.lectomia parcial
+Q00535,fal.lectomia total | fal.lectomia total
+Q00536,corporoplastia de penis | corporoplastia de penis
+Q00537,implantacio de protesi semirigida de penisi | implantacio de protesi semirigida de penis
+Q00538,implantacio de protesi inflable de penis | implantacio de protesi inflable de penis
+Q00539,exenteracio pelviana a la dona | exenteracio pelviana a la dona
+Q00540,desbridament perineal per gangrena de fournier | desbridament perineal per gangrena de fournier
+Q00541,plastia de reconstruccio perineal | plastia de reconstruccio perineal
+Q00543,extraccio de cateter ureteral (per cistoscopia) | extraccio de cateter ureteral (per cistoscopia)
+Q00544,extraccio de cateter ureteral (per cistoscopia) <local> | extraccio de cateter ureteral (per cistoscopia) <local>
+Q00545,urs flexible/rirs | litotripsia de litiasi ureteral (per uretero-renoscopia)
+Q00546,litotripsia de litiasi vesical amb rivolith | litotripsia de litiasi vesical amb rivolith
+Q00547,aspiracio de moll d os per a trasplantament | aspiracio de moll d os per a trasplantament
+Q00548,artroscopia d espatlla <local> | artroscopia d espatlla <local>
+Q00549,artroscopia de colze <local> | artroscopia de colze <local>
+Q00550,artroscopia de canell <local> | artroscopia de canell <local>
+Q00551,artroscopia de genoll <local> | artroscopia de genoll <local>
+Q00552,artroscopia de turmell <local> | artroscopia de turmell <local>
+Q00553,implantacio d agulla d iridi | implantacio d agulla d iridi
+Q00554,implantacio d agulla d iridi <local> | implantacio d agulla d iridi <local>
+Q00556,implantacio d agulla d iridi per tumor de mama <local> | implantacio d agulla d iridi per tumor de mama <local>
+Q00558,implantacio de cilindres vaginasls (cesi) | implantacio de cilindres vaginals (cesi)
+Q00559,implantacio de cilindres vaginals (cesi) <local> | implantacio de cilindres vaginals (cesi) <local>
+Q00560,implantacio de colpostats (cesi) | implantacio de colpostats (cesi)
+Q00561,implantacio de colpostats (cesi)  <local> | implantacio de colpostats (cesi) <local>
+Q00562,implantacio de motlles vaginals (iridi) | implantacio de motlles vaginals (iridi)
+Q00563,implantacio de motlles vaginals (iridi)<local> | implantacio de motlles vaginals (iridi)<local>
+Q00564,reemplacament de protesi de v aortica amb autoempelt [ross] | reemplacament de protesi valvular aortica amb autoempelt [ross]
+Q00565,reemplacament de protesi de v aortica amb homoempelt | reemplacament de protesi valvular aortica amb homoempelt
+Q00566,reemplacament de protesi de v aortica amb protesi biologica | reemplacament de protesi valvular aortica amb protesi biologica
+Q00567,reemplacament de protesi de v. aortica amb protesi mecanica | reemplacament de protesi valvular aortica amb protesi mecanica
+Q00568,reemplacament de protesi de v mitral amb protesi biologica | reemplacament de protesi valvular mitral amb protesi biologica
+Q00569,reemplacament de protesi de v mitral amb protesi mecanica | reemplacament de protesi valvular mitral amb protesi mecanica
+Q00570,reemplacament de protesi de v pulmonar amb protesi biologica | reemplacament de protesi valvular pulmonar amb protesi biologica
+Q00571,"reemplaca,ent de protesi de v pulmonar amb protesi mecanica | reemplacament de protesi valvular pulmonar amb protesi mecanica"
+Q00572,reemplacament de protesi v pulmonar ambteixit biologic | reemplacament de protesi valvular pulmonar amb teixit biologic
+Q00573,reemplacament de protesi de v tricuspide amb homoempelt | reemplacament de protesi valvular tricuspide amb homoempelt
+Q00574,reemplacament de protesi de v tricuspide amb protesi biologica | reemplacament de protesi valvular tricuspide amb protesi biologica amb tecnica h
+Q00575,reemplacament de protesi de v tricuspide amb protesi mecanica | reemplacament de protesi valvular tricuspide amb protesi mecanica
+Q00576,reemplacament de valvula aortica amb protesi mecanica | reemplacament de valvula aortica amb protesi mecanica
+Q00577,reemplacament de valvula pulmonar amb protesi biologica | reemplacament de valvula pulmonar amb protesi biologica
+Q00578,reemplacament de valvula pulmonar amb protesi mecanica | reemplacament de valvula pulmonar amb protesi mecanica
+Q00579,reemplacament de valvula tricuspide | reemplacament de valvula tricuspide ambprotesi mecanica
+Q00580,reparacion de valvula aortica | reparacio de valvula aortica | reparacio de valvula aortica
+Q00581,reparacio de valvula aortica i d aorta ascendent | reparacio de valvula aortica i d aorta ascendent [david]
+Q00582,reparacion de valvula mitral | reparacio de valvula mitral | reparacio de valvula mitral
+Q00583,reparacio de valvula pulmonar | reparacio de valvula pulmonar
+Q00584,reparacio de valvula tricuspide amb anell protetic | reparacio de valvula tricuspide amb anell protetic
+Q00585,reparacio de valvula tricuspide | reparacio de valvula tricuspide sense anell protetic
+Q00586,descompressio de nervi orbitari | descompressio de nervi orbitari
+Q00587,paratiroidectomia subtotal | paratiroidectomia subtotal
+Q00588,suprarenalectomia unilateral
+Q00589,suprarenalectomia unilateral (laparoscopia) | suprarenalectomia unilateral (per laparoscopia)
+Q00590,suprarenalectomia bilateral | suprarenalectomia bilateral
+Q00591,suprarenalectomia bilateral (laparoscopia) | suprarenalectomia bilateral (per laparoscopia)
+Q00592,hipofisectomia per craniotomia | hipofisectomia per craniotomia
+Q00593,lligadura d arteria carotide externa | lligadura d arteria carotide externa
+Q00594,endoscopia nasal (rinoscopia) | endoscopia nasal
+Q00595,faringoscopia | faringoscopia
+Q00596,excisio de diverticle de zencker (per endoscopia) | excisio de diverticle de zencker (per endoscopia)
+Q00597,excisio d angiofibroma de cavum | excisio d angiofibroma de cavum
+Q00598,excisio de tumor parafaringi | excisio de tumor parafaringi
+Q00599,laringoscopia + biopsia laringea | laringoscopia + biopsia laringia
+Q00600,derivacio espleno-renal anterior | derivacio espleno-renal anterior
+Q00601,derivacio espleno-renal retroperitoneal | derivacio espleno-renal retroperitoneal
+Q00602,derivacio mesenterico-caval | derivacio mesenterico-caval
+Q00603,derivacio porto-caval | derivacio porto-caval
+Q00604,revisio d anastomosi vascular en fetge trasplantat | revisio d anastomosi vascular en fetge trasplantat
+Q00605,perfusio d extremitat inferior amb agent antineoplastic | perfusio d extremitat inferior amb agent antineoplastic
+Q00606,excisio de gangli limfatic axil.lar | excisio de gangli limfatic axil.lar
+Q00607,excisio de gangli centinella axil.lar | excisio de gangli centinella axil.lar
+Q00608,excisio de gangli limfatic inguinal | excisio de gangli limfatic inguinal
+Q00609,excision de ganglio centinela | excisio de gangli centinella | excisio de gangli centinella
+Q00610,limfadenectomia radical ilio-obturatriu | limfadenectomia radical ilio-obturatriu
+Q00611,limfadenectomia radical ilio-inguinal | limfadenectomia radical ilio-inguinal
+Q00612,limfadenectomia radical inguinal | limfadenectomia radical inguinal
+Q00613,esplenectomia
+Q00614,esplenectomia (laparoscopia) | esplenectomia (per laparoscopia)
+Q00615,esofagectomia total
+Q00616,esofagectomia total (laparoscopia) | esofagectomia total (per laparoscopia) | esofagectomia total (laparoscopia)
+Q00617,gastrectomia subtotal
+Q00618,gastrectomia subtotal (laparoscopia) | gastrectomia subtotal (per laparoscopia)
+Q00619,gastrectomia total
+Q00620,gastrectomia total (laparoscopia) | gastrectomia total (per laparoscopia) | gastrectomia total (laparoscopia)
+Q00621,sutura d ulcera gastrica | sutura d ulcera gastrica
+Q00622,fundoplicatura (nissen) | fundoplicatura [nissen]
+Q00623,fundoplicatura [nissen] (laparoscopia) | fundoplicatura [nissen] (per laparoscopia)
+Q00624,reseccio parcial d intesti prim | reseccio parcial d intesti prim
+Q00625,reseccio parcial d intesti prim (laparoscopia) | reseccio parcial d intesti prim (per laparoscopia)
+Q00626,reseccio ileo-cecal | reseccio ileo-cecal
+Q00627,reseccio ileo-cecal (laparoscopia) | reseccio ileo-cecal (per laparoscopia)
+Q00628,hemicolectomia dreta
+Q00629,hemicolectomia dreta (laparoscopia) | hemicolectomia dreta (per laparoscopia) | hemicolectomia dreta (laparoscopia)
+Q00630,colectomia transversa | colectomia transversa
+Q00631,colectomia transversa (laparoscopia) | colectomia transversa (per laparoscopia)
+Q00632,hemicolectomia esquerra
+Q00633,hemicolectomia esquerra (laparoscopia) | hemicolectomia esquerra (per laparoscopia)
+Q00634,hemicolectomia esquerra + colostomia [hartmannh] | hemicolectomia esquerra + colostomia [hartmann]
+Q00635,hemicolectomia esquerra + colostomia [hartmann] (laparoscopia) | hemicolectomia esquerra + colostomia [hartmann] (per laparoscopia)
+Q00636,sigmoidectomia | sigmoidectomia
+Q00637,sigmoidectomia (laparoscopia) | sigmoidectomia (per laparoscopia) | sigmoidectomia (laparoscopia)
+Q00638,colectomia abdominal total
+Q00639,colectomia abdominal total  (laparoscopia) | colectomia abdominal total (per laparoscopia)
+Q00640,apendicectomia  (laparoscopia) | apendicectomia (per laparoscopia)
+Q00641,apendicectomia | apendicectomia
+Q00642,procto.colectomia total + reservorio ileal en j | procto-colectomia total + reservori ileal en j
+Q00643,procto-colectomia total + reservorio ileal en j (laparoscopia) | procto-colectomia total + reservori ileal en j (per laparoscopia) | procto-colectomia total + reservori ileal en j (laparoscopia)
+Q00644,reseccio abdomino-perineal de recte [miles] | reseccio abdomino-perineal de recte [miles]
+Q00645,reseccio abdomino-perineal de recte (miles) (laparoscopia) | reseccio abdomino-perineal de recte [miles] (per laparoscopia)
+Q00646,reseccion anterior alta de recto | reseccio anterior alta de recte | reseccio anterior alta de recte
+Q00647,reseccio anterior alta de recte (laparoscopia) | reseccio anterior alta de recte (per laparoscopia)
+Q00648,reseccio anterior baixa de recte + excisio total de mesorecte | reseccio anterior baixa de recte + excisio total de mesorecte
+Q00649,reseccio anterior baixa de recte + excisio total de mesorecte (laparoscopia) | reseccio anterior baixa de recte + excisio total de mesorecte (per laparoscopia)
+Q00650,drenatge d absces perianal | drenatge d absces perianal
+Q00651,fistulectomia anal interna
+Q00652,hemorroidectomia
+Q00653,esfinterotomia anal | esfinterotomia anal
+Q00654,hepatectomia ampliada
+Q00655,hepatectomia de donant viu
+Q00656,reseccio segmentaria de fetge | reseccio segmentaria de fetge
+Q00657,reseccio segmentaria de fetge (laparoscopia) | reseccio segmentaria de fetge (per laparoscopia)
+Q00658,excisio de quist hidatidic hepatic | excisio de quist hidatidic hepatic
+Q00659,hepatectomia reglada
+Q00660,trasplantament de fetge de donant cadaver | trasplantament de fetge
+Q00661,reparacio de laceracio hepatica | reparacio de laceracio hepatica
+Q00662,colecistectomia
+Q00663,colecistectomia (laparoscopia) | colecistectomia (per laparoscopia) | colecistectomia  (laparoscopia)
+Q00664,derivacio bilio-digestiva | derivacio bilio-digestiva
+Q00665,revisio de derivacio bilio-digestiva | revisio de derivacio bilio-digestiva
+Q00666,reparacion de hernia inguinal unilateral | reparacio d hernia inguinal unilateral | reparacio d hernia inguinal unilateral
+Q00667,reparacion de hernia inguinal unilateral con malla | reparacio d hernia inguinal unilateral amb empelt | reparacio d hernia inguinal unilateral amb malla
+Q00668,reparacio d hernia inguinal bilateral | reparacio d hernia inguinal bilateral
+Q00669,reparacio d hernia inguinal bilateral amb malla | reparacio d hernia inguinal bilateral amb empelt
+Q00670,reparacio d hernia crural unilateral amb malla | reparacio d hernia crural unilateral amb empelt
+Q00671,reparacio d hernia crural unilateral | reparacio d hernia crural unilateral
+Q00672,reparacio d hernia crural bilateral ambmalla | reparacio d hernia crural bilateral ambempelt
+Q00673,reparacio d hernia crural bilateral | reparacio d hernia crural bilateral
+Q00674,reparacio d hernia umbilical amb malla | reparacio d hernia umbilical amb empelt
+Q00675,reparacio d hernia umbilical | reparacio d hernia umbilical
+Q00676,reparacio d eventracio | reparacio d eventracio
+Q00677,reparacio d hernia de spieghel | reparacio d hernia de spieghel
+Q00678,reparacion de hernia epigastrica | reparacio d hernia epigastrica | reparacio d hernia epigastrica
+Q00679,reparacion de hernia con malla | reparacio d eventracio amb empelt | reparacio d eventracio amb malla
+Q00680,laparotomia diagnostica | laparotomia diagnostica | laparotomia diagnostica
+Q00681,drenatge d absces subfrenic | drenatge d absces subfrenic
+Q00682,drenatge d hematoma intraperitoneal | drenatge d hematoma intraperitoneal
+Q00683,excisio de si pilonidal | excisio de si pilonidal
+Q00684,desbridament cervical
+Q00685,excisio de melanoma de cap i coll | excisio de melanoma de cap i coll
+Q00686,excisio de melanoma de tronc | excisio de melanoma de tronc
+Q00687,excisio de melanoma d extremitat inferior | excisio de melanoma d extremitat inferior
+Q00688,excisio de melanoma d extremitat superior | excisio de melanoma d extremitat superior
+Q00689,reparacio de meningocele nasal | reparacio de meningocele nasal
+Q00690,excisio de lesio de parpella | excisio de lesio de parpella
+Q00691,excisio de lesio de parpella <local> | excisio de lesio de parpella <local>
+Q00692,excisio de calazi <local> | excisio de calazi <local>
+Q00693,reparacio de ptosi palpebral | reparacio de ptosi palpebral
+Q00694,reparacio de ptosi palpebral <local> | reparacio de ptosi palpebral <local>
+Q00695,reparacio d ectropi  <local> | reparacio d ectropi <local>
+Q00696,reparacio d entropi <local> | reparacio d entropi <local>
+Q00697,plastia palpebral <local> | plastia palpebral <local>
+Q00698,depilacio de parpella <local> | depilacio de parpella <local>
+Q00699,sondatge lacrimal <local> | sondatge lacrimal <local>
+Q00700,canaliculostomia lacrimal
+Q00701,dacriocistectomia
+Q00703,excisio de lesio de conjuntiva <local> | excisio de lesio de conjuntiva <local>
+Q00704,implant ocular de membrana amniotica | implant ocular de membrana amniotica
+Q00705,plastia conjuntival <local> | plastia conjuntival <local>
+Q00706,excisio de pterigi <local> | excisio de pterigi <local>
+Q00707,sutura de laceracio corneal | sutura de laceracio corneal
+Q00708,reparacio de dehiscencia corneal | reparacio de dehiscencia corneal
+Q00709,trasplantament corneal
+Q00710,trabeculectomia | trabeculectomia
+Q00711,ciclocrioterapia | ciclocrioterapia
+Q00712,implant de valvula per glaucoma | implant de valvula per glaucoma
+Q00713,sutura de laceracio d esclerotica | sutura de laceracio d esclerotica
+Q00714,facoemulsificacio de cataracta | facoemulsificacio de cataracta
+Q00715,facoemulsificacion de catarata + lio | facoemulsificacio de cataracta + implant de lio | facoemulsificacio de catarata + lio
+Q00716,lensectomial | lensectomia
+Q00717,extraccio extracapsular de catarata | extraccio extracapsular de cataracta
+Q00718,extraccio extracapsular de catarata + lio | extraccio extracapsular de cataracta + implant de lio
+Q00719,implant secundari de lio | implant secundari de lio
+Q00720,extraccio de lio | extraccio de lio
+Q00721,crioterapia de la retina
+Q00722,fotocoagulacio de la retina amb laser | fotocoagulacio de la retina amb laser
+Q00723,grunziment escleral amb implant | frunziment escleral amb implant
+Q00724,extraccio d implant escleral | extraccio d implant escleral
+Q00725,vitrectomia mecanica anterior | vitrectomia mecanica anterior
+Q00726,vitrectomia mecanica via pars plana (vpp) | vitrectomia mecanica via pars plana (vpp)
+Q00727,cirurgia de l estrabisme
+Q00728,evisceracio de globus ocular | evisceracio de globus ocular
+Q00729,enucleacio de globus ocular | enucleacio de globus ocular
+Q00730,extraccio de protesi ocular | extraccio de protesi ocular
+Q00731,reparacio de ruptura de globus ocular | reparacio de ruptura de globus ocular
+Q00732,descompressio anterior en fractures vertebrals | descompressio anterior en fractures vertebrals
+Q00733,descompressio de canal medul.lar en mielopatia cervicoartrotica | descompressio de canal medul.lar en mielopatia cervicoartrotica
+Q00734,descomprensio posterior en fractures vertebrals | descompressio posterior en fractures vertebrals
+Q00735,foraminotomia
+Q00736,rizolisis<local> | rizolisi | rizolisi <local>
+Q00737,osteosintesi d l odontoide | osteosintesi de l odontoide
+Q00738,osteosintesi del raquis cervical inferior en fractures | osteosintesi del raquis cervical inferior en fractures
+Q00740,empelt de duramater | empelt de duramater
+Q00741,reparacio de duramater | reparacio de duramater
+Q00742,injeccio epidural o intradural peroperatoria de corticoides | injeccio epidural o intradural peroperatoria de corticoides
+Q00743,laminoplastia cervical | laminoplastia cervical
+Q00744,protesi de disc intervertebral cervical | protesi de disc intervertebral cervical
+Q00745,protesi de disc intervertebral lumbar | protesi de disc intervertebral lumbar
+Q00746,protesi interespinosa | protesi interespinosa
+Q00747,desnervacio del tendo rotular | desnervacio del tendo rotular
+Q00748,excisio de neuroma de morton de la planta del peu | excisio de neuroma de morton de la planta del peu
+Q00749,biopsia de nervi periferic | biopsia de nervi periferic
+Q00750,biopsia de nervi periferic d extremitatinferior | biopsia de nervi periferic d extremitatinferior
+Q00751,biopsia de nervi periferic d extremitatsuperior | biopsia de nervi periferic d extremitatsuperior
+Q00752,sutura simple de nervi periferic | sutura simple de nervi periferic
+Q00753,sutura simple de nervi periferic d extremitat inferior | sutura simple de nervi periferic d extremitat inferior
+Q00754,sutura simple de nervi periferic d extremitat superior | sutura simple de nervi periferic d extremitat superior
+Q00755,liberamiento de canal carpiano | alliberament la canal carpiana | alliberament de canal carpiana
+Q00756,alliberament de canal tarsiana
+Q00757,transposicio de nervi cubitat | transposicio de nervi cubital
+Q00758,revisio tardana de lesio de nervi periferic | revisio tardana de lesio de nervi periferic
+Q00759,revisio tardana de lesio de nervi periferic d extremitat inferior | revisio tardana de lesio de nervi periferic d extremitat inferior
+Q00760,revisio tardana de lesio de nervi periferic d extremitat superior | revisio tardana de lesio de nervi periferic d extremitat superior
+Q00761,sequestrectomia d extremitat inferior
+Q00762,sequestrectomia d extremitat superior | sequestrectomia d extremitat superior
+Q00763,perforacions ossies del genoll [tipus pridie] | perforacions ossies del genoll [tipus pridie]
+Q00764,perforacions ossies del genoll [tipus pridie] (artroscopia) | perforacions ossies del genoll [tipus pridie] (per artroscopia)
+Q00765,perforacio descompressiva (forage) de maluc | perforacio descompressiva (forage) de maluc
+Q00766,perforacio descompressiva (forage) de maluc + cargol de suport mecanic | perforacio descompressiva (forage) de maluc + cargol de suport mecanic
+Q00767,perforacions de la rotula (espongialitzacio) | perforacions de la rotula (espongialitzacio)
+Q00768,osteotomia de valguitzacio de l extremitat inferior del femur | osteotomia de valguitzacio de l extremitat inferior del femur
+Q00769,osteotomia de valguitzacio de l extremitat superior del femur | osteotomia de valguitzacio de l extremitat superior del femur
+Q00770,osteotomia de varitzacio de l extremitat inferior del femur | osteotomia de varitzacio de l extremitat inferior del femur
+Q00771,osteotomia de varitzacio de l extremitat superior del femur | osteotomia de varitzacio de l extremitat superior del femur
+Q00773,osteotomia flexora de l extremitat inferior del femur | osteotomia flexora de l extremitat inferior del femur
+Q00774,osteotomia de valguitzacio de l extremitat superior de la tibia | osteotomia de valguitzacio de l extremitat superior de la tibia
+Q00775,osteotomia de varitzacio de l extremitat superior de la tibia | osteotomia de varitzacio de l extremitat superior de la tibia
+Q00776,osteotomia extensora de l extremitat superior de la tibia | osteotomia extensora de l extremitat superior de la tibia
+Q00777,osteotomia flexora de l extremitat superior de la tibia | osteotomia flexora de l extremitat superior de la tibia
+Q00778,osteotomia de la pelvis [chiari] | osteotomia de la pelvis [chiari]
+Q00779,osteotomia del coll humeral | osteotomia del coll humeral
+Q00780,osteotomia de la diafisi humeral | osteotomia de la diafisi humeral
+Q00781,osteotomia de l extremitat inferior de l humer | osteotomia de l extremitat inferior de l humer
+Q00782,osteotomia de l extremitat inferior delcubit | osteotomia de l extremitat inferior delcubit
+Q00783,osteotomia de l extremitat inferior delradi | osteotomia de l extremitat inferior delradi
+Q00784,osteotomia de l extremitat superior de cubit o radi | osteotomia de l extremitat superior de cubit o radi
+Q00785,osteotomia de carpians | osteotomia de carpians
+Q00786,osteotomia de falanges de la ma | osteotomia de falanges de la ma
+Q00787,osteotomia de metacarpians | osteotomia de metacarpians
+Q00788,osteotomia rotatoria de l extremitat inferior del femur | osteotomia rotatoria de l extremitat inferior del femur
+Q00789,osteotomia de rotula | osteotomia de rotula
+Q00790,osteotomia de l extremitat inferior de la tibia | osteotomia de l extremitat inferior de la tibia
+Q00791,osteotomia rotatoria de l extremitat superior de la tibia | osteotomia rotatoria de l extremitat superior de la tibia
+Q00792,osteotomia de calcani | osteotomia de calcani
+Q00793,osteotomia de metatarsianos | osteotomia de metatarsians
+Q00794,osteotomies vertebrals
+Q00795,osteotomies vertebrals en espondiloartritis anquilopoetica | osteotomies vertebrals en espondiloartritis anquilopoetica
+Q00796,biopsia ossia de genoll | biopsia ossia de genoll
+Q00797,biopsia ossia de genoll (artroscopia) | biopsia ossia de genoll (per artroscopia)
+Q00798,biopsia ossia d extremitat inferior | biopsia ossia d extremitat inferior
+Q00799,biopsia ossia d extremitat superior | biopsia ossia d extremitat superior
+Q00800,puncio vertebral per a biopsia o cultiu | puncio vertebral per a biopsia o cultiu
+Q00801,reparacion de dedo del pie de martillo | reparacio de dit del peu de martell | reparacio de dit del peu de martell
+Q00802,reparacio de dit del peu d urpa | reparacio de dit del peu d urpa
+Q00803,escapulectomia parcial | escapulectomia parcial
+Q00804,reseccio de l extrem distal de la clavicula | reseccio de l extrem distal de la clavicula
+Q00805,estiloidectomia radial | estiloidectomia radial
+Q00806,reseccio parcial de l extremitat superior del radi | reseccio parcial de l extremitat superior del radi
+Q00807,reseccio parcial de l olecran | reseccio parcial de l olecran
+Q00808,reseccio parcial o total d un os del carp | reseccio parcial o total d un os del carp
+Q00809,patel.lectomia parcial | patel.lectomia parcial
+Q00810,cirurgia de la metastasi vertebral cervical per via anterior | cirurgia de la metastasi vertebral cervical per via anterior
+Q00811,cirurgia de la mestastasi vertebral cervical por via posterior | cirurgia de la metastasi vertebral cervical per via posterior
+Q00813,cirurgia de la metastasi vertebral toraco-lumbar per via post | cirurgia de la metastasi vertebral toraco-lumbar per via posterior
+Q00814,corporectomia vertebral cervical
+Q00815,corporectomia vertebral toraco-lumbar | corporectomia vertebral toraco-lumbar
+Q00816,clidectomia total | clidectomia total
+Q00817,escapulectomia total | escapulectomia total
+Q00818,reseccio amplia de l espatlla per tumor | reseccio amplia de l espatlla per tumor
+Q00819,reseccio total del brac per tumor | reseccio total del brac per tumor
+Q00820,reseccio de la primera fila del carp | reseccio de la primera fila del carp
+Q00821,patel.lectomia total | patel.lectomia total
+Q00822,astragalectomia | astragalectomia
+Q00823,vertebrectomia | vertebrectomia
+Q00824,empelt ossi a l escafoide [matti-russe] | empelt ossi a l escafoide [matti-russe]
+Q00825,espongioplastia transpedicular | espongioplastia transpedicular
+Q00827,escurcament de l avantbrac (cubit i radi) | escurcament de l avantbrac (cubit i radi)
+Q00834,allargament de l avantbrac (cubit i radi) | allargament de l avantbrac (cubit i radi)
+Q00835,allargament de la cuixa (femur) | allargament de la cuixa (femur)
+Q00836,allargament de la cama (tibia i perone) | allargament de la cama (tibia i perone)
+Q00837,vertebroplastica percutania | vertebroplastia percutania | vertebroplastica percutania
+Q00838,ligamentotaxi vertebral pedicular
+Q00839,extraccio de mo de maluc (placa) | extraccio de mo de maluc
+Q00840,extraccio de mo de maluc: agulles k | extraccio de mo de maluc: agulles de kirschner
+Q00841,extraccio de mo de maluc: cargol-placa lliscant | extraccio de mo de maluc: cargol-placa lliscant
+Q00842,extraccio de mo de maluc: cargols | extraccio de mo de maluc: cargols
+Q00843,extraccio de mo de maluc: cerclatge | extraccio de mo de maluc: cerclatge
+Q00844,extraccio de mo de maluc: clau gamma | extraccio de mo de maluc: clau gamma
+Q00845,extraccio de mo de maluc: clau pfn | extraccio de mo de maluc: clau pfn
+Q00846,extraccio de mo de maluc: clau-placa monobloc | extraccio de mo de maluc: clau-placa monobloc
+Q00847,extraccio de mo de columna | extraccio de mo de columna
+Q00848,extraccio de mo de columna: clicks | extraccio de mo de columna: clicks
+Q00849,extraccio de mo de columna: diapaso | extraccio de mo de columna: diapaso
+Q00851,extraccio de mo de columna: synergy | extraccio de mo de columna: synergy
+Q00852,extraccio de mo de columna: uss | extraccio de mo de columna: uss
+Q00853,reduccio incruenta de fractura vertebral + cotilla de guix | reduccio incruenta de fractura vertebral + cotilla de guix
+Q00854,reduccio incruenta de fractura vertebral + cotilla de guix <local> | reduccio incruenta de fractura vertebral + cotilla de guix <local>
+Q00855,osteosintesi de maluc | osteosintesi de maluc
+Q00856,osteosintesi de femur: agulles k | osteosintesi de maluc: agulles de kirschner
+Q00857,osteosintesi de femur:cargol-placa lliscant (135o) [dhs] | osteosintesi de maluc: cargol-placa lliscant
+Q00858,"osteosintesi de femur, cargols canulats | osteosintesi de maluc: cargols canulats"
+Q00859,osteosintesi de femur: cerclatge | osteosintesi de maluc: cerclatge
+Q00860,osteosintesis de femur: clavo endomedular corto [pfn o gamma] | osteosintesi de maluc: clau  endomedul*lar curt (pfn o gamma) | osteosintesi de femur: clau endomedul.lar curt [pfn o gamma]
+Q00861,osteosintesi de maluc:clau endomedul.lar llarg [pfn o gamma] | osteosintesi de maluc: clau  endomedul*lar llarg (pfn o gamma)
+Q00862,osteosintesi de femur: clau-placa monobloc | osteosintesi de maluc: clau-placa monobloc
+Q00863,reinsercio de trocanter major | reinsercio de trocanter major
+Q00864,cirurgia reparadora de l espondilolistesi (els) | cirurgia reparadora de l espondilolistesi (els)
+Q00865,osteosintesi de la simfisi pubiana | osteosintesi de la simfisi pubiana
+Q00866,osteosintesi vertebral anterior en fractures | osteosintesi vertebral anterior en fractures
+Q00867,osteosintesi vertebral combinada (anterior i posterior) en fractures | osteosintesi vertebral combinada (anterior i posterior) en fractures
+Q00868,osteosintesi vertebral posterior de fractures | osteosintesi vertebral posterior en fractures
+Q00869,extraccio de protesi de colze (sense recanvi) | extraccio de protesi de colze
+Q00870,extraccio de protesi de genoll i artrodesi | extraccio de protesi de genoll i artrodesi
+Q00871,extraccio de protesi de genoll i col.locacio d espaiador | extraccio de protesi de genoll i col.locacio d espaiador
+Q00873,artrotomia simple d espatlla | artrotomia simple d espatlla
+Q00874,artrotomia simple de colze | artrotomia simple de colze
+Q00875,artrotomia simple de canell | artrotomia simple de canell
+Q00876,artrotomia simple de ma i dits | artrotomia simple de ma i dits
+Q00877,limpieza quirurgica de infeccion de protesis de cadera (dair): recambio de cabez | neteja quirurgica d infeccio de proteside maluc | neteja quirurgica d infeccio de proteside maluc ( dair): recanvi de cap i/o pol
+Q00878,artrotomia simple de genoll
+Q00879,artrotomia simple de turmell | artrotomia simple de turmell
+Q00880,artroscopia de hombro | artroscopia d espatlla | artroscopia d espatlla
+Q00881,artroscopia de colze | artroscopia de colze
+Q00882,artroscopia de canell | artroscopia de canell
+Q00883,artroscopia de metacarpo-falangia | artroscopia de metacarpo-falangia
+Q00884,artroscopia de cadera | artroscopia de maluc | artroscopia de maluc
+Q00885,artroscopia de rodilla | artroscopia de genoll | artroscopia de genoll
+Q00886,artroscopia de turmell | artroscopia de turmell
+Q00887,biopsia articular d espatlla | biopsia articular d espatlla
+Q00888,biopsia articular de colze | biopsia articular de colze
+Q00889,biopsia articular de canell | biopsia articular de canell
+Q00890,biopsia articular de ma i dits | biopsia articular de ma i dits
+Q00891,biopsia articular de maluc | biopsia articular de maluc
+Q00892,biopsia articular de genoll (artroscopia) | biopsia articular de genoll (per artroscopia)
+Q00893,biopsia articular de turmell | biopsia articular de turmell
+Q00894,capsulotomia o capsulectomia d espatlla | capsulotomia o capsulectomia d espatlla
+Q00895,capsulotomia o capsulectomia de colze | capsulotomia o capsulectomia de colze
+Q00896,capsulotomia o capsulectomia de canell | capsulotomia o capsulectomia de canell
+Q00897,capsulotomia o capsulectomia de ma i dits | capsulotomia o capsulectomia de ma i dits
+Q00898,capsulotomia o capsulectomia de maluc | capsulotomia o capsulectomia de maluc
+Q00899,capsulotomia o capsulectomia de genoll | capsulotomia o capsulectomia de genoll
+Q00900,regularitzacio (shaving) de cartilag degenoll | regularitzacio (shaving) de cartilag degenoll
+Q00901,regularitzacio (shaving) de cartilag degenoll (artroscopia) | regularitzacio (shaving) de cartilag degenoll (per artroscopia)
+Q00902,reseccio de l aleta externa de genoll [ficat] | reseccio de l aleta externa de genoll [ficat]
+Q00903,capsulotomia o capsulectomia de turmell | capsulotomia o capsulectomia de turmell
+Q00904,capsulotomia o capsulectomia de peu i dits | capsulotomia o capsulectomia de peu i dits
+Q00905,discectomia cervical | discectomia cervical
+Q00906,discectomia lumbar
+Q00907,discectomia lumbar percutania | discectomia lumbar percutania
+Q00908,meniscectomia de genoll  (artroscopia) | meniscectomia de genoll (per artroscopia)
+Q00909,sinovectomia d espatlla | sinovectomia d espatlla
+Q00910,sinovectomia d espatlla (artroscopia) | sinovectomia d espatlla (per artroscopia)
+Q00911,sinovectomia de colze | sinovectomia de colze
+Q00912,sinovectomia de colze (artroscopia) | sinovectomia de colze (per artroscopia)
+Q00913,sinovectomia de canell | sinovectomia de canell
+Q00914,sinovectomia de mano y dedos | sinovectomia de ma i dits | sinovectomia de ma i dits
+Q00915,sinovectomia de genoll | sinovectomia de genoll
+Q00916,sinovectomia de genoll (artroscopia) | sinovectomia de genoll (per artroscopia)
+Q00917,sinovectomia de peu i dits | sinovectomia de peu i dits
+Q00918,sinovectomia de turmell | sinovectomia de turmell
+Q00919,artrolisis de rodilla | artrolisi de genoll | artrolisi de genoll
+Q00920,astrolisi de genoll (artroscopia) | artrolisi de genoll (per artroscopia)
+Q00921,artroplastia de reseccio d espatlla | artroplastia de reseccio d espatlla
+Q00922,artroplastia de reseccio de colze | artroplastia de reseccio de colze
+Q00923,cirurgia mobilitzadora de l articulaciocarpo-metacarpiana | cirurgia mobilitzadora de l articulaciocarpo-metacarpiana
+Q00924,cirurgia mobilitzadora de l articulaciointerfalangia | cirurgia mobilitzadora de l articulaciointerfalangia
+Q00925,cirurgia mobilitzadora de l articulaciometacarpo-falangia | cirurgia mobilitzadora de l articulaciometacarpo-falangia
+Q00926,artroplastia de reseccio de maluc (girdlestone) | artroplastia de reseccio de maluc [girdlestone]
+Q00927,reseccio articular de genoll | reseccio articular de genoll
+Q00928,artrodesi vertebral amb osteosintesi d articulars posteriors | artrodesi vertebral amb osteosintesi d#articulars posteriors
+Q00929,artrodesi vertebral anterolateral intersomatica (alif) | artrodesi vertebral anterolateral intersomatica (alif)
+Q00931,artrodesi vertebral cervical instrumentada circumferencial (360o) | artrodesi vertebral cervical instrumentada circumferencial (360o)
+Q00932,artrodesi vertebral circumferencial(360o) | artrodesi vertebral circumferencial (360o)
+Q00933,artrodesi vertebral pedicular | artrodesi vertebral pedicular
+Q00934,artrodesi vertebral transforaminal intersomatica (tlif) | artrodesi vertebral transforaminal intersomatica (tlif)
+Q00935,cirurgia de l espondilolistesi degenerativa de l adult | cirurgia de l espondilolistesi degenerativa de l#adult
+Q00936,cirurgia de l espondilolistesi del desenvolupament | cirurgia de l espondilolistesi del desenvolupament
+Q00937,cirurgia de l espondilolistesi traumatica per estres | cirurgia de l espondilolistesi traumatica per estres
+Q00938,correccio quirurgica de la cifosi vertebral | correccio quirurgica de la cifosi vertebral
+Q00939,correccio quirurgica de l escoliosi degenerativa de l adult | correccio quirurgica de l escoliosi degenerativa de l#adult
+Q00940,correccio quirurgica de l escoliosi idiopatica | correccio quirurgica de l escoliosi idiopatica
+Q00941,curetatge i artrodesi vertebral anterior en tuberculosi | legrat i artrodesi vertebral anterior en tuberculosi
+Q00942,curetatge i artrodesi vertebral ant en tuberculosi + artrodesi vertebral pedicul | legrat i artrodesi vertebral anterior en tuberculosi + artrodesi vertebral pedic
+Q00943,cirurgia de la inestabilitat del raquiscervical sup (occipito-atlanto-axial) | cirurgia de la inestabilitat del raquiscervical superior (occipito-atlanto-axia
+Q00944,artrodesi vertebral cervical anterior amb espaiador intersomatic | artrodesi vertebral cervical anterior amb espaiador intersomatic
+Q00945,artrodesi vertebral cervical anterior amb placa | artrodesi vertebral cervical anterior amb placa
+Q00946,artodesis vertebral cervical posterior instrumentada | artrodesi vertebral cervical posterior instrumentada | artrodesi vertebral cervical posterior instrumentada
+Q00947,artrodesi vertebral lumbo-sacra amb osteosintesi a iliacs (galveston) | artrodesi vertebral lumbo-sacra amb osteosintesi a iliacs (galveston)
+Q00948,artrodesi de turmell: tibio-astragalina(ta) | artrodesi de turmell: tibio-astragalina(ta)
+Q00949,artrodesi doble de turmell: subastragalina i mediotarsiana | artrodesi doble de turmell: subastragalina i mediotarsiana
+Q00950,"artrodesi triple de turmell:tibio-astragalina, subastragalina i mediotarsiana | artrodesi triple de turmell: tibio-astragalina, subastragalina i mediotarsiana"
+Q00951,artrodesi de turmell: subastragalina (sa) | artrodesi de turmell: subastragalina (sa)
+Q00952,artrodesi de turmell:mediotarsiana (chopart) | artrodesi de turmell: mediotarsiana [chopart]
+Q00953,artrodesis de pie: tarso-metatarsiano | artrodesi de peu: tarso-metatarsiana | artrodesi de peu: tarso-metatarsiana
+Q00954,artrodesi de peu: metatarso-falangia | artrodesi de peu: metatarso-falangia
+Q00955,artrodesi de maluc | artrodesi de maluc
+Q00956,artrodesi de genoll | artrodesi de genoll
+Q00957,artrodesi d espatlla | artrodesi d espatlla
+Q00958,artrodesi de colze | artrodesi de colze
+Q00959,artrodesi radio-carpiana | artrodesi radio-carpiana
+Q00960,artrodesi metacarpo-carpiana | artrodesi metacarpo-carpiana
+Q00961,artrodesi metacarpo-falangia | artrodesi metacarpo-falangia
+Q00962,artrodesi interfalangia de la ma | artrodesi interfalangia de la ma
+Q00963,artrodesi sacro-iliaca | artrodesi sacro-iliaca
+Q00964,desartrodesi de maluc | desartrodesi de maluc
+Q00965,reparacio global de la gran lesio de lligaments de genoll | reparacio global de la gran lesio de lligaments de genoll
+Q00966,reparacio de triade de genoll desgraciada | reparacio de triade de genoll desgraciada
+Q00967,avancament de la tuberositat tibial anterior (tta ) [maquet-bandi] | avancament de la tuberositat tibial anterior (tta ) [maquet-bandi]
+Q00968,estabilitzacio proximal de genoll [insall] | estabilitzacio proximal de genoll [insall]
+Q00969,medializacion de la tuberosidad tibial anterior (tta) | medialitzacio de la tuberositat tibial anterior (tta) | medialitzacio de la tuberositat tibial anterior (tta)
+Q00970,reparacion de ligamento cruzado anterior de rodilla | reparacio de lligament encreuat anterior de genoll | reparacio de lligament encreuat anterior de genoll
+Q00971,reparacio de lligament encreuat posterior de genoll | reparacio de lligament encreuat posterior de genoll
+Q00972,reparacio de lligament lateral extern de genoll | reparacio de lligament lateral extern de genoll
+Q00973,reparacio de lligament lateral intern de genoll | reparacio de lligament lateral intern de genoll
+Q00974,fixacio de fragment osteo-condral al genoll | fixacio de fragment osteo-condral al genoll
+Q00975,fixacio de fragment osteo-condral al genoll (artroscopia) | fixacio de fragment osteo-condral al genoll (per artroscopia)
+Q00976,mosaicoplastia al genoll | mosaicoplastia al genoll
+Q00977,plastia os-tendo-os per a lligament encreuat ant de genoll | plastia os-tendo-os per a lligament encreuat anterior de genoll
+Q00978,plastia os-tendo-os per a lligament encreuat ant de genoll (artroscopia) | plastia os-tendo-os per a lligament encreuat anterior de genoll (per artroscopia
+Q00979,plastia os-tendo-os per a lligament encreuat post de genoll | plastia os-tendo-os per a lligament encreuat posterior de genoll
+Q00980,plastia os-tendo-os per a lligament encreuat post de genoll (artroscopia) | plastia os-tendo-os per a lligament encreuat posterior de genoll (per artroscopi
+Q00981,reparacio de laxitud cronica de lligaments de genoll | reparacio de laxitud cronica de lligaments de genoll
+Q00982,sutura meniscal de genoll | sutura meniscal de genoll
+Q00983,sutura meniscal de genoll (artroscopia) | sutura meniscal de genoll (per artroscopia)
+Q00984,trasplantament de condrocits al genoll | trasplantament de condrocits al genoll
+Q00985,trasplantament meniscal de genoll | trasplantament meniscal de genoll
+Q00986,artrolisi de turmell | artrolisi de turmell
+Q00987,protesis total de cadera primaria: cementada | protesi total de maluc: cimentada | protesi total de maluc primaria: cimentada
+Q00988,protesi total de maluc primaria: complexa | protesi total de maluc: complexa
+Q00989,protesi total de maluc  primaria : hibrida | protesi total de maluc: hibrida
+Q00990,protesis total de cadera derecha /izquierda no cementada | protesi total de maluc: no cimentada | protesi total de maluc primaria : no cimentada
+Q00991,protesi parcial de maluc primaria: bipolar cimentada | protesi parcial de maluc: bipolar cimentada
+Q00992,protesi parcial de maluc: bipolar de reseccio tumoral | protesi parcial de maluc: bipolar de reseccio tumoral
+Q00993,protesis total de cadera derecha /izquierda cementada (thomp | protesi parcial de maluc: cimentada [thompson] | protesi parcial de maluc : cimentada [thompson]
+Q00994,protesi parcial de maluc: de reseccio tumoral | protesi parcial de maluc: de reseccio tumoral
+Q00995,protesi parcial de maluc  primaria: no cimentada (moore) | protesi parcial de maluc: no cimentada [moore]
+Q00996,recanvi t de protesis de maluc  no cimentada | revisio de protesi de maluc
+Q00997,protesi parcial de genoll: femoro-patel.lar
+Q00998,protesis parcial de rodilla: unicompartimental | protesi parcial de genoll: unicompartimental
+Q00999,protesis total de rodilla: de frontiza | protesi total de genoll: de frontissa | protesi total de genoll: de frontissa
+Q01000,protesi total de genoll: de lliscament | protesi total de genoll: de lliscament
+Q01001,recambio de protesis de rodilla | revisio de protesi de genoll | recanvi de protesi de genoll
+Q01002,protesis de tobillo | protesi de turmell | protesi de turmell
+Q01003,recanvi  complex de protesi t de maluc amb implant a mida | recanvi de protesi total de maluc amb empelt estructural de cotila
+Q01004,recanvi de protesi t de maluc amb empelt estructural de femur | recanvi de protesi total de maluc amb empelt estructural de femur
+Q01005,recanvi de protesi t de maluc amb empelt triturat i compactat (ling-sloof) | recanvi de protesi total de maluc amb empelt triturat i compactat [ling-sloof]
+Q01006,recanvi de protesi t de maluc amb megaprotesi | recanvi de protesi total de maluc amb megaprotesi
+Q01007,recanvi de protesi t de maluc amb tija curta o vastag primari | recanvi de protesi total de maluc amb tija llarga
+Q01008,recanvi de protesi t de maluc  amb espaidor | recanvi de protesi total de maluc infectada en dos temps: espaiador (1r temps)
+Q01009,recanvi de protesi t de maluc infectadaen 2 temps: protesi (2 temps) | recanvi de protesi total de maluc infectada en dos temps: protesi (2n temps)
+Q01010,recambio de protesis de cadera infectada en un tiempo | recanvi de protesi total de maluc infectada en un temps | recanvi de protesi t de maluc infectadaen un temps
+Q01011,recanvi de protesi de turmell | revisio de protesi de turmell
+Q01012,protesi de dits de la ma | protesi de dits de la ma
+Q01013,protesi de canell | protesi de canell
+Q01014,artroplastia trapezio-metacarpiana | artroplastia trapezio-metacarpiana
+Q01015,protesi total d espatlla | protesi total d espatlla
+Q01016,protesi parcial d espatlla | protesi parcial d espatlla
+Q01017,reparacio de luxacio recidivant d espatlla (bankart) | reparacio de luxacio recidivant d espatlla [bankart]
+Q01018,recanvi de protesi d espatlla | revisio de protesi d espatlla
+Q01019,protesi de colze | protesi de colze
+Q01020,recanvi de protesi de canell | revisio de protesi de canell
+Q01021,recanvi de protesi de dits de la ma | revisio de protesi de dits de la ma
+Q01022,sutura de capsula o lligamente de peu iturmell | sutura de capsula o lligament de peu i turmell
+Q01023,sutura de tendo d aquiles | sutura de tendo d aquil.les
+Q01024,sutura secundaria de tendons de la ma | sutura secundaria de tendons de la ma
+Q01025,trasplantament de tendons de la ma | trasplantament de tendons de la ma
+Q01026,transposicio de dit de la ma per a pol.licitzacio | transposicio de dit de la ma per a pol.licitzacio
+Q01027,reconstruccio de polze | reconstruccio de polze
+Q01028,reconstruccio de politja de tendons de la ma | reconstruccio de politja de tendons de la ma
+Q01029,transposicio de dit de la ma | transposicio de dit de la ma
+Q01030,reparacio de dit de la ma de martell <local> | reparacio de dit de la ma de martell <local>
+Q01031,alliberament d adherencies de tendons de la ma | alliberament d adherencies de tendons de la ma
+Q01032,tenotomia d adductors de maluc | tenotomia d adductors de maluc
+Q01033,tenotomia de la porcio llarga del biceps | tenotomia de la porcio llarga del biceps
+Q01034,tenotomia i zetaplastia del tensor de la fascia lata | tenotomia i zetaplastia del tensor de la fascia lata
+Q01035,fasciotomia palmar per sequeles de sindr. compartimental de l avantbrac | fasciotomia palmar per sequeles de sindrome compartimental de l avantbrac
+Q01036,desenganxament quadricipital de genoll [judet] | desenganxament quadricipital de genoll [judet]
+Q01037,alliberament muscular de l avantbrac [scaglietti] | alliberament muscular de l avantbrac [scaglietti]
+Q01038,excisio de quist de baker de genoll | excisio de quist de baker de genoll
+Q01039,reparacio de manegot de rotadors | reparacio de manegot de rotadors
+Q01040,reparacio de manegot de rotadors (artroscopia) | reparacio de manegot de rotadors (per artroscopia)
+Q01041,trasplantament musculo-tendinos i mioplastia de genoll | trasplantament musculo-tendinos i mioplastia de genoll
+Q01042,trasplantament musculo-tendinos i mioplastia d espatlla | trasplantament musculo-tendinos i mioplastia d espatlla
+Q01043,plastia de quadriceps femoral | plastia de quadriceps femoral
+Q01044,tenodesi de la porcio llarga del biceps | tenodesi de la porcio llarga del biceps
+Q01045,correccio d actitud viciosa de genoll amb alliberament de parts toves | correccio d actitud viciosa de genoll amb alliberament de parts toves
+Q01047,desarticulacio del canell | desarticulacio del canell
+Q01048,desarticulacio del colze | desarticulacio del colze
+Q01049,desarticulacio de l espatlla | desarticulacio de l espatlla
+Q01051,desarticulacio del turmell | desarticulacio del turmell
+Q01052,desarticulacio del genoll | desarticulacio del genoll
+Q01053,desarticulacio del maluc | desarticulacio del maluc
+Q01054,reimplantacio del polze | reimplantacio del polze
+Q01055,reimplantacio dels dits de la ma | reimplantacio dels dits de la ma
+Q01056,reimplantacio de l avantbrac | reimplantacio de l avantbrac
+Q01057,reimplantacio del canell o de la ma | reimplantacio del canell o de la ma
+Q01059,revisio de monyo d amputacio d extremitat inferior | revisio de monyo d amputacio d extremitat inferior
+Q01060,revisio de monyo d amputacio d extremitat superior | revisio de monyo d amputacio d extremitat superior
+Q01061,extraccio d ungla de dit de la ma | extraccio d ungla de dit de la ma
+Q01062,extraccio d ungla de dit de la ma <local> | extraccio d ungla de dit de la ma <local>
+Q01063,extraccio d ungla de dit del peu | extraccio d ungla de dit del peu
+Q01064,extraccio d ungla de dit del peu <local> | extraccio d ungla de dit del peu <local>
+Q01065,reconstruccio d ungla de dit de la ma | reconstruccio d ungla de dit de la ma
+Q01066,reconstruccio d ungla de dit del peu | reconstruccio d ungla de dit del peu
+Q01068,mobilitzacio forcada de genoll | mobilitzacio forcada de genoll
+Q01069,neteja d infeccio vertebral postquirurgica | neteja d infeccio vertebral postquirurgica
+Q01070,extraccio de cos estrany a la ma | extraccio de cos estrany a la ma
+Q01071,extraccio de cos estrany a la ma <local> | extraccio de cos estrany a la ma <local>
+Q01072,ampliacio de marges d excisio de lesio cutania <local> | ampliacio de marges d excisio de lesio cutania <local>
+Q01073,ampliacio de marges d excisio de lesio cutania de coll <local> | ampliacio de marges d excisio de lesio cutania de coll <local>
+Q01074,ampliacio de marges d excisio de lesio cutania de cuir cabellut <local> | ampliacio de marges d excisio de lesio cutania de cuir cabellut <local>
+Q01075,ampliacio de marges d excisio de lesio cutania de genitals <local> | ampliacio de marges d excisio de lesio cutania de genitals <local>
+Q01076,ampliacio de marges d excisio de lesio cutania de la ma <local> | ampliacio de marges d excisio de lesio cutania de la ma <local>
+Q01077,ampliacio de marges d excisio de lesio cutania de torax <local> | ampliacio de marges d excisio de lesio cutania de torax <local>
+Q01078,ampliacio de marges d excisio de lesio cutania del peu <local> | ampliacio de marges d excisio de lesio cutania del peu <local>
+Q01079,ampliacio de marges d excisio de lesio cutania d esquena <local> | ampliacio de marges d excisio de lesio cutania d esquena <local>
+Q01080,ampliacio de marges d excisio de lesio cutania d extremitat inf <local> | ampliacio de marges d excisio de lesio cutania d extremitat inferior <local>
+Q01081,ampliacio de marges d excisio de lesio cutania d extremitat sup <local> | ampliacio de marges d excisio de lesio cutania d extremitat superior <local>
+Q01082,ampliacio de marges d excisio de lesio cutania facial <local> | ampliacio de marges d excisio de lesio cutania facial <local>
+Q01083,excisio de lesio cutania + reparacio amb empelt <local> | excisio de lesio cutania + reparacio amb empelt <local>
+Q01084,excisio de lesio cutania  + reparacio amb penjall <local> | excisio de lesio cutania + reparacio amb penjall <local>
+Q01085,excisio de lesio cutania <local> | excisio de lesio cutania <local>
+Q01086,excisio de lesio cutania de coll + reparacio amb empelt <local> | excisio de lesio cutania de coll + reparacio amb empelt <local>
+Q01087,excisio de lesio cutania de coll + reparacio amb penjall <local> | excisio de lesio cutania de coll + reparacio amb penjall <local>
+Q01088,excisio de lesio cutania de coll <local> | excisio de lesio cutania de coll <local>
+Q01089,excisio de lesio cutania de cuir cabellut + reparacio amb empelt <local> | excisio de lesio cutania de cuir cabellut + reparacio amb empelt <local>
+Q01090,escisio de lesio cutania de cuir cabellut + reparacio amb penjall <local> | excisio de lesio cutania de cuir cabellut + reparacio amb penjall <local>
+Q01091,excisio de lesio cutania de cuir cabellut <local> | excisio de lesio cutania de cuir cabellut <local>
+Q01092,excisio de lesio cutania de genitals + reparacio amb empelt <local> | excisio de lesio cutania de genitals + reparacio amb empelt <local>
+Q01093,excisio de lesio cutania de genitals + reparacio amb penjall <local> | excisio de lesio cutania de genitals + reparacio amb penjall <local>
+Q01094,excisio de lesio cutania de genitals <local> | excisio de lesio cutania de genitals <local>
+Q01095,excisio de lesio cutania de la ma + reparacio am empelt <local> | excisio de lesio cutania de la ma + reparacio amb empelt <local>
+Q01096,excisio de lesio cutania de la ma + reparacio amb penjall <local> | excisio de lesio cutania de la ma + reparacio amb penjall <local>
+Q01097,excisio de lesio cutania de la ma <local> | excisio de lesio cutania de la ma <local>
+Q01098,excisio de lesio cutania de torax + reparacio amb empelt <local> | excisio de lesio cutania de torax + reparacio amb empelt <local>
+Q01099,excisio de lesio cutania de torax + reparacio amb penjall <local> | excisio de lesio cutania de torax + reparacio amb penjall <local>
+Q01100,excisio de lesio cutania de torax <local> | excisio de lesio cutania de torax <local>
+Q01101,excisio de lesio cutania del peu + reparacio amb empelt <local> | excisio de lesio cutania del peu + reparacio amb empelt <local>
+Q01102,excisio de lesio cutania del peu + reparacio amb penjall <local> | excisio de lesio cutania del peu + reparacio amb penjall <local>
+Q01103,excisio de lesio cutania del peu <local> | excisio de lesio cutania del peu <local>
+Q01104,excisio de lesio cutania d esquena + reparacio amb empelt <local> | excisio de lesio cutania d esquena + reparacio amb empelt <local>
+Q01105,excisio de lesio cutania d esquena + reparacio amb penjall <local> | excisio de lesio cutania d esquena + reparacio amb penjall <local>
+Q01106,excisio de lesio cutania d esquena  <local> | excisio de lesio cutania d esquena <local>
+Q01107,excisio de lesio cutania d extr. inf + reparacio amb empelt <local> | excisio de lesio cutania d extremitat inferior + reparacio amb empelt <local>
+Q01108,excisio de lesio cutania d extr. inf + reparacio amb penjall <local> | excisio de lesio cutania d extremitat inferior + reparacio amb penjall <local>
+Q01109,excisio de lesio cutania d extremitat inferior <local> | excisio de lesio cutania d extremitat inferior <local>
+Q01110,excisio de lesio cutania d extr. sup + reparacio amb empelt <local> | excisio de lesio cutania d extremitat superior + reparacio amb empelt <local>
+Q01111,excisio de lesio cutania d extr. sup + reparacio amb penjall <local> | excisio de lesio cutania d extremitat superior + reparacio amb penjall <local>
+Q01112,excisio de lesio cutania d estremitat superior  <local> | excisio de lesio cutania d extremitat superior <local>
+Q01113,excisio de lesio cutania facial + reparacio amb empelt <local> | excisio de lesio cutania facial + reparacio amb empelt <local>
+Q01114,excisio de lesio cutania facial + reparacio amb penjall <local> | excisio de lesio cutania facial + reparacio amb penjall <local>
+Q01115,excisio de lesio cutania facial <local> | excisio de lesio cutania facial <local>
+Q01116,insercion cateter espinal temporal | implantacio de cateter espinal i perfusor subcutani programable <local>
+Q01117,insercion cateter perineural | implantacio d electrode espinal i generador subcutani <local>
+Q01118,revisio d electrode espinal i generadorsubcutani <local> | revisio d electrode espinal i generadorsubcutani <local>
+Q01119,extraccio d electrode espinal i generador subcutani <local> | extraccio d electrode espinal i generador subcutani <local>
+Q01120,extraccio de cateter espinal i perfusorsubcutani programable <local> | extraccio de cateter espinal i perfusorsubcutani programable <local>
+Q01121,revisio de cateter espinal i perfusor programable <local> | revisio de cateter espinal i perfusor subcutani programable <local>
+Q01123,extraccio d organs per mort encefalica | extraccio d organs per mort encefalica
+Q01124,extraccio d organs a cor parat | extraccio d organs a cor parat
+Q01125,extraccio d organs: cor
+Q01126,extraccio d organs: fetge
+Q01127,extraccio d organs: pulmo dret | extraccio d organs: pulmons
+Q01129,pericardiectomia total | pericardiectomia total
+Q01130,implantacio d electrodes cerebrals al globus pal.lid per parkinson | implantacio d electrodes cerebrals al globus pal.lid per parkinson
+Q01131,implantacio d electrodes cerebrals per epilepsia (per forat oval) | implantacio d electrodes cerebrals per epilepsia (a traves del forat oval)
+Q01132,implantacio d electrodes cerebrals per epilepsia (per craniotomia) | implantacio d electrodes cerebrals per epilepsia (per craniotomia)
+Q01133,esplancnicectomia (per toracoscopia) | esplancnicectomia (per toracoscopia)
+Q01134,tiroidectomia quasi total | tiroidectomia quasi total
+Q01135,tiroidectomia subtotal | tiroidectomia subtotal
+Q01136,paratiroidectomia total | paratiroidectomia total
+Q01138,paratiroidectomia de adenoma | paratiroidectomia per adenoma
+Q01139,paratiroidectomia per adenoma (per endoscopia) | paratiroidectomia per adenoma (per endoscopia)
+Q01140,reparacio vascular d abdomen per empeltinfectat | reparacio vascular d abdomen per empeltinfectat
+Q01141,reparacio vascular de torax per empelt infectat | reparacio vascular de torax per empelt infectat
+Q01142,reparacio vascular d extremitat inferior per empelt infectat | reparacio vascular d extremitat inferior per empelt infectat
+Q01143,reparacio vascular d extremitat superior per empelt infectat | reparacio vascular d extremitat superior per empelt infectat
+Q01144,reparacio d aneurisma dissecant d aortatoracica amb endoprotesi | reparacio d aneurisma dissecant d aortatoracica amb endoprotesi
+Q01145,excisio de gangli limfatic pelvia | excisio de gangli limfatic pelvia
+Q01146,excisio de gangli limfatic periaortic | excisio de gangli limfatic periaortic
+Q01147,excisio de gangli limfatic periaortic (laparoscopia) | excisio de gangli limfatic periaortic (per laparoscopia)
+Q01148,excisio de gangli limfatic periaortic (retroperitoneoscopia) | excisio de gangli limfatic periaortic (per retroperitoneoscopia)
+Q01149,excisio de gangli centinella de cervic uterina | excisio de gangli centinella de coll uteri
+Q01150,excisio de gangli centinella de mama | excisio de gangli centinella de mama
+Q01151,excisio de gangli centinela de vulva | excisio de gangli centinella de vulva
+Q01152,limfadenectomia radical axil.lar
+Q01153,limfadenectomia radical periaortica | limfadenectomia radical periaortica
+Q01154,limfadenectomia radical periaortica (laparoscopia) | limfadenectomia radical periaortica (per laparoscopia)
+Q01155,limfadenectomia radical periaortica (retroperitoneoscopia) | limfadenectomia radical periaortica (per retroperitoneoscopia)
+Q01156,limfadenectomia radical pelviana
+Q01157,limfadenectomia radical pelviana (laparoscopia) | limfadenectomia radical pelviana (per laparoscopia)
+Q01158,limfadenectomia radical de l hil renal | limfadenectomia radical de l hil renal
+Q01159,gastrectomia de maniga (sleeve) (laparoscopia) | gastrectomia de maniga (per laparoscopia) | gastrectomia de maniga (sleeve) (laparoscopia)
+Q01160,gastro-enterostomia dista (bypass) (laparoscopia) | gastro-enterostomia distal (bypass) (per laparoscopia) | gastro-enterostomia dista (bypass) (laparoscopia)
+Q01161,gastro-enterostomia proximal (bypass) (laparoscopia) | gastro-enterostomia proximal (bypass) (per laparoscopia)
+Q01162,gastro-jejunostomia
+Q01163,gastro-jejunostomia (laparoscopia) | gastro-jejunostomia (per laparoscopia)
+Q01164,encreuament duodenal (switch) (laparoscopia) | encreuament duodenal (switch) (per laparoscopia)
+Q01165,sigmoidectomia + rectoplastia (laparoscopia) | sigmoidectomia + rectoplastia (per laparoscopia)
+Q01166,reconstruccio de hartmann | reconstruccio de hartmann
+Q01167,colostomia
+Q01168,ileostomia
+Q01169,reparacio d hernia pericolostomotica | reparacio d hernia pericolostomotica
+Q01170,cierre de ileostomia | tancament d ileostomia
+Q01171,tancament de colostomia
+Q01172,sutura de laceracio de duode | sutura de laceracio de duode
+Q01173,sutura de laceracio d intesti prim | sutura de laceracio d intesti prim
+Q01174,sutura de laceracio d intesti gros | sutura de laceracio d intesti gros
+Q01175,apendicectomia incidental en una laparoscopia | apendicectomia incidental en una laparoscopia
+Q01176,apendicectomia incidental en una laparotomia
+Q01177,recto-sigmoideo perineal | recto-sigmoidectomia perineal
+Q01178,plicatura rectal [delorme]
+Q01179,drenatge de fistula perianal amd sedal (seton) | drenatge de fistula perianal amb sedal (seton)
+Q01180,puesta a plano de fistula perianal | posta a pla de fistula perianal | posta a pla de fistula perianal
+Q01181,fistulectomia i penjall endoanal (flap) | fistulectomia i penjall endoanal (flap)
+Q01182,desbridament d hemorroides trombosades | desbridament d hemorroides trombosades
+Q01183,esfinteroplastia anal | esfinteroplastia anal
+Q01184,implantacio d esfinter anal artificial | implantacio d esfinter anal artificial
+Q01185,implantacio de neurostimulador sacre (incontinencia anal) | implantacio de neurostimulador anal
+Q01186,control d hemorragia anal postoperatoria | control d hemorragia anal postoperatoria
+Q01187,colecistomia + coledocotomia | colecistectomia + coledocotomia
+Q01188,colecistectomia + coledocotomia (laparoscopia) | colecistectomia + coledocotomia (per laparoscopia)
+Q01189,colecisto-jejunostomia | colecisto-jejunostomia
+Q01190,colecisto-jejunostomia (laparoscopia) | colecisto-jejunostomia (per laparoscopia)
+Q01191,hepatico-jejunostomia | hepatico-jejunostomia
+Q01192,coledocotomia
+Q01193,coledocotomia (laparoscopia) | coledocotomia (per laparoscopia)
+Q01194,ampul.lectomia d ampul.la de vater | ampul.lectomia d ampul.la de vater
+Q01195,excisio de tumor de via biliar | excisio de tumor de via biliar
+Q01196,esfinterotomia d esfinter d oddi | esfinterotomia d esfinter d oddi
+Q01197,pancreatico-jejunostomia [puestow] | pancreatico-jejunostomia [puestow]
+Q01198,drenatge d absces de pancrees | drenatge d absces de pancrees
+Q01199,enucleacio de tumor neuroendocri del pancrees | enucleacio de tumor neuroendocri del pancrees
+Q01200,pancreatocisto-gastrostomia | pancreatocisto-gastrostomia
+Q01201,pancreatocisto-jejunostomia | pancreatocisto-jejunostomia
+Q01202,pancreatectomia distal
+Q01203,pancreatectomia distal (laparoscopia) | pancreatectomia distal (per laparoscopia)
+Q01204,duodeno-pancreatectomia cefalica | duodeno-pancreatectomia cefalica [whipple] | duodeno-pancreatectomia cefalica
+Q01205,duodeno-pancreatectomia cefalica amb preservacio pilorica | duodeno-pancreatectomia cefalica amb preservacio pilorica
+Q01206,trasplantament de pancrees | trasplantament de pancrees
+Q01207,trasplantament de pancrees i de ronyo | trasplantament de pancrees i de ronyo
+Q01208,laparotomia diagnostica de revisio (second  look) | laparotomia diagnostica de revisio (second look)
+Q01209,laparotomia per hemorragia | laparotomia per hemorragia
+Q01210,laparotomia per peritonitis
+Q01211,laparoscopia diagnostica de revisio (second look) | laparoscopia diagnostica de revisio (second look)
+Q01212,laparoscopia per hemorragia | laparoscopia per hemorragia
+Q01213,laparoscopia per peritonitis | laparoscopia per peritonitis
+Q01214,rentat peritoneal per a citologia
+Q01215,excisio d endometriosi peritoneal | excisio d endometriosi peritoneal
+Q01216,excisio d endometriosi peritoneal (laparoscopia) | excisio d endometriosi peritoneal (per laparoscopia)
+Q01217,vaporitzacio endometriosi peritoneal | excisio d endometriosi peritoneal amb laser
+Q01218,ecisio d endometriosi peritoneal amb laser (laparoscopia) | excisio d endometriosi peritoneal amb laser (per laparoscopia)
+Q01219,omentectomia
+Q01220,alliberament d adherencies pelvianes (laparoscopia) | alliberament d adherencies pelvianes (per laparoscopia)
+Q01221,alliberament d adherencies pelvianes | alliberament d adherencies pelvianes
+Q01222,fotocoagulacio de tm d ureter o pelvis amb laser (uretero-renoscopia) | fotocoagulacio de tumor d ureter o pelvis amb laser (per uretero-renoscopia)
+Q01223,fotocoagulacio de tumor d ureter o pelvis amb laser (percutania) | fotocoagulacio de tumor d ureter o pelvis amb laser (percutania)
+Q01224,cistoscopia + pielografia ascendent | cistoscopia + pielografia ascendent
+Q01225,sutura de laceracio de bufeta urinaria | sutura de laceracio de bufeta urinaria
+Q01226,plicatura suburetral de kelly | plicatura suburetral de kelly
+Q01227,suspensio uretro-vaginal suprapubica | suspensio uretro-vaginal suprapubica
+Q01228,suspensio uretro-vaginal suprapubica amb material biol (fascia o similars) | suspensio uretro-vaginal suprapubica amb material biologic (fascia o similars)
+Q01229,suspensio uretro-vaginal suprapubica amb material sint (tvt o similar) | suspensio uretro-vaginal suprapubica amb material sint (tvt o similars)
+Q01230,suspensio uretro-vaginal retropubica [burch] | suspensio uretro-vaginal retropubica [burch]
+Q01231,suspensio uretro-vaginal retropubica [burch] (laparoscopia) | suspensio uretro-vaginal retropubica [burch] (per laparoscopia)
+Q01232,injeccio suburetral d agents de volum (col.lagen i similars) | injeccio suburetral d agents de volum (col.lagen i similars)
+Q01233,suspensio uretro-vaginal suprapubica amb regulacio mecanica ext (remeex) | suspensio uretro-vaginal suprapubica amb regulacio mecanica externa (remeex)
+Q01234,termoablacio prostatica amb agulla (tuna) | termoablacio prostatica amb agulla (tuna)
+Q01235,termoablacion prostatica con laser | termoablacio prostatica amb laser | termoablacio prostatica amb laser
+Q01236,"ter,pablacio prostatica amb microones | termoablacio prostatica amb microones"
+Q01237,crioterapia radical de prostata | termoablacio prostatica amb termoterapia | crioterapia radical de prostata
+Q01238,termoablacio prostatica amb vaporitzacio | termoablacio prostatica amb vaporitzacio
+Q01239,adenomectomia prostatica transecervicalhemostatica (ath) | adenomectomia prostatica transcervical hemostatica (ath)
+Q01240,adenomectomia prostatica transvesical | adenomectomia prostatica transvesical
+Q01241,adenomectomia prostatica retropubica  [millin] | adenomectomia prostatica retropubica [millin] | adenomectomia prostatica retropubica [millin]
+Q01242,varicocelectomia per via inguinal
+Q01243,varicocelectomia [ivanisevich] | varicocelectomia [ivanisevich] | varicocelectomia  [ivanisevich]
+Q01244,biopsia d ovari | biopsia d ovari
+Q01245,biopsia d ovari (laparoscopia) | biopsia d ovari (per laparoscopia)
+Q01246,suspensio d ovari (ooforopexia) | suspensio d ovari (ooforopexia)
+Q01247,puncio fol.licular d ovari assistida per ecografia
+Q01248,puncion folicular de ovario asistida por ecografia (ambulatoria) | puncio fol.licular d ovari assistida per ecografia <local> | puncio fol.locular d ovari assistida per ecografia (ambulatoria)
+Q01249,oclusio tubarica bilateral (per laparotomia) | oclusio tubaria bilateral (per laparotomia)
+Q01250,biopsia uterina: endocervix <local> | biopsia uterina: endocervix <local>
+Q01251,biopsia uterina: exocervix <local> | biopsia uterina: exocervix <local>
+Q01252,conizacion de cervix uterino | conitzacio de cervix uterina | conitzacio de cervix uterina
+Q01253,conitzacio de cervix uterina <local>
+Q01254,excisio de polip de cervix uterina | excisio de polip de cervix uterina
+Q01255,extirpacio monyo cervical | extirpacio de monyo de coll uteri
+Q01256,cerclatge uteri (laparoscopia) | cerclatge uteri
+Q01257,histerectomia abd radical [wertheim-meigs] + limfadenectomia pelviana | histerectomia abdominal radical [wertheim-meigs] + limfadenectomia pelviana
+Q01258,histerectomia vag radical [schauta] + limfadenectomia pelviana (laparoscopia) | histerectomia vaginal radical [schauta]+ limfadenectomia pelviana (per laparosc
+Q01259,excisio de septe vaginal | excisio de septe vaginal
+Q01260,excisio d himen | excisio d himen
+Q01261,excision de lesion vaginal | excisio de lesio vaginal | excisio de lesio vaginal
+Q01262,reparacio de fistula recto-vaginal | reparacio de fistula recto-vaginal
+Q01263,obliteracio vaginal (cleisis) | obliteracio vaginal (cleisis)
+Q01264,ampliacio d introit vaginal | ampliacio d introit vaginal
+Q01265,"excisio de condilomes (de vulva, vaginao perineu) amb laser | excisio de condilomes (de vulva, vaginao perineu) amb laser"
+Q01266,vulvectomia cutania | vulvectomia cutania
+Q01267,vulvectomia radical
+Q01268,vulvectomia radical + escisio de ganglicentinella de vulva | vulvectomia radical + excisio de ganglicentinella de vulva
+Q01269,vulvectomia radical + limfadenectomia inguinal | vulvectomia radical + limfadenectomia inguinal
+Q01270,hemivulvectomia | hemivulvectomia
+Q01271,hemivulvectomia + excisio de gangli centinella de vulva | hemivulvectomia + excisio de gangli centinella de vulva
+Q01272,hemivulvectomia + limfadenectomia inguinal | hemivulvectomia + limfadenectomia inguinal
+Q01273,vulvectomia parcial | vulvectomia parcial
+Q01274,vulvectomia parcial + excisio de ganglicentinella de vulva | vulvectomia parcial + excisio de ganglicentinella de vulva
+Q01275,vulvectomia parcial + limfadenectomia inguinal | vulvectomia parcial + limfadenectomia inguinal
+Q01276,vulvectomia simple | vulvectomia simple
+Q01277,cesaria electiva | cesaria electiva
+Q01278,cesaria en curs de part | cesaria en curs de part
+Q01279,cesaria urgent | cesaria urgent
+Q01280,desbridament d absces de mama | desbridament d absces de mama
+Q01281,excisio de fistula de mama | excisio de fistula de mama
+Q01282,exploracio ginecologica (amb anestesia) | exploracio ginecologica (amb anestesia)
+Q01283,biopsia diagnostica de moll d os | biopsia diagnostica de moll d os
+Q01284,frenoplastia prepucial <local> | frenoplastia prepucial <local>
+Q01285,trabeculectomia + facoemulsificacio de cataracta
+Q01286,trabeculectomia + facoemulsificacio de cataracta + lio | trabeculectomia + facoemulsificacio de cataracta + implant de lio
+Q01287,trasplantament corneal + extraccio extracapsular de cataracta
+Q01288,trasplantament de cornea + extraccio extracapsular de catarata + lio | trasplantament corneal + extraccio extracapsular de cataracta + implant de lio
+Q01289,desbridament i neteja de ferida d abdomen | desbridament i neteja de ferida d abdomen
+Q01290,desbridament i neteja de ferida de coll
+Q01291,desbridament i neteja de ferida de perineu
+Q01292,desbridament i neteja de ferida de torax
+Q01293,desbridament i neteja de ferida d esquena | desbridament i neteja de ferida d esquena
+Q01294,desbridament neteja de ferida d extremitat inferior | desbridament i neteja de ferida d extremitat inferior
+Q01295,desbridament i neteja de ferida d extremitat superior | desbridament i neteja de ferida d extremitat superior
+Q01296,empelt ossi en fractura de canell
+Q01297,empelt ossi en fractura de repla tibial | empelt ossi en fractura de repla tibial
+Q01298,empelt ossi en fractura d humer | empelt ossi en fractura d humer
+Q01299,excisio de cap de radi
+Q01300,fasciotomia de l avantbrac | fasciotomia de l avantbrac
+Q01301,osteosintesi de pelvis (acetabul: cellaposteior): cargols | osteosintesi d acetabul (cella posterior): cargols
+Q01302,osteosintesi de pelvis (acetabul): placa o cargols | osteosintesi d acetabul: placa o cargols
+Q01303,osteosintesi d astragal: cargols o agulles k | osteosintesi d astragal: cargols o agulles de kirschner
+Q01304,osteosintesi de calcani: agulles k | osteosintesi de calcani: agulles de kirschner
+Q01305,osteosintesi de calcani: placa | osteosintesi de calcani: placa
+Q01306,fixador extern de canell | osteosintesi de canell: fixador extern
+Q01307,"osteosintesi de clavicula: placa, clau endomedul.lar o agulles k | osteosintesi de clavicula: placa, clau endomedul.lar o agulles de kirschner"
+Q01308,fixador extern de colze | osteosintesi de colze: fixador extern
+Q01309,osteosintesi de cubit (diafisi): placa | osteosintesi de cubit (diafisi): placa
+Q01310,osteosintesi de falanges de la ma: agulles k | osteosintesi de falanges de la ma: agulles de kirschner
+Q01311,osteosintesi de falanges de la ma: placa de minifragments | osteosintesi de falanges de la ma: placa de minifragments
+Q01312,osteosintesis de femur: tornillo-placa deslizante (95o) [dcs] | osteosintesi de femur: cargol-placa lliscant (95o) | osteosintesi de femur: cargol-placa lliscant (95o) [dcs]
+Q01313,osteosintesi de femur: clau endomedul.lar enforrellat [ufn] | osteosintesi de femur: clau endomedul.lar enforrellat
+Q01314,osteosintesi de femur: clau endomedul.lar llarg [pfn o gamma] | osteosintesi de femur: clau endomedul.lar llarg (tipus pfn o gamma)
+Q01315,osteosintesi de femur: clau endomedul.lar retrograd | osteosintesi de femur: clau endomedul.lar retrograd
+Q01316,osteosintesi de femur: placa | osteosintesi de femur: placa
+Q01317,fixador extern de ma | osteosintesi de la ma: fixador extern
+Q01318,osteosintesi de metacarpians: agulles k | osteosintesi de metacarpians: agulles de kirschner
+Q01319,osteosintesi de metacarpians: placa de minifragments | osteosintesi de metacarpians: placa de minifragments
+Q01320,osteosintesi de pelvis: placa anterior | osteosintesi de pelvis (anterior): placa
+Q01321,osteosintesi de pelvis  (percutania) | osteosintesi de pelvis (percutania)
+Q01322,mod.qui. fixador extern de pelvis: anterior | osteosintesi de pelvis: fixador extern anterior
+Q01323,fixador extern de pelvis  tipus c-clamp | osteosintesi de pelvis: fixador extern tipus c-clamp
+Q01324,osteosintesi de perone i mal.leol peroneal: placa o cargols | osteosintesi de perone: placa
+Q01325,osteosintesis de pie (percutania) | osteosintesi de peu (percutania) | osteosintesi de peu (percutania)
+Q01326,osteosintesi de radi (cap) cargols o agulles k | osteosintesi de radi (cap): cargols o agulles de kirschner
+Q01327,osteosintesi de radi (diafisi): placa | osteosintesi de radi (diafisi): placa
+Q01328,osteosintesi de radi (epifisi distal): placa de baix perfil | osteosintesi de radi (epifisi distal): placa de baix perfil
+Q01329,osteosintesis de radio (epifisisdistal): placa o tornillos | osteosintesi de radi (epifisi distal): placa o cargols | osteosintesi de radi(epifisi distal): placa o cargols
+Q01330,osoteosintesi de radi (percutania): agulles k | osteosintesi de radi (percutania): agulles de kirschner
+Q01331,osteosintesi de tibia (diafisi): placa | osteosintesi de tibia (diafisi): placa
+Q01332,osteosintesi de tibia (pilo): placa | osteosintesi de tibia (pilo): placa
+Q01333,osteosintesi de tibia (repla): cargols canulats | osteosintesi de tibia (repla): cargols canulats
+Q01334,osteosintesi de tibia (repla): placa o cargols | osteosintesi de tibia (repla): placa o cargols
+Q01335,mod.quir. osteosintesi de tibia | osteosintesi de tibia: clau endomedul.lar enforrellat
+Q01336,fixador extern de tibia | osteosintesi de tibia: fixador extern
+Q01337,osteosintesi de tibia (mal.leol): cargols o agulles k | osteosintesi de turmell (mal.leol medial): cargols o agulles de kirschner
+Q01338,osteosintesi d escafoide del carp | osteosintesi d escafoide del carp
+Q01339,fixador extern d espatlla | osteosintesi d espatlla: fixador extern
+Q01340,osteosintesi d estiloide cubital (oberta o percutania) | osteosintesi d estiloide cubital (oberta o percutania)
+Q01341,osteosintesi d humer (epifisi proximal)(percutania): agulles k | osteosintesi d humer (epifisi proximal)(percutania): agulles de kirschner
+Q01342,osteosintesi d humer (epifisi proximal): placa o cargols | osteosintesi d humer (epifisi proximal): placa o cargols
+Q01343,osteosintesi d humer (epifisi proximal): sutura o agulles  k | osteosintesi d humer (epifisi proximal): sutura o agulles de kirschner
+Q01344,osteosintesi d humer (paleta) (percutania): agulles k | osteosintesi d humer (paleta) (percutania): agulles de kirschner
+Q01345,osteosintesi d humer (paleta): placa o cargols | osteosintesi d humer (paleta): placa o cargols
+Q01346,osteosintesi d humer: agulles endomedul.lars [hacketal]
+Q01347,osteosintesi d humer: clau endomedul.lar enforrellat | osteosintesi d humer: clau endomedul.lar enforrellat
+Q01348,osteosintesi d humer  placa | osteosintesi d humer: placa
+Q01349,osteosintesi d olecran | osteosintesi d olecran
+Q01350,reduccio (oberta) de luxacio de maluc | reduccio (oberta) de luxacio de maluc
+Q01351,reduccio (oberta) de luxacio de proteside maluc
+Q01352,reduccio (tancada) de luxacio de maluc | reduccio (tancada) de luxacio de maluc
+Q01353,reduccio (tancada) de luxacio de protesi de maluc
+Q01354,reduccio (tancada) de luxacio d espatlla | reduccio (tancada) de luxacio d espatlla
+Q01355,reinsercio d espines tibials (oberta)
+Q01356,reinsercio d espines tibials (artroscopia) | reinsercio d espines tibials (per artroscopia)
+Q01357,reparacio acromioclavicular | reparacio acromioclavicular
+Q01358,sutura d arteria cubital
+Q01359,sutura d arteria radial
+Q01360,sutura de nervi col.lateral de la ma | sutura de nervi col.lateral de la ma
+Q01361,sutura de tendo externsor de la ma | sutura de tendo extensor de la ma
+Q01362,sutura de tendo flexor de la ma | sutura de tendo flexor de la ma
+Q01363,sutura microquirurgica de nervi col.lateral de la ma | sutura microquirurgica de nervi col.lateral de la ma
+Q01364,sutura microquirurgica de nervi cubitalal canell
+Q01365,sutura microquirurgica de nervi media al canell
+Q01366,sutura microquirurgica vascular de la ma | sutura microquirurgica vascular de la ma
+Q01367,sutura de tendo de peu o turmell | sutura tendinosa de peu o turmell
+Q01368,tecniques de cobertura cutania de la ma | tecniques de cobertura cutania de la ma
+Q01369,tecniques de cobertura cutania de l avantbrac i el colze
+Q01370,"alliberament de retraccio cicatricial de ma i dits amb empelts, penjalls o zetap | alliberament de retraccio cicatricial de la ma i els dits amb empelts, penjalls"
+Q01371,apicectomia dental
+Q01372,apicectomia dental <local>
+Q01373,artroplastia temporomandibular amb autoempelt
+Q01374,artroplastia temporomandibular amb homoempelt
+Q01375,artroplastia temporomandibular amb protesi
+Q01376,artroplastia temporomandibular sense autoempelt
+Q01378,correccio d hipospadies
+Q01379,dermolipectomia abdominal parcial | dermolipectomia abdominal parcial
+Q01380,dermolipectomia abdominal | dermolipectomia abdominal total
+Q01381,empelt cutani amb anastomosi microvascular | empelt cutani amb anastomosi microvascular
+Q01382,empelt de fascia amb anastomosi microvascular | empelt de fascia amb anastomosi microvascular
+Q01383,empelt muscular o musculocutani amb anastomosi microvascular | empelt muscular o musculocutani amb anastomosi microvascular
+Q01384,excisio de lesio cutania benigna o premaligna<local> | excisio de lesio cutania benigna o premaligna <local>
+Q01385,excisio de lesio cutania benigna o premaligna amb laser <local>
+Q01386,excisio de lesio de parpella i reconstruccio
+Q01387,excisio de lesio labial i reconstruccioamb penjall [estlander]
+Q01388,excisio de lesio labial i reconstruccioamb penjall labial encreuat [abbe-estlan
+Q01389,excisio de lesio lingual i reconstruccio amb penjall
+Q01390,excisio de quist congenit de cua de cella <local>
+Q01391,excisio de quist congenit de la linia mediana nasal
+Q01392,excisio d ulcera isquiatica de pressio + penjall cutani
+Q01393,excisio d ulcera sacra de pressio + penjall cutani
+Q01395,excisio o curetatge de lesio cutania benigna | excisio o curetatge de lesio cutania benigna
+Q01396,excisio o curetatge de tumor benigne decubit o radi
+Q01397,excisio o curetatge de tumor benigne del carp
+Q01398,exodoncia de diente impactado | exodoncia de dent impactada | exodoncia de dent impactada
+Q01399,exodoncia de dent impactada <local> | exodoncia de dent impactada <local>
+Q01400,extraccio d arrel dental residual | extraccio d arrel dental residual
+Q01401,extraccio d arrel dental residual <local>
+Q01402,extraccio de protesi mamaria | extraccio de protesi mamaria
+Q01403,extraccio de sutura metal.lica dental <local> | extraccio de sutura metal.lica dental <local>
+Q01404,extraccio d expansor sense reconstruccio | extraccio d expansor de teixit mamari
+Q01405,extraccio d expansor de teixit no mamari
+Q01406,extraccio quirurgica de dent <local> | extraccio quirurgica de dent <local>
+Q01407,fasciectomia palmar per malaltia de dupuytren
+Q01408,frenectomia lingual
+Q01409,frenectomia lingual <local>
+Q01410,gingivoplastia | gingivoplastia
+Q01411,glossectomia radical
+Q01412,glossectomia total
+Q01413,insercio de protesi mamaria unilateral per asimetria mamaria | insercio de protesi mamaria unilateral per asimetria mamaria
+Q01414,insercio d expansor de teixit mamari | insercio d expansor de teixit mamari
+Q01415,recanvi d expansor per penjoll | insercio d expansor de teixit mamari (per subcutaneoscopia)
+Q01416,insercio d expansor de teixit no mamari | insercio d expansor de teixit no mamari
+Q01417,insercio immediata de protesi mamaria (post. cir. mamaria) | insercio immediata de protesi mamaria (despres de cirurgia mamaria)
+Q01418,insercio retardada de protesi mamaria (post cir. mamaria)) | insercio retardada de protesi mamaria (despres de cirurgia mamaria)
+Q01419,recanvi d expansor per protesi (gm 68) | insercio retardada de protesi mamaria (despres de cirurgia mamaria) (per subcuta
+Q01420,liposuccion de lipomatosi de madelung | liposuccio de lipomatosi de madelung | liposuccio de lipomatosi de madelung
+Q01421,mandibulectomia marginal | mandibulectomia marginal
+Q01422,mandibulectomia total | mandibulectomia total | mandibulectomia total
+Q01423,mastoplastia de aumento con implante deprotesis | mastoplastia d augment amb implant de protesi | mastoplastia d augmet amb implant de protesi
+Q01424,mastoplastia de reduccion bilateral | mastoplastia de reduccio bilateral | mastoplastia de reduccio bilateral
+Q01425,mastoplastia de reduccio unilateral | mastoplastia de reduccio unilateral
+Q01426,omfaloplastia
+Q01427,osteotomia segmentaria de mandibula | osteotomia segmentaria de mandibula
+Q01428,"penjall cutani (10 a 30 cm2): cara, coll, aixelles, genitals, mans, peus | penjall cutani (de 10 a 30 cm2): cara, coll, aixelles, genitals, mans, peus"
+Q01429,penjall cutani (10 a 30 cm2): cuir cabellut | penjall cutani (de 10 a 30 cm2): cuir cabellut
+Q01430,penjall cutani  (10 a 30 cm2): extremitats | penjall cutani (de 10 a 30 cm2): extremitats
+Q01431,"penjall cutani (10 a 30 cm2): parpelles, nas, orelles, llavis | penjall cutani (de 10 a 30 cm2): parpelles, nas, orelles, llavis"
+Q01432,penjall cutani (10 a 30 cm2): tronc | penjall cutani (de 10 a 30 cm2): tronc
+Q01433,"penjall cutani(< 10 cm2): cara, coll, aixelles, genitals, mans, peus | penjall cutani (fins a 10 cm2): cara, coll, aixelles, genitals, mans, peus"
+Q01434,penjall cutani (< 10 cm2): cuir cabellut | penjall cutani (fins a 10 cm2): cuir cabellut
+Q01435,penjall cutani (< 10 cm2): extremitats | penjall cutani (fins a 10 cm2): extremitats
+Q01436,"penjall cutani  (< 10 cm2): parpelles, nas, orelles, llavis | penjall cutani (fins a 10 cm2): parpelles, nas, orelles, llavis"
+Q01437,penjall cutani (< 10 cm2): tronc | penjall cutani (fins a 10 cm2): tronc
+Q01438,penjall cutani  (mes de 30 cm2) | penjall cutani (mes de 30 cm2)
+Q01439,"penjall muscular, musculocutani o fasciocutani: cap i coll | penjall muscular, musculocutani o fasciocutani: cap i coll"
+Q01440,"penjall muscular, musculocutani o fasciocutani: extremitat inferior | penjall muscular, musculocutani o fasciocutani: extremitat inferior"
+Q01441,"penjall muscular, musculocutani o fasciocutani extremitat superior | penjall muscular, musculocutani o fasciocutani: extremitat superior"
+Q01442,"penjall muscular, musculocutani o fasciocutani: tronc | penjall muscular, musculocutani o fasciocutani: tronc"
+Q01443,reconstruccio de branques mandibulars amb osteotomia | reconstruccio de branques mandibulars amb osteotomia
+Q01444,reconstruccio de branques mandibulars amb ostetotomia i empelt ossi
+Q01445,reconstruccio de condil mandibular amb autoempelt ossi i de cartilag
+Q01446,reconstruccio d arc zigomatic i fossa glenoideal amb empelt ossi i de cartilag | reconstruccio de l arc zigomatic i la fossa glenoidal amb empelt ossi i de carti
+Q01447,reconstruccion de mandibula + osteosintesis | reconstruccio de mandibula + osteosintesi | reconstruccion de mandibula + osteosintesi
+Q01448,reconstruccio d areola i de mugro | reconstruccio de mugro
+Q01449,reconstruccio extraoral de mandibula amb placa d osteosintesi | reconstruccio extraoral de mandibula amb placa d osteosintesi
+Q01450,reconstruccio mamaria amb empelt de dorsal ample
+Q01451,reconstruccio mamaria amb empelt lliure | reconstruccio mamaria amb empelt lliure
+Q01452,reconstruccio mamaria amb penjall diep | reconstruccio mamaria amb penjall tram de pedicle doble
+Q01453,reconstruccio mamaria amb penjall tram de pedicle simple
+Q01454,reconstruccio mamaria amb penjall tram de pedicle simple amb anastomosi microvas
+Q01455,reconstruccio maxil.lar o mandibular (parcial) amb implant subperiostic | reconstruccio maxil.lar o mandibular (parcial) amb implant subperiostic
+Q01456,reconstruccio maxil.lar o mandibular (total) amb implant subperiostic | reconstruccio maxil.lar o mandibular (total) amb implant subperiostic
+Q01457,reconstruccio nasal: parts toves | reconstruccio nasal: parts toves
+Q01458,reconstruccio nasal: parts toves i parts ossies
+Q01459,reconstruccio parcial de pavello de l orella | reconstruccio parcial de pavello de l orella
+Q01460,reconstruccio total de melic
+Q01461,reconstruccio total del pavello de l orella | reconstruccio total de pavello de l orella
+Q01462,reconstruccion vaginal con expansor | reconstruccio vaginal amb expansor | reconstruccion vaginal amb expansor
+Q01463,reconstruccio vaginal amb plastia musculocutania | reconstruccio vaginal amb plastia musculocutania
+Q01464,reconstruccio vulvar despres de cirurgia oncologica
+Q01465,reparacio d eventracio amb penjall muscular
+Q01466,reparacio d extrofia vesical
+Q01467,sequestrectomia d os facial
+Q01468,sinusectomia frontal
+Q01469,sinusotomia frontal
+Q01470,tancament de fistula de la boca
+Q01471,tancament de fistula salival
+Q01474,comissurotomia de valvula mitral (oberta) [heart-port]
+Q01476,reemplacament de protesi de v mitral amb protesi biologica [heart-port] | reemplacament de protesi valvular mitral amb protesi biologica [heart-port]
+Q01477,reemplacament de protesi v mitral amb protesi mecanica (heart-port) | reemplacament de protesi valvular mitral amb protesi mecanica [heart-port]
+Q01478,reemplacament de protesi de v tricuspide amb protesi biologica [heart-port] | reemplacament de protesi valvular tricuspide amb protesi biologica [heart-port]
+Q01480,reemplacament de valvula mitral amb protesi biologica [heart-port]
+Q01481,reemplacament de valvula mitral amb protesi mecanica (heart`port) | reemplacament de valvula mitral amb protesi mecanica [heart-port]
+Q01482,reemplacament de valvula tricuspide ambprotesi biologica [heart-port]
+Q01484,reparacio de valvula mitral (heart-port) | reparacio de valvula mitral [heart-port]
+Q01485,reparacio de valvula tricuspide amb anell protetic (heart-port) | reparacio de valvula tricuspide amb anell protetic [heart-port]
+Q01487,tancament de cia (heart-port) | tancament de cia [heart-port]
+Q01488,cirurgia de neoplasies de cavitat oral | cirurgia de neoplasies de cavitat oral
+Q01489,col.locacio de via venosa central <local> | col.locacio de via venosa central <local>
+Q01490,descomprenssio d estenosi de canal lumbar | descompressio d estenosi de canal lumbar
+Q01491,drenatge d absces gluti
+Q01492,excisio de bursitis de colze | excisio de bursitis de colze
+Q01493,excisio de condilomes perianals | excisio de condilomes perianals
+Q01494,excisio de condilomes perianals <local>
+Q01495,excisio de gangli al canell | excisio de ganglio al canell
+Q01496,excisio de ganglio al canell  <local> | excisio de ganglio al canell <local>
+Q01498,excisio de lesio d orbita | excisio de lesio d orbita
+Q01499,excisio de lesio labial | excisio de lesio labial
+Q01500,excisio de lesio labial <local>
+Q01501,excisio de lesio lingual
+Q01502,excisio de lesio lingual <local>
+Q01503,excisio de lipoma | excisio de lipoma
+Q01504,excisio de lipoma <local> | excisio de lipoma <local> | excisio de lipoma <local>
+Q01505,excisio de teixit cerebral | excisio de teixit cerebral
+Q01506,excisio de tumor de parts toves: extremitat  inf. | excisio de tumor de parts toves: extremitat inf.
+Q01507,excisio de tumor de parts toves: extremitat inf <local> | excisio de tumor de parts toves: extremitat inf. <local>
+Q01508,excisio de tumor de parts toves: extremitat sup | excisio de tumor de parts toves: extremitat sup.
+Q01509,excisio de tumor de parts toves: extremitat sup <local> | excisio de tumor de parts toves: extremitat sup. <local>
+Q01510,excisio de tumor de parts toves: ma
+Q01511,escisio de tumor de parts toves:ma <local> | excisio de tumor de parts toves: ma <local>
+Q01512,excisio de tumor de parts toves: peu
+Q01513,excisio de tumor de parts toves: <local> | excisio de tumor de parts toves: peu <local>
+Q01514,excisio de tumor ossi: carpians i/o metacarpians
+Q01515,excisio de tumor ossi: cubit i radi
+Q01516,excisio de tumor ossi: femur | excisio de tumor ossi: femur
+Q01517,excisio de tumor ossi: humer
+Q01518,excisio de tumor ossi: pelvis | excisio de tumor ossi: pelvis
+Q01519,excisio de tumor ossi: rotula
+Q01520,excisio de tumor ossi: tarsians i/o metatarsians
+Q01521,excisio de tumor ossi: tibia i perone
+Q01522,excisio de tumor vertebral per via anterior | excisio de tumor vertebral per via anterior
+Q01523,excisio de tumor vertebral per via posterior
+Q01524,excisio d hal.lux valgus | excisio d hal.lux valgus
+Q01525,extraccio de cos estrany al colze
+Q01526,extraccio de cos estrany al colze <local>
+Q01527,extraccio de cos estrany al peu | extraccio de cos estrany al peu
+Q01528,extraccio de cos estrany al peu <local>
+Q01529,extraccio de derivacio ventriculo-peritoneal | extraccio de derivacio ventriculo-peritoneal
+Q01530,extraccio de mo de carpians i/o metacarpians | extraccio de mo de carpians i/o metacarpians
+Q01531,extraccio de mo de columna per via anterior
+Q01532,extraccio de mo de columna per via posterior | extraccio de mo de columna per via posterior
+Q01533,extraccio de m.o. de cubit i/o radi | extraccio de mo de cubit i/o radi
+Q01534,extraccio de mo de cubit/io radi: agulles k | extraccio de mo de cubit i/o radi: agulles de kirschner
+Q01535,extraccio de mo de cubit i/o radi: placa
+Q01536,extraccio de mo de falanges de la ma
+Q01537,extraccio de mo de falanges del peu | extraccio de mo de falanges del peu
+Q01538,extraccio de m.o. de fermur | extraccio de mo de femur
+Q01539,extraccio de mo de femur:clau endomedul.lar | extraccio de mo de femur: clau endomedul.lar
+Q01540,extraccio de mo de femur: clau endomedul.lar retrograd
+Q01541,extraccio de mo de femur: clau-placa lliscant | extraccio de mo de femur: clau-placa lliscant
+Q01542,extraccio de mo de femur: placa
+Q01543,extraccio de mo pelvis | extraccio de mo de pelvis
+Q01544,extraccio de mo de rotula
+Q01545,extraccion de m.o. de tarsianos y/o metatarsianos | extraccio de mo de tarsians i/o metatarsians | extraccio de m.o. de tarsians i/o metatarsians
+Q01546,extraccio de mo de tibia i7o perone | extraccio de mo de tibia i/o perone
+Q01547,estraccio de mo de tibia i/o perone:: clau endomedul.lar | extraccio de mo de tibia i/o perone: clau endomedul.lar
+Q01548,extraccion m.o. de tibia i/o perone: placa y/o tornillo | extraccio de mo de tibia i/o perone: placa i/o cargol | extraccio m.o. de tibia i/o perone: placa i/o cargol
+Q01549,extraccio de mo d humer | extraccio de mo d humer
+Q01550,extraccio de mo d humer. agulles k | extraccio de mo d humer: agulles de kirschner
+Q01551,extraccio de mo d humer: clau endomedul.lar
+Q01552,extraccio de mo d humer: placa | extraccio de mo d humer: placa
+Q01553,gastrostomia (per laparotomia | gastrostomia (per laparotomia)
+Q01554,ileotransversostomia | ileotransversostomia
+Q01555,ileotransversostomia (laparoscopia) | ileotransversostomia (per laparoscopia)
+Q01556,implantacio d estimulador vagal | implantacio d estimulador cortical cerebral
+Q01557,lobectomia cerebral
+Q01558,mapeig cerebral: motor i de llenguatge
+Q01559,neteja de ferida d esternotomia | neteja de ferida d esternotomia
+Q01560,operacio drez per a lesions medul.lars
+Q01561,osteosintesi de rotula | osteosintesi de rotula
+Q01562,pancreatocisto-gastrostomia (laparoscopia) | pancreatocisto-gastrostomia (per laparoscopia)
+Q01563,puncio lumbar diagnostica <local> | puncio lumbar diagnostica <local>
+Q01565,reparacion de lesion de plexo braquial | reparacio de lesio de plexe braquial | reparacio de lesio de plexe braquial
+Q01566,reparacio de pseudoartrosi de perone: curetatge i osteosintesi
+Q01567,reseccio d escafoide del carp
+Q01568,reseccio d escafoide del tars
+Q01569,revisio d hipospadies
+Q01570,septoplastia ventricular | septoplastia ventricular
+Q01571,talamotomia estereotactica
+Q01572,tancament de vesicostomia (cistostomia)
+Q01573,tenotomia de tendo d`aquil.les | tenotomia de tendo d aquil.les
+Q01574,biopsia d adenopatia axil.lar <local>
+Q01575,biopsia de adenopatia cervical <local> | biopsia d adenopatia cervical <local> | biopsia d adenopatia cervical <local>
+Q01576,biopsia d adenopatia inguinal <local> | biopsia d adenopatia inguinal <local>
+Q01577,biopsia de cavum | biopsia de cavum
+Q01578,biopsia gingival
+Q01579,biopsia gingival <local>
+Q01580,biopsia labial
+Q01581,biopsia labial <local>
+Q01582,biopsia lingual
+Q01583,biopsia lingual <local>
+Q01584,biopsia muscular
+Q01585,biopsia muscular <local> | biopsia muscular <local>
+Q01586,biopsia ossia d extremitat inferior  <local> | biopsia ossia d extremitat inferior <local>
+Q01587,biopsia ossia d extremitat superior <local>
+Q01588,col.locacio de cateter peritoneal <local> | col.locacio de cateter peritoneal <local>
+Q01589,col.locacio de cateter venos per a hd | col.locacio de cateter venos per a hd (perm-cath)
+Q01590,col.locacio de cateter venos per a hd  (perm-cath) <local> | col.locacio de cateter venos per a hd (perm-cath) <local>
+Q01591,col.locacio de reservori subcutani per a medicacio (port-a-cath) | col.locacio de reservori subcutani per a medicacio (port-a-cath)
+Q01592,colocacion de reservorio subcutaneo para medicacion(port-a-cath) <local> | col.locacio de reservori subcutani per a medicacio (port-a-cath) <local> | col.locacio de reservori subcutani per a medicacio (port-a-cath) <local>
+Q01594,excisio de diverticle uretral | excisio de diverticle uretral
+Q01595,excisio de lesio de paret toracica | excisio de lesio de paret toracica
+Q01596,excisio de polip anal | excisio de polip anal
+Q01597,excisio de polip gastric
+Q01598,excisio de polip rectal
+Q01599,excisio de tumor de mesenteri
+Q01600,excisio d hidrosadenitis axil.lar | excisio d hidrosadenitis axil.lar
+Q01601,excisio d hidrosadenitis inguinal
+Q01602,excisio d ulcera de talo de pressio + penjall cutani
+Q01603,extraccio de cateter peritoneal <local>
+Q01604,extraccio de coaguls intravesicals (percistoscopia)
+Q01605,extraccio de coaguls intravesicals (percistotomia)
+Q01606,extraccio de cos estrany intravesical (per cistoscopia) | extraccio de cos extrany intravesical (per cistoscopia)
+Q01607,extraccio de cos estrany intravesical (per cistotomia) | extraccio de cos extrany intravesical (per cistotomia)
+Q01608,extraccio de dtt <local>
+Q01609,extraccio de mo de carpians i/o metacarpians  <local> | extraccio de mo de carpians i/o metacarpians <local>
+Q01610,extraccio de mo de cubit i/o radi <local> | extraccio de mo de cubit i/o radi <local>
+Q01611,extraccio de mo de falanges de la ma <local>
+Q01612,extraccio de mo de falanges del peu<local> | extraccio de mo de falanges del peu <local>
+Q01613,extraccio de mo de tarsians i/o metatarsians <local>
+Q01614,extraccio de mo de tibia i/o perone <local>
+Q01615,extraccio de tamponament nasal <local>
+Q01616,extraccio quirurgica de dent | extraccio quirurgica de dent
+Q01617,jejunostomia
+Q01619,protesi total de maluc: de superficie
+Q01620,recanvi parcial de protesi t de maluc: cotila | recanvi de protesi total de maluc: cotila
+Q01621,reconstruccio d areola i de mugro <local> | reconstruccio de mugro <local>
+Q01622,reduccio (oberta) de luxacio de colze | reduccio (oberta) de luxacio de colze
+Q01623,reduccio (tancada) de luxacio de colze | reduccio (tancada) de luxacio de colze
+Q01624,regularitzacio d amputacio traumatica de dit de la ma | regularitzacio d amputacio traumatica de dit de la ma
+Q01625,reparacio de dit del peu de martell <local>
+Q01626,reparacio de dit del peu d urpa <local> | reparacio de dit del peu d urpa <local>
+Q01627,reparacio d estenosi ureteral | reparacio d estenosi ureteral
+Q01628,reseccio parcial d intesti gros | reseccio parcial d intesti gros
+Q01629,reseccio parcial d intesti gros (laparoscopia) | reseccio parcial d intesti gros (per laparoscopia)
+Q01630,simpatectomia toracica unilateral (per toracotomia)
+Q01631,simpatectomia toracica unilateral (per vtc) | simpatectomia toracica unilateral (per vtc)
+Q01632,sutura de laceracio d esofag | sutura de laceracio d esofag
+Q01633,sutura de laceracio d estomac | sutura de laceracio d estomac
+Q01634,tancament de laringostomia <local>
+Q01635,tancament de traqueostomia <local>
+Q01637,turbinectomia <local>
+Q01638,alliberament de cicatriu de la ma
+Q01639,alliberament de tenosinovitis de dequervain
+Q01640,aplicacio d al.loempelt ossi | aplicacio d al.loempelt ossi
+Q01641,aplicacion de autoinjerto oseo | aplicacio d autoempelt ossi | aplicacio d autoempelt ossi
+Q01642,aplicacio de bmp | aplicacio de bmp
+Q01643,artrotomia i drenatge de canell
+Q01644,artrotomia i drenatge de colze
+Q01645,artrotomia i drenatge de genoll
+Q01646,artrotomia i drenatge de maluc
+Q01647,artrotomia i drenatge de turmell
+Q01648,artrotomia i drenatge d espatlla
+Q01649,biopsia d adenopatia supraclavicular <local> | biopsia d adenopatia supraclavicular <local>
+Q01650,biopsia de pell i teixit subcutani
+Q01651,biopsia de pell i teixit subcutani <local>
+Q01652,biopsia ossia facial | biopsia ossia facial
+Q01653,biopsia ossia facial <local>
+Q01654,biopsia peritoneal o de tumoracion peritoneal | biopsia peritoneal o de tumoracio peritoneal
+Q01655,biopsia peritoneal o de tumoracio peritoneal (laparoscopia) | biopsia peritoneal o de tumoracio peritoneal (per laparoscopia)
+Q01656,biopsia rectal | biopsia rectal
+Q01657,biopsia rectal <local>
+Q01658,curetatge d encondroma | curetatge d encondroma
+Q01659,desbridament i neteja de ferida de paret abdominal
+Q01660,desbridament i neteja de ferida de paret toracica
+Q01661,desbridament i neteja de ferida d extremitat inferior
+Q01663,desbridament i neteja de ferida facial i de crani | desbridament i neteja de ferida facial i de crani
+Q01664,drenatge de bursitis de colze
+Q01665,drenatge de bursitis de genoll
+Q01666, cirurgia oberta per sindrome dolor trocanteri | drenatge de bursitis de maluc
+Q01667,embolectomia d extremitat inferior | embolectomia d extremitat inferior
+Q01668,excisio de gangli limfatic supraclavicular | excisio de gangli limfatic supraclavicular
+Q01669,excisio de lesio de mucosa oral
+Q01670,excisio de lesio de mucosa oral <local>
+Q01671,excisio de liposarcoma | excisio de liposarcoma
+Q01672,excisio de neuroma de cap i coll
+Q01673,excisio de neuroma d extremitat inferior | excisio de neuroma d extremitat inferior
+Q01674,excisio de neuroma d extremitat superior
+Q01675,excisio de quist de vulva o perineu
+Q01676,excision de quiste maxilar | excisio de quist maxil.lar | excisio de quist maxil.lar
+Q01677,excisio de tumoracio peritoneal | excisio de tumoracio peritoneal
+Q01678,excision de tumoracion peritoneal (laparoscopia) | excisio de tumoracio peritoneal (per laparoscopia) | excisio de tumoracio peritoneal (laparoscopia)
+Q01679,extraccio de cateter venos per a hd | extraccio de cateter venos per a hd (permcath)
+Q01680,extraccio de cos extrany rectal | extraccio de cos estrany rectal
+Q01681,extraccio de derivacio ventricular externa
+Q01682,extraccio de filferros d esternotomia
+Q01683,extraccio de malla intolerada de paret abdominal | extraccio de malla intolerada de paret abdominal
+Q01684,extraccio de protesi de colze
+Q01685,extraccio de protesi de genoll (sense recanvi) | extraccio de protesi de genoll
+Q01686,extraccio de protesi de maluc (sense recanvi) | extraccio de protesi de maluc
+Q01687,extraccio de protesi de turmell (sense recanvi) | extraccio de protesi de turmell
+Q01688,extraccio de protesi d espatlla (sense recanvi) | extraccio de protesi d espatlla
+Q01693,extraccio d organs: intesti prim
+Q01694,extraccio d organs: pancrees
+Q01695,neteja quirurgica d infeccio de proteside colze
+Q01696,neteja quirurgica d infeccio de proteside genoll | neteja quirurgica d infeccio de proteside genoll
+Q01697,neteja quirurgica d infeccio de proteside turmell
+Q01698,neteja quirurgica d infeccio de protesid espatlla
+Q01699,reduccio (oberta) de luxacio de peu o turmell | reduccio (oberta) de luxacio de peu o de turmell
+Q01700,reduccio (tancada) de luxacio de peu o de turmell | reduccio (tancada) de luxacio de peu o de turmell
+Q01701,reparacio de fractura alveolar amb filferros
+Q01702,reparacio de pseudoartrosi de cubit: curetatge i osteosintesi
+Q01703,reparacio de pseudoartrosi de femur: curetatge i osteosintesi
+Q01704,reparacio de pseudoartrosi de humer: curetatge i isteosintesi | reparacio de pseudoartrosi de humer: curetatge i osteosintesi
+Q01705,reparacio de pseudoartrosi de radi: curetatge i osteosintesi
+Q01706,reparacio de pseudoartrosi de tibia: curetatge i osteosintesi
+Q01707,revisio de derivacio ventricular externa | revisio de derivacio ventricular externa
+Q01708,revisio d esfinter urinari artificial
+Q01709,revisio d hemorragia postoperatoria de camp tiroidal
+Q01710,revisio d hemorragia postoperatoria de cavitat abdominal | revisio d hemorragia postoperatoria de cavitat abdominal
+Q01711,revisio d hemorragia postoperatoria de cirurgia cardiaca | revisio d hemorragia postoperatoria de cirurgia cardiaca
+Q01712,revisio d hemorragia postoperatoria de mama | revisio d hemorragia postoperatoria de mama
+Q01713,revisio d hemorragia postoperatoria de paret abdominal | revisio d hemorragia postoperatoria de paret abdominal
+Q01714,revisio d hemorragia postoperatoria de paret toracica | revisio d hemorragia postoperatoria de paret toracica
+Q01715,revisio d hemorragia postoperatoria de vulva o perineu
+Q01716,revisio o extraccio de dai | revisio o extraccio de dai
+Q01717,sutura de ferida cutania de paret abdominal | sutura de ferida cutania de paret abdominal
+Q01718,sutura de ferida cutania de paret abdominal <local> | sutura de ferida cutania de paret abdominal <local>
+Q01719,sutura ferida cutania de paret toracica | sutura de ferida cutania de paret toracica
+Q01720,sutura de ferida cutania de paret toracica <local>
+Q01721,sutura de ferida cutania d extremitat inferior | sutura de ferida cutania d extremitat inferior
+Q01722,sutura de ferida cutania d extremitat inferior <local>
+Q01723,sutura de ferida cutania d extremitat superior | sutura de ferida cutania d extremitat superior
+Q01724,sutura de ferida cutania d extremitat superior <local> | sutura de ferida cutania d extremitat superior <local>
+Q01725,sutura de ferida cutania facial | sutura de ferida cutania facial
+Q01726,sutura de ferida cutania facial <local>
+Q01727,sutura de ferida de cuir cabellut (scalp)
+Q01728,sutura de ferida de cuir cabellut (scalp) <local>
+Q01729,sutura de laceracio de diafragma | sutura de laceracio de diafragma
+Q01730,sutura o reinsercio de tendo patel.lar | sutura o reinsercio de tendo patel.lar
+Q01731,alliberament d adherencies uterines | alliberament d adherencies uterines
+Q01732,biopsia de vulva
+Q01733,biopsia de vulva <local> | biopsia de vulva <local>
+Q01734,biopsia ossia de columna vertebral
+Q01735,biopsia ossia de columna vertebral <local>
+Q01736,biopsia ossia de pelvis
+Q01737,biopsia ossia de pelvis <local>
+Q01738,colpectomia
+Q01739,colpo-sacrofixacio de cupula vaginal | colpo-sacrofixacio de cupula vaginal
+Q01740,excisio de lesio de vulva o perineu | excisio de lesio de vulva o perineu
+Q01741,excisio de lesio cutania de penis
+Q01742,excisio de lesio cutania de penis <local>
+Q01743,reparacio de pectus excavatum
+Q01744,alveoloplastia
+Q01745,amputacio nasal | amputacio nasal
+Q01746,avancament maxil.lar | avancament maxil.lar
+Q01747,biopsia de mucosa oral
+Q01748,biopsia de mucosa oral <local>
+Q01749,biopsia de paladar dur | biopsia de paladar dur
+Q01750,biopsia de paladar tou i d uvula
+Q01751,biopsia de paladar tou i d uvula <local>
+Q01752,correccio de fissura palatina
+Q01753,desinsercio de musculatura epicondilia
+Q01754,drenatge de la cara i del sol de la boca
+Q01755,empelt cutani a llavi i cavitat oral | empelt cutani a llavi i cavitat oral
+Q01756,excisio de carcinoma del paladar i reconstruccio amb penjall pediculat
+Q01757,excisio de ganglio al turmell
+Q01758,excisio de ganglio al turmell <local>
+Q01759,excision de lesion cutanea | excisio de lesio cutania | excisio de lesio cutania
+Q01760,excisio de lesio cutania de vulva | excisio de lesio cutania de vulva
+Q01761,excisio de lesio del paladar tou | excisio de lesio del paladar tou
+Q01762,excisio de lesio d esofag | excisio de lesio d esofag
+Q01763,excisio de lesio gingival
+Q01764,excisio de lesio gingival <local>
+Q01765,excisio de lesio muscular | excisio de lesio muscular
+Q01766,excisio de lesio muscular <local> | excisio de lesio muscular <local>
+Q01767,excisio de lesio odontogenica | excisio de lesio odontogenica
+Q01768,excisio de leucoplasia al sol de la boca
+Q01769,excisio de tumor al biceps braquial
+Q01770,excisio de tumor labial
+Q01771,excisio de tumor pleural | excisio de tumor pleural
+Q01772,excisio de xantelasmes
+Q01773,excisio de xantelasmes <local>
+Q01774,excicisio d ulcera d extremitat inferiro + penjall cutani | excisio d ulcera d extremitat inferior + penjall cutani
+Q01775,exenteracio d orbita i excisio d os orbitari
+Q01776,extraccio de diu (histeroscopia) | extraccio de diu extrauteri per histeroscopia
+Q01777,extraccio de mo d un os facial | extraccio de mo d un os facial
+Q01778,extraccio de punts de sutura corneal | extraccio de punts de sutura corneal
+Q01779,extraccio de punts de sutura corneal <local>
+Q01780,fetoscopia i coagulacio de comunicacions placentaries amb laser | fetoscopia i coagulacio de comunicacions placentaries amb laser
+Q01781,frenectomia labial
+Q01782,frenectomia labial <local>
+Q01783,genioplastia d augment
+Q01784,genioplastia de reduccio
+Q01785,hepatectomia de donant viu + trasplantament de fetge (domino)
+Q01786,hepatectomia reglada (laparoscopia) | hepatectomia reglada (per laparoscopia) | hepatectomia reglada (laparoscopia)
+Q01787,implante dental intraoseo | implant dental intraossi | implant dental intraossi
+Q01788,implant sintetic en un os facial | implant sintetic en un os facial
+Q01789,implantacio de marcapas ddd/vdd
+Q01790,implantacio de marcapas vvi
+Q01792,insercio de dispositiu cranial de traccio vertebral | insercio de dispositiu cranial de traccio vertebral
+Q01793,laparoscopia diagnostica per esterilitat
+Q01794,mastectomia subtotal | mastectomia subtotal
+Q01795,orbitotomia amb penjall ossi
+Q01796,ostectomia total d os facial amb reconstruccio simultania
+Q01797,osteotomia de maxil.lar superior | osteotomia de maxil.lar superior
+Q01798,"reconstruccio total del nas, amb penjall"
+Q01799,reduccio (oberta) de fractura malar i d arc zigomatic | reduccio (oberta) de fractura malar i d arc zigomatic
+Q01800,reduccio (oberta) de fractura mandibular | reduccio (oberta) de fractura mandibular
+Q01801,reduccio (oberta) de fractura maxil.lar | reduccio (oberta) de fractura maxil.lar
+Q01802,reduccio (oberta) de fractura nasal
+Q01803,reduccio (oberta) de fractura orbitaria | reduccio (oberta) de fractura orbitaria
+Q01804,reduccio (oberta) de luxacio temporo-mandibular | reduccio (oberta) de luxacio temporo-mandibular
+Q01805,reduccio (tancada) de fractiura malar id arc zigomatic | reduccio (tancada) de fractura malar i d arc zigomatic
+Q01806,reduccio (tancada) de fractura mandibular | reduccio (tancada) de fractura mandibular
+Q01807,reduccio (tancada) de fractura maxil.lar | reduccio (tancada) de fractura maxil.lar
+Q01808,reduccio (tancada) de luxacio temporo-mandibular
+Q01809,reduccio de prolapse hemorroidal | reduccio de prolapse hemorroidal
+Q01810,reparacio de dehiscencia de ferida operatoria de mama | reparacio de dehiscencia de ferida operatoria de mama
+Q01811,reparacio de dit de la ma de ressort | reparacio de dit de la ma de ressort
+Q01812,reparacio de dit de la ma de ressort <local>
+Q01813,reparacio de fistula de lcr (per craniotomia) | reparacio de fistula de lcr (per craniotomia)
+Q01814,reparacio de fistula de lcr (per via transesfenoidal) | reparacio de fistula de lcr (per via transesfenoidal)
+Q01815,reparacio de fistula de lcr a nivell espinal
+Q01816,reparacio d evisceracio | reparacio d evisceracio
+Q01817,reparacio d hernia lumbar
+Q01818,revisio de protesi mamaria | revisio de protesi mamaria
+Q01819,sondatge de conducte salival
+Q01820,sutura d arteria | sutura d arteria
+Q01821,sutura d arteria <local> | sutura d arteria <local>
+Q01822,sutura de laceracio de paladar | sutura de laceracio de paladar
+Q01824,sutura de laceracio d orella
+Q01825,sutura de laceracio d orella <local> | sutura de laceracio d orella <local>
+Q01826,sutura de laceracio labial | sutura de laceracio labial
+Q01827,sutura de laceracio labial <local>
+Q01828,sutura de laceracio lingual | sutura de laceracio lingual
+Q01829,sutura de laceracio lingual <local>
+Q01830,sutura de vena | sutura de vena
+Q01831,sutura de vena <local> | sutura de vena <local>
+Q01832,tancament de fistula branquial
+Q01833,tancament de fistula faringo-esofagica
+Q01834,tancament de fistula oro-antral
+Q01835,tancament de fistula oro-nasal
+Q01836,estapedectomia <local> | estapedectomia <local>
+Q01837,excisio de glom carotidi | excisio de glom carotidi
+Q01838,extraccio de cos estrany al segment anterior de l ull
+Q01839,extraccio de cos estrany al segment anterior de l ull <local>
+Q01840,extraccio de mo de clavicula
+Q01841,extraccio de mo de clavicula <local>
+Q01842,extraccio de mo d escapula
+Q01843,extraccio de mo d escapula <local>
+Q01844,extraccio de mo d estern i/o costelles
+Q01846,extraccio de tamponament nasal
+Q01847,panendoscopia orl:faringo-esofagoscopia + laringoscopia | panendoscopia orl: faringo-esofagoscopia + laringoscopia
+Q01848,reemplacament de tamponament nasal
+Q01849,reseccio transuretral (rtu) de bufeta +bvm | reseccio transuretral (rtu) de bufeta +bvm
+Q01850,septoplastia + turbinectomia | septoplastia + turbinectomia
+Q01851,sutura de laceracio de laringe
+Q01852,sutura de laceracio de traquea
+Q01853,timectomia | timectomia
+Q01854,reduccio (oberta) de fractura-luxacio d espatlla | reduccio (oberta) de luxacio d espatlla
+Q01855,revisio de colostomia | revisio de colostomia
+Q01856,revisio d ileostomia | revisio d ileostomia
+Q01857,sutura de capsula o lligament de ma i canell | sutura de capsula o lligament de ma i canell
+Q01858,sutura de capsula o lligament de ma i canell <local>
+Q01859,ureterectomia parcial | ureterectomia parcial
+Q01860,ureterectomia total | ureterectomia total
+Q01861,enterotomia i extraccio de betzoar
+Q01862,fixador extern de cubit i/o radi | fixador extern de cubit i/o radi
+Q01863,fixador extern de femur | fixador extern de femur
+Q01864,fixador extern de turmell | fixador extern de turmell
+Q01865,fixador extern d humer | fixador extern d humer
+Q01866,osteosintesi de metatarsians: agulles k | osteosintesi de metatarsians: agulles k
+Q01867,osteosintesi de metatarsians: placa de minifragments | osteosintesi de metatarsians: placa de minifragments
+Q01868,osteosintesi de pelvis: placa sacroiliaca
+Q01869,osteosintesi d humer: agulles de rusch [kapandji]
+Q01870,protesi de cap de radi | protesi de cap de radi
+Q01871,reduccio (oberta) de luxacio de genoll | reduccio (oberta) de luxacio de genoll
+Q01872,reduccio (oberta) de luxacio d espatlla
+Q01873,reduccio (tancada) de luxacio de genoll | reduccio (tancada) de luxacio de genoll
+Q01874,canvi de generador de marcapas bicameral  <local> | canvi de generador de marcapas bicameral <local>
+Q01875,canvi de generador de marcapas tricameral <local> | canvi de generador de marcapas tricameral <local>
+Q01876,canvi de generador de marcapas unicameral <local> | canvi de generador de marcapas unicameral <local>
+Q01877,implantacio de marcapas unicameral <local>
+Q01878,implantacio de marcapas bicameral <local>
+Q01879,implantacio de marcapas tricameral <local>
+Q01880,implantacio de marcapas unicameral
+Q01881,implantacio de marcapas unicameral per toracotomia
+Q01882,implantacio de marcapas bicameral | implantacio de marcapas bicameral
+Q01883,implantacio de marcapas bicameral per toracotomia
+Q01884,implantacio de marcapas tricameral | implantacio de marcapas tricameral
+Q01885,implantacio de marcapas tricameral per toracotomia
+Q01886,reparacio de fistula vesico-cutania | reparacio de fistula vesico-cutania
+Q01887,esclerectomia no perforant + implant | esclerectomia no perforant + implant
+Q01888,esclerectomia no perforant + implant + facoemulsificacio  + lio | esclerectomia no perforant + implant + facoemulsificacio + lio
+Q01889,anoscopia | exploracio anal | anoscopia
+Q01890,exploracio manual de cavitat uterina despres de part | exploracio manual de cavitat uterina despres del part
+Q01891,extraccio de reservori subcutani per a medicacio (port-a-cath)
+Q01892,extraccion de reservorio subcutanio para medicacion (port a cath) <local> | extraccio de reservori subcutani per a medicacio (port-a-cath) <local> | extraccio de reservori subcutani per a medicacio (port a cath)  <local>
+Q01893,extraccio manual de placenta retinguda | extraccio manual de placenta retinguda
+Q01894,part amb extraccio parcial de natges
+Q01895,part amb extraccio total de natges
+Q01896,part assistit amb forceps alt amb episiotomia
+Q01897,part assistit amb forceps baix amb episiotomia
+Q01899,part eutocic assistit manualmet | part eutocic assistit manualment
+Q01900,tiroidectomia substernal total (per goll endotoracic)
+Q01905,col.locacio de protesi humero-axil.lar per a dialisi | col.locacio de protesi humero-axil.lar per a dialisi
+Q01906,col.locacio de protesi femoro-safena per a dialisi | col.locacio de protesi femoro-safena per a dialisi
+Q01907,revisio de protesi humero-axil.lar per a dialisi
+Q01908,revisio de protesi femoro-safena per a dialisi
+Q01909,extraccio de protesi humero-axil.lar per a dialisi
+Q01910,extraccio de protesi femoro-safena per a dialisi
+Q01911,revisio de derivacio vascular periferica d extremitat inferior | revisio de derivacio vascular periferica d extremitat inferior
+Q01912,revisio de derivacio vascular periferica d extremitat superior
+Q01913,ileo-jejunostomia | ileo-jejunostomia
+Q01914,extraccio manual de placenta | extraccio manual de placenta
+Q01915,revisio manual de cavitat uterina per hemorragia postpart | revisio manual de cavitat uterina per hemorragia postpart
+Q01916,sutura de dehiscencia de cicatriu uterina anterior
+Q01917,legrat per avortament en curs | legrat per avortament en curs
+Q01918,lligadura d arteries hipogastriques
+Q01919,desbridament d absces de vulva | desbridament d absces de vulva
+Q01920,suturacio de laceracio de vagina | sutura de laceracio de vagina
+Q01921,sutura de laceracio de vulva o perineu
+Q01922,alliberament de torsio de quist d ovari
+Q01923,alliberament de torsio de quist d ovari(laparoscopia) | alliberament de torsio de quist d ovari(laparoscopia)
+Q01924,destruccion de tumor hepatico con radiofrecuencia | destruccio de tumor hepatic amb radiofrequencia | destruccio de tumor hepatic amb radiofrequencia
+Q01925,destruccio de tumor hepatic amb radiofrequencia (laparoscopia) | destruccio de tumor hepatic amb radiofrequencia (laparoscopia)
+Q01926,coledoco-enterostomia
+Q01927,duodenotomia | duodenotomia
+Q01928,reparacio de lesio d aorta (excepte aneurisma) amb endoprotesi
+Q01929,reparacio de vies biliars
+Q01930,revisio d anastomosi de vies biliars
+Q01931,sutura de capsula o lligament de peu i turmell <local>
+Q01932,sutura de laceracio nasal <local> | sutura de ferida nasal <local>
+Q01933,sutura d ulcera duodenal | sutura d ulcera duodenal
+Q01934,derivacio urinaria ortotopica continent(neobufeta ileal)
+Q01937,ureterostomia cutania | ureterostomia cutania
+Q01938,extraccio d organs: ronyo dret
+Q01939,extraccio d organs: ronyo esquerre
+Q01940,extraccio d organs: pulmo esquerre
+Q01941,extraccio de protesi de penis | extraccio de protesi de penis
+Q01942,biopsia testicular (abierta) | biopsia testicular (oberta) | biopsia testicular (oberta)
+Q01943,col.locacio de ferula de guix a extremitat inferior
+Q01944,col.locacio de ferula de guix a extremitat superior
+Q01945,osteosintesi de femur: clau endomedul.lar  curt [gamma 3] | osteosintesi de femur: clau endomedul.lar curt [gamma 3]
+Q01946,osteosintesi de femur: clau endomedul.lar curt [tfn]
+Q01947,apendicectomia (laparoscopia i reconversio) | apendicectomia (laparoscopia i reconversio)
+Q01948,biopsia de penis
+Q01949,biopsia de penis <local>
+Q01950,colecistectomia (laparoscopia i reconversio) | colecistectomia (laparoscopia i reconversio)
+Q01951,drenatge d absces perirenal
+Q01952,esofagostomia cervical | esofagostomia cervical
+Q01953,excisio de gangli limfatic ilio-inguinal | excisio de gangli limfatic ilio-inguinal
+Q01954,excisio de gangli limfatic ilio-inguinal (laparoscopia) | excisio de gangli limfatic ilio-inguinal (laparoscopia)
+Q01955,excisio de recidiva tumoral en neobufeta ileal
+Q01956,nefrectomia parcial per traumatisme
+Q01957,nefrectomia total per traumatisme
+Q01958,pancreatectomia corporocaudal | pancreatectomia corporocaudal
+Q01959,plastia conjuntival | plastia conjuntival
+Q01960,plastia palpebral | plastia palpebral
+Q01961,recanvi de sonda de nefrostomia
+Q01962,recanvi de sonda de nefrostomia <local> | recanvi de sonda de nefrostomia <local>
+Q01963,colostomia  (assistida per laparoscopia) | colostomia (assistida per laparoscopia)
+Q01964,drenatge d absces perineal
+Q01965,histerectomia vag + suspensio uretro-vaginal suprapubica | histerectomia vag + suspensio uretro-vaginal suprapubica
+Q01966,revisio d anastomosi uretero-intestinal
+Q01967,revisio d hemorragia postoperatoria de zona parotidia | reviso d hemorragia postoperatoria de zona parotidia
+Q01968,uretrectomia | uretrectomia
+Q01969,aspiracio diagnostica de vitri
+Q01970,"extraccio d esfinter uretral artificial, sense reemplacament"
+Q01971,gastrectomia de maniga (sleeve)
+Q01972,injeccio intravitria
+Q01973,orquiectomia (laparoscopia) | orquiectomia (laparoscopia)
+Q01974,revisio de monyo d amputacio d extremitat superior <local>
+Q01975,substitucio d esfinter uretral artificial
+Q01976,tumorectomia renal
+Q01977,tumorectomia renal (laparoscopia)
+Q01978,histerectomia  abd + biopsia preoperatoria d ovari
+Q01979,laparoscopia diagnostica + biopsia d endometri
+Q01980,laparotomia diagnostica + biopsia d endometri
+Q01981,laparoscopia diagnostica + biopsia preoperatoria d ovari
+Q01982,laparotomia diagnostica + biopsia preoperatoria d ovar
+Q01983,excisio de quist uracal de paret abdominal
+Q01984,omfalectomia
+Q01985,excisio de l urac
+Q01986,canvi d electrode de neurostimulador sacre (incontinencia anal)
+Q01987,excisio de tumor de paret abdominal
+Q01988,excisio de tumor gluti
+Q01989,excisio de tumor rectal
+Q01990,extraccio de malla intolerada de paret abdominal <local>
+Q01991,revisio de neurostimulador sacre (incontinencia anal)
+Q01992,alliberament d adherencies de faringe
+Q01993,artrolisi de colze
+Q01994,artolisis de hombro | artrolisi d espatlla
+Q01995,artroplastia de dits del peu
+Q01997,cirurgia del clitoris
+Q01998,dilatacio de l esfinter anal
+Q01999,drenatge de bursitis d espatlla
+Q02000,endarterectomia abdominal
+Q02001,endarterectomia aortica
+Q02002,endarterectomia d extremitat inferior
+Q02003,endarterectomia d extremitat superior
+Q02004,esternotomia descomprensiva
+Q02005,excisio uretrocele
+Q02006,excisio de diverticle de bufeta urinaria (cistoscopia)
+Q02007,excisio de lesio de muscul de la ma
+Q02008,excisio de lesio de paladar dur
+Q02009,excisio de lesio de parts toves de la ma
+Q02010,excisio de lesio de penis
+Q02011,excisio de lesio de penis <local>
+Q02012,excisio de lesio de recte
+Q02013,excision de lesion de escroto | excisio de lesio d escrot
+Q02014,excisio de lesio d escrot <local>
+Q02015,excisio de lesio d orella mitjana
+Q02016,excisio de lesio nasal
+Q02017,excisio de lesio nasal <local>
+Q02018,excisio de mugro
+Q02019,exploracio rectal
+Q02021,extraccio de cerclatge uteri <local>
+Q02022,extraccio de cos estrany al genoll
+Q02023,extraccio de cos estrany d amigdala o adenoides
+Q02024,extraccio de cos estrany d amigdala o adenoides <local>
+Q02025,extraccio de cos estrany de faringe
+Q02026,extraccio de cos estrany de matriu
+Q02027,extraccio de cos estrany de traquea i/obronquis
+Q02028,extraccio de cos estrany de vagina
+Q02029,extraccio de cos estrany d estomac
+Q02030,extraccio de cos estrany d intesti gros
+Q02031,exeresi quist uretral
+Q02032,extraccio de cos estrany penetrant a l ull
+Q02033,extraccio de cos estrany penetrant a l ull <local>
+Q02034,incisio i drenatge de l espai palmar o tenar
+Q02035,osteosintesi de cubit i/o radi (sense reduccio de fractura)
+Q02036,osteosintesi de femur (sense reduccio de fractura)
+Q02037,osteosintesi de tibia i/o perone (sensereduccio de fractura)
+Q02038,osteosintesi d humer (sense reduccio defractura)
+Q02041,quistectomia hepatica (laparoscopia)
+Q02042,reduccio (tancada) de fractura de carp i/o metacarp
+Q02043,reduccio (tancada) de fractura de cubiti/o radi
+Q02044,reduccio (tancada) de fractura de dits de la ma
+Q02045,reduccio (tancada) de fractura de dits del peu
+Q02046,reduccio (tancada) de fractura de femur
+Q02047,reduccio (tancada) de fractura de tars i/o metatars
+Q02048,reduccio (tancada) de fractura de tibiai/o perone i
+Q02049,reduccio (tancada) de fractura d humer
+Q02050,reparacio de ferida orbitaria
+Q02051,reparacio de ferida orbitaria <local>
+Q02052,reparacio de fistula escleral
+Q02053,reparacio de laceracio corneal amb empelt conjuntival
+Q02054,reseccio segmentaria multiple d intestigros
+Q02055,reseccion segmentaria multiple de intestino grueso (laparoscopia) | reseccio segmentaria multiple d intestigros (laparoscopia)
+Q02056,reseccio segmentaria multiple d intestiprim
+Q02057,reseccio segmentaria multiple d intestiprim (laparoscopia)
+Q02058,revisio d anastomosi d estomac
+Q02059,revisio d anastomosi d estomac (laparoscopia)
+Q02060,revisio d anastomosi d intesti gros
+Q02061,revisio d anastomosi d intesti gros (laparoscopia)
+Q02062,revisio d anastomosi d intesti prim
+Q02063,revisio d anastomosi d intesti prim (laparoscopia)
+Q02064,revisio de cavitat orbitaria despres d enucleacio o d evisceracio
+Q02065,revisio de mastoidectomia
+Q02066,revisio de timpanoplastia
+Q02067,revisio d hemorragia postoperatoria de bufeta urinaria
+Q02068,revisio d hemorragia postoperatoria de cirurgia vascular
+Q02069,sinovectomia de maluc
+Q02070,sinovectomia de peu i dits
+Q02071,sutura de bena tendinosa (excepte de lama)
+Q02072,sutura de beina tendinosa de la ma
+Q02073,sutura de capsula o lligament d extremitat inferior
+Q02074,sutura de capsula o lligament d extremitat superior
+Q02075,sutura de laceracio anal
+Q02076,sutura de laceracio conjuntival
+Q02077,sutura de laceracio de cervix uterina
+Q02078,sutura de laceracio de cervix uterina <local>
+Q02079,sutura de laceracio de conducte deferent i d epididim
+Q02081,sutura de laceracio de conducte espermatic i d epididim
+Q02083,sutura de laceracio de faringe
+Q02084,sutura de laceracio de mama
+Q02086,sutura de laceracio de paret toracica
+Q02087,sutura de laceracio de paret toracica <local>
+Q02088,sutura de laceracio de penis
+Q02089,sutura de laceracio de penis <local>
+Q02090,sutura de laceracio de recte
+Q02091,sutura de laceracio d uretra
+Q02092,sutura de laceracio d uretra <local>
+Q02093,sutura de laceracio escrotal
+Q02094,sutura de laceracio escrotal <local>
+Q02095,sutura de laceracio gingival
+Q02096,sutura de laceracio gingival <local>
+Q02097,sutura de laceracio glandula salival
+Q02098,sutura de laceracio glandula salival <local>
+Q02099,sutura de laceracio uterina
+Q02100,sutura de muscul o fascia de la ma
+Q02101,tenosinovectomia (excepte de la ma)
+Q02102,tenosinovectomia de la ma
+Q02103,tenotomia de la ma
+Q02104,aplicacio de radiofrequencia: discs o articulacions vertebrals <local>
+Q02105,aplicacio de rafiofrequencia: ganglis simpatics <local>
+Q02106,radiofrequencia nervis perif. o cad. simp.
+Q02109,biopsia de parpella <local>
+Q02111,blefarorrafia <local>
+Q02112,infiltracio musculatura pelviana
+Q02113,"blocatge de plexe celiac, esplancnic o hipogastric <local>"
+Q02114,blocatge epidural o intratecal <local>
+Q02115,"blocatge simpatic cervical, toracic o lumbar <local>"
+Q02116,correccio de retraccio palpebral
+Q02117,excisio lesions majors de parpella
+Q02118,extraccio d implant orbitari
+Q02121,nefrolitotomia | nefrolitotomia
+Q02122,orbitotomia amb insercio d#implant orbitari
+Q02123,recanvi de protesi total de genoll: de frontissa
+Q02124,recanvi de protesi total de genoll: de lliscament
+Q02130,recanvi de protesi t de maluc: cimentada
+Q02131,recanvi complex de protesi t de maluc: no a mida (components modulars)
+Q02132,recanvi de protesi t de maluc: de superficie
+Q02133,recanvi de protesi t de maluc: hibrida
+Q02134,recanvi  parcial de protesi t de maluc no infectada ( cap i /o polietile)
+Q02135,reconstruccio de fons de sac conjuntival
+Q02136,reconstruccio de parpella amb empelts cartilaginosos
+Q02137,reconstruccio de parpella amb implant d#or o plati
+Q02140,col.locacio de cateter de hickman
+Q02141,destruccio de tumor hepatic amb radiofrequencia (percutania)
+Q02142,excisio de melanoma de cap i coll i de gangli centinella
+Q02143,excisio de melanoma de tronc i gangli centinella
+Q02144,excisio de melanoma d extremitat inferior i de gangli centinella
+Q02145,excisio de melanoma d extremitat superior i gangli de centinella
+Q02146,polipectomia histeroscopia (ambulatoria)
+Q02147,injeccio perianal de substancia terapeutica
+Q02148,litotripsia de litiasi pielica (percutania)
+Q02149,miomectomia histeroscopia (ambulatoria)
+Q02150,nefrectomia parcial (laparoscopia) | nefrectomia parcial (laparoscopia)
+Q02151,rentat i drenatge d absces subfrenic
+Q02152,rentat i drenatge d absces subfrenic (laparoscopia)
+Q02153,reparacio de diafragma
+Q02154,reparacio de diafragma  (laparoscopia)
+Q02155,revisio d anastomosi gastro-esofagica (per toracotomia)
+Q02156,tancament de fistula de diafragma
+Q02157,"implantacio de protesi coclear, amb mastoidectomia"
+Q02158,uretrolitotomia
+Q02159,ablacio quirurgica d arritmia cardiaca
+Q02161,biopsia de nervi periferic d extremitatinferior <local>
+Q02162,biopsia de nervi periferic d extremitatsuperior <local>
+Q02163,canvi d electrode de neurostimulador sacre (incontinencia anal) <local>
+Q02164,implantacio de neurostimulador sacre (incontinencia anal) <local>
+Q02165,injeccio perianal de substancia terapeutica <local>
+Q02166,revisio de neurostimulador sacre (incontinencia anal) <local>
+Q02167,derivacio carotido-carotidia
+Q02168,derivacio vascular periferica no especificada
+Q02169,enterotomia i extraccio de calcul biliar
+Q02170,enterotomia i extraccio de cos estrany intraluminal
+Q02171,reparacio de meningocele d orella mitjana
+Q02172,trepanacio per extreure un hematoma
+Q02173,trepanacio per extreure un hematoma <local>
+Q02174,tancament de fistula traqueoesofagica
+Q02175,biopsia de muscul o tendo extraocular
+Q02176,biopsia de muscul o tendo extraocular <local>
+Q02177,endoscopia nasal <local>
+Q02178,extraccio de calcul de glandula salival
+Q02179,extraccio de calcul de glandula salival<local>
+Q02180,extraccio de cos estrany subcutani
+Q02181,extraccio de implant subcutani (local)
+Q02182,extraccio de mo d un os facial <local>
+Q02183,sondatge de conducte salival <local>
+Q02184,col.locacio de cateter peritoneal (laparoscopia)
+Q02185,varicocelectomia (laparoscopia)
+Q02186,dermoabrasio amb laser
+Q02187,excisio radical de lesio cutania
+Q02188,ablacio de venes pulmonars per vtc
+Q02189,reparacio valvula mitral amb anell protetic
+Q02190,descompressio nervi facial
+Q02191,protesi total de genoll: obeses
+Q02192,recanvi de protesi total de genoll: obeses
+Q02193,transplantectomia d injert pancreatic
+Q02196,implant material sintetic (injeccio o tatuatge de lesio o defecte de pell)
+Q02197,empelt material autoleg de greix per lipoatrofia facial
+Q02198,protesi parcial de maluc primaria: bipolar  no cimentada
+Q02199,altres reconstruccions i reparacions
+Q02200,otras reparaciones y reconstrucciones de penis rs | altres reparacions i reconstruccions depenis rs
+Q02201,microdisectomia percutania
+Q02202,artrodesi vertebral intersomatica transforaminal i pedicular amb tecnica minimam
+Q02204,trasplantectomia de pancrees implantat
+Q02205,nefrectomia radical transvaginal (laparoscopia)
+Q02206,trasplantament de pulmo
+Q02208,trasplantament  de traquea
+Q02209,protesi metatarsofalangica
+Q02210,hal.lux rigidus
+Q02211,gastrectomia  transvaginal (laparoscopia)
+Q02212,infusio de progenitors per a trasplant
+Q02213,nefroureterectomia | nefroureterectomia
+Q02215,extraccio de teixits per investigacio
+Q02216,extraccio d  organs per investigacio.
+Q02219,nefro - uretectomia lumbar
+Q02220,rentat bronco-alveolar massiu
+Q02221,mastectomia bilateral de masculinizacion | mastectomia bilateral de masculinitzacio
+Q02222,control hemorragia postoperatoria
+Q02223,nefro - cistectomia radical (laparoscopia )
+Q02224,electroquimioterapia
+Q02225,faloplastia
+Q02226,col.locacio de cateter intra-periteonal
+Q02227,colposacropexia (laparoscopia)
+Q02228,correccio laceracio de perine
+Q02229,criocirurgia cervical
+Q02230,exeresis de polipo cervical (histeroscopia) | exeresi de polip cervical (histeroscopia)
+Q02231,exeresi endometriosi profunda sense resseccio intestinal
+Q02232,exeresi endometriosi profunda amb resseccio intestinal
+Q02233,exeresis gangli sentinella de endometri
+Q02234,"extirpacion parcial cuello, parametriosy vagina - traquelectomia | exxtirpacio parcial coll, parametris i vagina - traquelectomia"
+Q02235,histerectomia abdominal subtotal + anexoctomia bilateral
+Q02236,histerectomia abdominal radical
+Q02237,histerectomia abdominal radical (laparoscopia)
+Q02238,histerectomia subtotal (laparoscopia) | histerectomia subtotal (laparoscopia)
+Q02239,histerectomia abdominal total + anexectomia bilateral (papar)
+Q02240,histerectomia total (laparoscopia)
+Q02241,histerectomia vaginal radical (laparoscopia)
+Q02242,histeropexia
+Q02243,histeropexia (laparoscopia)
+Q02244,mastectomia subcutania bilateral
+Q02245,mastectomia subcutania unilateral
+Q02246,reparacio de cistocele amb malla
+Q02247,reparacio de rectocele amb malla
+Q02248,reparacio prolapse de cupula via vaginal amb malla
+Q02249,retirada de cateter intra-peritoneal
+Q02250,esternotomia exploradora
+Q02251,nefrectomia transumbilical (laparoscopia notes)
+Q02252,nefrectomia radical transvaginal -donant viu (laparoscopia)
+Q02253,col.locacio banda suburetral
+Q02254,tenotomia tendo (artroscopia)
+Q02255,descompressio subacromial (artroscopia)
+Q02256,artroplastia reseccio (artroscopia)
+Q02257,alliberament nervi (artroscopia)
+Q02258,transposicio tendo (artroscopia)
+Q02259,reinsercio rodet glenoideo (artroscopia)
+Q02260,luxacio recidivant espatlla (artroscopia)
+Q02261,tenodesis tendo (artroscopia)
+Q02262,recobriment amb pegat escleral
+Q02263,ciclofotocoagulacio
+Q02264,incisio limbar relaxant
+Q02265,biopsia corneal
+Q02266,biopsia conjuntival
+Q02267,aspiracio diagnostica ca
+Q02268,injeccio a ca
+Q02269,injeccio  subconjuntival
+Q02270,toxina botulinica
+Q02271,fenestracio nervi optic
+Q02272,exenteracio del contingut de l orbita
+Q02273,orbitotomia
+Q02274,blefarorrafia
+Q02275,nefrolitotimia percutania per litiasi total
+Q02276,implant de protesi de valv.percut. via femoral
+Q02277,implant de protesi de valv. percut. viatransapical/transaortica
+Q02278,cruroplastia por secuelas de obesidad | cruroplastia per sequeles d obesitat
+Q02279,abdominoplastia por secuelas de obesidad | abdominoplastia per sequela d obesitat
+Q02280,reduccio/elevacio mamaria per sequeles d obesitat
+Q02281,braquioplastia per sequela d obesitat
+Q02282,pancreatectomia total
+Q02283,t. del xoc femoroacetabular per tecnicaoberta: abor. intermuscular amb  luxacio
+Q02284,t. del xoc femoroacetabular per tecnicaoberta: abor. intermuscular sense luxaci
+Q02285,t. del xoc femoroacetabular per artroscopia
+Q02286,biopsia amigdala i adenoide
+Q02287,amigdalectomia (parcial)
+Q02288,altres operacions amigdales i adenoides
+Q02289,amigdalectomia lingual laser co2
+Q02290,"reconstruccio total nas  reconstruccio amb penjall: brac, fro"
+Q02291,rinoplastia limitada  reparacio plastica penjalls naso-labial
+Q02292,"rinoplastia d augment amb empelt, implant sintetic"
+Q02293,otras rinoplastias  rinoplastia nariz | altres rinoplasties  rinoplastia nas
+Q02294,altres septobplasties  esclafament de septe nasal
+Q02295,otras reparaciones/intervenciones plasticas de nariz: reinsercion nariz amputada | altres reparacions/intervencions plastiques de nas: reinsercio nas amputat
+Q02296,tancament fistula nasal  fistulectomia naso-labial
+Q02297,lateralitzacio cornets
+Q02298,radiofrequencia cornets
+Q02299,cross - linking
+Q02300,reconstruccio anells corneals
+Q02301,tancament quirurgic de conducte arterios  
+Q02302,correccio malrotacio intestinal
+Q02303,incisio de peritoneu
+Q02304,correccio atresia esofagica.
+Q02305,anastomosi intestinal
+Q02306,reseccio estenosis intestinal  
+Q02308,reparacio llavi fesu.
+Q02309,decompressio plexe braquial
+Q02310,decompressio plexe lumbosacre
+Q02311,recalibratge de canal lumbar
+Q02312,foraminotomia cervical posterior
+Q02313,perfusion hiperdermica para tract. neoplasias | perfussio hiperdermica per tract. neoplasies
+Q02314,nefrectomia transvaginal donant viu (laparoscopia)
+Q02315,nefrectomia transumbilical donant viu (laparoscopia)
+Q02316,nefrectomia  radical transumbilical  (laparoscopia)
+Q02317,implantacio protesi d iliaca
+Q02318,traqueostomia mediastinica
+Q02319,implantacio estimulador neurocardiac
+Q02320,legrat aspiratiu
+Q02321,tract.pseudoartrosis i retard de consolid.mitjancant ones de xoc
+Q02322,reseccion costilla cervical y reparacion de otras anomalias de el estrecho torac | reseccio costella cervical i reparacio d altres anomalies de l estret toracic
+Q02323, pegat hematic epidural <local>
+Q02325,inyeccion del area esfenopalatina bilateral con lidocaina
+Q02326,derivacio quist siringomielic
+Q02327,ventriculostomia
+Q02328,clipatge d aneurisme
+Q02329,tx renal donant viu aboi obert
+Q02331,protesis de parcial de maluc: cap de femur
+Q02332,protesis de parcial de maluc: insert
+Q02335,recanvi  parcial de protesis de maluc: peca femoral
+Q02338,recanvi de protesis de genoll: peca tibial
+Q02339,recanvi de protesis de genoll: peca femoral
+Q02340,recanvi de protesis de genoll: peca rotular
+Q02341,recanvi de protesis de genoll: injert tibial
+Q02344,elevate anterior + posterior
+Q02345,!altra suspensio uterina - operacio de manchester
+Q02346,insercio diu
+Q02347,"oclusio de trompes de fal.lopi, altres formes - essure"
+Q02348,col.locacio implanon
+Q02349,histerectomia abdominal + salpingectomia bilateral per laparoscopia
+Q02350,colpoleisis
+Q02351,exeresi polip cervical
+Q02352,reimplantacio d ovari
+Q02353,reimplantacio d ovari per laparoscopia
+Q02354,extraccio restes ovulars (histeroscopia)
+Q02355,radioterapia intraoperatoria. r.i.o.
+Q02356,extraccio os + tendons
+Q02357,extraccio os
+Q02358,extraccio cor
+Q02359,extraccio arteries
+Q02360,extraccio ulls
+Q02361,extraccio pell
+Q02362,extraccio pell + cartilag
+Q02363,extraccio m. amniotica
+Q02364,descompresion fosa posterior | descompressio fossa posterior
+Q02365,cirugia bi-maxilar | cirurgia bi-maxil*lar
+Q02366,cirurgia uni-maxil*lar
+Q02367,cirugia oral simple | cirurgia oral simple
+Q02368,cirurgia oral complexa
+Q02369,cirurgia oral oncologica
+Q02370,cirurgia oral oncologica complexa
+Q02371,prostatectomia robotica | prostatectomia robotica
+Q02372,esofagectomia  robotica
+Q02373,hemicolectomia dreta  robotica
+Q02374,craniotomia per evacuacio d hematoma
+Q02375,retirada d electrodes
+Q02376,recanvi d estimulador vagal
+Q02377,sigmoidectomia robotica
+Q02378,hemicolectomia esquerra robotica
+Q02379,reseccio anterior alta de recte -robotica-
+Q02380,res ant baixa recte+exc.total mesorecte-robotica
+Q02381,empelt ossi a crani (cranioplastia)
+Q02384,proctectomia
+Q02385,proctectomia + reservori ileal
+Q02386,tx renal donant viu robot
+Q02387,cistectomia radica -robotica- | cistectomia radical -robotica-
+Q02388,cistectomia radical (laparoscopia)
+Q02389,mastopexia
+Q02390,liposuccion tipo iii | liposuccio tipus iii
+Q02391,plastia palpebral bilateral
+Q02392,plastia palpebral unilateral | plastia palpebral unilateral
+Q02393,altres injeccions en el nervi o ganlgi simpatics
+Q02394,altres operacions de nervis cranials i periferics
+Q02395,retirada cable de neuroestimulador periferic
+Q02396,tx renal donant viu aboi robot
+Q02397,reconstruccio oida externa (canaloplastia)
+Q02398,obliteracio de mastoidectomia
+Q02399,revisio estapedectomia
+Q02400,malformacio congenita de cadena ossicular
+Q02401,revisio de timpanoplastia
+Q02402,mastoidectomia radical
+Q02403,revisio mastoidectomia
+Q02404,inyeccio de timpa (corticoide)
+Q02405,control d epistaxi per lligadura art.etmoidals
+Q02406,control d epistaxi per lligadura art.maxil*lar a traves de l 
+Q02407,biopsia del nas (endosopica)
+Q02408,etmoidotomia
+Q02409,esfenoidotomia
+Q02410,sinusectomia
+Q02411,rec. prot.t  genoll infec. 1 temps
+Q02412,rec. prot.t  genoll infec. 2 temps:protesi
+Q02413,rec. prot.t  genoll infec. 2 temps:espaiador
+Q02418,exeresi simple local curta melanoma
+Q02420,cirurgia robotica en cancer d endometri
+Q02421,alliberament nervi pudendo robotic
+Q02422,esfinter artificial robotica
+Q02423,cirurgia robotica per extraccio uterina
+Q02424,reparacio valvula mitral (robotica)
+Q02425,extracorp. robotica
+Q02426,gastro-enter. prox. (bypass) robotic
+Q02427,encreua. duod. (switch) robotic
+Q02428,tx renal cadaver robot
+Q02430, tx renal donant viu robot ortotopic
+Q02660,trasplantament de fetge de donant viu
+Q03000,circulacio estracorporia auxiliar de cir. a cor obert
+Q03001,circulacio extracorporia preparada no realitzada
+Q03002,circulacio extracorporia de hearport
+Q03003,circulacio extracorporia amb heartport
+Q03004,cirurgia de la fa aillada amb heartport
+Q03005,excisio d anell subvalvular aortic
+Q03006,extracorp. amb canulacio periferica
+Q03007,perfusio tractament de melanoma
+Q03008,reimplante ureteral robotico | reimplant ureteral robotic
+Q03009,rescat quirurgic robotic
+Q03010,bipopsia cavitat oral
+Q03011,exeresi lesions benignes cavitat oral
+Q03012,altres reparacions de faringe
+Q03013,miotomia crico-faringea
+Q03015,lisi d adherencies de nas refregada nasal posterior
+Q03016,excisio d amigdala lingual
+Q03017,fistulitzacio traqueo-esofagica
+Q03018,operacio de trompa d eustaqui
+Q03019,injeccio gentamicina oida interna
+Q03022,artrodesi vertebral lateral per via misamb tecnica xlif
+Q03028,fusio vertebral cervical complicada
+Q03030,fusio vertebral anterior i posterior combinada
+Q03038,enucleacio endoscopica de la hipertrofia benigna de prostata (hbp)amb laser
+Q03039,drenatge absces cerebral
+Q03040,glotoplastia
+Q03041,rdf refrigerada
+Q03042,vasovasostomia robotica
+Q03043,nefrectomia parcial robotica
+Q03044,reparacio fistula vesico-vaginal robotica
+Q03045,uretroplastia robotica | uretroplastia robotica
+Q03046,implantacio dbs per epilepsia
+Q03047,recanvi generador dbs per epilepsia
+Q03048,implantacio dbs per tms
+Q03049,recanvi generador dbs per tms
+Q03050,limfadenectomia radical inguinal robotica
+Q03052,reparacio eventracio per laparoscopia
+Q03053,"infiltracio nerv.,plex.,cad.simp.,musc.,art."
+Q03054,ne. fase de prova
+Q03055,ne. implant definitiu
+Q03056,ne. recanvi generador
+Q03058,perfussor extern (portal epidural)
+Q03059,perfusor progamable
+Q03060,recambio perfusor
+Q03061,insercion estimulador periferico
+Q03062,nefrectomia radical robotica
+Q03063,excisio de diverticle de bufeta urinaria robotica
+Q03065,determinacio gangli sentinella cervical
+Q03066,adrenalectomia endos. retroperit. unilat.
+Q03067,adrenalectomia endos. retroperit. bilateral
+Q03068,buidament ganglio. cerv. central unilat.
+Q03069,buidament ganglio. cerv. central bilateral
+Q03070,tiroidectomia total de complecio
+Q03071,tiroidectomia endoscopica (transaxilar) | tiroidectomia endoscopica (transaxilar)
+Q03072,esofagectomia parcial ivor-lewis (laparoscopia)
+Q03073,gastrostomia laparoscopia
+Q03074,carcinomatosi peritoneal excisio amb perfussio (lps)
+Q03075,trasplantament uteri
+Q03076,protesi primaria total de rodilla cirugia robotica | protesi primaria total de genoll cirurgia robotica
+Q03077,limfadenectomia radical robotica ilio-inguinail | limfadenectomia radical robotica ilio-inguinail
+Q03078,ablacio laser de zona epileptogena
+Q03079,ablacio laser de teixit tumoral
+Q03080,col.locacio marcadors fiducials
+Q03081,colecistectomia robotica
+Q03082,pancreatectomia corporocaudal robotica
+Q03083,duodenopancreatectomia cefalica robotica | duodenopancreatectomia cefalica robotica
+Q03084,rectopexia robotica
+Q03085,rectopexia per laparoscopia
+Q03086,miotomia heller + fundoplic. dor robotica
+Q03087,miotomia heller + fundoplic. toupet (lps)
+Q03088,miotomia heller + fundoplic. toupet robotica
+Q03089,sadi bypass duodeno-ileal s/ gastrec. (lps)
+Q03090,sadi bypass duodeno-ileal s/ gastrec. robotica
+Q03091,sadi-s bypass duodeno-ileal + gastrectomia (lps)
+Q03092,sadi-s bypass duodeno-ileal + gastrectomia robotica
+Q03093,miotomia heller + fundoplic. dor (lps)
+Q03094,derivacio urinaria robotica heterotopica no continent (bricker)
+Q03095,carcinomatosi peritoneal excisio amb perfussio (oberta)
+Q03096,carcinomatosi peritoneal: destruccio amb pipac
+Q03097,carcinomatosi peritoneal excisio sense perfussio (lps)
+Q03098,carcinomatosi peritoneal excisio sense perfussio (oberta)
+Q03099,plasma ric amb plaquetes
+Q03100,artroscopia atm
+Q03101,artrocentesi atm
+Q03102,cirugia ortogmatica bimaxilar | cirurgia ortognatica bimaxil.lar
+Q03103,cirugia ortogmatica monomaxilar | cirurgia ortognatica monomaxil.lar
+Q03104,reconst. micro-quir. mandibular a/anast. i empelt
+Q03105,sialoendoscopia
+Q03107,cirurgia refractiva lateral excimer
+Q03108,cirugia refractiva bilateral excimer | cirurgia refractiva bilateral excimer
+Q03109,reseccio robotica de tumor mediastinic
+Q03110,segmententomia robotica
+Q03111,lobectomia robotica
+Q03112,rezum terapia termica prostatica vapor
+Q03113,orl tecnologia robotica
+Q03114,protesi primaria genoll unicomp. robotica
+Q03115,exenteracio pelviana a l home robotica
+Q03116,adm cortis endovesical
+Q03117,electrofulguracio mes biopsia vesical
+Q03118,bx prostatica transperineal x fusio
+Q03119,biopsia escisional dirigida (marcatge amb llavor radiactiva)
+Q03121,arterio-venostomia per a dialisi (favi percutanea)
+Q03122,hepaticoyeyunostomia robotica
+Q03123,reseccio ileocecal robotica
+Q03124,cir. robotica patologia benigna complexa
+Q03125,hifu focal prostatic
+Q03126,heartport iccv aux
+Q03127,robot iccv aux
+Q03128,dilatacio tubarica
+Q03129,crioterapia focal de prostata
+Q03130,otros tratamientos ablativos focales prostaticos
+Q03131,rep. d hernia umbilical amb malla (laparoscopia)
+Q03132,rep. d hernia epigastrica amb malla (laparoscopia)
+Q03133,rep. d hernia inguinal bilateral (laparoscopia)
+Q03134,rep. d hernia inguinal unilateral (laparoscopia)
+Q03135,rep. d hernia spiegel amb malla (laparoscopia)
+Q03136,rep. d eventracio amb malla (laparoscopia)
+Q03137,rep. d eventracio amb penjall muscular (laparoscopia)
+Q03138,rep. d hernia crural bilateral amb malla (laparoscopia)
+Q03139,rep. d hernia crural unilateral amb malla (laparoscopia)
+Q03140,rep. d hernia epigastrica (laparoscopia)
+Q03141,rep. d hernia inguinal bilateral amb malla (laparoscopia)
+Q03142,rep. d hernia inguinal unilateral amb malla (laparoscopia)
+Q03143,rep. d hernia pericolostomotica (laparoscopia)
+Q03144,rep. d hernia umbilical (laparoscopia)
+Q03145,reanastomosi uretrovesical robotic
+Q03146,tancament orelleta cirurgia cardiaca
+Q03147,annexectomia unilateral (vaginal)
+Q03148,biopsia de vagina(laparoscopia)
+Q03149,cerclatge uteri despres de traquelectomia
+Q03150,histerectomia subtotal i cervicopexia (laparoscopia)
+Q03151,drenatge vulvar
+Q03153,histeroscopia - extraccio de restes ovulars
+Q03154,criopreservacio teixit ovaric (laparoscopia)
+Q03155,altres complicacions en reintervencionsde mama
+Q03156,reparacio hernia de paret abdominal
+Q03157,reseccio endometriosi paret abdominal (laparoscopia)
+Q03158,vaporitzacio endometrioma (laparoscopia)
+Q03159,altres procediments diagnostics de vulva
+Q03160,drenatge extraperitoneal (laparoscopia)
+Q03161,disseccio retroperitoneal (laparoscopia)
+Q03164,miomectomia per radiofrequencia (laparoscopia)
+Q03165,reconstruccio ablacio genital (laparoscopia)
+Q03166,estadificacio cancer endometri inicial (laparoscopia)
+Q03167,estadificacio cancer endometri inicial sentinella (laparoscopia)
+Q03168,estadificacio cancer endometri inicial tipus ii(laparoscopia)
+Q03169,exenteracio pelviana (laparoscopia)
+Q03170,limfadenectomia retroperitoneal aorticai pelviana (laparoscopia)
+Q03171,laparoscopia exploradora - diagnostica
+Q03172,laparoscopia d  estadificacio laparoscopica
+Q03173,laparotomia d  estadificacio (laparoscopia)
+Q03174,citorreduccio primaria - interval - secundaria
+Q03175,traquelectomia
+Q03176,esclerosis d hemorroides
+Q03178,hal rar/thd: altres procediments hemorroides
+Q03179,lligadura hemorroides amb bandes elastiques
+Q03180,nefrectomia parcial robotica
+Q03181,estabilitzacio coronaria
+Q03182,lipofilling facial/cervical
+Q03183,mohs
+Q03184,radiofrequencia raquis
+Q03185,radiofrequencia cap i coll
+Q03186,bloqueo dolor | bloqueig dolor
+Q03187,radiofrequencia nervis periferics
+Q03188,reparacio d estenosi ureteral robotica
+Q03189,litotripsia per ones de xoc ronyo
+Q03190,litotripsia per ones de xoc ureter
+Q03191,cirurgia reconstructiva avantpeu
+Q03192,cirurgia reconstructiva avantpeu deformitats complexes primaries
+Q03193,cirurgia reconstructiva avantpeu en rescats de cirugies previes
+Q03194,cirurgia reconstructiva retropeu
+Q03195,cirurgia reconstructiva retropeu deformitats complexes primaries
+Q03196,cirurgia reconstructiva retropeu en rescats de cirugies previes
+Q03197,implantacio dbs per cefalea
+Q03201,mastectom unilat preserv pell + expansor
+Q03202,mastectom bilat preserv pell + expansor
+Q03203,mastectom unilat pres pell mugro + expansor
+Q03204,mastectom bilat pres pell mugro + expansor
+Q03207,mastectom unilat pres pell mugro + dorsal ampl
+Q03209,mastectom unilat preserv pell + implant
+Q03210,mastectom bilat preserv pell + implant
+Q03211,mastectom unilat pres pell mugro + implant
+Q03212,mastectom bilat pres pell mugro + implant
+Q03215,mastectom unilat pres pell mugro +diep
+Q03217,prk
+Q03218,reseccio tumor retrorrectal robotic
+Q03219,fundoplicatura nissen robotica
+Q03220,gastrectomia subtotal robotica
+Q03222,gastrectomia total robotica
+Q03224,adrenalectomia retriperitoneal robotica
+Q03225,eventroplastia robotica
+Q03226,implant uretral disp. de nitinol (itind)
+Q03227,linfadenectomia periaortica robotica
+Q03228,adenectomia prostatica cervical robotica
+Q03229,proctectomia robotica
+Q03230,cerclatge cervical o transvaginal
+Q03232,anastomosis limfatic-venosa
+Q03233,recanvi protesi genoll cir. robotica
+Q09900,angiografia cerebral o medular
+Q09952,embolitzacio d hematoma subdural cronic
+QNOIQ01,monitoritzacio i cures generals sense intervencio
+QNOIQ02,anestesia sense intervencio
+QNOIQ03,reanimacio cardio-pulmonar sense intervencio
+QSEPA,quimerisme subpoblacions leucocitaries(sp)

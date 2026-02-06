@@ -1,0 +1,7 @@
+code,description
+Y,Present at admission (comorbidity)
+N,Not present at admission (complication)
+U,Unknown (insufficient documentation)
+W,Clinically undetermined
+E,Exempt
+-,Unreported (not registered by documentalist)

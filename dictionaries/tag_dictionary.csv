@@ -1,0 +1,262 @@
+tag_ref,tag_group,tag_subgroup,tag_descr
+322,ADDICCIO,CHEMSEX,N.D.
+83,ADDICCIO,MALUA,Projecte MALUA
+233,ADDICCIO,N.D.,N.D.
+321,ADDICCIO,TABAC,N.D.
+252,ADDICCIO,TUA,N.D.
+239,AGREX,N.D.,N.D.
+188,AGREX,PNACC,AGREX: No acceptació del programa
+191,AGREX,PNLOC,AGREX: No localització
+42,AGREX,T10,TRAUMA amb alguna complicació
+43,AGREX,TADOL,TRAUMA ADOLESCENT  16-18
+44,AGREX,TDISC,TRAUMA EN PERSONES DISCAPACITADES PSIQUIQUES
+45,AGREX,TMC,TRAUMA MULTIPLE COMPLEX
+46,AGREX,TU6,TRAUMA UNIC RECENT
+328,CAISQ,AMICS,N.D.
+330,CAISQ,MINOCA,N.D.
+331,CAISQ,N.D.,N.D.
+329,CAISQ,OHCA,N.D.
+327,CAISQ,PROTECT,N.D.
+326,CAISQ,SCACEST,N.D.
+250,CAISQ,SCASEST,N.D.
+325,CAISQ,SCC,N.D.
+58,COL-HAI,CBP,Colangitis biliar primaria
+59,COL-HAI,CEP,Colangitis esclerosant primaria
+60,COL-HAI,HAI,Hepatitis autoimmune
+61,COL-HAI,MISCELAN,Altres malalt. autoimm. i colestasiq. del fetge
+246,COL-HAI,N.D.,N.D.
+24,COVID-19,ACTIU,Covid Actiu
+25,COVID-19,GUARIT,Covid guarit
+26,COVID-19,HC3,Covid HC3
+235,COVID-19,N.D.,N.D.
+27,COVID-19,PERSISTE,Covid persistent
+335,DIABETES,AFECCIO,N.D.
+337,DIABETES,ALTRES,N.D.
+336,DIABETES,FARMACS,N.D.
+334,DIABETES,GENETIC,N.D.
+338,DIABETES,LADA,N.D.
+221,DIABETES,N.D.,N.D.
+100,DIABETES,TIP1,Diabetes tipus I
+101,DIABETES,TIP2,Diabetes tipus II
+333,DIAB_SEG,ABBOTT,N.D.
+332,DIAB_SEG,MEDTRONI,N.D.
+220,EMBARAZO,N.D.,N.D.
+261,EMP,00002493,P.D.
+342,EMP,GENOLL,N.D.
+340,EMP,IPOSTTOH,N.D.
+102,ENDOMETRIO,ADENOMIO,adenomiosi
+132,ENDOMETRIO,OVARIC,endometrioma ovàric
+133,ENDOMETRIO,PROFUNDA,endometriosi profunda
+205,EPIL,EEC,Epilepsia focal extratemporal controlada
+207,EPIL,EER,Epilepsia focal extratemporal resistente
+209,EPIL,EGR,Epilepsia generalizada resistente
+48,EPIL,EPDESC,EP - Desconeguda
+156,EPIL,EPEPA,EP-Esdeven. paroxístics no epilèptics
+49,EPIL,EPEST,EP - Estructural
+50,EPIL,EPGEN,EP - Genètica
+51,EPIL,EPIMM,EP - Immune
+52,EPIL,EPINF,EP - Infecciosa
+53,EPIL,EPMET,EP - Metabòlica
+213,EPIL,ETR,Epilepsia focal temporal resistente
+224,EPIL,N.D.,N.D.
+134,ESQ,CLOZA,Clozapines
+82,ESQ,CLOZILLD,Clozapines + injectables LLD
+135,ESQ,ILLD,injectables llarga durada
+241,ESQ,N.D.,N.D.
+136,ESQ,RESTA,Resta
+137,ESQ,TEC,Teràpia electroconvulsiva
+195,GEM-Q,ADRENAL,Malatia adrenal
+238,GEM-Q,N.D.,N.D.
+196,GEM-Q,PARATIR,Malaltia paratiroidea
+197,GEM-Q,TIR_BEN,Tiroides Benigne
+198,GEM-Q,TIR_MAL,Neoplasia maligna tiroides
+348,GN,GNMP,N.D.
+346,GN,GSFS,N.D.
+343,GN,N.D.,N.D.
+347,GN,NCM,N.D.
+344,GN,NLGA,N.D.
+345,GN,NM,N.D.
+263,GTDLC,GDLCCX,N.D.
+349,GTDLC,GDLCF,N.D.
+258,GTDLC,GDLCT,N.D
+154,HEPCLIN,HEPCLINV,Hepatopatia crònica per VHB
+227,HEPCLIN,N.D.,N.D.
+62,HEPGENETIC,DEFICIA1,Déficit de Alfa-1-antitripsina
+64,HEPGENETIC,PORFIRIA,Porfiria
+65,HEPGENETIC,WILSON,Malaltia de Wilson
+267,HEREDIT,ALPORT,N.D.
+265,HEREDIT,N.D.,N.D.
+266,HEREDIT,PQR,N.D.
+268,HEREDIT,TUBUL,N.D.
+127,HP,HAP,Hipertensió arterial pulmonar
+128,HP,HP-ALTRE,HP no classificable
+129,HP,HP-CAR,HP associada a cardiopatia esquerra
+130,HP,HP-RESP,HP associada a malaltia respiratòria
+131,HP,HPTEC,HP tromboembòlica crònica
+269,HP,N.D.,N.D.
+270,HTASEC,N.D.,N.D.
+172,HTPORTAL,CIRROTIC,CirroticaTP
+173,HTPORTAL,HDXHTP,HDxHTP
+174,HTPORTAL,HTIDIOPÁ,HTIdiopática
+226,HTPORTAL,N.D.,N.D.
+175,HTPORTAL,OTRASVAS,Otrasvasculares
+176,HTPORTAL,OTROSTIP,otrosTIPS
+177,HTPORTAL,SBC,SBC
+178,HTPORTAL,SINCLASI,Sinclasificar
+274,HTPORTAL,SOS,N.D.
+179,HTPORTAL,TPNOCIRR,TPnoCirrotica
+255,ICAR,AGFERED,N.D
+260,ICAR,CRFELLER,P.D.
+259,ICAR,CRFEPRES,N.D
+254,ICAR,CRFERED,N.D
+284,ICAR,FEDESC,N.D.
+281,ICAR,FELLERED,N.D.
+280,ICAR,FEPRES,N.D.
+279,ICAR,FERED,N.D.
+282,ICAR,N.D.,N.D.
+285,ICAR,SHOCK,N.D.
+163,INF-4B,0,INF-4B - 0
+164,INF-4B,1,INF-4B - 1
+165,INF-4B,2,INF-4B - 2
+138,INF-4B,3,INF-4B - 3
+225,INF-4B,N.D.,N.D.
+289,LUPUS,N.D.,N.D.
+168,MII,COL.ALTR,Colitis altres
+170,MII,COL.INDE,Colitis Indeterminada
+180,MII,COL.MICR,Colitis microscòpica
+182,MII,COL.ULC,Colitis ulcerosa
+184,MII,CROHN,Malaltia Crohn
+186,MII,SOSPITA,Sospita MII
+84,MITMEVA,QUIRURGI,QUIRÚRGIC
+85,MITMEVA,TAVI,TAVI
+86,MITMEVA,TRACTAME,TRACTAMENTMÈDIC
+290,NEFONCO,N.D.,N.D.
+158,ONCHEP,ADE,Adenoma
+159,ONCHEP,ANG,Angioma
+161,ONCHEP,BENIGNE,Altres tumors benignes
+103,ONCHEP,CARHEP,Carcinoma Hepatocel·lular
+56,ONCHEP,COLNGIO,Colangiocarcinoma
+160,ONCHEP,HNF,Hiperplasia nodular focal
+57,ONCHEP,MALIG,Altres malignàcies
+222,ONCHEP,N.D.,N.D.
+66,ONCHEP,SCREENCH,Screening CHC
+162,ONCHEP,SENSECLA,Sense classificar
+36,ONCOMAMA,ADV.HER2,N. Mama avançada HER2-positiva
+37,ONCOMAMA,ADV.LUM,N. Mama avançada Luminal/HER2-negativa
+38,ONCOMAMA,ADV.TNB,N. mama avançada triple-negativa
+28,ONCOMAMA,CARC_SIT,Carcinoma in situ
+39,ONCOMAMA,LOC.HER2,N. Mama localitzada HER2-positiva
+40,ONCOMAMA,LOC.LUM,N. Mama localitzada Luminal/HER2-negativa
+41,ONCOMAMA,LOC.TNB,N. mama localitzada triple-negativa
+232,ONCOMAMA,N.D.,N.D.
+169,ONCOPULMO,ALTRES,Altres tumors
+171,ONCOPULMO,CPCNP_LO,CPCNP localitzat
+181,ONCOPULMO,CPCNP_L_,CPCNP localment avançat
+183,ONCOPULMO,CPCNP_ME,CPCNP metastatic
+199,ONCOPULMO,CPCNP_RE,CPCNP recidiva
+185,ONCOPULMO,CPCP_LOC,CPCP localizat
+187,ONCOPULMO,CPCP_MET,CPCP metastasic
+47,ONCOPULMO,MASA_EST,Massa pulmó per estudi
+192,ONCOPULMO,MASA_MED,Masa Mediastinica per estudi
+189,ONCOPULMO,MESOTELI,Mesotelioma
+202,ONCOPULMO,METASTAS,Metástasis a pulmó
+237,ONCOPULMO,N.D.,N.D.
+201,ONCOPULMO,NODUL_PU,Nodul Seguiment Pulmó
+193,ONCOPULMO,TUMOR_ME,Tumor Mediastinic
+294,PAE-TPI,N.D.,N.D.
+21,PLT,COT,Trauma musculoesquelético
+295,PLT,N.D.,N.D.
+23,PLT,NCR,Trauma Craneoencefálico
+296,POSTFRA,N.D.,N.D.
+297,RHC,N.D.,N.D.
+299,RISC_CV,N.D.,N.D.
+73,RISC_CV,RCV_APA,RCV - Aterosclerosis preclínica avanzada
+74,RISC_CV,RCV_DIAB,RCV - Diabetes
+298,RISC_CV,RCV_DMJ,N.D.
+75,RISC_CV,RCV_EIC,RCV - Enfermedad inflamatoria crónica
+77,RISC_CV,RCV_GEN,RCV - Población general
+78,RISC_CV,RCV_HGG,RCV - Hiperlipemia grave
+80,RISC_CV,RCV_PS,RCV - Prevención secundaria
+89,RISC_CV,RCV_TOS,RCV - Trasplante de órgano sólido
+90,RISC_CV,RCV_VIH,RCV - VIH
+247,SINFHO,N.D.,N.D.
+248,TCA,N.D.,N.D.
+302,TELE-MED,N.D.,N.D.
+262,TELE_HDOM,N.D.,P.D.
+105,UAMM,ALTRES,Altres UAMM
+106,UAMM,AMIL,Amiloidosi
+107,UAMM,GMSI,gammapatía monoclonal sig inc.
+108,UAMM,MIELM,Mieloma múltiple
+304,UAMM,N.D.,N.D.
+245,UATC,N.D.,N.D.
+234,UFAV,N.D.,N.D.
+69,UFH,HEPC,Hepatitis C
+70,UFH,HEPCTF,Hepatitis C Transplantat de Fetge
+1,UGO,CUELLO,Cuello
+2,UGO,DERMATO,Dermatopatías
+3,UGO,ENDO,Endometrio
+4,UGO,LCPM,Lesión cervical pre maligna
+5,UGO,LVAPM,Lesión vaginal pre maligna
+6,UGO,LVUPM,Lesión vulvar pre maligna
+228,UGO,N.D.,N.D.
+7,UGO,OTROS,"Otros: Vulva, Vagina, NTG"
+8,UGO,OVAPER,Ovario-peritoneo
+9,UGO,SARCOMA,Sarcomas
+139,UNIEM,ALTRES,Altres UNIEM
+140,UNIEM,EA-PND,Encefalitis autoimmunes i malal. paraneoplásiques
+141,UNIEM,EM-ED,Esclerosi múltiple i altr. malal. desmielinitzants
+142,UNIEM,MG,Miastenia gravis
+242,UNIEM,N.D.,N.D.
+253,UNIEM,ONCO-HEM,N.D.
+143,UNIEM,PN,neuropaties perifèriques
+109,UPCV,430,Hemorragia subaracnoidea
+110,UPCV,431,Hematoma cerebral
+111,UPCV,434.91,Infarto cerebral
+112,UPCV,435.9,AIT
+113,UPCV,437.2,ENCEFALOPATIA HIPERTENSIVA
+114,UPCV,437.3,Aneurisma no roto
+313,UPCV,CL-AIT,N.D.
+251,UPCV,CODI-ICT,N.D.
+219,UPCV,N.D.,N.D.
+312,UPCV,TPA,N.D.
+117,UPCV,XXXXX,ALTRES
+118,UPOAT,GTR,Gerontotrauma
+229,UPOAT,N.D.,N.D.
+119,UPOAT,OTR,Otros UPOAT
+157,UPTM,ACLINIC,ASSAIG CLINIC
+215,UPTM,BIOMARC,BIOMARCADORS
+216,UPTM,EXOMA,EXOMA
+217,UPTM,GENETIC,PARKINSON GENÈTIC
+244,UPTM,N.D.,N.D.
+218,UPTM,TCOMPL,TERÀPIES COMPLEXES
+120,UROONCO,ALTRES_T,Altres tumors
+81,UROONCO,ESCL_TUB,Esclerosi tuberosa
+17,UROONCO,HEMATURI,Hematúria
+230,UROONCO,N.D.,N.D.
+121,UROONCO,PENE,Càncer de pene
+122,UROONCO,PROST,Càncer de pròstata
+18,UROONCO,PSA,Elevació de PSA
+123,UROONCO,RENAL,Tumor renal
+124,UROONCO,TESTICLE,Càncer de testicle
+125,UROONCO,VESINV,Tumor vesical invasiu
+126,UROONCO,VESNOINV,Tumor vesical no invasiu
+19,UROONCO,VIAS,Tumor de vies
+93,UROSURF,ANDROLOG,Andrologia
+54,UROSURF,DISFUNCI,Disfunció
+94,UROSURF,FUNCIONA,Funcional
+95,UROSURF,HBP,HBP
+96,UROSURF,LITIASI,Litiasi
+249,UROSURF,N.D.,N.D.
+55,UROSURF,NEUROLOG,Uro Neurologia
+97,UROSURF,RECONSTR,Reconstruc
+87,USMP,DOL,dol.
+88,USMP,EMB,Embaràs
+144,USMP,EMB-AC,Embaràs alta complexitat
+240,USMP,N.D.,N.D.
+145,USMP,PLAN,Planificació
+146,USMP,PP,Post part
+147,USMP,PP-AC,Post part alta complexitat
+203,UTBD,BIP,Transtorn bipolar
+204,UTBD,DEPRE,Transtorn Depressiu
+243,UTBD,N.D.,N.D.
+320,VASCULITIS,N.D.,N.D.

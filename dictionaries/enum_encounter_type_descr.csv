@@ -1,0 +1,34 @@
+code,description
+2O,2a opinion
+AD,Hosp. dia domic.
+BO,Blog. obstetrico
+CA,Cirugia mayor A
+CM,Cirugia menor A
+CU,Cura
+DH,Derivacion hosp
+DI,Der. otros serv.
+DU,Derivacion urg.
+EI,Entrega ICML
+HD,Hospital de dia
+IC,Interconsulta
+IH,Servicio final
+IQ,Interv. quir.
+LT,Llamada telef.
+MA,Copia mater.
+MO,Morgue
+NE,Necropsia
+PA,Preanestesia
+PD,Posible donante
+PF,Pompas funebres
+PP,Previa prueba
+PR,Prueba
+PV,Primera vista
+RE,Recetas
+SM,Sec. multicentro
+TR,Tratamiento
+UD,Urg. hosp. dia
+UR,Urgencias
+VD,Vis. domicilio
+VE,V. Enf. Hospital
+VS,Vista sucesiva
+VU,Vista URPA / Vista urgencias

@@ -1,0 +1,102 @@
+antibiotic_ref,antibiotic_descr
+MICAMBK,Amikacina 5 mcg/ml
+MICAMC,Amox./ c. clavulànic
+MICAMI,Amikacina
+MICAMP,Ampicil.lina
+MICAMX,Amoxicil.lina
+MICANF,Anfotericina B
+MICANI,Anidulafungina
+MICAPIP,Acido pipemèdico
+MICAZI,Azitromicina
+MICAZT,Aztreonam
+MICCAP,Capreomicina 5 mcg/ml
+MICCEFALEX,Cefalexina
+MICCEFI,Cefiderocol
+MICCFA,Ceftarolina
+MICCFX,Cefixima
+MICCFZ,Cefazolina
+MICCIC,Cicloserina 30 mcg/ml
+MICCIP,Ciprofloxacina
+MICCLA1,Claritromicina 1 mcg/ml
+MICCLA2,Claritromicina 2 mcg/ml
+MICCLA4,Claritromicina 4 mcg/ml
+MICCLA8,Claritromicina 8 mcg/ml
+MICCLI,Clindamicina
+MICCLR,Claritromicina
+MICCLT,Colistina
+MICCRO,Ceftriaxona
+MICCTB,Ceftibute
+MICCTZ,Ceftolozano/tazobactam
+MICCXM,Cefuroxima
+MICCZA,Ceftazidima/avibactam
+MICDAP,Daptomicina
+MICDCARB2,Detecció de carbapenemasa (lateral flow)
+MICDOR,Doripenem
+MICDOX,Doxiciclina
+MICEB25,"Etambutol 2,5 mcg/ml"
+MICEB75,"Etambutol 7,5 mcg/ml"
+MICERI,Eritromicina
+MICERT,Ertapenem
+MICESB6,Estreptomicina 6 mcg/ml
+MICESBK,Estreptomicina 1 mcg/ml
+MICESP,Espectinomicina
+MICEST,Estreptomicina
+MICETAM,Etambutol 5 mcg/ml
+MICETB,Etambutol
+MICETH,"Etionamida 1,5 mcg/ml"
+MICETI,Etionamida
+MICFLZ,Fluconazol
+MICFOS,Fosfomicina
+MICFOT,Cefotaxima
+MICFOX,Cefoxitina
+MICFUS,Acid Fusidic
+MICGEN,Gentamicina
+MICHA128,"Isoniacida 12,8 mcg/ml"
+MICHA16,"Isoniacida 1,6 mcg/ml"
+MICHA2,"Isoniacida 0,2 mcg/ml"
+MICHA32,"Isoniacida 3,2 mcg/ml"
+MICHA4,"Isoniacida 0,4 mcg/ml"
+MICHA64,"Isoniacida 6,4 mcg/ml"
+MICHA8,"Isoniacida 0,8 mcg/ml"
+MICIMI,Imipenem
+MICIMIREL,Imipenem/Relebactam
+MICISO,Isoniacida
+MICISON,"Isoniacida 0,1 mcg/ml"
+MICJOS,Josamicina
+MICKAN,Kanamicina 5 mcg/ml
+MICLEVO,Levofloxacina
+MICLIZ,Linezolid
+MICLZM2,Linezolid 2 mcg/ml
+MICLZM8,Linezolid 8 mcg/ml
+MICMER,Meropenem
+MICMIC,Micafungina
+MICMIN,Minociclina
+MICMOX,Moxifloxacina
+MICMTZ,Metronidazol
+MICMUP,Mupirocina
+MICMXM1,Moxifloxacino 1 mcg/ml
+MICNAL,Acid Nalidixic
+MICNIT,Nitrofurantoina
+MICOFLO,Ofloxacino 1 mcg/ml
+MICOFX,Ofloxacina
+MICOXA,Oxacil.lina
+MICPEN,Penicilina
+MICPIM,Cefepime
+MICPIRA,Pirazinamida 100 mcg/ml
+MICPRI,Pristinamicina
+MICPTZ,Pipera/tazobactam
+MICRB,"Rifabutina 0,5 mcg/ml"
+MICRF2,Rifampicina 2 mcg/ml
+MICRFB,Rifabutina
+MICRIBK,Rifampicina 1 mcg/ml
+MICRIF,Rifampicina
+MICSM2,Estreptomicina 2 mcg/ml
+MICSXT,Cotrimoxazol
+MICTAZ,Ceftazidima
+MICTEI,Teicoplanina
+MICTEL,Telitromicina
+MICTET,Tetraciclina
+MICTIG,Tigeciclina
+MICTOB,Tobramicina
+MICVAN,Vancomicina
+MICVOR,Voriconazol
