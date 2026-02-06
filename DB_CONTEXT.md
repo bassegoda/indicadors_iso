@@ -21,10 +21,28 @@ Your task: Create SQL queries from natural language questions. If I ask you for 
 - Optimize operations on large tables (`g_labs` and `g_rc`) by filtering early in CTEs
 - Do not explain optimizations in your response, just implement them
 
+#### Using Local Dictionaries:
+- A complete dictionary repository is available at `dictionaries/` with 54 CSV files covering all coded fields
+- **Before writing a SQL query**, grep the relevant dictionary to find the correct `_ref` codes:
+  - `dic_lab.csv` → lab_sap_ref codes (e.g., grep "creatinina" to find LAB120)
+  - `dic_ou_med.csv` → ou_med_ref codes (e.g., grep "cardiologia" to find CAR)
+  - `dic_ou_loc.csv` → ou_loc_ref codes for physical units
+  - `dic_diagnostic.csv` → ICD-9/ICD-10 codes and descriptions
+  - `dic_rc.csv` → clinical record parameter codes (e.g., grep "temperatura" to find TEMP)
+  - `drug_dictionary.csv` → drug_ref and atc_ref codes
+  - `atc_dictionary.csv` → ATC pharmaceutical classification
+  - `microorganism_dictionary.csv` → micro_ref codes
+  - `antibiotic_dictionary.csv` → antibiotic_ref codes
+  - `surgery_code_dictionary.csv` → surgery Q-codes
+  - `snomed_health_issues_dictionary.csv` → SNOMED-CT codes
+  - `enum_*.csv` → inline code meanings (episode types, care levels, sex, POA, etc.)
+- Full index: `dictionaries/dictionaries_manifest.csv` and `dictionaries/dictionaries_README.md`
+- This avoids unnecessary exploratory queries to the database and ensures correct reference codes
+
 #### Searching by Reference Fields:
 - **Default behavior**: Search using `_ref` fields (e.g., `lab_sap_ref`, `ou_med_ref`)
-- Retrieve `_ref` values from corresponding `dic_` tables when needed
-- If you think a first query exploring the necessary `_ref`codes could be helpfull, ask the user to execute it and paste the result so that you can retrieve the needed codes. 
+- Retrieve `_ref` values from the local `dictionaries/` CSV files first, or from `dic_` tables when needed
+- If you think a first query exploring the necessary `_ref` codes could be helpful, ask the user to execute it and paste the result so that you can retrieve the needed codes
 
 #### Searching Diagnoses (g_diagnostics table):
 1. **Primary method**: Search by `code` field using ICD-9 or ICD-10 codes
@@ -1058,6 +1076,8 @@ Contains all Pathology diagnoses associated with each case.
 ---
 
 ## Dictionary Tables
+
+> 💡 **All dictionary tables below are available as local CSV files in `dictionaries/`**. When designing SQL queries, grep the local CSVs first to find the correct reference codes instead of running exploratory queries against the database. See `dictionaries/dictionaries_README.md` for a full index of 54 available dictionaries (dic_* tables, data table extracts, and inline enumerations).
 
 ---
 
