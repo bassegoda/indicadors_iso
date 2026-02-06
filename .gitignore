@@ -12,6 +12,3 @@ venv/
 # Python cache
 __pycache__/
 *.pyc
-
-# Diccionarios (generados desde la base de datos)
-docs/dictionaries/*.csv
