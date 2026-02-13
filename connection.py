@@ -1,4 +1,4 @@
-# Cross-platform connection to be stored in each project root directory
+# Cross-platform MySQL connection. Place in project root with .env or use OneDrive/CWD fallback.
 
 import os
 import time
@@ -7,138 +7,93 @@ import pandas as pd
 from pathlib import Path
 from dotenv import load_dotenv
 
-def find_onedrive_path():
-    """
-    Encuentra la ruta de OneDrive en Windows o Mac.
-    Busca en múltiples ubicaciones comunes.
-    """
-    home_dir = Path.home()
-    system = os.name
-    
-    # Windows
-    if system == 'nt':
-        # Opción 1: Variable de entorno OneDrive
-        onedrive_env = os.getenv('OneDrive') or os.getenv('OneDriveCommercial')
-        if onedrive_env:
-            onedrive_path = Path(onedrive_env)
-            if onedrive_path.exists():
-                return onedrive_path
-        
-        # Opción 2: Buscar en el perfil del usuario
-        possible_paths = [
-            home_dir / 'OneDrive',
-            home_dir / 'OneDrive - Hospital Clínic de Barcelona',
-            Path(os.getenv('USERPROFILE', '')) / 'OneDrive',
-            Path(os.getenv('USERPROFILE', '')) / 'OneDrive - Hospital Clínic de Barcelona',
-        ]
-        
-        for path in possible_paths:
-            if path.exists() and path.is_dir():
+_ENV_PATH_CACHE = None
+
+def _find_onedrive_path():
+    """Find OneDrive path on Windows or macOS."""
+    home = Path.home()
+    if os.name == 'nt':
+        for env_var in ('OneDrive', 'OneDriveCommercial'):
+            p = os.getenv(env_var)
+            if p and (path := Path(p)).exists():
                 return path
-    
-    # macOS
+        for name in ('OneDrive',):
+            if (path := home / name).exists():
+                return path
+        if userprofile := os.getenv('USERPROFILE'):
+            if (path := Path(userprofile) / 'OneDrive').exists():
+                return path
     else:
-        # Opción 1: CloudStorage (OneDrive moderno en macOS)
-        cloud_storage = home_dir / 'Library' / 'CloudStorage'
-        if cloud_storage.exists():
-            for item in cloud_storage.iterdir():
+        cloud = home / 'Library' / 'CloudStorage'
+        if cloud.exists():
+            for item in cloud.iterdir():
                 if 'OneDrive' in item.name:
                     return item
-        
-        # Opción 2: OneDrive directo en home
-        possible_paths = [
-            home_dir / 'OneDrive',
-            home_dir / 'OneDrive - Hospital Clínic de Barcelona',
-        ]
-        
-        for path in possible_paths:
-            if path.exists() and path.is_dir():
-                return path
-    
+        if (path := home / 'OneDrive').exists():
+            return path
     return None
 
 def get_env_path():
-    """
-    Busca el archivo .env en la raíz de OneDrive.
-    """
-    onedrive_path = find_onedrive_path()
-    
-    if not onedrive_path:
-        raise FileNotFoundError(
-            "No se pudo encontrar la carpeta de OneDrive.\n"
-            "Por favor, asegúrate de que OneDrive esté instalado y configurado.\n"
-            "O crea el archivo .env manualmente en la raíz de OneDrive."
-        )
-    
-    env_path = onedrive_path / '.env'
-    
-    if not env_path.exists():
-        raise FileNotFoundError(
-            f"No se encontró el archivo .env en: {env_path}\n"
-            f"Por favor, crea el archivo .env en la raíz de OneDrive con las siguientes variables:\n"
-            f"DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT"
-        )
-    
-    return env_path
+    """Find .env: project root → OneDrive → CWD."""
+    global _ENV_PATH_CACHE
+    if _ENV_PATH_CACHE is not None:
+        return _ENV_PATH_CACHE
+
+    candidates = [
+        Path(__file__).resolve().parent / '.env',
+        Path.cwd() / '.env',
+    ]
+    onedrive = _find_onedrive_path()
+    if onedrive:
+        candidates.insert(1, onedrive / '.env')
+
+    for env_path in candidates:
+        if env_path.exists() and env_path.is_file():
+            _ENV_PATH_CACHE = env_path
+            return env_path
+
+    raise FileNotFoundError(
+        ".env not found. Searched: project root, OneDrive, CWD.\n"
+        "Create .env with: DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT"
+    )
 
 def get_connection(db_name=None):
-    """Returns a MySQL connection with credentials from .env file"""
-    env_path = get_env_path()
-    load_dotenv(env_path)
-    
-    # Obtener valores del .env
+    """Return MySQL connection with credentials from .env."""
+    load_dotenv(get_env_path())
     host = os.getenv('DB_HOST')
     user = os.getenv('DB_USER')
     password = os.getenv('DB_PASSWORD')
     database = os.getenv('DB_DATABASE', db_name)
     port = int(os.getenv('DB_PORT', '3306'))
-    
-    # Validar que existen los valores requeridos
-    required = {
-        'DB_HOST': host,
-        'DB_USER': user,
-        'DB_PASSWORD': password,
-        'DB_DATABASE': database
-    }
-    missing = [k for k, v in required.items() if not v]
-    
+
+    missing = [k for k, v in [('DB_HOST', host), ('DB_USER', user),
+              ('DB_PASSWORD', password), ('DB_DATABASE', database)] if not v]
     if missing:
-        raise ValueError(
-            f"Faltan las siguientes variables en {env_path}:\n"
-            f"{', '.join(missing)}\n"
-            f"Por favor, añade estas variables al archivo .env"
-        )
-    
-    # Create MySQL connection
-    conn = mysql.connector.connect(
-        host=host,
-        user=user,
-        password=password,
-        database=database,
-        port=port
+        raise ValueError(f"Missing in .env: {', '.join(missing)}")
+
+    return mysql.connector.connect(
+        host=host, user=user, password=password, database=database, port=port,
+        charset='utf8mb4', use_unicode=True
     )
-    
-    return conn
 
-
-def execute_query(query):
-    """Executes a SELECT query and returns a pandas dataframe"""
-    print("Executing query...")
-    start_time = time.time()
+def execute_query(query, verbose=True):
+    """Execute SELECT and return pandas DataFrame."""
+    if verbose:
+        print("Executing query...")
+    start = time.time()
     conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
+    cur = conn.cursor(dictionary=True)
     try:
-        cursor.execute(query)
-        results = cursor.fetchall()
-        df = pd.DataFrame(results) if results else pd.DataFrame()
-            
-        execution_time = time.time() - start_time
-        print(f"Query executada correctament en {execution_time:.2f} segons")
+        cur.execute(query)
+        rows = cur.fetchall()
+        df = pd.DataFrame(rows) if rows else pd.DataFrame()
+        if verbose:
+            print(f"Query executed successfully in {time.time() - start:.2f} seconds")
         return df
     except Exception as e:
-        print(f"Error executing query: {e}")
+        if verbose:
+            print(f"Error executing query: {e}")
         raise
     finally:
-        cursor.close()
+        cur.close()
         conn.close()
-        
