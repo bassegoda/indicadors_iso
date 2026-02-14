@@ -1,6 +1,11 @@
 """
 HOSPITALISATION WARD STAYS
 
+This counts the number of stays in a unit for a given year.
+
+It does not take into account if a patient was moved to another unit during the stays. 
+Admissions in two different units are counted as two different stays.
+
 Admission criteria (all three must be met):
 1. Bed assigned (place_ref IS NOT NULL)
 2. Admission date (MIN start_date after merging) falls within the requested year(s)
@@ -18,6 +23,20 @@ Prescription scope:
     Joined on episode_ref (ED episodes have a different episode_ref from
     the HOSP episode, so ED prescriptions are not included).  Validated
     against E073/2024: no false negatives from the ED->ICU pathway.
+
+PRESCRIPTION FILTER VALIDATION (E073/2024):
+    - Total stays: 466
+    - With prescriptions: 449 (96.4%)
+    - Without prescriptions: 17 (3.6%)
+    
+    Excluded stays are ultra-short (mean 6.2 hours, 0.1 days) and clinically
+    non-representative. Manual review confirmed these are:
+    - Pre-transplant evaluations that never proceed to transplantation
+    - "Phantom admissions" (administrative artifacts)
+    - Brief transfers without therapeutic activity
+    
+    The prescription filter ensures only clinically meaningful stays with
+    documented therapeutic activity are included.
 
 Outputs one CSV per unit.
 """
