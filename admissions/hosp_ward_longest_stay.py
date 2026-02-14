@@ -226,6 +226,107 @@ ORDER BY c.admission_date;
 """
 
 
+def build_sql_count_query(units: list) -> str:
+    """Build SQL that counts total stays per unit (no prescription filter)."""
+    units_list = "'" + "','".join(units) + "'"
+    hours_cases = build_hours_per_unit_cases(units)
+    return f"""
+WITH all_related_moves AS (
+    SELECT
+        patient_ref,
+        episode_ref,
+        ou_loc_ref,
+        start_date,
+        end_date,
+        COALESCE(end_date, NOW()) AS effective_end_date
+    FROM g_movements
+    WHERE ou_loc_ref IN ({units_list})
+      AND start_date <= '{{max_year}}-12-31 23:59:59'
+      AND COALESCE(end_date, NOW()) >= '{{min_year}}-01-01 00:00:00'
+      AND place_ref IS NOT NULL
+      AND COALESCE(end_date, NOW()) > start_date
+),
+flagged_starts AS (
+    SELECT 
+        *,
+        CASE 
+            WHEN ABS(TIMESTAMPDIFF(MINUTE, 
+                LAG(effective_end_date) OVER (
+                    PARTITION BY episode_ref ORDER BY start_date
+                ), 
+                start_date
+            )) <= 5
+            THEN 0 
+            ELSE 1 
+        END AS is_new_stay
+    FROM all_related_moves
+),
+grouped_stays AS (
+    SELECT 
+        *,
+        SUM(is_new_stay) OVER (
+            PARTITION BY episode_ref ORDER BY start_date
+        ) as stay_id
+    FROM flagged_starts
+),
+time_per_unit AS (
+    SELECT
+        patient_ref,
+        episode_ref,
+        stay_id,
+        ou_loc_ref,
+        SUM(TIMESTAMPDIFF(MINUTE, start_date, effective_end_date)) as minutes_in_unit
+    FROM grouped_stays
+    GROUP BY patient_ref, episode_ref, stay_id, ou_loc_ref
+),
+predominant_unit AS (
+    SELECT
+        patient_ref,
+        episode_ref,
+        stay_id,
+        ou_loc_ref as assigned_unit,
+        minutes_in_unit as max_minutes
+    FROM (
+        SELECT
+            t.patient_ref,
+            t.episode_ref,
+            t.stay_id,
+            t.ou_loc_ref,
+            t.minutes_in_unit,
+            ROW_NUMBER() OVER (
+                PARTITION BY t.patient_ref, t.episode_ref, t.stay_id
+                ORDER BY t.minutes_in_unit DESC, MIN(g.start_date) ASC
+            ) as rn
+        FROM time_per_unit t
+        INNER JOIN grouped_stays g
+            ON t.patient_ref = g.patient_ref
+            AND t.episode_ref = g.episode_ref
+            AND t.stay_id = g.stay_id
+            AND t.ou_loc_ref = g.ou_loc_ref
+        GROUP BY t.patient_ref, t.episode_ref, t.stay_id, 
+                 t.ou_loc_ref, t.minutes_in_unit
+    ) ranked
+    WHERE rn = 1
+),
+cohort AS (
+    SELECT
+        g.patient_ref,
+        g.episode_ref,
+        g.stay_id,
+        p.assigned_unit as ou_loc_ref
+    FROM grouped_stays g
+    INNER JOIN predominant_unit p
+        ON g.patient_ref = p.patient_ref
+        AND g.episode_ref = p.episode_ref
+        AND g.stay_id = p.stay_id
+    GROUP BY g.patient_ref, g.episode_ref, g.stay_id, p.assigned_unit
+    HAVING YEAR(MIN(g.start_date)) BETWEEN {{min_year}} AND {{max_year}}
+       AND p.assigned_unit = '{{unit}}'
+)
+SELECT COUNT(*) as total_stays FROM cohort c;
+"""
+
+
 # ==========================================
 # FUNCTIONS
 # ==========================================
@@ -269,7 +370,14 @@ def get_units_from_user() -> list:
         return unique_units
 
 
-def process_unit(unit: str, all_units: list, years: list, timestamp: str, sql_template: str):
+def process_unit(
+    unit: str,
+    all_units: list,
+    years: list,
+    timestamp: str,
+    sql_template: str,
+    count_sql_template: str,
+):
     """Run query for a unit and save CSV."""
     min_year = min(years)
     max_year = max(years)
@@ -281,9 +389,21 @@ def process_unit(unit: str, all_units: list, years: list, timestamp: str, sql_te
     )
 
     df = execute_query(query)
+    total_included = len(df)
+
+    # Total stays (before prescription filter) to report exclusions
+    count_query = count_sql_template.format(
+        unit=unit,
+        min_year=min_year,
+        max_year=max_year
+    )
+    count_df = execute_query(count_query)
+    total_stays = int(count_df["total_stays"].iloc[0]) if not count_df.empty else 0
+    excluded_no_prescription = total_stays - total_included
 
     if df.empty:
         print(f"[{unit}] No data found")
+        print(f"        Excluded (no prescription): {excluded_no_prescription} stays")
         return
 
     # Save CSV
@@ -293,7 +413,7 @@ def process_unit(unit: str, all_units: list, years: list, timestamp: str, sql_te
     df.to_csv(filename, index=False, encoding='utf-8-sig')
 
     # Summary
-    total = len(df)
+    total = total_included
     patients = df['patient_ref'].nunique()
     deaths = (df['exitus_during_stay'] == 'Yes').sum()
     mortality = (deaths / total * 100) if total > 0 else 0
@@ -303,6 +423,7 @@ def process_unit(unit: str, all_units: list, years: list, timestamp: str, sql_te
 
     print(f"[{unit}] {total} stays | {patients} patients | {deaths} deaths ({mortality:.1f}%)")
     print(f"        Transfers: {transfers} ({transfer_pct:.1f}%) | Still admitted: {still_in}")
+    print(f"        Excluded (no prescription): {excluded_no_prescription} stays")
     print(f"        → {filename.name}")
 
 
@@ -322,13 +443,14 @@ def main():
     # Build SQL template with dynamic units
     print(f"\nBuilding query for units: {', '.join(units)}...")
     sql_template = build_sql_query(units)
+    count_sql_template = build_sql_count_query(units)
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     print(f"Processing {len(units)} unit(s) for years {min(years)}-{max(years)}...\n")
 
     for unit in units:
-        process_unit(unit, units, years, timestamp, sql_template)
+        process_unit(unit, units, years, timestamp, sql_template, count_sql_template)
 
     print(f"\n✓ Output saved to: {OUTPUT_DIR}")
     print(f"✓ No duplicate stays across {', '.join(units)}\n")

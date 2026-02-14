@@ -2,6 +2,7 @@ otros/
 output/
 **/output/
 data/
+admissions/validation/
 credencials/
 .DS_Store
 .vscode/

@@ -12,9 +12,9 @@ Cada subcarpeta contiene análisis específicos de diferentes indicadores:
 - **mortality/**: Análisis de mortalidad por mes
 - **nutritions/**: Análisis de nutrición enteral y parenteral
 - **snisp/**: Análisis de incidentes
-- **admissions/**: Identificación de ingresos reales en unidades de hospitalización (ver sección detallada más abajo)
+- **admissions/**: Identificación de ingresos reales en unidades de hospitalización (ver sección detallada más abajo). Incluye el script por unidad predominante (`hosp_ward_longest_stay.py`) que fusiona estancias entre unidades y asigna cada estancia a la unidad con más tiempo.
 
-Cada análisis genera sus resultados en una subcarpeta `output/` dentro de su respectiva carpeta.
+Cada análisis genera sus resultados en una subcarpeta `output/` dentro de su respectiva carpeta. La carpeta `admissions/validation/` existe solo para uso local (no está versionada en git; ver `.gitignore`).
 
 ---
 
@@ -59,6 +59,24 @@ El script solicita interactivamente:
 - **Unidad(es)**: una o varias separadas por coma (`E073` o `E073,I073`)
 
 Genera un CSV por unidad en `admissions/output/` con el nombre `admissions_{unidad}_{años}_{timestamp}.csv`.
+
+### Script por unidad predominante (`hosp_ward_longest_stay.py`)
+
+Cuando se analizan **varias unidades relacionadas** (p. ej. E073 e I073), el script `hosp_ward_longest_stay.py` agrupa movimientos consecutivos entre esas unidades en una sola estancia y asigna cada estancia a la **unidad donde el paciente pasó más tiempo** (principio de estancia predominante). Así se evita contar dos veces a un paciente que pasa de E073 a I073.
+
+**Ejecución:**
+
+```bash
+python admissions/hosp_ward_longest_stay.py
+```
+
+Solicita año(s) y **al menos dos unidades** (p. ej. `E073,I073`). Los criterios de ingreso real (cama, año, prescripción) son los mismos que en `hosp_ward_stays.py`.
+
+**Salida en terminal:** Para cada unidad se imprime el número de estancias, pacientes, fallecimientos, traslados y **cuántas estancias se excluyen por no tener ninguna prescripción** durante la estancia (línea `Excluded (no prescription): N stays`). Los CSV se guardan en `admissions/output/` con nombres del tipo `admissions_{unidad}_from_{unidades}_{años}_{timestamp}.csv`.
+
+### Carpeta `admissions/validation/`
+
+Carpeta para archivos de validación local (p. ej. listados de estancias con/sin prescripción). **No está versionada**: se eliminó del repositorio y está en `.gitignore`. Puedes usarla en tu máquina sin que se suba a git.
 
 ### Columnas de salida
 
