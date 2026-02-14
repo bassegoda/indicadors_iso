@@ -3,6 +3,7 @@ output/
 **/output/
 data/
 admissions/validation/
+admissions/bo/
 credencials/
 .DS_Store
 .vscode/
