@@ -4,6 +4,7 @@ output/
 data/
 admissions/validation/
 admissions/bo/
+deliris/*.png
 credencials/
 .DS_Store
 .vscode/
