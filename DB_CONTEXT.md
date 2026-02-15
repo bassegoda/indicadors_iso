@@ -1576,3 +1576,165 @@ LEFT JOIN surgery_teams st ON su.surgery_ref = st.surgery_ref
 LEFT JOIN surgery_events se ON su.surgery_ref = se.surgery_ref
 ORDER BY su.patient_ref, su.start_date, se.event_timestamp;
 ```
+
+-- =============================================================================
+-- EXAMPLE 8: Hospitalisation ward stays with predominant unit assignment
+-- Units: E073, I073 | Year: 2024
+-- Schema: g_ (g_movements, g_demographics, g_exitus, g_prescriptions)
+-- =============================================================================
+```sql
+
+WITH all_related_moves AS (
+    SELECT
+        patient_ref,
+        episode_ref,
+        ou_loc_ref,
+        start_date,
+        end_date,
+        COALESCE(end_date, NOW()) AS effective_end_date
+    FROM g_movements
+    WHERE ou_loc_ref IN ('E073','I073')
+      AND start_date <= '2024-12-31 23:59:59'
+      AND COALESCE(end_date, NOW()) >= '2024-01-01 00:00:00'
+      AND place_ref IS NOT NULL
+      AND COALESCE(end_date, NOW()) > start_date
+),
+flagged_starts AS (
+    SELECT
+        *,
+        CASE
+            WHEN ABS(TIMESTAMPDIFF(MINUTE,
+                LAG(effective_end_date) OVER (
+                    PARTITION BY episode_ref ORDER BY start_date
+                ),
+                start_date
+            )) <= 5
+            THEN 0
+            ELSE 1
+        END AS is_new_stay
+    FROM all_related_moves
+),
+grouped_stays AS (
+    SELECT
+        *,
+        SUM(is_new_stay) OVER (
+            PARTITION BY episode_ref ORDER BY start_date
+        ) AS stay_id
+    FROM flagged_starts
+),
+time_per_unit AS (
+    SELECT
+        patient_ref,
+        episode_ref,
+        stay_id,
+        ou_loc_ref,
+        SUM(TIMESTAMPDIFF(MINUTE, start_date, effective_end_date)) AS minutes_in_unit
+    FROM grouped_stays
+    GROUP BY patient_ref, episode_ref, stay_id, ou_loc_ref
+),
+predominant_unit AS (
+    SELECT
+        patient_ref,
+        episode_ref,
+        stay_id,
+        ou_loc_ref AS assigned_unit,
+        minutes_in_unit AS max_minutes
+    FROM (
+        SELECT
+            t.patient_ref,
+            t.episode_ref,
+            t.stay_id,
+            t.ou_loc_ref,
+            t.minutes_in_unit,
+            ROW_NUMBER() OVER (
+                PARTITION BY t.patient_ref, t.episode_ref, t.stay_id
+                ORDER BY t.minutes_in_unit DESC, MIN(g.start_date) ASC
+            ) AS rn
+        FROM time_per_unit t
+        INNER JOIN grouped_stays g
+            ON t.patient_ref = g.patient_ref
+            AND t.episode_ref = g.episode_ref
+            AND t.stay_id = g.stay_id
+            AND t.ou_loc_ref = g.ou_loc_ref
+        GROUP BY t.patient_ref, t.episode_ref, t.stay_id,
+                 t.ou_loc_ref, t.minutes_in_unit
+    ) ranked
+    WHERE rn = 1
+),
+cohort AS (
+    SELECT
+        g.patient_ref,
+        g.episode_ref,
+        g.stay_id,
+        p.assigned_unit AS ou_loc_ref,
+        MIN(g.start_date) AS admission_date,
+        MAX(g.end_date) AS discharge_date,
+        MAX(g.effective_end_date) AS effective_discharge_date,
+        TIMESTAMPDIFF(HOUR, MIN(g.start_date), MAX(g.effective_end_date)) AS hours_stay,
+        TIMESTAMPDIFF(DAY, MIN(g.start_date), MAX(g.effective_end_date)) AS days_stay,
+        TIMESTAMPDIFF(MINUTE, MIN(g.start_date), MAX(g.effective_end_date)) AS minutes_stay,
+        CASE WHEN MAX(g.end_date) IS NULL THEN 'Yes' ELSE 'No' END AS still_admitted,
+        COUNT(*) AS num_movements,
+        COUNT(DISTINCT g.ou_loc_ref) AS num_units_visited,
+        SUM(CASE WHEN g.ou_loc_ref = 'E073'
+            THEN TIMESTAMPDIFF(MINUTE, g.start_date, COALESCE(g.end_date, NOW()))
+            ELSE 0 END) AS minutes_E073,
+        SUM(CASE WHEN g.ou_loc_ref = 'I073'
+            THEN TIMESTAMPDIFF(MINUTE, g.start_date, COALESCE(g.end_date, NOW()))
+            ELSE 0 END) AS minutes_I073
+    FROM grouped_stays g
+    INNER JOIN predominant_unit p
+        ON g.patient_ref = p.patient_ref
+        AND g.episode_ref = p.episode_ref
+        AND g.stay_id = p.stay_id
+    GROUP BY g.patient_ref, g.episode_ref, g.stay_id, p.assigned_unit
+    HAVING YEAR(MIN(g.start_date)) = 2024
+)
+SELECT DISTINCT
+    c.patient_ref,
+    c.episode_ref,
+    c.stay_id,
+    c.ou_loc_ref,
+    c.admission_date,
+    c.discharge_date,
+    c.effective_discharge_date,
+    c.hours_stay,
+    c.days_stay,
+    c.minutes_stay,
+    c.still_admitted,
+    c.num_movements,
+    c.num_units_visited,
+    c.minutes_E073,
+    c.minutes_I073,
+    CASE
+        WHEN c.num_units_visited > 1 THEN 'Yes'
+        ELSE 'No'
+    END AS had_transfer,
+    YEAR(c.admission_date) AS year_admission,
+    TIMESTAMPDIFF(YEAR, d.birth_date, c.admission_date) AS age_at_admission,
+    CASE
+        WHEN d.sex = 1 THEN 'Male'
+        WHEN d.sex = 2 THEN 'Female'
+        WHEN d.sex = 3 THEN 'Other'
+        ELSE 'Not reported'
+    END AS sex,
+    CASE
+        WHEN ex.exitus_date IS NOT NULL
+             AND ex.exitus_date BETWEEN c.admission_date
+                 AND c.effective_discharge_date
+        THEN 'Yes'
+        ELSE 'No'
+    END AS exitus_during_stay,
+    ex.exitus_date
+FROM cohort c
+LEFT JOIN g_demographics d
+    ON c.patient_ref = d.patient_ref
+LEFT JOIN g_exitus ex
+    ON c.patient_ref = ex.patient_ref
+INNER JOIN g_prescriptions p
+    ON c.patient_ref = p.patient_ref
+    AND c.episode_ref = p.episode_ref
+    AND p.start_drug_date BETWEEN c.admission_date
+        AND c.effective_discharge_date
+ORDER BY c.admission_date;
+```
