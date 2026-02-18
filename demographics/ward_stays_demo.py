@@ -1,5 +1,6 @@
 import pandas as pd
 from pathlib import Path
+from datetime import datetime
 import sys
 
 # Añadir directorio raíz al path
@@ -35,7 +36,7 @@ flagged_starts AS (
         CASE
             WHEN ABS(TIMESTAMPDIFF(MINUTE,
                 LAG(effective_end_date) OVER (
-                    PARTITION BY episode_ref ORDER BY start_date
+                    PARTITION BY patient_ref, episode_ref ORDER BY start_date
                 ),
                 start_date
             )) <= 5
@@ -48,7 +49,7 @@ grouped_stays AS (
     SELECT
         *,
         SUM(is_new_stay) OVER (
-            PARTITION BY episode_ref ORDER BY start_date
+            PARTITION BY patient_ref, episode_ref ORDER BY start_date
         ) AS stay_id
     FROM flagged_starts
 ),
@@ -58,7 +59,8 @@ time_per_unit AS (
         episode_ref,
         stay_id,
         ou_loc_ref,
-        SUM(TIMESTAMPDIFF(MINUTE, start_date, effective_end_date)) AS minutes_in_unit
+        SUM(TIMESTAMPDIFF(MINUTE, start_date, effective_end_date)) AS minutes_in_unit,
+        MIN(start_date) AS first_start_date
     FROM grouped_stays
     GROUP BY patient_ref, episode_ref, stay_id, ou_loc_ref
 ),
@@ -71,23 +73,12 @@ predominant_unit AS (
         minutes_in_unit AS max_minutes
     FROM (
         SELECT
-            t.patient_ref,
-            t.episode_ref,
-            t.stay_id,
-            t.ou_loc_ref,
-            t.minutes_in_unit,
+            *,
             ROW_NUMBER() OVER (
-                PARTITION BY t.patient_ref, t.episode_ref, t.stay_id
-                ORDER BY t.minutes_in_unit DESC, MIN(g.start_date) ASC
+                PARTITION BY patient_ref, episode_ref, stay_id
+                ORDER BY minutes_in_unit DESC, first_start_date ASC
             ) AS rn
-        FROM time_per_unit t
-        INNER JOIN grouped_stays g
-            ON t.patient_ref = g.patient_ref
-            AND t.episode_ref = g.episode_ref
-            AND t.stay_id = g.stay_id
-            AND t.ou_loc_ref = g.ou_loc_ref
-        GROUP BY t.patient_ref, t.episode_ref, t.stay_id,
-                 t.ou_loc_ref, t.minutes_in_unit
+        FROM time_per_unit
     ) ranked
     WHERE rn = 1
 ),
@@ -217,7 +208,24 @@ ORDER BY cw.admission_date;
 
 
 # ==========================================
-# 2. RESUMEN POR AÑO
+# 2. CONSTANTES AISBE
+# ==========================================
+
+ABS_CLINIC = [
+    "2A", "2B", "2C", "2D", "2E",
+    "3A", "3B", "3C", "3D", "3E",
+    "3G", "3H", "3I",
+    "4A", "4B", "4C",
+    "5A", "5B", "5C", "5D",
+]
+CP_CLINIC = [
+    "08004", "08011", "08014", "08015", "08017", "08021",
+    "08022", "08028", "08029", "08034", "08036", "08038",
+]
+
+
+# ==========================================
+# 3. FUNCIONES AUXILIARES
 # ==========================================
 
 def _format_median_iqr(series: pd.Series) -> str:
@@ -230,32 +238,100 @@ def _format_median_iqr(series: pd.Series) -> str:
     return f"{q2:.1f} [{q1:.1f}-{q3:.1f}]"
 
 
+def _fmt_n_pct(count: int, total: int) -> str:
+    if total == 0:
+        return ""
+    pct = count / total * 100
+    return f"{count} ({pct:.1f}%)"
+
+
+def _classify_aisbe(patient_df: pd.DataFrame) -> pd.Series:
+    """Classify patients as AISBE based on health_area and postcode.
+
+    Args:
+        patient_df: DataFrame indexed by patient_ref with health_area and postcode columns.
+
+    Returns:
+        Boolean Series indexed by patient_ref.
+    """
+    ha = patient_df["health_area"].astype(str).str.strip()
+    pc = patient_df["postcode"].astype(str).str.strip().str[:5]
+    is_abs = ha.isin(ABS_CLINIC)
+    is_cp = (~is_abs) & pc.isin(CP_CLINIC)
+    return is_abs | is_cp
+
+
+def _compute_mortality(sub: pd.DataFrame) -> dict:
+    """Compute in-stay, 30-day and 90-day mortality from admission date.
+
+    Returns dict with keys: deaths_stay, deaths_30, deaths_90,
+    n (denominator), and formatted strings.
+    """
+    n = len(sub)
+    if n == 0:
+        return {
+            "deaths_stay": 0, "deaths_30": 0, "deaths_90": 0, "n": 0,
+            "stay_fmt": "", "d30_fmt": "", "d90_fmt": "",
+        }
+
+    deaths_stay = int((sub["exitus_during_stay"] == "Yes").sum())
+
+    # 30/90-day mortality from admission date (standard clinical convention)
+    admission_dt = pd.to_datetime(sub["admission_date"], errors="coerce")
+    exitus_dt = pd.to_datetime(sub["exitus_date"], errors="coerce")
+    valid = exitus_dt.notna() & admission_dt.notna()
+    delta = (exitus_dt - admission_dt).dt.total_seconds() / 86400
+
+    deaths_30 = int((valid & (delta >= 0) & (delta <= 30)).sum())
+    deaths_90 = int((valid & (delta >= 0) & (delta <= 90)).sum())
+
+    return {
+        "deaths_stay": deaths_stay,
+        "deaths_30": deaths_30,
+        "deaths_90": deaths_90,
+        "n": n,
+        "stay_fmt": _fmt_n_pct(deaths_stay, n),
+        "d30_fmt": _fmt_n_pct(deaths_30, n),
+        "d90_fmt": _fmt_n_pct(deaths_90, n),
+    }
+
+
+# ==========================================
+# 4. RESUMEN POR AÑO (CSV - flat)
+# ==========================================
+
 def build_yearly_summary(df: pd.DataFrame) -> pd.DataFrame:
+    """Build flat yearly summary for CSV export."""
     if df.empty:
         return pd.DataFrame()
 
     df = df.copy()
-
-    # Normalizar columnas clave
     if "days_stay" not in df.columns and "hours_stay" in df.columns:
         df["days_stay"] = df["hours_stay"] / 24.0
-
     df["year_admission"] = df["year_admission"].astype(int)
 
-    # El orden de las claves define el orden visual de las filas
     summary_rows: dict[str, dict[int, str]] = {
         "N estancias": {},
+        "N pacientes": {},
         "Edad, mediana [IQR]": {},
-        "Sexo": {},
-        "Nacionalidad": {},
+        "Sexo masculino (n, %)": {},
+        "Sexo femenino (n, %)": {},
+        "Nacionalidad española (n, %)": {},
+        "Otras nacionalidades (n, %)": {},
         "Pacientes AISBE (n, %)": {},
         "Estancia (días), mediana [IQR]": {},
         "Cirrosis (n, %)": {},
         "Reingreso 24h (n, %)": {},
         "Reingreso 72h (n, %)": {},
-        "Mortalidad global (estancia, 30d, 90d) (n, %)": {},
-        "Mortalidad en cirrosis (estancia, 30d, 90d) (n, %)": {},
-        "Mortalidad en no AISBE (estancia, 30d, 90d) (n, %)": {},
+        "Mortalidad global - en estancia (n, %)": {},
+        "Mortalidad global - 30 días (n, %)": {},
+        "Mortalidad global - 90 días (n, %)": {},
+        "Mortalidad cirrosis - en estancia (n, %)": {},
+        "Mortalidad cirrosis - 30 días (n, %)": {},
+        "Mortalidad cirrosis - 90 días (n, %)": {},
+        "Mortalidad no AISBE - en estancia (n, %)": {},
+        "Mortalidad no AISBE - 30 días (n, %)": {},
+        "Mortalidad no AISBE - 90 días (n, %)": {},
     }
 
     years = sorted(df["year_admission"].dropna().unique())
@@ -263,8 +339,6 @@ def build_yearly_summary(df: pd.DataFrame) -> pd.DataFrame:
     for year in years:
         sub = df[df["year_admission"] == year]
         n = len(sub)
-
-        # N estancias
         summary_rows["N estancias"][year] = str(n)
 
         if n == 0:
@@ -272,219 +346,639 @@ def build_yearly_summary(df: pd.DataFrame) -> pd.DataFrame:
                 summary_rows[key].setdefault(year, "")
             continue
 
-        # Edad
+        # Unique patients for patient-level metrics
+        patients = sub.drop_duplicates(subset=["patient_ref"])
+        n_pat = len(patients)
+        summary_rows["N pacientes"][year] = str(n_pat)
+
+        # Age (stay-level, as age varies by admission date)
         summary_rows["Edad, mediana [IQR]"][year] = _format_median_iqr(
             pd.to_numeric(sub["age_at_admission"], errors="coerce")
         )
 
-        # Sexo (una sola fila con M/F)
-        sex_counts = sub["sex"].value_counts(dropna=False)
-        male_count = int(sex_counts.get("Male", 0))
-        female_count = int(sex_counts.get("Female", 0))
-        male_pct = (male_count / n * 100) if n > 0 else 0.0
-        female_pct = (female_count / n * 100) if n > 0 else 0.0
-        summary_rows["Sexo"][year] = (
-            f"Masculino: {male_count} ({male_pct:.1f}%), "
-            f"Femenino: {female_count} ({female_pct:.1f}%)"
+        # Sex (patient-level)
+        sex_counts = patients["sex"].value_counts(dropna=False)
+        male = int(sex_counts.get("Male", 0))
+        female = int(sex_counts.get("Female", 0))
+        summary_rows["Sexo masculino (n, %)"][year] = _fmt_n_pct(male, n_pat)
+        summary_rows["Sexo femenino (n, %)"][year] = _fmt_n_pct(female, n_pat)
+
+        # Nationality (patient-level)
+        natio = patients["natio_ref"].fillna("").astype(str)
+        n_spain = int((natio == "ES").sum())
+        n_other = n_pat - n_spain
+        summary_rows["Nacionalidad española (n, %)"][year] = _fmt_n_pct(n_spain, n_pat)
+        summary_rows["Otras nacionalidades (n, %)"][year] = _fmt_n_pct(n_other, n_pat)
+
+        # AISBE (patient-level)
+        patient_health = patients[["patient_ref", "health_area", "postcode"]].set_index(
+            "patient_ref"
         )
+        is_aisbe = _classify_aisbe(patient_health)
+        n_aisbe = int(is_aisbe.sum())
+        summary_rows["Pacientes AISBE (n, %)"][year] = _fmt_n_pct(n_aisbe, n_pat)
 
-        # Nacionalidad: España vs Otras (ES en natio_ref), en una sola fila
-        is_spain = sub.get("natio_ref", "").fillna("") == "ES"
-        n_spain = int(is_spain.sum())
-        n_other = n - n_spain
-        pct_spain = (n_spain / n * 100) if n > 0 else 0.0
-        pct_other = (n_other / n * 100) if n > 0 else 0.0
-        summary_rows["Nacionalidad"][year] = (
-            f"España: {n_spain} ({pct_spain:.1f}%), "
-            f"Otras: {n_other} ({pct_other:.1f}%)"
-        )
-
-        # Pacientes de ABS clínicas (basado en paciente, no en estancias)
-        abs_clinic = [
-            "2A", "2B", "2C", "2D", "2E",
-            "3A", "3B", "3C", "3D", "3E",
-            "3G", "3H", "3I",
-            "4A", "4B", "4C",
-            "5A", "5B", "5C", "5D",
-        ]
-        cp_clinic = [
-            "08004", "08011", "08014", "08015", "08017", "08021",
-            "08022", "08028", "08029", "08034", "08036", "08038",
-        ]
-
-        # Un registro por paciente con su health_area y postcode (primera aparición)
-        patient_health = (
-            sub[["patient_ref", "health_area", "postcode"]]
-            .drop_duplicates(subset=["patient_ref"])
-            .set_index("patient_ref")
-        )
-        n_patients_year = len(patient_health)
-        if n_patients_year > 0:
-            ha = patient_health["health_area"].astype(str).str.strip()
-            pc = (
-                patient_health["postcode"]
-                .astype(str)
-                .str.strip()
-                .str[:5]
-            )
-
-            # Regla AISBE:
-            # 1) Si health_area está en abs_clinic -> AISBE
-            # 2) Si no, pero postcode está en cp_clinic -> AISBE
-            is_abs = ha.isin(abs_clinic)
-            is_cp = (~is_abs) & pc.isin(cp_clinic)
-            is_aisbe = is_abs | is_cp
-
-            n_abs = int(is_aisbe.sum())
-            pct_abs = n_abs / n_patients_year * 100
-            summary_rows["Pacientes AISBE (n, %)"][year] = (
-                f"{n_abs} ({pct_abs:.1f}%)"
-            )
-        else:
-            summary_rows["Pacientes AISBE (n, %)"][year] = ""
-
-        # Estancia (días)
+        # Length of stay (stay-level)
         summary_rows["Estancia (días), mediana [IQR]"][year] = _format_median_iqr(
             pd.to_numeric(sub["days_stay"], errors="coerce")
         )
 
-        # Mortalidad durante la estancia (toda la cohorte)
-        deaths = int((sub["exitus_during_stay"] == "Yes").sum())
-        deaths_pct = (deaths / n * 100) if n > 0 else 0.0
+        # Cirrhosis (stay-level prevalence)
+        cirr = pd.to_numeric(sub["has_cirrhosis"], errors="coerce").fillna(0)
+        has_cirr = int((cirr == 1).sum())
+        summary_rows["Cirrosis (n, %)"][year] = _fmt_n_pct(has_cirr, n)
 
-        # Mortalidad a 30 y 90 días post-alta (toda la cohorte)
-        exitus_date = pd.to_datetime(sub["exitus_date"], errors="coerce")
-        discharge_date = pd.to_datetime(sub["effective_discharge_date"], errors="coerce")
-        valid_dates = exitus_date.notna() & discharge_date.notna()
-        delta_days = (exitus_date - discharge_date).dt.total_seconds() / 86400
-
-        # Mortalidad acumulada a 30/90 días desde el inicio de la estancia
-        # (incluye muertes intrahospitalarias y post-alta)
-        death_30 = valid_dates & (delta_days <= 30)
-        death_90 = valid_dates & (delta_days <= 90)
-
-        deaths_30 = int(death_30.sum())
-        deaths_90 = int(death_90.sum())
-        deaths_30_pct = (deaths_30 / n * 100) if n > 0 else 0.0
-        deaths_90_pct = (deaths_90 / n * 100) if n > 0 else 0.0
-
-        summary_rows["Mortalidad global (estancia, 30d, 90d) (n, %)"][year] = (
-            f"En estancia: {deaths} ({deaths_pct:.1f}%), "
-            f"30 días: {deaths_30} ({deaths_30_pct:.1f}%), "
-            f"90 días: {deaths_90} ({deaths_90_pct:.1f}%)"
-        )
-
-        # Reingresos
-        for col, row_key in [
+        # Readmissions (stay-level)
+        for col, key in [
             ("readmission_24h", "Reingreso 24h (n, %)"),
             ("readmission_72h", "Reingreso 72h (n, %)"),
         ]:
             vals = pd.to_numeric(sub[col], errors="coerce").fillna(0)
             count = int((vals == 1).sum())
-            pct = (count / n * 100) if n > 0 else 0.0
-            summary_rows[row_key][year] = f"{count} ({pct:.1f}%)"
+            summary_rows[key][year] = _fmt_n_pct(count, n)
 
-        # Cirrosis (prevalencia)
-        cirr = pd.to_numeric(sub["has_cirrhosis"], errors="coerce").fillna(0)
-        has_cirr = int((cirr == 1).sum())
-        cirr_pct = (has_cirr / n * 100) if n > 0 else 0.0
-        summary_rows["Cirrosis (n, %)"][year] = f"{has_cirr} ({cirr_pct:.1f}%)"
+        # Global mortality (from admission date)
+        mort = _compute_mortality(sub)
+        summary_rows["Mortalidad global - en estancia (n, %)"][year] = mort["stay_fmt"]
+        summary_rows["Mortalidad global - 30 días (n, %)"][year] = mort["d30_fmt"]
+        summary_rows["Mortalidad global - 90 días (n, %)"][year] = mort["d90_fmt"]
 
-        # Subgrupo con cirrosis: mortalidad en estancia, 30 y 90 días
+        # Cirrhosis mortality
         sub_cirr = sub[cirr == 1]
-        n_cirr = len(sub_cirr)
-        if n_cirr > 0:
-            # En estancia
-            deaths_cirr_stay = int((sub_cirr["exitus_during_stay"] == "Yes").sum())
-            deaths_cirr_stay_pct = (deaths_cirr_stay / n_cirr * 100) if n_cirr > 0 else 0.0
+        mort_cirr = _compute_mortality(sub_cirr)
+        summary_rows["Mortalidad cirrosis - en estancia (n, %)"][year] = mort_cirr["stay_fmt"]
+        summary_rows["Mortalidad cirrosis - 30 días (n, %)"][year] = mort_cirr["d30_fmt"]
+        summary_rows["Mortalidad cirrosis - 90 días (n, %)"][year] = mort_cirr["d90_fmt"]
 
-            # 30 y 90 días post-alta
-            exitus_cirr = pd.to_datetime(sub_cirr["exitus_date"], errors="coerce")
-            discharge_cirr = pd.to_datetime(
-                sub_cirr["effective_discharge_date"], errors="coerce"
-            )
-            valid_cirr = exitus_cirr.notna() & discharge_cirr.notna()
-            delta_cirr = (exitus_cirr - discharge_cirr).dt.total_seconds() / 86400
-
-            # Mortalidad acumulada 30/90 días en cirróticos
-            death_cirr_30 = valid_cirr & (delta_cirr <= 30)
-            death_cirr_90 = valid_cirr & (delta_cirr <= 90)
-
-            deaths_cirr_30 = int(death_cirr_30.sum())
-            deaths_cirr_90 = int(death_cirr_90.sum())
-            deaths_cirr_30_pct = (
-                deaths_cirr_30 / n_cirr * 100
-            ) if n_cirr > 0 else 0.0
-            deaths_cirr_90_pct = (
-                deaths_cirr_90 / n_cirr * 100
-            ) if n_cirr > 0 else 0.0
-
-            summary_rows["Mortalidad en cirrosis (estancia, 30d, 90d) (n, %)"][year] = (
-                f"En estancia: {deaths_cirr_stay} ({deaths_cirr_stay_pct:.1f}%), "
-                f"30 días: {deaths_cirr_30} ({deaths_cirr_30_pct:.1f}%), "
-                f"90 días: {deaths_cirr_90} ({deaths_cirr_90_pct:.1f}%)"
-            )
-        else:
-            summary_rows["Mortalidad en cirrosis (estancia, 30d, 90d) (n, %)"][year] = ""
-
-        # Subgrupo NO AISBE: mortalidad en estancia, 30 y 90 días
-        # Reutilizamos is_aisbe definido arriba
-        if n_patients_year > 0:
-            # Marcamos AISBE a nivel estancia (por paciente_ref)
-            # Para simplificar, consideramos estancia NO AISBE si su paciente no es AISBE
-            patient_is_aisbe = is_aisbe.reindex(sub["patient_ref"]).fillna(False).to_numpy()
-            sub_no_aisbe = sub[~patient_is_aisbe]
-            n_no_aisbe = len(sub_no_aisbe)
-        else:
-            sub_no_aisbe = sub.iloc[0:0]
-            n_no_aisbe = 0
-
-        if n_no_aisbe > 0:
-            # En estancia
-            deaths_no_stay = int((sub_no_aisbe["exitus_during_stay"] == "Yes").sum())
-            deaths_no_stay_pct = (
-                deaths_no_stay / n_no_aisbe * 100 if n_no_aisbe > 0 else 0.0
-            )
-
-            # 30 y 90 días (mortalidad acumulada desde la estancia)
-            exitus_no = pd.to_datetime(sub_no_aisbe["exitus_date"], errors="coerce")
-            discharge_no = pd.to_datetime(
-                sub_no_aisbe["effective_discharge_date"], errors="coerce"
-            )
-            valid_no = exitus_no.notna() & discharge_no.notna()
-            delta_no = (exitus_no - discharge_no).dt.total_seconds() / 86400
-
-            death_no_30 = valid_no & (delta_no <= 30)
-            death_no_90 = valid_no & (delta_no <= 90)
-
-            deaths_no_30 = int(death_no_30.sum())
-            deaths_no_90 = int(death_no_90.sum())
-            deaths_no_30_pct = (
-                deaths_no_30 / n_no_aisbe * 100 if n_no_aisbe > 0 else 0.0
-            )
-            deaths_no_90_pct = (
-                deaths_no_90 / n_no_aisbe * 100 if n_no_aisbe > 0 else 0.0
-            )
-
-            summary_rows["Mortalidad en no AISBE (estancia, 30d, 90d) (n, %)"][year] = (
-                f"En estancia: {deaths_no_stay} ({deaths_no_stay_pct:.1f}%), "
-                f"30 días: {deaths_no_30} ({deaths_no_30_pct:.1f}%), "
-                f"90 días: {deaths_no_90} ({deaths_no_90_pct:.1f}%)"
-            )
-        else:
-            summary_rows["Mortalidad en no AISBE (estancia, 30d, 90d) (n, %)"][year] = ""
+        # Non-AISBE mortality
+        patient_is_aisbe = sub["patient_ref"].map(is_aisbe).fillna(False)
+        sub_no_aisbe = sub[~patient_is_aisbe.values]
+        mort_no = _compute_mortality(sub_no_aisbe)
+        summary_rows["Mortalidad no AISBE - en estancia (n, %)"][year] = mort_no["stay_fmt"]
+        summary_rows["Mortalidad no AISBE - 30 días (n, %)"][year] = mort_no["d30_fmt"]
+        summary_rows["Mortalidad no AISBE - 90 días (n, %)"][year] = mort_no["d90_fmt"]
 
     index = list(summary_rows.keys())
     data = {year: [summary_rows[row].get(year, "") for row in index] for year in years}
 
     summary_df = pd.DataFrame(data, index=index)
     summary_df.index.name = "Variable"
-
     return summary_df
 
 
 # ==========================================
-# 3. MAIN
+# 5. RESUMEN ESTRUCTURADO (para HTML)
+# ==========================================
+
+def build_yearly_summary_structured(df: pd.DataFrame) -> tuple[list[dict], list[int]]:
+    """Build structured yearly summary for HTML report.
+
+    Returns:
+        (sections, years) where sections is a list of section dicts and
+        years is the sorted list of year values.
+    """
+    if df.empty:
+        return [], []
+
+    df = df.copy()
+    if "days_stay" not in df.columns and "hours_stay" in df.columns:
+        df["days_stay"] = df["hours_stay"] / 24.0
+    df["year_admission"] = df["year_admission"].astype(int)
+
+    years = sorted(df["year_admission"].dropna().unique())
+
+    # Accumulators per section; each row is {label, values:{year:str}, total:str, style:str}
+    demo_rows = []
+    clinical_rows = []
+    mort_global_rows = []
+    mort_cirr_rows = []
+    mort_noaisbe_rows = []
+
+    # -- Initialize row templates --
+    def _new_row(label, style=""):
+        return {"label": label, "values": {}, "total": "", "style": style}
+
+    r_n_stays = _new_row("N estancias", "bold")
+    r_n_patients = _new_row("N pacientes", "bold")
+    r_age = _new_row("Edad, mediana [IQR]")
+    r_male = _new_row("Sexo masculino", "indent")
+    r_female = _new_row("Sexo femenino", "indent")
+    r_spain = _new_row("Nacionalidad espa\u00f1ola", "indent")
+    r_other_nat = _new_row("Otras nacionalidades", "indent")
+    r_aisbe = _new_row("Pacientes AISBE")
+    r_los = _new_row("Estancia (d\u00edas), mediana [IQR]")
+    r_cirr = _new_row("Cirrosis")
+    r_readm24 = _new_row("Reingreso 24h")
+    r_readm72 = _new_row("Reingreso 72h")
+    r_mg_stay = _new_row("En estancia")
+    r_mg_30 = _new_row("A 30 d\u00edas")
+    r_mg_90 = _new_row("A 90 d\u00edas")
+    r_mc_stay = _new_row("En estancia")
+    r_mc_30 = _new_row("A 30 d\u00edas")
+    r_mc_90 = _new_row("A 90 d\u00edas")
+    r_mn_stay = _new_row("En estancia")
+    r_mn_30 = _new_row("A 30 d\u00edas")
+    r_mn_90 = _new_row("A 90 d\u00edas")
+
+    # Accumulators for totals
+    total_stays = 0
+    all_patients = set()
+    all_ages = []
+    total_male = 0
+    total_female = 0
+    total_spain = 0
+    total_other_nat = 0
+    total_aisbe = 0
+    total_n_pat = 0
+    all_los = []
+    total_cirr = 0
+    total_readm24 = 0
+    total_readm72 = 0
+    # Mortality totals
+    t_mg = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
+    t_mc = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
+    t_mn = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
+
+    for year in years:
+        sub = df[df["year_admission"] == year]
+        n = len(sub)
+        total_stays += n
+        r_n_stays["values"][year] = str(n)
+
+        if n == 0:
+            for r in [r_n_patients, r_age, r_male, r_female, r_spain, r_other_nat,
+                      r_aisbe, r_los, r_cirr, r_readm24, r_readm72,
+                      r_mg_stay, r_mg_30, r_mg_90,
+                      r_mc_stay, r_mc_30, r_mc_90,
+                      r_mn_stay, r_mn_30, r_mn_90]:
+                r["values"][year] = ""
+            continue
+
+        # Unique patients
+        patients = sub.drop_duplicates(subset=["patient_ref"])
+        n_pat = len(patients)
+        all_patients.update(patients["patient_ref"].tolist())
+        total_n_pat += n_pat
+        r_n_patients["values"][year] = str(n_pat)
+
+        # Age
+        ages = pd.to_numeric(sub["age_at_admission"], errors="coerce").dropna()
+        all_ages.extend(ages.tolist())
+        r_age["values"][year] = _format_median_iqr(ages)
+
+        # Sex (patient-level)
+        sex_counts = patients["sex"].value_counts(dropna=False)
+        male = int(sex_counts.get("Male", 0))
+        female = int(sex_counts.get("Female", 0))
+        total_male += male
+        total_female += female
+        r_male["values"][year] = _fmt_n_pct(male, n_pat)
+        r_female["values"][year] = _fmt_n_pct(female, n_pat)
+
+        # Nationality (patient-level)
+        natio = patients["natio_ref"].fillna("").astype(str)
+        n_spain = int((natio == "ES").sum())
+        n_other = n_pat - n_spain
+        total_spain += n_spain
+        total_other_nat += n_other
+        r_spain["values"][year] = _fmt_n_pct(n_spain, n_pat)
+        r_other_nat["values"][year] = _fmt_n_pct(n_other, n_pat)
+
+        # AISBE
+        patient_health = patients[["patient_ref", "health_area", "postcode"]].set_index(
+            "patient_ref"
+        )
+        is_aisbe = _classify_aisbe(patient_health)
+        n_aisbe = int(is_aisbe.sum())
+        total_aisbe += n_aisbe
+        r_aisbe["values"][year] = _fmt_n_pct(n_aisbe, n_pat)
+
+        # Length of stay
+        los = pd.to_numeric(sub["days_stay"], errors="coerce").dropna()
+        all_los.extend(los.tolist())
+        r_los["values"][year] = _format_median_iqr(los)
+
+        # Cirrhosis
+        cirr = pd.to_numeric(sub["has_cirrhosis"], errors="coerce").fillna(0)
+        has_cirr = int((cirr == 1).sum())
+        total_cirr += has_cirr
+        r_cirr["values"][year] = _fmt_n_pct(has_cirr, n)
+
+        # Readmissions
+        for col, row_ref, total_ref_name in [
+            ("readmission_24h", r_readm24, "total_readm24"),
+            ("readmission_72h", r_readm72, "total_readm72"),
+        ]:
+            vals = pd.to_numeric(sub[col], errors="coerce").fillna(0)
+            count = int((vals == 1).sum())
+            row_ref["values"][year] = _fmt_n_pct(count, n)
+            if total_ref_name == "total_readm24":
+                total_readm24 += count
+            else:
+                total_readm72 += count
+
+        # Global mortality
+        mort = _compute_mortality(sub)
+        r_mg_stay["values"][year] = mort["stay_fmt"]
+        r_mg_30["values"][year] = mort["d30_fmt"]
+        r_mg_90["values"][year] = mort["d90_fmt"]
+        t_mg["stay"] += mort["deaths_stay"]
+        t_mg["d30"] += mort["deaths_30"]
+        t_mg["d90"] += mort["deaths_90"]
+        t_mg["n"] += mort["n"]
+
+        # Cirrhosis mortality
+        sub_cirr = sub[cirr == 1]
+        mort_c = _compute_mortality(sub_cirr)
+        r_mc_stay["values"][year] = mort_c["stay_fmt"]
+        r_mc_30["values"][year] = mort_c["d30_fmt"]
+        r_mc_90["values"][year] = mort_c["d90_fmt"]
+        t_mc["stay"] += mort_c["deaths_stay"]
+        t_mc["d30"] += mort_c["deaths_30"]
+        t_mc["d90"] += mort_c["deaths_90"]
+        t_mc["n"] += mort_c["n"]
+
+        # Non-AISBE mortality
+        patient_is_aisbe = sub["patient_ref"].map(is_aisbe).fillna(False)
+        sub_no_aisbe = sub[~patient_is_aisbe.values]
+        mort_n = _compute_mortality(sub_no_aisbe)
+        r_mn_stay["values"][year] = mort_n["stay_fmt"]
+        r_mn_30["values"][year] = mort_n["d30_fmt"]
+        r_mn_90["values"][year] = mort_n["d90_fmt"]
+        t_mn["stay"] += mort_n["deaths_stay"]
+        t_mn["d30"] += mort_n["deaths_30"]
+        t_mn["d90"] += mort_n["deaths_90"]
+        t_mn["n"] += mort_n["n"]
+
+    # -- Compute totals --
+    r_n_stays["total"] = str(total_stays)
+    r_n_patients["total"] = str(len(all_patients))
+    r_age["total"] = _format_median_iqr(pd.Series(all_ages)) if all_ages else ""
+    r_male["total"] = _fmt_n_pct(total_male, total_n_pat)
+    r_female["total"] = _fmt_n_pct(total_female, total_n_pat)
+    r_spain["total"] = _fmt_n_pct(total_spain, total_n_pat)
+    r_other_nat["total"] = _fmt_n_pct(total_other_nat, total_n_pat)
+    r_aisbe["total"] = _fmt_n_pct(total_aisbe, total_n_pat)
+    r_los["total"] = _format_median_iqr(pd.Series(all_los)) if all_los else ""
+    r_cirr["total"] = _fmt_n_pct(total_cirr, total_stays)
+    r_readm24["total"] = _fmt_n_pct(total_readm24, total_stays)
+    r_readm72["total"] = _fmt_n_pct(total_readm72, total_stays)
+
+    r_mg_stay["total"] = _fmt_n_pct(t_mg["stay"], t_mg["n"])
+    r_mg_30["total"] = _fmt_n_pct(t_mg["d30"], t_mg["n"])
+    r_mg_90["total"] = _fmt_n_pct(t_mg["d90"], t_mg["n"])
+    r_mc_stay["total"] = _fmt_n_pct(t_mc["stay"], t_mc["n"])
+    r_mc_30["total"] = _fmt_n_pct(t_mc["d30"], t_mc["n"])
+    r_mc_90["total"] = _fmt_n_pct(t_mc["d90"], t_mc["n"])
+    r_mn_stay["total"] = _fmt_n_pct(t_mn["stay"], t_mn["n"])
+    r_mn_30["total"] = _fmt_n_pct(t_mn["d30"], t_mn["n"])
+    r_mn_90["total"] = _fmt_n_pct(t_mn["d90"], t_mn["n"])
+
+    # -- Assemble sections --
+    sections = [
+        {
+            "section": "Demograf\u00eda",
+            "css": "demo",
+            "rows": [r_n_stays, r_n_patients, r_age, r_male, r_female,
+                     r_spain, r_other_nat, r_aisbe],
+        },
+        {
+            "section": "Cl\u00ednica",
+            "css": "clinical",
+            "rows": [r_los, r_cirr, r_readm24, r_readm72],
+        },
+        {
+            "section": "Mortalidad global",
+            "css": "mortality",
+            "rows": [r_mg_stay, r_mg_30, r_mg_90],
+        },
+        {
+            "section": "Mortalidad en cirrosis",
+            "css": "mortality-cirr",
+            "rows": [r_mc_stay, r_mc_30, r_mc_90],
+        },
+        {
+            "section": "Mortalidad en no AISBE",
+            "css": "mortality-noaisbe",
+            "rows": [r_mn_stay, r_mn_30, r_mn_90],
+        },
+    ]
+
+    return sections, years
+
+
+# ==========================================
+# 6. HTML REPORT GENERATION
+# ==========================================
+
+_CSS = """
+:root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    --color-text: #1f2937;
+    --color-text-muted: #6b7280;
+    --color-border: #e5e7eb;
+    --color-border-thick: #d1d5db;
+    --color-bg: #ffffff;
+    --color-bg-header: #f8fafc;
+    --color-bg-total: #f8fafc;
+    --section-demo: #eef2f7;
+    --section-demo-text: #1e3a5f;
+    --section-demo-accent: #3b82f6;
+    --section-clinical: #eef2f7;
+    --section-clinical-text: #1e3a5f;
+    --section-clinical-accent: #3b82f6;
+    --section-mortality: #fef2f2;
+    --section-mortality-text: #991b1b;
+    --section-mortality-accent: #ef4444;
+    --section-mortality-cirr: #faf5ff;
+    --section-mortality-cirr-text: #581c87;
+    --section-mortality-cirr-accent: #a855f7;
+    --section-mortality-noaisbe: #f3f4f6;
+    --section-mortality-noaisbe-text: #374151;
+    --section-mortality-noaisbe-accent: #6b7280;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    margin: 0;
+    padding: 40px;
+    background: #f9fafb;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+
+/* Header */
+.report-header {
+    padding: 32px 40px 24px;
+    border-bottom: 1px solid var(--color-border);
+}
+.report-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 6px;
+}
+.report-header .subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+/* Table wrapper for horizontal scroll */
+.table-wrapper {
+    overflow-x: auto;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 13px;
+    min-width: 800px;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--color-bg-header);
+    padding: 12px 16px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--color-text);
+    border-bottom: 2px solid var(--color-border-thick);
+    white-space: nowrap;
+}
+thead th:first-child {
+    text-align: left;
+    min-width: 220px;
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background: var(--color-bg-header);
+}
+thead th.col-total {
+    border-left: 2px solid var(--color-border-thick);
+    background: var(--color-bg-total);
+    font-weight: 700;
+}
+
+/* Section header rows */
+tr.section-header td {
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border);
+}
+tr.section-header td:first-child {
+    border-left: 4px solid transparent;
+}
+
+tr.section-demo td { background: var(--section-demo); color: var(--section-demo-text); }
+tr.section-demo td:first-child { border-left-color: var(--section-demo-accent); }
+tr.section-clinical td { background: var(--section-clinical); color: var(--section-clinical-text); }
+tr.section-clinical td:first-child { border-left-color: var(--section-clinical-accent); }
+tr.section-mortality td { background: var(--section-mortality); color: var(--section-mortality-text); }
+tr.section-mortality td:first-child { border-left-color: var(--section-mortality-accent); }
+tr.section-mortality-cirr td { background: var(--section-mortality-cirr); color: var(--section-mortality-cirr-text); }
+tr.section-mortality-cirr td:first-child { border-left-color: var(--section-mortality-cirr-accent); }
+tr.section-mortality-noaisbe td { background: var(--section-mortality-noaisbe); color: var(--section-mortality-noaisbe-text); }
+tr.section-mortality-noaisbe td:first-child { border-left-color: var(--section-mortality-noaisbe-accent); }
+
+/* Data rows */
+tbody td {
+    padding: 9px 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+}
+tbody td:first-child {
+    text-align: left;
+    color: var(--color-text);
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--color-bg);
+}
+tbody td.col-total {
+    border-left: 2px solid var(--color-border-thick);
+    background: var(--color-bg-total);
+    font-weight: 600;
+}
+tbody tr:hover td {
+    background-color: #f1f5f9;
+}
+tbody tr:hover td:first-child {
+    background-color: #f1f5f9;
+}
+tbody tr:hover td.col-total {
+    background-color: #eef2f6;
+}
+
+/* Row styles */
+tr.row-bold td:first-child { font-weight: 700; }
+tr.row-bold td { font-weight: 600; }
+tr.row-indent td:first-child { padding-left: 36px; color: var(--color-text-muted); }
+
+/* Footer */
+.report-footer {
+    padding: 24px 40px;
+    border-top: 1px solid var(--color-border);
+    background: #fafbfc;
+}
+.report-footer h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin: 0 0 10px;
+    font-weight: 600;
+}
+.report-footer ul {
+    margin: 0;
+    padding: 0 0 0 18px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+}
+.report-footer .timestamp {
+    margin-top: 14px;
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+/* Print */
+@media print {
+    body { background: #fff; padding: 0; margin: 0; }
+    .container { box-shadow: none; border-radius: 0; }
+    .report-header { padding: 20px; }
+    table { font-size: 10px; min-width: 0; }
+    thead th, tbody td { padding: 5px 8px; }
+    thead th:first-child, tbody td:first-child { position: static; }
+    thead { display: table-header-group; }
+    .report-footer { padding: 16px 20px; }
+    @page { size: landscape; margin: 1cm; }
+}
+
+@media (max-width: 768px) {
+    body { padding: 16px; }
+    .report-header { padding: 20px; }
+    .report-header h1 { font-size: 18px; }
+    table { font-size: 11px; }
+    thead th, tbody td { padding: 6px 10px; }
+}
+"""
+
+
+def generate_html_report(
+    sections: list[dict],
+    years: list[int],
+    title: str,
+    output_path: Path,
+) -> None:
+    """Generate a professional HTML report from structured summary data."""
+
+    n_cols = len(years) + 2  # Variable + years + Total
+
+    # Header row
+    year_ths = "".join(f'<th>{y}</th>' for y in years)
+    thead = (
+        f'<thead><tr>'
+        f'<th>Variable</th>'
+        f'{year_ths}'
+        f'<th class="col-total">Total</th>'
+        f'</tr></thead>'
+    )
+
+    # Body
+    body_rows = []
+    for sec in sections:
+        # Section header
+        body_rows.append(
+            f'<tr class="section-header section-{sec["css"]}">'
+            f'<td colspan="{n_cols}">{sec["section"]}</td>'
+            f'</tr>'
+        )
+        for row in sec["rows"]:
+            style = row.get("style", "")
+            row_class = f'row-{style}' if style else ''
+            cells = [f'<td>{row["label"]}</td>']
+            for y in years:
+                cells.append(f'<td>{row["values"].get(y, "")}</td>')
+            cells.append(f'<td class="col-total">{row.get("total", "")}</td>')
+            body_rows.append(
+                f'<tr class="{row_class}">' + "".join(cells) + '</tr>'
+            )
+
+    tbody = '<tbody>' + "\n".join(body_rows) + '</tbody>'
+
+    now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+
+    html = f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<style>{_CSS}</style>
+</head>
+<body>
+<div class="container">
+
+<div class="report-header">
+    <h1>{title}</h1>
+    <p class="subtitle">Hospital Cl\u00ednic de Barcelona &mdash; Unidades E073, I073</p>
+</div>
+
+<div class="table-wrapper">
+<table>
+{thead}
+{tbody}
+</table>
+</div>
+
+<div class="report-footer">
+    <h3>Notas metodol\u00f3gicas</h3>
+    <ul>
+        <li><strong>Unidades analizadas:</strong> E073, I073 (movimientos con place_ref v\u00e1lido).</li>
+        <li><strong>Estancia:</strong> movimientos consecutivos agrupados con tolerancia de 5 min; unidad predominante por tiempo.</li>
+        <li><strong>Filtro de prescripci\u00f3n:</strong> solo estancias con al menos una prescripci\u00f3n activa durante la estancia.</li>
+        <li><strong>Sexo y nacionalidad:</strong> calculados a nivel de paciente \u00fanico (no de estancia).</li>
+        <li><strong>AISBE:</strong> pacientes con \u00e1rea b\u00e1sica de salud del \u00e1rea de influencia del hospital o c\u00f3digo postal correspondiente.</li>
+        <li><strong>Mortalidad a 30/90 d\u00edas:</strong> acumulada desde la fecha de ingreso (incluye muertes intrahospitalarias).</li>
+        <li><strong>Cirrosis:</strong> diagn\u00f3stico ICD-9/ICD-10 en cualquier episodio del paciente (condici\u00f3n cr\u00f3nica).</li>
+        <li><strong>Reingresos:</strong> siguiente ingreso en E073/I073 dentro del plazo indicado tras el alta.</li>
+        <li><strong>Total:</strong> pacientes \u00fanicos se cuentan una vez; porcentajes se calculan sobre la suma de los denominadores anuales.</li>
+    </ul>
+    <p class="timestamp">Informe generado el {now_str}</p>
+</div>
+
+</div>
+</body>
+</html>"""
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(html)
+
+
+# ==========================================
+# 7. MAIN
 # ==========================================
 
 def main():
@@ -514,18 +1008,6 @@ def main():
 
     # Análisis rápido de health_area y AISBE a nivel paciente (toda la cohorte)
     if "health_area" in df.columns:
-        abs_clinic = [
-            "2A", "2B", "2C", "2D", "2E",
-            "3A", "3B", "3C", "3D", "3E",
-            "3G", "3H", "3I",
-            "4A", "4B", "4C",
-            "5A", "5B", "5C", "5D",
-        ]
-        cp_clinic = [
-            "08004", "08011", "08014", "08015", "08017", "08021",
-            "08022", "08028", "08029", "08034", "08036", "08038",
-        ]
-
         patient_health_all = (
             df[["patient_ref", "health_area", "postcode"]]
             .drop_duplicates(subset=["patient_ref"])
@@ -534,12 +1016,6 @@ def main():
         n_patients_all = len(patient_health_all)
 
         ha_all = patient_health_all["health_area"].astype(str).str.strip()
-        pc_all = (
-            patient_health_all["postcode"]
-            .astype(str)
-            .str.strip()
-            .str[:5]
-        )
 
         # Missing en health_area
         missing_health = ha_all.eq("") | ha_all.eq("nan")
@@ -548,129 +1024,60 @@ def main():
             n_missing_health / n_patients_all * 100 if n_patients_all > 0 else 0.0
         )
         print(
-            f"Pacientes únicos: {n_patients_all} | "
-            f"health_area missing/vacía en {n_missing_health} "
+            f"Pacientes \u00fanicos: {n_patients_all} | "
+            f"health_area missing/vac\u00eda en {n_missing_health} "
             f"({pct_missing_health:.1f}%)"
         )
 
         # Distribución de áreas básicas de salud (no missing)
-        print("\nDistribución de health_area (top 20):")
+        print("\nDistribuci\u00f3n de health_area (top 20):")
         ha_counts = ha_all[~missing_health].value_counts().head(20)
         for area, count in ha_counts.items():
             pct = count / n_patients_all * 100 if n_patients_all > 0 else 0.0
             print(f"  {area}: {count} pacientes ({pct:.1f}%)")
 
-        # AISBE por health_area y por código postal
-        is_abs_all = ha_all.isin(abs_clinic)
-        is_cp_all = (~is_abs_all) & pc_all.isin(cp_clinic)
-        is_aisbe_all = is_abs_all | is_cp_all
-
+        # AISBE classification
+        is_aisbe_all = _classify_aisbe(patient_health_all)
         n_aisbe_total = int(is_aisbe_all.sum())
         pct_aisbe_total = (
             n_aisbe_total / n_patients_all * 100 if n_patients_all > 0 else 0.0
         )
 
+        is_abs_all = patient_health_all["health_area"].astype(str).str.strip().isin(ABS_CLINIC)
         n_aisbe_ha = int(is_abs_all.sum())
-        n_aisbe_cp = int(is_cp_all.sum())
+        n_aisbe_cp = n_aisbe_total - n_aisbe_ha
 
         print(
-            "\nClasificación AISBE (toda la cohorte, a nivel paciente):\n"
-            f"  AISBE por health_area (ABS clínicas): {n_aisbe_ha}\n"
-            f"  AISBE añadido por código postal: {n_aisbe_cp}\n"
+            "\nClasificaci\u00f3n AISBE (toda la cohorte, a nivel paciente):\n"
+            f"  AISBE por health_area (ABS cl\u00ednicas): {n_aisbe_ha}\n"
+            f"  AISBE a\u00f1adido por c\u00f3digo postal: {n_aisbe_cp}\n"
             f"  Total AISBE: {n_aisbe_total} "
-            f"({pct_aisbe_total:.1f}% de los pacientes únicos)"
+            f"({pct_aisbe_total:.1f}% de los pacientes \u00fanicos)"
         )
 
     # Crear carpeta output si no existe
     output_dir = Path(__file__).parent / "output"
     output_dir.mkdir(exist_ok=True)
 
-    # Guardar cohorte completa por si se necesita para análisis adicionales
+    # Guardar cohorte completa
     years_str = f"{min_year}-{max_year}" if min_year != max_year else str(min_year)
     cohort_filename = output_dir / f"ward_stays_cohort_{years_str}_E073-I073.csv"
     df.to_csv(cohort_filename, index=False, encoding="utf-8-sig")
     print(f"Cohorte completa guardada en: {cohort_filename}")
 
-    # Construir tabla resumen
+    # CSV summary (flat)
     summary_df = build_yearly_summary(df)
-
     summary_filename = output_dir / f"ward_stays_summary_{years_str}_E073-I073.csv"
     summary_df.to_csv(summary_filename, encoding="utf-8-sig")
     print(f"Tabla resumen (CSV) guardada en: {summary_filename}")
 
-    # Exportar a HTML con formato más profesional
+    # HTML summary (structured)
+    sections, section_years = build_yearly_summary_structured(df)
     html_filename = output_dir / f"ward_stays_summary_{years_str}_E073-I073.html"
-
-    title_text = f"Demografía y resultados de estancias en E073+I073 ({years_str})"
-
-    # Construir tabla HTML manualmente para poder estilizar secciones
-    columns = list(summary_df.columns)
-    header_cells = "".join(f"<th>{col}</th>" for col in ["Variable"] + columns)
-
-    body_rows = []
-    for idx, row in summary_df.iterrows():
-        # Estilos suaves por secciones
-        if idx in {
-            "N estancias",
-            "Edad, mediana [IQR]",
-            "Sexo",
-            "Nacionalidad",
-            "Pacientes AISBE (n, %)",
-            "Estancia (días), mediana [IQR]",
-        }:
-            row_style = "background-color:#fafafa;font-weight:500;"
-        elif idx in {
-            "Cirrosis (n, %)",
-            "Reingreso 24h (n, %)",
-            "Reingreso 72h (n, %)",
-        }:
-            row_style = "background-color:#ffffff;"
-        elif idx.startswith("Mortalidad global"):
-            row_style = "background-color:#f3f4f6;font-weight:600;"
-        elif idx.startswith("Mortalidad en cirrosis"):
-            row_style = "background-color:#f9f5ff;"
-        elif idx.startswith("Mortalidad en no AISBE"):
-            row_style = "background-color:#f5f5f5;"
-        else:
-            row_style = ""
-
-        cells = [f"<td style='text-align:left;'>{idx}</td>"]
-        for col in columns:
-            val = row[col]
-            cells.append(f"<td>{val}</td>")
-        body_rows.append(f"<tr style='{row_style}'>" + "".join(cells) + "</tr>")
-
-    table_html = (
-        "<table>"
-        "<thead><tr>"
-        f"{header_cells}"
-        "</tr></thead>"
-        "<tbody>"
-        + "".join(body_rows) +
-        "</tbody></table>"
-    )
-
-    full_html = (
-        "<html><head><meta charset='utf-8'/>"
-        "<style>"
-        "body{font-family:Arial,Helvetica,sans-serif;margin:40px;}"
-        "h2{color:#1f2933;margin-bottom:24px;}"
-        "table{border-collapse:collapse;width:100%;font-size:14px;}"
-        "th,td{border:1px solid #e1e4e8;padding:8px;text-align:center;}"
-        "th{background-color:#f8f9fa;font-weight:600;}"
-        "tbody tr:hover{background-color:#f1f5f9;}"
-        "</style></head><body>"
-        f"<h2>{title_text}</h2>"
-        f"{table_html}"
-        "</body></html>"
-    )
-
-    with open(html_filename, "w", encoding="utf-8") as f:
-        f.write(full_html)
-
+    title_text = f"Demograf\u00eda y resultados de estancias en E073+I073 ({years_str})"
+    generate_html_report(sections, section_years, title_text, html_filename)
     print(f"Tabla resumen (HTML) guardada en: {html_filename}")
 
 
 if __name__ == "__main__":
     main()
-
