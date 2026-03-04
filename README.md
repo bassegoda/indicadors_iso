@@ -27,7 +27,7 @@ Cada subcarpeta contiene análisis específicos de diferentes indicadores:
 | Carpeta | Descripción |
 |---------|-------------|
 | **admissions/** | Identificación de ingresos reales en unidades de hospitalización. Incluye `hosp_ward_stays.py` (por unidad) y `hosp_ward_longest_stay.py` (por unidad predominante). [Ver documentación detallada →](admissions/README.md) |
-| **demographics/** | Análisis demográfico de cohortes de pacientes |
+| **demographics/** | Tabla demográfica y de resultados de estancias en E073+I073 (`ward_stays_demo.py`). Estructura modular: `_sql.py` (consulta SQL), `_metrics.py` (cálculo de métricas), `_report.py` (generación HTML/CSV). Salidas: cohorte completa + tabla resumen en CSV y HTML en `demographics/output/` |
 | **deliris/** | Análisis de delirium (CAM-ICU) |
 | **drg/** | Informe de complejidad asistencial basado en DRGs (Diagnosis-Related Groups): genera un PDF multipágina con indicadores de severidad (SOI), riesgo de mortalidad (ROM) y peso DRG (Case Mix Index) |
 | **micro/** | Datos de microbiología y antibiogramas |
