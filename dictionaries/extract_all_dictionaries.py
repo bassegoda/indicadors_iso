@@ -419,18 +419,18 @@ DICTIONARY_REGISTRY = {
                 "  form_ref, form_descr, "
                 "  tab_ref, tab_descr, "
                 "  section_ref, section_descr, "
-                "  type_ref, type_descr "
+                "  question_ref, question_descr "
                 "FROM ("
                 "  SELECT form_ref, form_descr, tab_ref, tab_descr, "
-                "         section_ref, section_descr, type_ref, type_descr "
+                "         section_ref, section_descr, question_ref, question_descr "
                 "  FROM g_dynamic_forms WHERE form_ref IS NOT NULL"
                 "  UNION"
                 "  SELECT form_ref, form_descr, tab_ref, tab_descr, "
-                "         section_ref, section_descr, type_ref, type_descr "
+                "         section_ref, section_descr, question_ref, question_descr "
                 "  FROM g_special_records WHERE form_ref IS NOT NULL"
-                ") AS combined ORDER BY form_ref, tab_ref, section_ref, type_ref"
+                ") AS combined ORDER BY form_ref, tab_ref, section_ref, question_ref"
             ),
-            "text_columns": ["form_descr", "tab_descr", "section_descr", "type_descr"],
+            "text_columns": ["form_descr", "tab_descr", "section_descr", "question_descr"],
             "source_table": "g_dynamic_forms, g_special_records",
             "slow": True,
         },

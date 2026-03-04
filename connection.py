@@ -49,6 +49,11 @@ def get_env_path():
 
     for env_path in candidates:
         if env_path.exists() and env_path.is_file():
+            try:
+                with open(env_path, encoding="utf-8") as f:
+                    f.read(1)  # Verify readable (e.g. OneDrive may block)
+            except (PermissionError, OSError):
+                continue  # Skip this path, try next
             _ENV_PATH_CACHE = env_path
             return env_path
 

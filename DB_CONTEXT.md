@@ -788,13 +788,14 @@ Dynamic forms collect clinical data in a structured manner. All of this data is 
 | tab_descr | VARCHAR | | Tab description |
 | section_ref | VARCHAR(10) | | Form section (parameter) identifier |
 | section_descr | VARCHAR | | Section description |
-| type_ref | VARCHAR(8) | | Form question (characteristic) identifier |
-| type_descr | VARCHAR | | Characteristic description |
+| question_ref | VARCHAR(8) | | Form question (characteristic) identifier |
+| question_descr | VARCHAR | | Question/characteristic description |
 | class_ref | VARCHAR(3) | | Assessment class: **CC** (structured clinical course forms), **EF** (physical examination forms), **ES** (scale forms), **RG** (record or report forms), **RE** (special record forms), **VA** (assessment forms), **TS** (social work forms) |
 | class_descr | VARCHAR | | Class description |
 | value_num | FLOAT | | Numeric value inserted |
-| value_text | VARCHAR(255) | | Text value inserted |
+| value_text | VARCHAR(255) | | Text value inserted (may contain code+description, e.g. "20-Otro hospital-") |
 | value_date | DATETIME | | Datetime value inserted |
+| value_descr | VARCHAR | | Description of the selected value (human-readable label) |
 | form_date | DATETIME | | Date when the form was saved |
 | load_date | DATETIME | | Date of update |
 
@@ -804,7 +805,7 @@ The components of dynamic forms follow this hierarchy:
 - **Form** (form_ref, form_descr): The main container
 - **Tab** (tab_ref, tab_descr): Groups within a form
 - **Section** (section_ref, section_descr): Parameters within a tab
-- **Type** (type_ref, type_descr): Questions/characteristics within a section
+- **Question** (question_ref, question_descr): Questions/characteristics within a section
 
 **Example (5 rows)**
 
@@ -831,7 +832,7 @@ The components of dynamic forms follow this hierarchy:
 
 ### g_special_records
 
-Special records (also known as nursing records) are a specific type of dynamic form completed by nurses to collect clinical data in a structured manner. All of this data is recorded in the `g_special_records` table, where each special record appears as many times as it was saved in SAP.
+Special records (also known as nursing records) are a specific type of dynamic form completed by nurses to collect clinical data in a structured manner. All of this data is recorded in the `g_special_records` table, where each special record appears as many times as it was saved in SAP. Unlike `g_dynamic_forms`, special records use `start_date` and `end_date` for temporal bounds instead of `form_date`.
 
 | Attribute | Data type | Key | Definition |
 |-----------|-----------|-----|------------|
@@ -846,14 +847,15 @@ Special records (also known as nursing records) are a specific type of dynamic f
 | tab_descr | VARCHAR | | Tab description |
 | section_ref | VARCHAR(10) | | Form section (parameter) identifier |
 | section_descr | VARCHAR | | Section description |
-| type_ref | VARCHAR(8) | | Form question (characteristic) identifier |
-| type_descr | VARCHAR | | Characteristic description |
+| question_ref | VARCHAR(8) | | Form question (characteristic) identifier |
+| question_descr | VARCHAR | | Question/characteristic description |
 | class_ref | VARCHAR(3) | | Assessment class: **RE** (special record forms) |
 | class_descr | VARCHAR | | Class description |
+| start_date | DATETIME | | Start date of the record |
+| end_date | DATETIME | | End date of the record |
 | value_num | FLOAT | | Numeric value inserted |
 | value_text | VARCHAR(255) | | Text value inserted |
-| value_date | DATETIME | | Datetime value inserted |
-| form_date | DATETIME | | Date when the form was saved |
+| value_descr | VARCHAR | | Description of the selected value (human-readable label) |
 | load_date | DATETIME | | Date of update |
 
 **Example (5 rows)**

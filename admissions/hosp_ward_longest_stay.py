@@ -22,6 +22,9 @@ Prescription filter validation (E073/2024):
     admissions, brief transfers.
 
 Output: One CSV per unit (only stays assigned to that unit)
+
+Procedencia: Each stay is enriched with procedencia_otro_centro (Sí/No/Sin datos)
+from the UCI form field PROCE_MALA (procedencia del paciente antes del ingreso).
 """
 
 import pandas as pd
@@ -152,6 +155,23 @@ predominant_unit AS (
     ) ranked
     WHERE rn = 1
 ),
+-- Procedencia del paciente antes del ingreso (formulario UCI, PROCE_MALA)
+-- Última valoración por episodio
+procedencia_episodio AS (
+    SELECT patient_ref, episode_ref, value_descr as procedencia
+    FROM (
+        SELECT patient_ref, episode_ref, value_descr,
+               ROW_NUMBER() OVER (
+                   PARTITION BY patient_ref, episode_ref
+                   ORDER BY form_date DESC
+               ) as rn
+        FROM g_dynamic_forms
+        WHERE form_ref = 'UCI'
+          AND question_ref = 'PROCE_MALA'
+          AND status = 'CO'
+    ) x
+    WHERE rn = 1
+),
 cohort AS (
     -- Merge movements into complete stays
     SELECT
@@ -211,8 +231,18 @@ SELECT DISTINCT
         THEN 'Yes'
         ELSE 'No'
     END as exitus_during_stay,
-    ex.exitus_date
+    ex.exitus_date,
+    proc.procedencia,
+    CASE
+        WHEN proc.procedencia IS NULL THEN 'Sin datos'
+        WHEN proc.procedencia LIKE '%Otro centro%' OR proc.procedencia LIKE '%Otro hospital%'
+             OR proc.procedencia LIKE '%otro centro%' OR proc.procedencia LIKE '%otro hospital%'
+        THEN 'Sí'
+        ELSE 'No'
+    END as procedencia_otro_centro
 FROM cohort c
+LEFT JOIN procedencia_episodio proc
+    ON c.patient_ref = proc.patient_ref AND c.episode_ref = proc.episode_ref
 LEFT JOIN g_demographics d 
     ON c.patient_ref = d.patient_ref
 LEFT JOIN g_exitus ex 
@@ -421,8 +451,15 @@ def process_unit(
     transfer_pct = (transfers / total * 100) if total > 0 else 0
     still_in = (df['still_admitted'] == 'Yes').sum() if 'still_admitted' in df.columns else 0
 
+    # Procedencia otro centro
+    otro_centro = (df['procedencia_otro_centro'] == 'Sí').sum()
+    no_otro_centro = (df['procedencia_otro_centro'] == 'No').sum()
+    sin_datos = (df['procedencia_otro_centro'] == 'Sin datos').sum()
+    otro_centro_pct = (otro_centro / total * 100) if total > 0 else 0
+
     print(f"[{unit}] {total} stays | {patients} patients | {deaths} deaths ({mortality:.1f}%)")
     print(f"        Transfers: {transfers} ({transfer_pct:.1f}%) | Still admitted: {still_in}")
+    print(f"        Procedencia otro centro: {otro_centro} ({otro_centro_pct:.1f}%) | No: {no_otro_centro} | Sin datos: {sin_datos}")
     print(f"        Excluded (no prescription): {excluded_no_prescription} stays")
     print(f"        → {filename.name}")
 

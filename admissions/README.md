@@ -77,3 +77,5 @@ Carpeta para archivos de validación local (p. ej. listados de estancias con/sin
 | `sex` | Sexo (`Male` / `Female` / `Other` / `Not reported`) |
 | `exitus_during_stay` | Si el paciente fallecimiento durante la estancia (`Yes` / `No`) |
 | `exitus_date` | Fecha de fallecimiento (NULL si no ha fallecido) |
+| `procedencia` | Procedencia antes del ingreso (formulario UCI PROCE_MALA), si existe |
+| `procedencia_otro_centro` | `Sí` si procedencia es otro centro/hospital, `No` si otra, `Sin datos` si no hay formulario |
