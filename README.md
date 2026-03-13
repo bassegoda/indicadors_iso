@@ -17,7 +17,7 @@ cd indicadors_iso
 pip install -r requirements.txt
 
 # 4. Ejecuta cualquier script
-python demographics/demo.py
+python demographics/ward_stays_demo.py
 ```
 
 ## Estructura del Proyecto
@@ -26,16 +26,15 @@ Cada subcarpeta contiene análisis específicos de diferentes indicadores:
 
 | Carpeta | Descripción |
 |---------|-------------|
-| **admissions/** | Identificación de ingresos reales en unidades de hospitalización. Incluye `hosp_ward_stays.py` (por unidad) y `hosp_ward_longest_stay.py` (por unidad predominante). [Ver documentación detallada →](admissions/README.md) |
+| **admissions/** | Identificación de ingresos reales en unidades de hospitalización. Incluye `hosp_ward_longest_stay.py` (por unidad predominante). [Ver documentación detallada →](admissions/README.md) |
 | **demographics/** | Tabla demográfica y de resultados de estancias en E073+I073 (`ward_stays_demo.py`). Estructura modular: `_sql.py` (consulta SQL), `_metrics.py` (cálculo de métricas), `_report.py` (generación HTML/CSV). Salidas: cohorte completa + tabla resumen en CSV y HTML en `demographics/output/` |
 | **deliris/** | Análisis de delirium (CAM-ICU) |
 | **drg/** | Informe de complejidad asistencial basado en DRGs (Diagnosis-Related Groups): genera un PDF multipágina con indicadores de severidad (SOI), riesgo de mortalidad (ROM) y peso DRG (Case Mix Index) |
-| **micro/** | Datos de microbiología y antibiogramas |
-| **mortality/** | Análisis de mortalidad por mes |
+| **dynamic_forms/** | Consultas SQL sobre formularios dinámicos (`g_dynamic_forms`). Ejecución con `run_queries.py`; consultas en `queries/`, salida CSV en `dynamic_forms/output/`. [Ver README →](dynamic_forms/README.md) |
 | **necropsy/** | Análisis de provisions de necropsias y autopsias — busca códigos relacionados en el diccionario y consulta la base de datos |
 | **nutritions/** | Análisis de nutrición enteral y parenteral |
 | **sepsis3/** | Query SQL para identificación de pacientes con sepsis según criterios Sepsis-3 (SOFA score ≥ 2 + sospecha de infección) |
-| **snisp/** | Análisis de incidentes |
+| **snisp/** | Análisis de incidentes (`analysis_2025.py`) |
 | **dictionaries/** | 54 diccionarios CSV extraídos de la base de datos (códigos de diagnóstico, laboratorio, fármacos, unidades, etc.). Incluye `extract_all_dictionaries.py` para regenerarlos y su propio [README](dictionaries/dictionaries_README.md) con la descripción de cada archivo |
 
 Cada análisis genera sus resultados en una subcarpeta `output/` dentro de su respectiva carpeta.
@@ -96,11 +95,13 @@ pip install -r requirements.txt
 Cada script se ejecuta de forma independiente desde la raíz del proyecto:
 
 ```bash
-python demographics/demo.py
+python demographics/ward_stays_demo.py
+python admissions/hosp_ward_longest_stay.py
 python deliris/deliris.py
 python nutritions/nutritions.py
 python drg/drg_complexity_report.py
 python necropsy/necropsias_autopsias.py
+python dynamic_forms/run_queries.py --list
 ```
 
 Los scripts solicitan interactivamente los parámetros necesarios (año, unidades, etc.) y generan los resultados en la carpeta `output/` correspondiente.

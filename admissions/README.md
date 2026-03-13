@@ -1,5 +1,7 @@
 # Admissions — Identificación de ingresos reales
 
+> **Nota:** En el repositorio solo está disponible `hosp_ward_longest_stay.py` (por unidad predominante). La lógica que se describe a continuación aplica a ambos enfoques; `hosp_ward_stays.py` (por unidad) no está actualmente en el repo.
+
 El script `hosp_ward_stays.py` extrae los ingresos reales en una unidad física determinada (ej. E073). Un ingreso se considera **real** únicamente si cumple los tres criterios siguientes:
 
 ## Criterios de ingreso real
