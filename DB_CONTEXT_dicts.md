@@ -24,9 +24,28 @@ Your task: Create SQL queries from natural language questions. If I ask you for 
 - Do not explain optimizations in your response, just implement them
 - Use always MariaDB dialect.
 
+#### Using Local Dictionaries:
+- A complete dictionary repository is available at `dictionaries/` with 54 CSV files covering all coded fields
+- **Before writing a SQL query**, grep the relevant dictionary to find the correct `_ref` codes:
+  - `dic_lab.csv` → lab_sap_ref codes (e.g., grep "creatinina" to find LAB120)
+  - `dic_ou_med.csv` → ou_med_ref codes (e.g., grep "cardiologia" to find CAR)
+  - `dic_ou_loc.csv` → ou_loc_ref codes for physical units
+  - `dic_diagnostic.csv` → ICD-9/ICD-10 codes and descriptions
+  - `dic_rc.csv` → clinical record parameter codes (e.g., grep "temperatura" to find TEMP)
+  - `drug_dictionary.csv` → drug_ref and atc_ref codes
+  - `atc_dictionary.csv` → ATC pharmaceutical classification
+  - `microorganism_dictionary.csv` → micro_ref codes
+  - `antibiotic_dictionary.csv` → antibiotic_ref codes
+  - `surgery_code_dictionary.csv` → surgery Q-codes
+  - `snomed_health_issues_dictionary.csv` → SNOMED-CT codes
+  - `enum_*.csv` → inline code meanings (episode types, care levels, sex, POA, etc.)
+- Full index: `dictionaries/dictionaries_manifest.csv` and `dictionaries/dictionaries_README.md`
+- This avoids unnecessary exploratory queries to the database and ensures correct reference codes
+
 #### Searching by Reference Fields:
 - **Default behavior**: Search using `_ref` fields (e.g., `lab_sap_ref`, `ou_med_ref`)
-- If you think a first query exploring the necessary `_ref` codes could be helpful, ask the user to execute it and paste the result so that you can retrieve the needed codes. The descriptions can be either in catalan or in spanish. Use both for the helper queries. 
+- Retrieve `_ref` values from the local `dictionaries/` CSV files first, or from `dic_` tables when needed
+- If you think a first query exploring the necessary `_ref` codes could be helpful, ask the user to execute it and paste the result so that you can retrieve the needed codes
 
 #### Searching Diagnoses (g_diagnostics table):
 1. **Primary method**: Search by `code` field using ICD-9 or ICD-10 codes
@@ -52,40 +71,6 @@ Your task: Create SQL queries from natural language questions. If I ask you for 
    - Always use `LIKE '%text%'` pattern matching (e.g., `descr LIKE '%transplant%'`)
 
 3. **NEVER use**: The `catalog` field (unless explicitly requested by the user)
-
-#### WARNING – Searching Surgery Types and Q Codes (g_surgery table):
-- If the user asks for a **type of surgery** in natural language (e.g., "cataract surgery", "intravitreal injection") and does **not** provide Q codes, **first propose a short helper SQL query** to retrieve the relevant Q codes before writing the final analysis query. Also, suggest that a query using the `g_procedures` table is an option. The user should be informed of that and asked wether he wants to use this approach or the surgery table approach.
-- If using the surgery table the helper query should search the `surgery_code_descr` field in `g_surgery` using a `LIKE` filter with the user-provided text. Take into account that the descriptions for the surgeries can be writen either in catalan or in spanish. Use both when generating the helper query. For example, if the user asks about "cataract", propose something like:
-
-```sql
-SELECT DISTINCT
-    surgery_code,
-    surgery_code_descr
-FROM g_surgery
-WHERE surgery_code_descr LIKE '%cataract%';
-```
-
-- Ask the user to run this helper query, review the returned `surgery_code` values (Q codes), and confirm which codes are relevant.
-- Once the user confirms the Q codes, **use those Q codes explicitly** in the main query with an `IN (...)` filter on `surgery_code` instead of relying on free-text `LIKE` filters on `surgery_code_descr`.
-
-
-Q-codes use local Catalan nomenclature with informal abbreviations. Common patterns:
-
-tx = trasplantament (transplant)
-obert = open surgery
-robot = robotic surgery
-ABOI = ABO-incompatible (blood group incompatible transplant)
-donant viu = living donor
-donant cadaver = deceased donor
-ronyo / ronyó = kidney
-fetge = liver
-cor = heart
-pancrees = pancreas
-cornea / corneal = cornea
-
-
-New techniques generate new Q-codes over time (e.g., robotic variants added alongside traditional open codes). Always search broadly using multiple terms rather than relying on a fixed list.
-
 
 #### Handling Duplicate Codes:
 - Be aware that the same diagnosis or procedure may appear multiple times in an episode
@@ -439,6 +424,8 @@ Contains the clinical records for each episode. Currently, the fields `episode_r
 | units | VARCHAR(8) | | Units |
 | care_level_ref | INT | FK | Unique identifier that groups care levels (intensive care unit, conventional hospitalization, etc.) if they are consecutive and belong to the same level |
 
+> 📖 **Dictionary for result_txt**: Check the [rc_result_txt dictionary](https://dsc-clinic.gitlab.io/datascope/rc_result_txt_dic.html)
+
 **Example (5 rows)**
 
 | patient_ref | episode_ref | result_date | meas_type_ref | load_date | ou_loc_ref | ou_med_ref | rc_sap_ref | rc_descr | result_num | result_txt | units | care_level_ref |
@@ -555,6 +542,7 @@ The `treatment_ref` field serves as a foreign key that links the `g_prescription
 | unit | VARCHAR | FK | Dose unit (see complementary descriptions) |
 | care_level_ref | INT | FK | Unique identifier that groups care levels (ICU, WARD, etc.) if they are consecutive and belong to the same level |
 
+> 📖 **Complementary descriptions**: See [Prescriptions complementary descriptions](https://gitlab.com/dsc-clinic/datascope/-/wikis/Prescriptions#complementary-descriptions) for details on `prescr_env_ref`, `enum`/`drug_type_ref`, and `unit`.
 
 **Example (5 rows)**
 
@@ -595,6 +583,7 @@ Contains the administered pharmaceuticals (drugs) for each episode. The `treatme
 | load_date | DATETIME | | Date of update |
 | care_level_ref | INT | FK | Unique identifier that groups care levels (ICU, WARD, etc.) if they are consecutive and belong to the same level |
 
+> 📖 **Complementary descriptions**: See [Prescriptions complementary descriptions](https://gitlab.com/dsc-clinic/datascope/-/wikis/Prescriptions#complementary-descriptions) for details on `enum`/`drug_type_ref` and `quantity_unit`.
 
 **Example (5 rows)**
 
