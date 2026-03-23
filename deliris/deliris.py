@@ -29,48 +29,89 @@ WHERE rc_sap_ref = 'DELIRIO_CAM-ICU'
   AND result_date BETWEEN '{year}-01-01 00:00:00' AND '{year}-12-31 23:59:59';
 """
 
-# Cohort + delirium analysis in E073/I073 (per stay)
 COHORT_DELIRIUM_SQL = """
-WITH raw_moves AS (
-    SELECT 
+WITH all_related_moves AS (
+    SELECT
         patient_ref,
         episode_ref,
-        ou_loc_ref, 
+        ou_loc_ref,
         start_date,
-        end_date
+        end_date,
+        COALESCE(end_date, NOW()) AS effective_end_date
     FROM g_movements
     WHERE ou_loc_ref IN ({units_formatted})
-      AND start_date BETWEEN '{year}-01-01' AND '{year}-12-31 23:59:59'
-      AND start_date != end_date
+      AND start_date <= '{year}-12-31 23:59:59'
+      AND COALESCE(end_date, NOW()) >= '{year}-01-01 00:00:00'
+      AND place_ref IS NOT NULL
+      AND COALESCE(end_date, NOW()) > start_date
 ),
 flagged_starts AS (
-    SELECT 
+    SELECT
         *,
-        CASE 
-            WHEN LAG(end_date) OVER (PARTITION BY episode_ref ORDER BY start_date) = start_date 
-            THEN 0 
-            ELSE 1 
+        CASE
+            WHEN ABS(TIMESTAMPDIFF(MINUTE,
+                LAG(effective_end_date) OVER (
+                    PARTITION BY patient_ref, episode_ref ORDER BY start_date
+                ),
+                start_date
+            )) <= 5
+            THEN 0
+            ELSE 1
         END AS is_new_stay
-    FROM raw_moves
+    FROM all_related_moves
 ),
 grouped_stays AS (
-    SELECT 
+    SELECT
         *,
-        SUM(is_new_stay) OVER (PARTITION BY episode_ref ORDER BY start_date) as stay_id
+        SUM(is_new_stay) OVER (
+            PARTITION BY patient_ref, episode_ref ORDER BY start_date
+        ) AS stay_id
     FROM flagged_starts
 ),
-cohort AS (
-    SELECT 
+time_per_unit AS (
+    SELECT
         patient_ref,
         episode_ref,
         stay_id,
-        MIN(ou_loc_ref) as ou_loc_ref, 
-        MIN(start_date) as true_start_date,
-        MAX(end_date) as true_end_date,
-        TIMESTAMPDIFF(HOUR, MIN(start_date), MAX(end_date)) AS total_hours
+        ou_loc_ref,
+        SUM(TIMESTAMPDIFF(MINUTE, start_date, effective_end_date)) AS minutes_in_unit,
+        MIN(start_date) AS first_start_date
     FROM grouped_stays
-    GROUP BY patient_ref, episode_ref, stay_id
-    HAVING TIMESTAMPDIFF(HOUR, MIN(start_date), MAX(end_date)) >= 10
+    GROUP BY patient_ref, episode_ref, stay_id, ou_loc_ref
+),
+predominant_unit AS (
+    SELECT
+        patient_ref,
+        episode_ref,
+        stay_id,
+        ou_loc_ref AS assigned_unit
+    FROM (
+        SELECT
+            *,
+            ROW_NUMBER() OVER (
+                PARTITION BY patient_ref, episode_ref, stay_id
+                ORDER BY minutes_in_unit DESC, first_start_date ASC
+            ) AS rn
+        FROM time_per_unit
+    ) ranked
+    WHERE rn = 1
+),
+cohort AS (
+    SELECT
+        g.patient_ref,
+        g.episode_ref,
+        g.stay_id,
+        p.assigned_unit AS ou_loc_ref,
+        MIN(g.start_date) AS true_start_date,
+        MAX(g.effective_end_date) AS true_end_date,
+        TIMESTAMPDIFF(HOUR, MIN(g.start_date), MAX(g.effective_end_date)) AS total_hours
+    FROM grouped_stays g
+    INNER JOIN predominant_unit p
+        ON g.patient_ref = p.patient_ref
+        AND g.episode_ref = p.episode_ref
+        AND g.stay_id = p.stay_id
+    GROUP BY g.patient_ref, g.episode_ref, g.stay_id, p.assigned_unit
+    HAVING TIMESTAMPDIFF(HOUR, MIN(g.start_date), MAX(g.effective_end_date)) >= 10
 ),
 delirium_rc AS (
     SELECT
@@ -113,7 +154,14 @@ SELECT
     MIN(result_date) AS first_assessment_date,
     MIN(CASE WHEN result_txt = 'DELIRIO_CAM-ICU_2' THEN result_date ELSE NULL END) AS first_present_date
 FROM cohort_rc
-GROUP BY patient_ref, episode_ref, stay_id, ou_loc_ref, true_start_date, true_end_date, total_hours
+GROUP BY
+    patient_ref,
+    episode_ref,
+    stay_id,
+    ou_loc_ref,
+    true_start_date,
+    true_end_date,
+    total_hours
 ORDER BY episode_ref, true_start_date;
 """
 
