@@ -113,6 +113,9 @@ def compute_summary(df: pd.DataFrame) -> tuple[list[dict], list[int]]:
         return [], []
 
     df = df.copy()
+    df = df[df["still_admitted"] == "No"]
+    if df.empty:
+        return [], []
     if "days_stay" not in df.columns and "hours_stay" in df.columns:
         df["days_stay"] = df["hours_stay"] / 24.0
     df["year_admission"] = df["year_admission"].astype(int)
