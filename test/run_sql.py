@@ -40,6 +40,8 @@ def run_sql_file(file_path):
             print(f"\nTotal rows returned: {len(df)}")
         else:
             print("\nQuery executed successfully, but returned no results.")
+        df.to_csv(file_path.with_suffix('.csv'), index=False)
+        print(f"\nResults saved to: {file_path.with_suffix('.csv')}")
             
     except Exception as e:
         print(f"\nFailed to execute query:\n{e}")
