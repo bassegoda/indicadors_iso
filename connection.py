@@ -1,5 +1,4 @@
-# Cross-platform MySQL connection. Place in project root with .env or use OneDrive/CWD fallback.
-
+# connection.py - Versión simplificada centrada en OneDrive
 import os
 import time
 import mysql.connector
@@ -9,72 +8,55 @@ from dotenv import load_dotenv
 
 _ENV_PATH_CACHE = None
 
-def _find_onedrive_path():
-    """Find OneDrive path on Windows or macOS."""
-    home = Path.home()
-    if os.name == 'nt':
-        for env_var in ('OneDrive', 'OneDriveCommercial'):
-            p = os.getenv(env_var)
-            if p and (path := Path(p)).exists():
-                return path
-        for name in ('OneDrive',):
-            if (path := home / name).exists():
-                return path
-        if userprofile := os.getenv('USERPROFILE'):
-            if (path := Path(userprofile) / 'OneDrive').exists():
-                return path
-    else:
-        cloud = home / 'Library' / 'CloudStorage'
-        if cloud.exists():
-            for item in cloud.iterdir():
-                if 'OneDrive' in item.name:
-                    return item
-        if (path := home / 'OneDrive').exists():
-            return path
-    return None
-
 def get_env_path():
-    """Find .env: project root → OneDrive → CWD."""
+    """Busca el archivo .env exclusivamente en OneDrive (Windows/macOS)."""
     global _ENV_PATH_CACHE
     if _ENV_PATH_CACHE is not None:
         return _ENV_PATH_CACHE
 
-    candidates = [
-        Path(__file__).resolve().parent / '.env',
-        Path.cwd() / '.env',
-    ]
-    onedrive = _find_onedrive_path()
-    if onedrive:
-        candidates.insert(1, onedrive / '.env')
+    home = Path.home()
+    
+    # Intento 1: Variables de entorno de Windows (OneDrive / OneDriveCommercial)
+    if os.name == 'nt':
+        for env_var in ('OneDrive', 'OneDriveCommercial'):
+            p = os.getenv(env_var)
+            if p:
+                path = Path(p) / '.env'
+                if path.exists():
+                    _ENV_PATH_CACHE = path
+                    return path
+    
+    # Intento 2: Ruta estándar de macOS (CloudStorage)
+    else:
+        cloud = home / 'Library' / 'CloudStorage'
+        if cloud.exists():
+            for s_path in cloud.iterdir():
+                if 'OneDrive' in s_path.name:
+                    path = s_path / '.env'
+                    if path.exists():
+                        _ENV_PATH_CACHE = path
+                        return path
 
-    for env_path in candidates:
-        if env_path.exists() and env_path.is_file():
-            try:
-                with open(env_path, encoding="utf-8") as f:
-                    f.read(1)  # Verify readable (e.g. OneDrive may block)
-            except (PermissionError, OSError):
-                continue  # Skip this path, try next
-            _ENV_PATH_CACHE = env_path
-            return env_path
+    # Intento 3: Ruta genérica ~/OneDrive/.env (Ambos)
+    path = home / 'OneDrive' / '.env'
+    if path.exists():
+        _ENV_PATH_CACHE = path
+        return path
 
-    raise FileNotFoundError(
-        ".env not found. Searched: project root, OneDrive, CWD.\n"
-        "Create .env with: DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT"
-    )
+    raise FileNotFoundError("¡Error! No se encontró el archivo .env en tu OneDrive. Verifica que esté sincronizado.")
 
 def get_connection(db_name=None):
-    """Return MySQL connection with credentials from .env."""
+    """Carga credenciales desde el .env de OneDrive y conecta a MySQL."""
     load_dotenv(get_env_path())
+    
     host = os.getenv('DB_HOST')
     user = os.getenv('DB_USER')
     password = os.getenv('DB_PASSWORD')
     database = os.getenv('DB_DATABASE', db_name)
     port = int(os.getenv('DB_PORT', '3306'))
 
-    missing = [k for k, v in [('DB_HOST', host), ('DB_USER', user),
-              ('DB_PASSWORD', password), ('DB_DATABASE', database)] if not v]
-    if missing:
-        raise ValueError(f"Missing in .env: {', '.join(missing)}")
+    if not all([host, user, password]):
+        raise ValueError("Faltan credenciales en el archivo .env de OneDrive.")
 
     return mysql.connector.connect(
         host=host, user=user, password=password, database=database, port=port,
@@ -82,9 +64,9 @@ def get_connection(db_name=None):
     )
 
 def execute_query(query, verbose=True):
-    """Execute SELECT and return pandas DataFrame."""
+    """Ejecuta una consulta SELECT y devuelve un DataFrame de pandas."""
     if verbose:
-        print("Executing query...")
+        print("Ejecutando query...")
     start = time.time()
     conn = get_connection()
     cur = conn.cursor(dictionary=True)
@@ -93,12 +75,13 @@ def execute_query(query, verbose=True):
         rows = cur.fetchall()
         df = pd.DataFrame(rows) if rows else pd.DataFrame()
         if verbose:
-            print(f"Query executed successfully in {time.time() - start:.2f} seconds")
+            print(f"Éxito en {time.time() - start:.2f}s")
         return df
     except Exception as e:
         if verbose:
-            print(f"Error executing query: {e}")
+            print(f"Error al ejecutar query: {e}")
         raise
     finally:
         cur.close()
         conn.close()
+
