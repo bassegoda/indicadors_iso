@@ -12,6 +12,7 @@ credencials/
 venv/
 .env
 .venv/
+*.csv
 
 # Python cache
 __pycache__/
