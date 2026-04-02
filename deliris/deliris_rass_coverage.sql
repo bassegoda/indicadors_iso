@@ -1,4 +1,5 @@
 -- RASS coverage: % of theoretical patient-shifts with at least one RASS recorded
+-- Excludes still-admitted patients to avoid inflated theoretical shifts
 -- All ICUs | Period: 2018-2025
 
 WITH all_related_moves AS (
@@ -39,8 +40,10 @@ cohort AS (
     SELECT
         patient_ref, episode_ref, ou_loc_ref, stay_id,
         MIN(start_date) AS admission_date,
+        MAX(end_date) AS discharge_date,
         MAX(effective_end_date) AS effective_discharge_date,
-        -- Theoretical shift count: shift-days × 3
+        CASE WHEN MAX(end_date) IS NULL THEN 1 ELSE 0 END AS still_admitted,
+        -- Theoretical shifts: shift-days × 3
         (DATEDIFF(
             CASE WHEN HOUR(MAX(effective_end_date)) < 8
                  THEN DATE(MAX(effective_end_date)) - INTERVAL 1 DAY
@@ -52,6 +55,7 @@ cohort AS (
     FROM grouped_stays
     GROUP BY patient_ref, episode_ref, ou_loc_ref, stay_id
     HAVING YEAR(MIN(start_date)) BETWEEN 2018 AND 2025
+      AND MAX(end_date) IS NOT NULL  -- Exclude still-admitted
 ),
 
 -- Count distinct shifts with ANY RASS recorded per stay
