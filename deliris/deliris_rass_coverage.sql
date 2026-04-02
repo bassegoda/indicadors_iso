@@ -1,5 +1,12 @@
 -- RASS coverage: % of theoretical patient-shifts with at least one RASS recorded
--- Excludes still-admitted patients to avoid inflated theoretical shifts
+-- Excludes still-admitted patients to avoid inflated theoretical shifts.
+-- IMPORTANT:
+--   1) MAX(end_date) ignores NULLs, so "MAX(end_date) IS NOT NULL" still lets in
+--      stays whose last segment is open.
+--   2) Some source systems encode "still admitted" with far-future end_date values
+--      (e.g. 9999-12-31) instead of NULL.
+-- To avoid denominator explosions, require every segment to have a real closed end_date:
+-- end_date IS NOT NULL AND end_date <= NOW().
 -- All ICUs | Period: 2018-2025
 
 WITH all_related_moves AS (
@@ -41,13 +48,11 @@ cohort AS (
         patient_ref, episode_ref, ou_loc_ref, stay_id,
         MIN(start_date) AS admission_date,
         MAX(end_date) AS discharge_date,
-        MAX(effective_end_date) AS effective_discharge_date,
-        CASE WHEN MAX(end_date) IS NULL THEN 1 ELSE 0 END AS still_admitted,
-        -- Theoretical shifts: shift-days × 3
+        -- Theoretical shifts: shift-days × 3 (use real MAX(end_date), not COALESCE(..., NOW()))
         (DATEDIFF(
-            CASE WHEN HOUR(MAX(effective_end_date)) < 8
-                 THEN DATE(MAX(effective_end_date)) - INTERVAL 1 DAY
-                 ELSE DATE(MAX(effective_end_date)) END,
+            CASE WHEN HOUR(MAX(end_date)) < 8
+                 THEN DATE(MAX(end_date)) - INTERVAL 1 DAY
+                 ELSE DATE(MAX(end_date)) END,
             CASE WHEN HOUR(MIN(start_date)) < 8
                  THEN DATE(MIN(start_date)) - INTERVAL 1 DAY
                  ELSE DATE(MIN(start_date)) END
@@ -55,7 +60,9 @@ cohort AS (
     FROM grouped_stays
     GROUP BY patient_ref, episode_ref, ou_loc_ref, stay_id
     HAVING YEAR(MIN(start_date)) BETWEEN 2018 AND 2025
-      AND MAX(end_date) IS NOT NULL  -- Exclude still-admitted
+      AND COUNT(*) = COUNT(
+            CASE WHEN end_date IS NOT NULL AND end_date <= NOW() THEN 1 END
+          )  -- Every segment closed with a real (non-future) end_date
 ),
 
 -- Count distinct shifts with ANY RASS recorded per stay
@@ -77,7 +84,7 @@ rass_coverage AS (
     LEFT JOIN g_rc r
         ON c.patient_ref = r.patient_ref
         AND r.ou_loc_ref = c.ou_loc_ref
-        AND r.result_date BETWEEN c.admission_date AND c.effective_discharge_date
+        AND r.result_date BETWEEN c.admission_date AND c.discharge_date
         AND r.rc_sap_ref = 'SEDACION_RASS'
     GROUP BY c.patient_ref, c.episode_ref, c.ou_loc_ref, c.stay_id
 )
