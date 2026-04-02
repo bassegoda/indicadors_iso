@@ -51,6 +51,12 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         target_file = Path(sys.argv[1])
     else:
-        target_file = Path(__file__).parent / "deliris_by_unit.sql"
-    
+        print("No filename passed as argument. Please pass a filename as argument.")
+        print("Usage: python run_sql.py <filename>")
+        print("Available files:")
+        print("  - camicu_compliance.sql")
+        print("  - camicu_positivity.sql")
+        print("  - camicu_daily_coverage.sql")
+        print("  - camicu_plots.py")
+        sys.exit(1)
     run_sql_file(target_file)

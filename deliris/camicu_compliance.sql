@@ -1,3 +1,4 @@
+-- camicu_compliance.sql -> camicu_compliance.csv (run_sql.py)
 -- CAM-ICU compliance: % of eligible shifts (RASS -3 to +4) with CAM-ICU recorded
 -- Handles both RASS formats: coded (pre-2022) and numeric (2022+)
 -- All ICUs | Period: 2018-2025

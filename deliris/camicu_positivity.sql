@@ -1,3 +1,4 @@
+-- camicu_positivity.sql -> camicu_positivity.csv (run_sql.py)
 -- CAM-ICU positivity rate: % of recorded CAM-ICU that are positive
 -- All ICUs | Period: 2018-2025
 

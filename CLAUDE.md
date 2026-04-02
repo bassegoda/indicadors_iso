@@ -50,7 +50,7 @@ There are no tests, linters, or build tools configured.
 - `_report.py` — CSV and HTML/PDF output
 - `<main_script>.py` — orchestrates the pipeline, handles interactive prompts
 
-Simpler modules (deliris, necropsy, sepsis3, snisp, nutritions) collapse everything into a single script.
+Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plots and cohort definitions; others (necropsy, sepsis3, snisp, nutritions) often collapse into a single script.
 
 **Output** goes to `<module>/output/` directories, which are gitignored.
 
