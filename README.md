@@ -27,6 +27,7 @@ Cada subcarpeta contiene análisis específicos de diferentes indicadores:
 | Carpeta | Descripción |
 |---------|-------------|
 | **admissions/** | Identificación de ingresos reales en unidades de hospitalización. Incluye `hosp_ward_longest_stay.py` (por unidad predominante). [Ver documentación detallada →](admissions/README.md) |
+| **data_quality/** | Comparación de completitud de datos entre dos años (`completeness_2024_vs_2025.py`) sobre `movements` y `labs`: totales, YTD, serie mensual y diaria (heatmap), filas/episodio, episodios huérfanos, frescura de `load_date` y desglose por unidad/facility/parámetro de lab. Salidas: CSVs + reporte HTML con gráficas en `data_quality/output/` |
 | **demographics/** | Tabla demográfica y de resultados de estancias en E073+I073 (`ward_stays_demo.py`). Estructura modular: `_sql.py` (consulta SQL), `_metrics.py` (cálculo de métricas), `_report.py` (generación HTML/CSV). Salidas: cohorte completa + tabla resumen en CSV y HTML en `demographics/output/` |
 | **deliris/** | Indicadores CAM-ICU / delirio en UCI. [Documentación →](deliris/README.md) |
 | **drg/** | Informe de complejidad asistencial basado en DRGs (Diagnosis-Related Groups): genera un PDF multipágina con indicadores de severidad (SOI), riesgo de mortalidad (ROM) y peso DRG (Case Mix Index) |
@@ -95,6 +96,7 @@ Cada script se ejecuta de forma independiente desde la raíz del proyecto:
 ```bash
 python demographics/ward_stays_demo.py
 python admissions/hosp_ward_longest_stay.py
+python data_quality/completeness_2024_vs_2025.py
 python deliris/run_sql.py deliris/camicu_compliance.sql
 python deliris/run_sql.py deliris/camicu_positivity.sql
 python deliris/run_sql.py deliris/camicu_daily_coverage.sql

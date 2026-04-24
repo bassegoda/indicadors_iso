@@ -33,6 +33,7 @@ python drg/drg_complexity_report.py           # outputs PDF + CSV
 python dynamic_forms/run_queries.py --list
 python dynamic_forms/run_queries.py --query <name>
 python dynamic_forms/run_queries.py --all
+python data_quality/completeness_2024_vs_2025.py  # prompts for (y1,y2) + YTD cutoff; ETL completeness report
 ```
 
 There are no tests, linters, or build tools configured.
@@ -48,6 +49,8 @@ There are no tests, linters, or build tools configured.
 - `<main_script>.py` — orchestrates the pipeline, handles interactive prompts
 
 Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plots and cohort definitions; others (necropsy, sepsis3, snisp, nutritions) often collapse into a single script.
+
+**`data_quality/`** — ETL completeness cross-year comparison over `movements` and `labs`. Same `_sql.py` / `_metrics.py` / `_report.py` split as demographics, but `_report.py` also embeds matplotlib charts (line, heatmap, bars) as base64 PNGs into a standalone HTML file.
 
 **Output** goes to `<module>/output/` directories, which are gitignored.
 
