@@ -7,7 +7,7 @@ WITH all_related_moves AS (
         start_date,
         end_date,
         COALESCE(end_date, current_timestamp) AS effective_end_date
-    FROM movements
+    FROM datascope_gestor_prod.movements
     WHERE ou_loc_ref IN ('E073','I073')
       AND start_date <= timestamp '{max_year}-12-31 23:59:59'
       AND COALESCE(end_date, current_timestamp) >= timestamp '{min_year}-01-01 00:00:00'
@@ -93,7 +93,7 @@ prescription_filtered AS (
     SELECT DISTINCT
         c.*
     FROM cohort c
-    INNER JOIN prescriptions p
+    INNER JOIN datascope_gestor_prod.prescriptions p
         ON c.patient_ref = p.patient_ref
         AND c.episode_ref = p.episode_ref
         AND p.start_drug_date BETWEEN c.admission_date
@@ -109,7 +109,7 @@ cohort_with_next AS (
 ),
 cirrhosis_dx AS (
     SELECT DISTINCT patient_ref
-    FROM diagnostics
+    FROM datascope_gestor_prod.diagnostics
     WHERE
         -- ICD-10 cirrhosis-related codes
         code LIKE 'K70.3%' OR
@@ -181,11 +181,11 @@ SELECT DISTINCT
         THEN 1 ELSE 0
     END AS readmission_72h
 FROM cohort_with_next cw
-LEFT JOIN demographics d
+LEFT JOIN datascope_gestor_prod.demographics d
     ON cw.patient_ref = d.patient_ref
 LEFT JOIN cirrhosis_dx dx
     ON cw.patient_ref = dx.patient_ref
-LEFT JOIN exitus ex
+LEFT JOIN datascope_gestor_prod.exitus ex
     ON cw.patient_ref = ex.patient_ref
 ORDER BY cw.admission_date;
 """

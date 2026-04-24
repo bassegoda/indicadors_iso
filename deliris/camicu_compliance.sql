@@ -9,7 +9,7 @@ WITH all_related_moves AS (
         patient_ref, episode_ref, ou_loc_ref,
         start_date, end_date,
         COALESCE(end_date, current_timestamp) AS effective_end_date
-    FROM movements
+    FROM datascope_gestor_prod.movements
     WHERE ou_loc_ref IN ('E016','E103','E014','E015','E037','E057','E073','E043')
       AND start_date <= timestamp '2025-12-31 23:59:59'
       AND COALESCE(end_date, current_timestamp) >= timestamp '2018-01-01 00:00:00'
@@ -65,7 +65,7 @@ rass_eligible AS (
             WHEN hour(r.result_date) < 8 THEN date_add('day', -1, cast(r.result_date as date))
             ELSE cast(r.result_date as date)
         END AS shift_date
-    FROM rc r
+    FROM datascope_gestor_prod.rc r
     INNER JOIN cohort c
         ON r.patient_ref = c.patient_ref
         AND r.ou_loc_ref = c.ou_loc_ref
@@ -106,7 +106,7 @@ cam_shifts AS (
             WHEN hour(r.result_date) < 8 THEN date_add('day', -1, cast(r.result_date as date))
             ELSE cast(r.result_date as date)
         END AS shift_date
-    FROM rc r
+    FROM datascope_gestor_prod.rc r
     INNER JOIN cohort c
         ON r.patient_ref = c.patient_ref
         AND r.ou_loc_ref = c.ou_loc_ref

@@ -14,7 +14,7 @@ SELECT DISTINCT
     value_num,
     value_date,
     value_descr
-FROM dynamic_forms
+FROM datascope_gestor_prod.dynamic_forms
 WHERE form_ref = 'UCI'
   AND status = 'CO'
 ORDER BY tab_ref, section_ref, question_ref

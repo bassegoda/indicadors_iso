@@ -62,7 +62,7 @@ WITH all_related_moves AS (
         start_date,
         end_date,
         COALESCE(end_date, current_timestamp) AS effective_end_date
-    FROM movements
+    FROM datascope_gestor_prod.movements
     WHERE ou_loc_ref IN ({units_list})
       AND start_date <= timestamp '{{max_year}}-12-31 23:59:59'
       AND COALESCE(end_date, current_timestamp) >= timestamp '{{min_year}}-01-01 00:00:00'
@@ -164,10 +164,10 @@ SELECT DISTINCT
     drg.mortality_risk_ref,
     drg.mortality_risk_descr
 FROM stays s
-INNER JOIN diagnostic_related_groups drg
+INNER JOIN datascope_gestor_prod.diagnostic_related_groups drg
     ON s.patient_ref = drg.patient_ref
     AND s.episode_ref = drg.episode_ref
-INNER JOIN prescriptions p
+INNER JOIN datascope_gestor_prod.prescriptions p
     ON s.patient_ref = p.patient_ref
     AND s.episode_ref = p.episode_ref
     AND p.start_drug_date BETWEEN s.admission_date

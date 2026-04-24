@@ -53,7 +53,7 @@ Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plo
 
 ## SQL Conventions
 
-The database runs on **AWS Athena (Trino/Presto SQL dialect)** — not MySQL. Tables no longer carry the `g_` prefix (e.g. `g_episodes` → `episodes`). Dictionary tables keep `dic_` prefix. SQL queries use extensive CTEs and window functions (`LAG`, `LEAD`, `ROW_NUMBER`). The predominant-unit logic (assign a stay to the unit where the patient spent the most time) is a recurring pattern shared across demographics, admissions, and drg modules.
+The database runs on **AWS Athena (Trino/Presto SQL dialect)** — not MySQL. Tables must be schema-qualified with `datascope_gestor_prod.` (e.g. `datascope_gestor_prod.movements`). Tables no longer carry the `g_` prefix (e.g. `g_episodes` → `episodes`). Dictionary tables keep `dic_` prefix. SQL queries use extensive CTEs and window functions (`LAG`, `LEAD`, `ROW_NUMBER`). The predominant-unit logic (assign a stay to the unit where the patient spent the most time) is a recurring pattern shared across demographics, admissions, and drg modules.
 
 **`DB_CONTEXT_AWS.md`** (root) is the authoritative database schema reference for the AWS/Athena instance. Read it before writing new SQL — it documents all relevant tables (without the `g_` prefix), ETL rules, ICD mappings, and the Athena (Trino/Presto) SQL dialect to use instead of MySQL. For code lookups (ICD, DRG, provisions, etc.), query the database directly via `execute_query` instead of using local dictionaries.
 

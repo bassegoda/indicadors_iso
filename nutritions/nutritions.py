@@ -35,7 +35,7 @@ def get_nutrition_query(start_date, end_date, unit_list):
             date_diff('hour', m.start_date, m.end_date) AS horesingres,
             LEAD(m.start_date) OVER (PARTITION BY m.episode_ref ORDER BY m.start_date) AS next_start_date
         FROM
-            movements AS m
+            datascope_gestor_prod.movements AS m
         WHERE
             m.ou_loc_ref IN ({units_formatted})
             AND m.start_date BETWEEN timestamp '{start_date} 00:00:00' AND timestamp '{end_date} 23:59:59'
@@ -59,7 +59,7 @@ def get_nutrition_query(start_date, end_date, unit_list):
             pe.drug_descr,
             ROW_NUMBER() OVER (PARTITION BY pe.episode_ref ORDER BY pe.start_drug_date ASC) AS rn
         FROM 
-            prescriptions AS pe
+            datascope_gestor_prod.prescriptions AS pe
         WHERE 
             pe.drug_descr IN ('NUTRICION ENTERAL', 'NUTRICIÓN PARENTERAL CENTRAL')
             AND pe.start_drug_date IS NOT NULL

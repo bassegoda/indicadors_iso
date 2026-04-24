@@ -7,7 +7,7 @@ WITH all_related_moves AS (
         start_date,
         end_date,
         COALESCE(end_date, current_timestamp) AS effective_end_date
-    FROM movements
+    FROM datascope_gestor_prod.movements
     WHERE ou_loc_ref IN ({units})
       AND start_date <= timestamp '{max_year}-12-31 23:59:59'
       AND COALESCE(end_date, current_timestamp) >= timestamp '{min_year}-01-01 00:00:00'
@@ -68,7 +68,7 @@ prescriptions_new AS (
     SELECT DISTINCT
         p.patient_ref,
         p.episode_ref
-    FROM prescriptions p
+    FROM datascope_gestor_prod.prescriptions p
     INNER JOIN cohort c
         ON p.patient_ref = c.patient_ref
         AND p.episode_ref = c.episode_ref
@@ -130,9 +130,9 @@ SELECT DISTINCT
         THEN 1 ELSE 0
     END AS readmission_72h
 FROM cohort_with_next cw
-LEFT JOIN demographics d
+LEFT JOIN datascope_gestor_prod.demographics d
     ON cw.patient_ref = d.patient_ref
-LEFT JOIN exitus ex
+LEFT JOIN datascope_gestor_prod.exitus ex
     ON cw.patient_ref = ex.patient_ref
 LEFT JOIN prescriptions_new prx
     ON cw.patient_ref = prx.patient_ref

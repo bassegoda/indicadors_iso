@@ -13,8 +13,8 @@ SELECT DISTINCT
     df.form_date AS fecha_valoracion,
     df.ou_loc_ref,
     df.ou_med_ref
-FROM episodes e
-INNER JOIN dynamic_forms df
+FROM datascope_gestor_prod.episodes e
+INNER JOIN datascope_gestor_prod.dynamic_forms df
     ON e.patient_ref = df.patient_ref
     AND e.episode_ref = df.episode_ref
 WHERE df.form_ref = 'UCI'

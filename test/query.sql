@@ -1,3 +1,3 @@
 SELECT *
-FROM datascope_gestor_prod.labs
-LIMIT 100000
+FROM datascope_gestor_prod.micro
+LIMIT 5000;

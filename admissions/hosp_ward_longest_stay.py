@@ -80,7 +80,7 @@ WITH all_related_moves AS (
         start_date,
         end_date,
         COALESCE(end_date, current_timestamp) AS effective_end_date
-    FROM movements
+    FROM datascope_gestor_prod.movements
     WHERE ou_loc_ref IN ({units_list})
       AND start_date <= timestamp '{{max_year}}-12-31 23:59:59'
       AND COALESCE(end_date, current_timestamp) >= timestamp '{{min_year}}-01-01 00:00:00'
@@ -165,7 +165,7 @@ procedencia_episodio AS (
                    PARTITION BY patient_ref, episode_ref
                    ORDER BY form_date DESC
                ) as rn
-        FROM dynamic_forms
+        FROM datascope_gestor_prod.dynamic_forms
         WHERE form_ref = 'UCI'
           AND question_ref = 'PROCE_MALA'
           AND status = 'CO'
@@ -243,11 +243,11 @@ SELECT DISTINCT
 FROM cohort c
 LEFT JOIN procedencia_episodio proc
     ON c.patient_ref = proc.patient_ref AND c.episode_ref = proc.episode_ref
-LEFT JOIN demographics d 
+LEFT JOIN datascope_gestor_prod.demographics d 
     ON c.patient_ref = d.patient_ref
-LEFT JOIN exitus ex 
+LEFT JOIN datascope_gestor_prod.exitus ex 
     ON c.patient_ref = ex.patient_ref
-INNER JOIN prescriptions p 
+INNER JOIN datascope_gestor_prod.prescriptions p 
     ON c.patient_ref = p.patient_ref 
     AND c.episode_ref = p.episode_ref
     AND p.start_drug_date BETWEEN c.admission_date 
@@ -269,7 +269,7 @@ WITH all_related_moves AS (
         start_date,
         end_date,
         COALESCE(end_date, current_timestamp) AS effective_end_date
-    FROM movements
+    FROM datascope_gestor_prod.movements
     WHERE ou_loc_ref IN ({units_list})
       AND start_date <= timestamp '{{max_year}}-12-31 23:59:59'
       AND COALESCE(end_date, current_timestamp) >= timestamp '{{min_year}}-01-01 00:00:00'

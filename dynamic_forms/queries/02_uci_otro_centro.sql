@@ -19,7 +19,7 @@ SELECT
     value_descr,
     ou_med_ref,
     ou_loc_ref
-FROM dynamic_forms
+FROM datascope_gestor_prod.dynamic_forms
 WHERE form_ref = 'UCI'
   AND status = 'CO'
   AND (

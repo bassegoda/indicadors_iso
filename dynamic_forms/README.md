@@ -1,6 +1,6 @@
 # Dynamic Forms - Queries
 
-Script para ejecutar consultas SQL contra la base de datos DataNex relacionadas con formularios dinámicos (`g_dynamic_forms`).
+Script para ejecutar consultas SQL contra la base de datos DataNex (AWS/Athena) relacionadas con formularios dinámicos (`dynamic_forms`).
 
 ## Estructura
 

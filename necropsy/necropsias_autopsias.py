@@ -28,7 +28,7 @@ def find_necropsia_autopsia_codes():
 
     query = f"""
     SELECT DISTINCT prov_ref, prov_descr
-    FROM provisions
+    FROM datascope_gestor_prod.provisions
     WHERE {like_clauses}
     ORDER BY prov_ref;
     """
@@ -58,7 +58,7 @@ def get_necropsias_by_year(year, prov_refs):
         ou_med_ref_exec,
         start_date_plan,
         end_date_plan
-    FROM provisions
+    FROM datascope_gestor_prod.provisions
     WHERE prov_ref IN ({prov_refs_formatted})
       AND year(start_date) = {year}
     ORDER BY start_date;

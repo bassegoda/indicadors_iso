@@ -14,8 +14,8 @@ WITH fib_admin AS (
         a.quantity_unit,
         a.drug_descr,
         a.given
-    FROM administrations a
-    INNER JOIN episodes e ON a.episode_ref = e.episode_ref
+    FROM datascope_gestor_prod.administrations a
+    INNER JOIN datascope_gestor_prod.episodes e ON a.episode_ref = e.episode_ref
     WHERE a.atc_ref = 'B02BB01'
       AND a.administration_date >= timestamp '2024-01-01 00:00:00'
       AND a.administration_date < timestamp '2025-01-01 00:00:00'
@@ -30,7 +30,7 @@ fib_labs AS (
         result_date,
         result_num,
         units
-    FROM labs
+    FROM datascope_gestor_prod.labs
     WHERE lab_sap_ref = 'LAB1102'
       AND result_num IS NOT NULL
       AND result_date >= timestamp '2024-01-01 00:00:00'

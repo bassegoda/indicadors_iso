@@ -30,7 +30,7 @@ Cada subcarpeta contiene análisis específicos de diferentes indicadores:
 | **demographics/** | Tabla demográfica y de resultados de estancias en E073+I073 (`ward_stays_demo.py`). Estructura modular: `_sql.py` (consulta SQL), `_metrics.py` (cálculo de métricas), `_report.py` (generación HTML/CSV). Salidas: cohorte completa + tabla resumen en CSV y HTML en `demographics/output/` |
 | **deliris/** | Indicadores CAM-ICU / delirio en UCI. [Documentación →](deliris/README.md) |
 | **drg/** | Informe de complejidad asistencial basado en DRGs (Diagnosis-Related Groups): genera un PDF multipágina con indicadores de severidad (SOI), riesgo de mortalidad (ROM) y peso DRG (Case Mix Index) |
-| **dynamic_forms/** | Consultas SQL sobre formularios dinámicos (`g_dynamic_forms`). Ejecución con `run_queries.py`; consultas en `queries/`, salida CSV en `dynamic_forms/output/`. [Ver README →](dynamic_forms/README.md) |
+| **dynamic_forms/** | Consultas SQL sobre formularios dinámicos (`dynamic_forms`). Ejecución con `run_queries.py`; consultas en `queries/`, salida CSV en `dynamic_forms/output/`. [Ver README →](dynamic_forms/README.md) |
 | **necropsy/** | Análisis de provisions de necropsias y autopsias — busca códigos relacionados directamente en la base de datos |
 | **nutritions/** | Análisis de nutrición enteral y parenteral |
 | **sepsis3/** | Query SQL para identificación de pacientes con sepsis según criterios Sepsis-3 (SOFA score ≥ 2 + sospecha de infección) |

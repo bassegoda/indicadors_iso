@@ -13,8 +13,8 @@ SELECT
     e.episode_type_ref,
     e.start_date AS episode_start,
     e.end_date AS episode_end
-FROM dynamic_forms df
-JOIN episodes e
+FROM datascope_gestor_prod.dynamic_forms df
+JOIN datascope_gestor_prod.episodes e
     ON df.patient_ref = e.patient_ref
     AND df.episode_ref = e.episode_ref
 WHERE df.form_ref = 'UCI'

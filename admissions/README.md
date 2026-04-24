@@ -8,13 +8,13 @@ El script `hosp_ward_stays.py` extrae los ingresos reales en una unidad física 
 
 | # | Criterio | Rationale |
 |---|----------|-----------|
-| 1 | **Cama asignada**: `place_ref IS NOT NULL` en `g_movements` | Sin cama no hay estancia física; los movimientos sin `place_ref` son traslados administrativos o de paso |
-| 2 | **Fecha de ingreso dentro del año solicitado**: `YEAR(admission_date)` debe estar en el rango de años | Se aplica sobre la fecha de ingreso de la **estancia agrupada** (no sobre los movimientos individuales), para evitar corromper el agrupamiento en estancias que cruzan el cambio de año |
+| 1 | **Cama asignada**: `place_ref IS NOT NULL` en `movements` | Sin cama no hay estancia física; los movimientos sin `place_ref` son traslados administrativos o de paso |
+| 2 | **Fecha de ingreso dentro del año solicitado**: `year(admission_date)` debe estar en el rango de años | Se aplica sobre la fecha de ingreso de la **estancia agrupada** (no sobre los movimientos individuales), para evitar corromper el agrupamiento en estancias que cruzan el cambio de año |
 | 3 | **Prescripción iniciada durante la estancia**: al menos una prescripción con `start_drug_date >= admission_date AND start_drug_date <= discharge_date` | Acredita que el paciente fue tratado efectivamente en la unidad. Las prescripções que ya estaban activas antes de la llegada no se consideran |
 
 ## Lógica de agrupamiento de movimientos en estancias
 
-`g_movements` registra cada cambio de ubicación. Para obtener una estancia continua se agrupan los movimientos consecutivos cuyo `end_date` coincide exactamente con el `start_date` del siguiente (patrón LAG-window):
+`movements` registra cada cambio de ubicación. Para obtener una estancia continua se agrupan los movimientos consecutivos cuyo `end_date` coincide exactamente con el `start_date` del siguiente (patrón LAG-window):
 
 ```
 raw_moves  →  flagged_starts  →  grouped_stays  →  cohort
