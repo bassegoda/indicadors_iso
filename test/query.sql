@@ -1,3 +1,2 @@
 SELECT *
-FROM datascope_gestor_prod.micro
-LIMIT 5000;
+FROM datascope_gestor_prod.demographics;
