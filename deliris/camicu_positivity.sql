@@ -1,23 +1,24 @@
 -- camicu_positivity.sql -> camicu_positivity.csv (run_sql.py)
 -- CAM-ICU positivity rate: % of recorded CAM-ICU that are positive
 -- All ICUs | Period: 2018-2025
+-- Dialect: Athena (Trino/Presto)
 
 WITH all_related_moves AS (
     SELECT
         patient_ref, episode_ref, ou_loc_ref,
         start_date, end_date,
-        COALESCE(end_date, NOW()) AS effective_end_date
-    FROM g_movements
+        COALESCE(end_date, current_timestamp) AS effective_end_date
+    FROM movements
     WHERE ou_loc_ref IN ('E016','E103','E014','E015','E037','E057','E073','E043')
-      AND start_date <= '2025-12-31 23:59:59'
-      AND COALESCE(end_date, NOW()) >= '2018-01-01 00:00:00'
+      AND start_date <= timestamp '2025-12-31 23:59:59'
+      AND COALESCE(end_date, current_timestamp) >= timestamp '2018-01-01 00:00:00'
       AND place_ref IS NOT NULL
-      AND COALESCE(end_date, NOW()) > start_date
+      AND COALESCE(end_date, current_timestamp) > start_date
 ),
 flagged_starts AS (
     SELECT *,
         CASE
-            WHEN ABS(TIMESTAMPDIFF(MINUTE,
+            WHEN ABS(date_diff('minute',
                 LAG(effective_end_date) OVER (
                     PARTITION BY patient_ref, episode_ref, ou_loc_ref
                     ORDER BY start_date
@@ -43,14 +44,14 @@ cohort AS (
         MAX(effective_end_date) AS effective_discharge_date
     FROM grouped_stays
     GROUP BY patient_ref, episode_ref, ou_loc_ref, stay_id
-    HAVING YEAR(MIN(start_date)) BETWEEN 2018 AND 2025
+    HAVING year(MIN(start_date)) BETWEEN 2018 AND 2025
 ),
 
 -- CAM-ICU records classified
 cam_results AS (
-    SELECT 
+    SELECT
         c.ou_loc_ref,
-        YEAR(r.result_date) AS yr,
+        year(r.result_date) AS yr,
         r.result_txt,
         CASE
             WHEN r.result_txt = 'DELIRIO_CAM-ICU_2' THEN 'positive'
@@ -58,7 +59,7 @@ cam_results AS (
             WHEN r.result_txt = 'DELIRIO_CAM-ICU_3' THEN 'other'
             ELSE 'unknown'
         END AS cam_result
-    FROM g_rc r
+    FROM rc r
     INNER JOIN cohort c
         ON r.patient_ref = c.patient_ref
         AND r.ou_loc_ref = c.ou_loc_ref
@@ -66,7 +67,7 @@ cam_results AS (
     WHERE r.rc_sap_ref = 'DELIRIO_CAM-ICU'
 )
 
-SELECT 
+SELECT
     ou_loc_ref,
     yr,
     COUNT(*) AS total_cam,

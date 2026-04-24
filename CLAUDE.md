@@ -4,18 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Clinical quality indicators system for Hospital Clínic de Barcelona. Extracts, analyzes, and exports clinical indicators from a MySQL database (DataNex) as CSV and PDF reports. Each module handles one indicator independently.
+Clinical quality indicators system for Hospital Clínic de Barcelona. Extracts, analyzes, and exports clinical indicators from a Metabase API (connected to DataNex on AVS) as CSV and PDF reports. Each module handles one indicator independently.
 
 ## Setup
 
 Requires Python ≥ 3.10 and a `.env` file in the OneDrive root (auto-detected cross-platform):
 
 ```
-DB_HOST=...
-DB_USER=...
-DB_PASSWORD=...
-DB_DATABASE=...
-DB_PORT=3306
+METABASE_URL=https://metabase.clinic.cat
+METABASE_EMAIL=...
+METABASE_PASSWORD=...
+METABASE_DATABASE_NAME=...
 ```
 
 ```bash
@@ -34,15 +33,13 @@ python drg/drg_complexity_report.py           # outputs PDF + CSV
 python dynamic_forms/run_queries.py --list
 python dynamic_forms/run_queries.py --query <name>
 python dynamic_forms/run_queries.py --all
-python dictionaries/extract_all_dictionaries.py --all
-python dictionaries/extract_all_dictionaries.py --list
 ```
 
 There are no tests, linters, or build tools configured.
 
 ## Architecture
 
-**`connection.py`** (root) — shared database layer. Use `execute_query(sql, params)` which returns a pandas DataFrame. Handles `.env` discovery across Windows/macOS OneDrive paths automatically.
+**`connection.py`** (root) — shared database layer via Metabase API. Use `execute_query(query, verbose=True)` which returns a pandas DataFrame. Handles `.env` discovery across Windows/macOS OneDrive paths automatically. Authenticates against Metabase, resolves the database by name, and executes native SQL queries.
 
 **Module pattern** (demographics is the canonical example):
 - `_sql.py` — SQL template (typically a large CTE chain)
@@ -56,11 +53,9 @@ Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plo
 
 ## SQL Conventions
 
-SQL queries use extensive CTEs and window functions (`LAG`, `LEAD`, `ROW_NUMBER`). The predominant-unit logic (assign a stay to the unit where the patient spent the most time) is a recurring pattern shared across demographics, admissions, and drg modules.
+The database runs on **AWS Athena (Trino/Presto SQL dialect)** — not MySQL. Tables no longer carry the `g_` prefix (e.g. `g_episodes` → `episodes`). Dictionary tables keep `dic_` prefix. SQL queries use extensive CTEs and window functions (`LAG`, `LEAD`, `ROW_NUMBER`). The predominant-unit logic (assign a stay to the unit where the patient spent the most time) is a recurring pattern shared across demographics, admissions, and drg modules.
 
-**`DB_CONTEXT.md`** (root, 86KB) is the authoritative database schema reference. Read it before writing new SQL — it documents all relevant tables, ETL rules, ICD mappings, and how to use the local dictionaries.
-
-**`dictionaries/`** contains 54 CSV files extracted from the database (ICD codes, lab parameters, drugs, DRG codes, SNOMED-CT, enumerations). Use these to look up codes offline before querying the live DB.
+**`DB_CONTEXT_AWS.md`** (root) is the authoritative database schema reference for the AWS/Athena instance. Read it before writing new SQL — it documents all relevant tables (without the `g_` prefix), ETL rules, ICD mappings, and the Athena (Trino/Presto) SQL dialect to use instead of MySQL. For code lookups (ICD, DRG, provisions, etc.), query the database directly via `execute_query` instead of using local dictionaries.
 
 ## Interactive Prompts
 

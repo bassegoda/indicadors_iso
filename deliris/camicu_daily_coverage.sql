@@ -4,23 +4,24 @@
 -- real closed end_date (no open segments, no far-future placeholders).
 -- Calendar days: inclusive from DATE(admission) through DATE(discharge).
 -- CAM days: DISTINCT DATE(result_date) for rc_sap_ref = 'DELIRIO_CAM-ICU' within [admission, discharge].
+-- Dialect: Athena (Trino/Presto)
 
 WITH all_related_moves AS (
     SELECT
         patient_ref, episode_ref, ou_loc_ref,
         start_date, end_date,
-        COALESCE(end_date, NOW()) AS effective_end_date
-    FROM g_movements
+        COALESCE(end_date, current_timestamp) AS effective_end_date
+    FROM movements
     WHERE ou_loc_ref IN ('E016','E103','E014','E015','E037','E057','E073','E043')
-      AND start_date <= '2025-12-31 23:59:59'
-      AND COALESCE(end_date, NOW()) >= '2018-01-01 00:00:00'
+      AND start_date <= timestamp '2025-12-31 23:59:59'
+      AND COALESCE(end_date, current_timestamp) >= timestamp '2018-01-01 00:00:00'
       AND place_ref IS NOT NULL
-      AND COALESCE(end_date, NOW()) > start_date
+      AND COALESCE(end_date, current_timestamp) > start_date
 ),
 flagged_starts AS (
     SELECT *,
         CASE
-            WHEN ABS(TIMESTAMPDIFF(MINUTE,
+            WHEN ABS(date_diff('minute',
                 LAG(effective_end_date) OVER (
                     PARTITION BY patient_ref, episode_ref, ou_loc_ref
                     ORDER BY start_date
@@ -44,34 +45,34 @@ cohort AS (
         patient_ref, episode_ref, ou_loc_ref, stay_id,
         MIN(start_date) AS admission_date,
         MAX(end_date) AS discharge_date,
-        DATEDIFF(DATE(MAX(end_date)), DATE(MIN(start_date))) + 1 AS n_icu_calendar_days
+        date_diff('day', cast(MIN(start_date) as date), cast(MAX(end_date) as date)) + 1 AS n_icu_calendar_days
     FROM grouped_stays
     GROUP BY patient_ref, episode_ref, ou_loc_ref, stay_id
-    HAVING YEAR(MIN(start_date)) BETWEEN 2018 AND 2025
+    HAVING year(MIN(start_date)) BETWEEN 2018 AND 2025
       AND COUNT(*) = COUNT(
-            CASE WHEN end_date IS NOT NULL AND end_date <= NOW() THEN 1 END
+            CASE WHEN end_date IS NOT NULL AND end_date <= current_timestamp THEN 1 END
           )
-      AND DATEDIFF(DATE(MAX(end_date)), DATE(MIN(start_date))) + 1 > 0
+      AND date_diff('day', cast(MIN(start_date) as date), cast(MAX(end_date) as date)) + 1 > 0
 ),
 
 per_stay AS (
     SELECT
         c.ou_loc_ref,
-        YEAR(c.admission_date) AS yr,
+        year(c.admission_date) AS yr,
         c.patient_ref,
         c.episode_ref,
         c.stay_id,
         c.n_icu_calendar_days,
-        COUNT(DISTINCT DATE(r.result_date)) AS days_with_cam
+        COUNT(DISTINCT cast(r.result_date as date)) AS days_with_cam
     FROM cohort c
-    LEFT JOIN g_rc r
+    LEFT JOIN rc r
         ON r.patient_ref = c.patient_ref
         AND r.ou_loc_ref = c.ou_loc_ref
         AND r.result_date >= c.admission_date
         AND r.result_date <= c.discharge_date
         AND r.rc_sap_ref = 'DELIRIO_CAM-ICU'
     GROUP BY
-        c.ou_loc_ref, YEAR(c.admission_date),
+        c.ou_loc_ref, year(c.admission_date),
         c.patient_ref, c.episode_ref, c.stay_id, c.n_icu_calendar_days
 )
 

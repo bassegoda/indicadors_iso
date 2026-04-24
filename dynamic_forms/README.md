@@ -37,9 +37,9 @@ python dynamic_forms/run_queries.py --query explorar_uci --no-save
 
 ## Requisitos
 
-- Credenciales en `.env` (DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)
+- Credenciales en `.env` (METABASE_URL, METABASE_EMAIL, METABASE_PASSWORD, METABASE_DATABASE_NAME)
 - `connection.py` en la raíz del proyecto
-- Dependencias: `pandas`, `mysql-connector-python`, `python-dotenv`
+- Dependencias: `pandas`, `requests`, `python-dotenv`
 
 ## Añadir nuevas queries
 

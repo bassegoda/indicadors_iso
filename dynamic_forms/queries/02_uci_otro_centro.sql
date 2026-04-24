@@ -1,5 +1,6 @@
 -- Formularios de valoración de críticos (UCI) donde el paciente
 -- indica "Otro centro" como procedencia
+-- Dialect: Athena (Trino/Presto)
 SELECT
     patient_ref,
     episode_ref,
@@ -18,7 +19,7 @@ SELECT
     value_descr,
     ou_med_ref,
     ou_loc_ref
-FROM g_dynamic_forms
+FROM dynamic_forms
 WHERE form_ref = 'UCI'
   AND status = 'CO'
   AND (

@@ -6,19 +6,19 @@ WITH all_related_moves AS (
         ou_loc_ref,
         start_date,
         end_date,
-        COALESCE(end_date, NOW()) AS effective_end_date
-    FROM g_movements
+        COALESCE(end_date, current_timestamp) AS effective_end_date
+    FROM movements
     WHERE ou_loc_ref IN ({units})
-      AND start_date <= '{max_year}-12-31 23:59:59'
-      AND COALESCE(end_date, NOW()) >= '{min_year}-01-01 00:00:00'
+      AND start_date <= timestamp '{max_year}-12-31 23:59:59'
+      AND COALESCE(end_date, current_timestamp) >= timestamp '{min_year}-01-01 00:00:00'
       AND place_ref IS NOT NULL
-      AND COALESCE(end_date, NOW()) > start_date
+      AND COALESCE(end_date, current_timestamp) > start_date
 ),
 flagged_starts AS (
     SELECT
         *,
         CASE
-            WHEN ABS(TIMESTAMPDIFF(MINUTE,
+            WHEN ABS(date_diff('minute',
                 LAG(effective_end_date) OVER (
                     PARTITION BY patient_ref, episode_ref ORDER BY start_date
                 ),
@@ -46,15 +46,15 @@ cohort AS (
         MIN(start_date) AS admission_date,
         MAX(end_date) AS discharge_date,
         MAX(effective_end_date) AS effective_discharge_date,
-        TIMESTAMPDIFF(HOUR, MIN(start_date), MAX(effective_end_date)) AS hours_stay,
-        TIMESTAMPDIFF(DAY, MIN(start_date), MAX(effective_end_date)) AS days_stay,
-        TIMESTAMPDIFF(MINUTE, MIN(start_date), MAX(effective_end_date)) AS minutes_stay,
+        date_diff('hour', MIN(start_date), MAX(effective_end_date)) AS hours_stay,
+        date_diff('day', MIN(start_date), MAX(effective_end_date)) AS days_stay,
+        date_diff('minute', MIN(start_date), MAX(effective_end_date)) AS minutes_stay,
         CASE WHEN MAX(end_date) IS NULL THEN 'Yes' ELSE 'No' END AS still_admitted,
         COUNT(*) AS num_movements,
         COUNT(DISTINCT ou_loc_ref) AS num_units_visited
     FROM grouped_stays
     GROUP BY patient_ref, episode_ref, stay_id
-    HAVING YEAR(MIN(start_date)) BETWEEN {min_year} AND {max_year}
+    HAVING year(MIN(start_date)) BETWEEN {min_year} AND {max_year}
 ),
 cohort_with_next AS (
     SELECT
@@ -68,7 +68,7 @@ prescriptions_new AS (
     SELECT DISTINCT
         p.patient_ref,
         p.episode_ref
-    FROM g_prescriptions p
+    FROM prescriptions p
     INNER JOIN cohort c
         ON p.patient_ref = c.patient_ref
         AND p.episode_ref = c.episode_ref
@@ -92,8 +92,8 @@ SELECT DISTINCT
         WHEN cw.num_units_visited > 1 THEN 'Yes'
         ELSE 'No'
     END AS had_transfer,
-    YEAR(cw.admission_date) AS year_admission,
-    TIMESTAMPDIFF(YEAR, d.birth_date, cw.admission_date) AS age_at_admission,
+    year(cw.admission_date) AS year_admission,
+    date_diff('year', d.birth_date, cw.admission_date) AS age_at_admission,
     d.natio_ref,
     CASE
         WHEN d.sex = 1 THEN 'Male'
@@ -117,22 +117,22 @@ SELECT DISTINCT
     END AS has_new_prescription,
     CASE
         WHEN cw.next_admission_date IS NOT NULL
-             AND TIMESTAMPDIFF(
-                 HOUR, cw.effective_discharge_date, cw.next_admission_date
+             AND date_diff(
+                 'hour', cw.effective_discharge_date, cw.next_admission_date
              ) <= 24
         THEN 1 ELSE 0
     END AS readmission_24h,
     CASE
         WHEN cw.next_admission_date IS NOT NULL
-             AND TIMESTAMPDIFF(
-                 HOUR, cw.effective_discharge_date, cw.next_admission_date
+             AND date_diff(
+                 'hour', cw.effective_discharge_date, cw.next_admission_date
              ) <= 72
         THEN 1 ELSE 0
     END AS readmission_72h
 FROM cohort_with_next cw
-LEFT JOIN g_demographics d
+LEFT JOIN demographics d
     ON cw.patient_ref = d.patient_ref
-LEFT JOIN g_exitus ex
+LEFT JOIN exitus ex
     ON cw.patient_ref = ex.patient_ref
 LEFT JOIN prescriptions_new prx
     ON cw.patient_ref = prx.patient_ref

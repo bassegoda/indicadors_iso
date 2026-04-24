@@ -1,8 +1,8 @@
 # Indicadores ISO
 
-> Clinical quality indicators from Hospital Clínic de Barcelona's MySQL database (DataNex). Each module extracts, analyses, and exports a specific indicator as CSV/PDF.
+> Clinical quality indicators from Hospital Clínic de Barcelona via Metabase API (DataNex on AVS). Each module extracts, analyses, and exports a specific indicator as CSV/PDF.
 
-Proyecto para obtener indicadores clínicos a partir de una base de datos MySQL del Hospital Clínic de Barcelona.
+Proyecto para obtener indicadores clínicos del Hospital Clínic de Barcelona a través de la API de Metabase (base de datos DataNex en AVS).
 
 ## Inicio Rápido
 
@@ -31,11 +31,10 @@ Cada subcarpeta contiene análisis específicos de diferentes indicadores:
 | **deliris/** | Indicadores CAM-ICU / delirio en UCI. [Documentación →](deliris/README.md) |
 | **drg/** | Informe de complejidad asistencial basado en DRGs (Diagnosis-Related Groups): genera un PDF multipágina con indicadores de severidad (SOI), riesgo de mortalidad (ROM) y peso DRG (Case Mix Index) |
 | **dynamic_forms/** | Consultas SQL sobre formularios dinámicos (`g_dynamic_forms`). Ejecución con `run_queries.py`; consultas en `queries/`, salida CSV en `dynamic_forms/output/`. [Ver README →](dynamic_forms/README.md) |
-| **necropsy/** | Análisis de provisions de necropsias y autopsias — busca códigos relacionados en el diccionario y consulta la base de datos |
+| **necropsy/** | Análisis de provisions de necropsias y autopsias — busca códigos relacionados directamente en la base de datos |
 | **nutritions/** | Análisis de nutrición enteral y parenteral |
 | **sepsis3/** | Query SQL para identificación de pacientes con sepsis según criterios Sepsis-3 (SOFA score ≥ 2 + sospecha de infección) |
 | **snisp/** | Análisis de incidentes (`analysis_2025.py`) |
-| **dictionaries/** | 54 diccionarios CSV extraídos de la base de datos (códigos de diagnóstico, laboratorio, fármacos, unidades, etc.). Incluye `extract_all_dictionaries.py` para regenerarlos y su propio [README](dictionaries/dictionaries_README.md) con la descripción de cada archivo |
 
 Cada análisis genera sus resultados en una subcarpeta `output/` dentro de su respectiva carpeta.
 
@@ -43,7 +42,7 @@ Cada análisis genera sus resultados en una subcarpeta `output/` dentro de su re
 
 ## Conexión a la Base de Datos
 
-La conexión a la base de datos se gestiona mediante el módulo `connection.py` ubicado en la raíz del proyecto.
+La conexión a la base de datos se gestiona mediante el módulo `connection.py` ubicado en la raíz del proyecto. Utiliza la **API de Metabase** para ejecutar consultas SQL nativas contra la base de datos DataNex alojada en AVS.
 
 ### Configuración
 
@@ -57,14 +56,13 @@ Las credenciales se almacenan en un archivo `.env` ubicado en la **raíz de OneD
 Crea un archivo `.env` en la raíz de OneDrive con el siguiente formato:
 
 ```env
-DB_HOST=tu_host
-DB_USER=tu_usuario
-DB_PASSWORD=tu_contraseña
-DB_DATABASE=tu_base_de_datos
-DB_PORT=3306
+METABASE_URL=https://metabase.clinic.cat
+METABASE_EMAIL=tu_email
+METABASE_PASSWORD=tu_contraseña
+METABASE_DATABASE_NAME=nombre_base_de_datos
 ```
 
-**Importante**: Cuando cambie la contraseña (cada 2-5 días), actualiza únicamente la línea `DB_PASSWORD=` en este archivo. El archivo se sincronizará automáticamente con OneDrive en todos tus ordenadores.
+**Importante**: Cuando cambie la contraseña, actualiza únicamente la línea `METABASE_PASSWORD=` en este archivo. El archivo se sincronizará automáticamente con OneDrive en todos tus ordenadores.
 
 ### Uso en los Scripts
 

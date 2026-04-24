@@ -55,8 +55,8 @@ def build_hours_per_unit_cases(units: list) -> str:
     cases = []
     for unit in units:
         cases.append(f"""
-        SUM(CASE WHEN g.ou_loc_ref = '{unit}' 
-            THEN TIMESTAMPDIFF(MINUTE, g.start_date, COALESCE(g.end_date, NOW())) 
+        SUM(CASE WHEN g.ou_loc_ref = '{unit}'
+            THEN date_diff('minute', g.start_date, COALESCE(g.end_date, current_timestamp))
             ELSE 0 END) as minutes_{unit}""")
     return ",".join(cases)
 
@@ -72,41 +72,41 @@ def build_sql_query(units: list) -> str:
     return f"""
 WITH all_related_moves AS (
     -- Get movements from all specified units
-    -- end_date can be NULL (patient still admitted); use NOW() as proxy
+    -- end_date can be NULL (patient still admitted); use current_timestamp as proxy
     SELECT
         patient_ref,
         episode_ref,
         ou_loc_ref,
         start_date,
         end_date,
-        COALESCE(end_date, NOW()) AS effective_end_date
-    FROM g_movements
+        COALESCE(end_date, current_timestamp) AS effective_end_date
+    FROM movements
     WHERE ou_loc_ref IN ({units_list})
-      AND start_date <= '{{max_year}}-12-31 23:59:59'
-      AND COALESCE(end_date, NOW()) >= '{{min_year}}-01-01 00:00:00'
+      AND start_date <= timestamp '{{max_year}}-12-31 23:59:59'
+      AND COALESCE(end_date, current_timestamp) >= timestamp '{{min_year}}-01-01 00:00:00'
       AND place_ref IS NOT NULL
-      AND COALESCE(end_date, NOW()) > start_date
+      AND COALESCE(end_date, current_timestamp) > start_date
 ),
 flagged_starts AS (
     -- Mark where new stays begin (across all units)
     -- Tolerance: movements within 5 minutes are considered consecutive
-    SELECT 
+    SELECT
         *,
-        CASE 
-            WHEN ABS(TIMESTAMPDIFF(MINUTE, 
+        CASE
+            WHEN ABS(date_diff('minute',
                 LAG(effective_end_date) OVER (
                     PARTITION BY episode_ref ORDER BY start_date
-                ), 
+                ),
                 start_date
             )) <= 5
-            THEN 0 
-            ELSE 1 
+            THEN 0
+            ELSE 1
         END AS is_new_stay
     FROM all_related_moves
 ),
 grouped_stays AS (
     -- Number each stay within the episode
-    SELECT 
+    SELECT
         *,
         SUM(is_new_stay) OVER (
             PARTITION BY episode_ref ORDER BY start_date
@@ -120,7 +120,7 @@ time_per_unit AS (
         episode_ref,
         stay_id,
         ou_loc_ref,
-        SUM(TIMESTAMPDIFF(MINUTE, start_date, effective_end_date)) as minutes_in_unit
+        SUM(date_diff('minute', start_date, effective_end_date)) as minutes_in_unit
     FROM grouped_stays
     GROUP BY patient_ref, episode_ref, stay_id, ou_loc_ref
 ),
@@ -165,7 +165,7 @@ procedencia_episodio AS (
                    PARTITION BY patient_ref, episode_ref
                    ORDER BY form_date DESC
                ) as rn
-        FROM g_dynamic_forms
+        FROM dynamic_forms
         WHERE form_ref = 'UCI'
           AND question_ref = 'PROCE_MALA'
           AND status = 'CO'
@@ -182,9 +182,9 @@ cohort AS (
         MIN(g.start_date) as admission_date,
         MAX(g.end_date) as discharge_date,
         MAX(g.effective_end_date) as effective_discharge_date,
-        TIMESTAMPDIFF(HOUR, MIN(g.start_date), MAX(g.effective_end_date)) AS hours_stay,
-        TIMESTAMPDIFF(DAY, MIN(g.start_date), MAX(g.effective_end_date)) AS days_stay,
-        TIMESTAMPDIFF(MINUTE, MIN(g.start_date), MAX(g.effective_end_date)) AS minutes_stay,
+        date_diff('hour', MIN(g.start_date), MAX(g.effective_end_date)) AS hours_stay,
+        date_diff('day', MIN(g.start_date), MAX(g.effective_end_date)) AS days_stay,
+        date_diff('minute', MIN(g.start_date), MAX(g.effective_end_date)) AS minutes_stay,
         CASE WHEN MAX(g.end_date) IS NULL THEN 'Yes' ELSE 'No' END as still_admitted,
         COUNT(*) as num_movements,
         COUNT(DISTINCT g.ou_loc_ref) as num_units_visited,{hours_cases}
@@ -194,7 +194,7 @@ cohort AS (
         AND g.episode_ref = p.episode_ref
         AND g.stay_id = p.stay_id
     GROUP BY g.patient_ref, g.episode_ref, g.stay_id, p.assigned_unit
-    HAVING YEAR(MIN(g.start_date)) BETWEEN {{min_year}} AND {{max_year}}
+    HAVING year(MIN(g.start_date)) BETWEEN {{min_year}} AND {{max_year}}
        AND p.assigned_unit = '{{unit}}'  -- Only stays assigned to requested unit
 )
 SELECT DISTINCT
@@ -216,8 +216,8 @@ SELECT DISTINCT
         WHEN c.num_units_visited > 1 THEN 'Yes' 
         ELSE 'No' 
     END as had_transfer,
-    YEAR(c.admission_date) as year_admission,
-    TIMESTAMPDIFF(YEAR, d.birth_date, c.admission_date) as age_at_admission,
+    year(c.admission_date) as year_admission,
+    date_diff('year', d.birth_date, c.admission_date) as age_at_admission,
     CASE
         WHEN d.sex = 1 THEN 'Male'
         WHEN d.sex = 2 THEN 'Female'
@@ -243,11 +243,11 @@ SELECT DISTINCT
 FROM cohort c
 LEFT JOIN procedencia_episodio proc
     ON c.patient_ref = proc.patient_ref AND c.episode_ref = proc.episode_ref
-LEFT JOIN g_demographics d 
+LEFT JOIN demographics d 
     ON c.patient_ref = d.patient_ref
-LEFT JOIN g_exitus ex 
+LEFT JOIN exitus ex 
     ON c.patient_ref = ex.patient_ref
-INNER JOIN g_prescriptions p 
+INNER JOIN prescriptions p 
     ON c.patient_ref = p.patient_ref 
     AND c.episode_ref = p.episode_ref
     AND p.start_drug_date BETWEEN c.admission_date 
@@ -268,31 +268,31 @@ WITH all_related_moves AS (
         ou_loc_ref,
         start_date,
         end_date,
-        COALESCE(end_date, NOW()) AS effective_end_date
-    FROM g_movements
+        COALESCE(end_date, current_timestamp) AS effective_end_date
+    FROM movements
     WHERE ou_loc_ref IN ({units_list})
-      AND start_date <= '{{max_year}}-12-31 23:59:59'
-      AND COALESCE(end_date, NOW()) >= '{{min_year}}-01-01 00:00:00'
+      AND start_date <= timestamp '{{max_year}}-12-31 23:59:59'
+      AND COALESCE(end_date, current_timestamp) >= timestamp '{{min_year}}-01-01 00:00:00'
       AND place_ref IS NOT NULL
-      AND COALESCE(end_date, NOW()) > start_date
+      AND COALESCE(end_date, current_timestamp) > start_date
 ),
 flagged_starts AS (
-    SELECT 
+    SELECT
         *,
-        CASE 
-            WHEN ABS(TIMESTAMPDIFF(MINUTE, 
+        CASE
+            WHEN ABS(date_diff('minute',
                 LAG(effective_end_date) OVER (
                     PARTITION BY episode_ref ORDER BY start_date
-                ), 
+                ),
                 start_date
             )) <= 5
-            THEN 0 
-            ELSE 1 
+            THEN 0
+            ELSE 1
         END AS is_new_stay
     FROM all_related_moves
 ),
 grouped_stays AS (
-    SELECT 
+    SELECT
         *,
         SUM(is_new_stay) OVER (
             PARTITION BY episode_ref ORDER BY start_date
@@ -305,7 +305,7 @@ time_per_unit AS (
         episode_ref,
         stay_id,
         ou_loc_ref,
-        SUM(TIMESTAMPDIFF(MINUTE, start_date, effective_end_date)) as minutes_in_unit
+        SUM(date_diff('minute', start_date, effective_end_date)) as minutes_in_unit
     FROM grouped_stays
     GROUP BY patient_ref, episode_ref, stay_id, ou_loc_ref
 ),
@@ -350,7 +350,7 @@ cohort AS (
         AND g.episode_ref = p.episode_ref
         AND g.stay_id = p.stay_id
     GROUP BY g.patient_ref, g.episode_ref, g.stay_id, p.assigned_unit
-    HAVING YEAR(MIN(g.start_date)) BETWEEN {{min_year}} AND {{max_year}}
+    HAVING year(MIN(g.start_date)) BETWEEN {{min_year}} AND {{max_year}}
        AND p.assigned_unit = '{{unit}}'
 )
 SELECT COUNT(*) as total_stays FROM cohort c;

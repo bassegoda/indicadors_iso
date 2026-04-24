@@ -1,6 +1,7 @@
 -- Ingresos (episodios) con procedencia de otro centro u otro hospital
 -- Formulario UCI, campo PROCE_MALA (procedencia antes del ingreso hospitalario)
 -- Un episodio por fila
+-- Dialect: Athena (Trino/Presto)
 SELECT DISTINCT
     e.patient_ref,
     e.episode_ref,
@@ -12,8 +13,8 @@ SELECT DISTINCT
     df.form_date AS fecha_valoracion,
     df.ou_loc_ref,
     df.ou_med_ref
-FROM g_episodes e
-INNER JOIN g_dynamic_forms df
+FROM episodes e
+INNER JOIN dynamic_forms df
     ON e.patient_ref = df.patient_ref
     AND e.episode_ref = df.episode_ref
 WHERE df.form_ref = 'UCI'

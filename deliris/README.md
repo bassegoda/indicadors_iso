@@ -1,6 +1,6 @@
 # Deliris — vigilancia de delirio en UCI (CAM-ICU)
 
-Módulo para extraer indicadores de **registro de RASS** y **CAM-ICU** en las unidades de cuidados intensivos definidas en las consultas, y generar tablas CSV y figuras a partir de DataNex (`g_movements`, `g_rc`).
+Módulo para extraer indicadores de **registro de RASS** y **CAM-ICU** en las unidades de cuidados intensivos definidas en las consultas, y generar tablas CSV y figuras a partir de DataNex via Metabase API (`g_movements`, `g_rc`).
 
 La documentación de esquema y tablas relevantes está en `DB_CONTEXT.md` / `DB_CONTEXT_dicts.md` en la raíz del repositorio.
 
@@ -9,8 +9,8 @@ La documentación de esquema y tablas relevantes está en `DB_CONTEXT.md` / `DB_
 ## Requisitos
 
 - Python ≥ 3.10, dependencias del proyecto (`requirements.txt`).
-- Archivo `.env` con credenciales MySQL (véase README principal).
-- **MySQL 8+** para `camicu_daily_coverage_excl_deep_rass.sql` (usa `WITH RECURSIVE` para expandir días calendario).
+- Archivo `.env` con credenciales de Metabase (véase README principal).
+- La query `camicu_daily_coverage_excl_deep_rass.sql` usa `WITH RECURSIVE` para expandir días calendario.
 
 ---
 

@@ -32,15 +32,15 @@ def get_nutrition_query(start_date, end_date, unit_list):
             m.episode_ref,
             m.start_date,
             m.end_date,
-            TIMESTAMPDIFF(hour, m.start_date, m.end_date) AS horesingres,
+            date_diff('hour', m.start_date, m.end_date) AS horesingres,
             LEAD(m.start_date) OVER (PARTITION BY m.episode_ref ORDER BY m.start_date) AS next_start_date
         FROM
-            g_movements AS m
-        WHERE 
-            m.ou_loc_ref IN ({units_formatted}) 
-            AND m.start_date BETWEEN '{start_date} 00:00:00' AND '{end_date} 23:59:59'
+            movements AS m
+        WHERE
+            m.ou_loc_ref IN ({units_formatted})
+            AND m.start_date BETWEEN timestamp '{start_date} 00:00:00' AND timestamp '{end_date} 23:59:59'
             AND m.start_date != m.end_date
-            AND TIMESTAMPDIFF(hour, m.start_date, m.end_date) > 1
+            AND date_diff('hour', m.start_date, m.end_date) > 1
     ),
     final_movements AS (
         SELECT 
@@ -59,7 +59,7 @@ def get_nutrition_query(start_date, end_date, unit_list):
             pe.drug_descr,
             ROW_NUMBER() OVER (PARTITION BY pe.episode_ref ORDER BY pe.start_drug_date ASC) AS rn
         FROM 
-            g_prescriptions AS pe
+            prescriptions AS pe
         WHERE 
             pe.drug_descr IN ('NUTRICION ENTERAL', 'NUTRICIÓN PARENTERAL CENTRAL')
             AND pe.start_drug_date IS NOT NULL
@@ -70,7 +70,7 @@ def get_nutrition_query(start_date, end_date, unit_list):
             fm.start_date,
             np.start_drug_date,
             np.drug_descr,
-            TIMESTAMPDIFF(hour, fm.start_date, np.start_drug_date) AS hours_difference
+            date_diff('hour', fm.start_date, np.start_drug_date) AS hours_difference
         FROM 
             final_movements fm
         INNER JOIN 

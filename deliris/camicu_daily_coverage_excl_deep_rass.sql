@@ -5,28 +5,27 @@
 -- Days with only deep sedation RASS are excluded from the CAM requirement (cannot assess CAM-ICU).
 -- Denominator for pct_stays_cam_all_evaluable_days: stays with at least one evaluable day.
 -- Cohort: same ICUs and closed-stay rules as camicu_daily_coverage.sql
+-- Dialect: Athena (Trino/Presto) — uses UNNEST(sequence(...)) instead of WITH RECURSIVE
 
-WITH RECURSIVE nums AS (
-    SELECT 0 AS n
-    UNION ALL
-    SELECT n + 1 FROM nums WHERE n < 800
+WITH nums AS (
+    SELECT n FROM UNNEST(sequence(0, 800)) AS t(n)
 ),
 all_related_moves AS (
     SELECT
         patient_ref, episode_ref, ou_loc_ref,
         start_date, end_date,
-        COALESCE(end_date, NOW()) AS effective_end_date
-    FROM g_movements
+        COALESCE(end_date, current_timestamp) AS effective_end_date
+    FROM movements
     WHERE ou_loc_ref IN ('E016','E103','E014','E015','E037','E057','E073','E043')
-      AND start_date <= '2025-12-31 23:59:59'
-      AND COALESCE(end_date, NOW()) >= '2018-01-01 00:00:00'
+      AND start_date <= timestamp '2025-12-31 23:59:59'
+      AND COALESCE(end_date, current_timestamp) >= timestamp '2018-01-01 00:00:00'
       AND place_ref IS NOT NULL
-      AND COALESCE(end_date, NOW()) > start_date
+      AND COALESCE(end_date, current_timestamp) > start_date
 ),
 flagged_starts AS (
     SELECT *,
         CASE
-            WHEN ABS(TIMESTAMPDIFF(MINUTE,
+            WHEN ABS(date_diff('minute',
                 LAG(effective_end_date) OVER (
                     PARTITION BY patient_ref, episode_ref, ou_loc_ref
                     ORDER BY start_date
@@ -52,24 +51,24 @@ cohort AS (
         MAX(end_date) AS discharge_date
     FROM grouped_stays
     GROUP BY patient_ref, episode_ref, ou_loc_ref, stay_id
-    HAVING YEAR(MIN(start_date)) BETWEEN 2018 AND 2025
+    HAVING year(MIN(start_date)) BETWEEN 2018 AND 2025
       AND COUNT(*) = COUNT(
-            CASE WHEN end_date IS NOT NULL AND end_date <= NOW() THEN 1 END
+            CASE WHEN end_date IS NOT NULL AND end_date <= current_timestamp THEN 1 END
           )
-      AND DATEDIFF(DATE(MAX(end_date)), DATE(MIN(start_date))) + 1 > 0
+      AND date_diff('day', cast(MIN(start_date) as date), cast(MAX(end_date) as date)) + 1 > 0
 ),
 
 stay_calendar_days AS (
     SELECT
         c.ou_loc_ref,
-        YEAR(c.admission_date) AS yr,
+        year(c.admission_date) AS yr,
         c.patient_ref,
         c.episode_ref,
         c.stay_id,
-        DATE_ADD(DATE(c.admission_date), INTERVAL n.n DAY) AS cal_day
+        date_add('day', n.n, cast(c.admission_date as date)) AS cal_day
     FROM cohort c
     INNER JOIN nums n
-        ON n.n <= DATEDIFF(DATE(c.discharge_date), DATE(c.admission_date))
+        ON n.n <= date_diff('day', cast(c.admission_date as date), cast(c.discharge_date as date))
 ),
 
 rass_deep_sedation_day AS (
@@ -78,9 +77,9 @@ rass_deep_sedation_day AS (
         c.episode_ref,
         c.ou_loc_ref,
         c.stay_id,
-        DATE(r.result_date) AS cal_day
+        cast(r.result_date as date) AS cal_day
     FROM cohort c
-    INNER JOIN g_rc r
+    INNER JOIN rc r
         ON r.patient_ref = c.patient_ref
         AND r.ou_loc_ref = c.ou_loc_ref
         AND r.result_date >= c.admission_date
@@ -89,8 +88,8 @@ rass_deep_sedation_day AS (
         AND (
             r.result_txt IN ('SEDACION_RASS_1', 'SEDACION_RASS_2')
             OR (
-                r.result_txt REGEXP '^-?[0-9]+$'
-                AND CAST(r.result_txt AS SIGNED) IN (-5, -4)
+                regexp_like(r.result_txt, '^-?[0-9]+$')
+                AND cast(r.result_txt as bigint) IN (-5, -4)
             )
         )
 ),
@@ -100,9 +99,9 @@ cam_days AS (
         c.episode_ref,
         c.ou_loc_ref,
         c.stay_id,
-        DATE(r.result_date) AS cal_day
+        cast(r.result_date as date) AS cal_day
     FROM cohort c
-    INNER JOIN g_rc r
+    INNER JOIN rc r
         ON r.patient_ref = c.patient_ref
         AND r.ou_loc_ref = c.ou_loc_ref
         AND r.result_date >= c.admission_date

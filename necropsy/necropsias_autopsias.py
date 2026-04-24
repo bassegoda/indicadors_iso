@@ -1,6 +1,6 @@
 """
 Análisis de provisions de necropsias y autopsias
-Busca en el diccionario términos relacionados y consulta la base de datos
+Busca códigos relacionados directamente en la base de datos
 """
 
 import sys
@@ -18,37 +18,22 @@ from connection import execute_query
 OUTPUT_DIR = current_file.parent / "output"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
-# Ruta al diccionario
-DICT_PATH = project_root / "docs" / "dictionaries" / "dic_provisions.csv"
+# Términos de búsqueda para necropsias/autopsias
+SEARCH_TERMS = ['necrops', 'autops', 'autòps', 'necòps', 'post-mortem', 'postmortem']
 
-def load_provisions_dict():
-    """Carga el diccionario de provisions"""
-    try:
-        df = pd.read_csv(DICT_PATH, encoding='utf-8')
-        return df
-    except FileNotFoundError:
-        print(f"❌ Error: No se encontró el diccionario en {DICT_PATH}")
-        print("   Ejecuta primero: python docs/dictionaries/generate_provisions_dict.py")
-        sys.exit(1)
+def find_necropsia_autopsia_codes():
+    """Busca códigos relacionados con necropsias y autopsias directamente en la base de datos"""
 
-def find_necropsia_autopsia_codes(df_dict):
-    """Busca códigos relacionados con necropsias y autopsias en el diccionario"""
-    
-    # Términos a buscar (case-insensitive)
-    search_terms = [
-        'necrops',
-        'autops',
-        'autòps',
-        'necòps',
-        'post-mortem',
-        'postmortem'
-    ]
-    
-    # Filtrar el diccionario
-    mask = df_dict['prov_descr'].str.lower().str.contains('|'.join(search_terms), case=False, na=False)
-    matching_codes = df_dict[mask].copy()
-    
-    return matching_codes
+    like_clauses = " OR ".join([f"prov_descr LIKE '%{term}%'" for term in SEARCH_TERMS])
+
+    query = f"""
+    SELECT DISTINCT prov_ref, prov_descr
+    FROM provisions
+    WHERE {like_clauses}
+    ORDER BY prov_ref;
+    """
+
+    return execute_query(query)
 
 def get_necropsias_by_year(year, prov_refs):
     """Obtiene todas las provisions de necropsias/autopsias de un año"""
@@ -73,9 +58,9 @@ def get_necropsias_by_year(year, prov_refs):
         ou_med_ref_exec,
         start_date_plan,
         end_date_plan
-    FROM g_provisions
+    FROM provisions
     WHERE prov_ref IN ({prov_refs_formatted})
-      AND YEAR(start_date) = {year}
+      AND year(start_date) = {year}
     ORDER BY start_date;
     """
     
@@ -86,14 +71,9 @@ def main():
     print("  ANÁLISIS DE NECROPSIAS Y AUTOPSIAS")
     print("=" * 80)
     
-    # 1. Cargar diccionario
-    print("\n>>> Cargando diccionario de provisions...")
-    df_dict = load_provisions_dict()
-    print(f"✓ Diccionario cargado: {len(df_dict)} provisions")
-    
-    # 2. Buscar códigos relacionados
-    print("\n>>> Buscando códigos de necropsias/autopsias en el diccionario...")
-    matching_codes = find_necropsia_autopsia_codes(df_dict)
+    # 1. Buscar códigos relacionados en la base de datos
+    print("\n>>> Buscando códigos de necropsias/autopsias en la base de datos...")
+    matching_codes = find_necropsia_autopsia_codes()
     
     if matching_codes.empty:
         print("❌ No se encontraron códigos relacionados con necropsias/autopsias")

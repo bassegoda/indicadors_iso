@@ -1,5 +1,6 @@
 -- Valoración de críticos (UCI): campo procedencia/origen con valor "Otro centro"
 -- Incluye join con episodios para contexto
+-- Dialect: Athena (Trino/Presto)
 SELECT
     df.patient_ref,
     df.episode_ref,
@@ -12,8 +13,8 @@ SELECT
     e.episode_type_ref,
     e.start_date AS episode_start,
     e.end_date AS episode_end
-FROM g_dynamic_forms df
-JOIN g_episodes e
+FROM dynamic_forms df
+JOIN episodes e
     ON df.patient_ref = e.patient_ref
     AND df.episode_ref = e.episode_ref
 WHERE df.form_ref = 'UCI'

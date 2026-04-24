@@ -61,19 +61,19 @@ WITH all_related_moves AS (
         ou_loc_ref,
         start_date,
         end_date,
-        COALESCE(end_date, NOW()) AS effective_end_date
-    FROM g_movements
+        COALESCE(end_date, current_timestamp) AS effective_end_date
+    FROM movements
     WHERE ou_loc_ref IN ({units_list})
-      AND start_date <= '{{max_year}}-12-31 23:59:59'
-      AND COALESCE(end_date, NOW()) >= '{{min_year}}-01-01 00:00:00'
+      AND start_date <= timestamp '{{max_year}}-12-31 23:59:59'
+      AND COALESCE(end_date, current_timestamp) >= timestamp '{{min_year}}-01-01 00:00:00'
       AND place_ref IS NOT NULL
-      AND COALESCE(end_date, NOW()) > start_date
+      AND COALESCE(end_date, current_timestamp) > start_date
 ),
 flagged_starts AS (
     SELECT
         *,
         CASE
-            WHEN ABS(TIMESTAMPDIFF(MINUTE,
+            WHEN ABS(date_diff('minute',
                 LAG(effective_end_date) OVER (
                     PARTITION BY episode_ref ORDER BY start_date
                 ),
@@ -98,7 +98,7 @@ time_per_unit AS (
         episode_ref,
         stay_id,
         ou_loc_ref,
-        SUM(TIMESTAMPDIFF(MINUTE, start_date, effective_end_date)) AS minutes_in_unit
+        SUM(date_diff('minute', start_date, effective_end_date)) AS minutes_in_unit
     FROM grouped_stays
     GROUP BY patient_ref, episode_ref, stay_id, ou_loc_ref
 ),
@@ -139,14 +139,14 @@ stays AS (
         p.assigned_unit AS ou_loc_ref,
         MIN(g.start_date) AS admission_date,
         MAX(g.effective_end_date) AS effective_discharge_date,
-        YEAR(MIN(g.start_date)) AS stay_year
+        year(MIN(g.start_date)) AS stay_year
     FROM grouped_stays g
     INNER JOIN predominant_unit p
         ON g.patient_ref = p.patient_ref
         AND g.episode_ref = p.episode_ref
         AND g.stay_id = p.stay_id
     GROUP BY g.patient_ref, g.episode_ref, g.stay_id, p.assigned_unit
-    HAVING YEAR(MIN(g.start_date)) BETWEEN {{min_year}} AND {{max_year}}
+    HAVING year(MIN(g.start_date)) BETWEEN {{min_year}} AND {{max_year}}
 )
 SELECT DISTINCT
     s.patient_ref,
@@ -164,10 +164,10 @@ SELECT DISTINCT
     drg.mortality_risk_ref,
     drg.mortality_risk_descr
 FROM stays s
-INNER JOIN g_diagnostic_related_groups drg
+INNER JOIN diagnostic_related_groups drg
     ON s.patient_ref = drg.patient_ref
     AND s.episode_ref = drg.episode_ref
-INNER JOIN g_prescriptions p
+INNER JOIN prescriptions p
     ON s.patient_ref = p.patient_ref
     AND s.episode_ref = p.episode_ref
     AND p.start_drug_date BETWEEN s.admission_date

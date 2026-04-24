@@ -1,5 +1,6 @@
 -- Explorar la estructura del formulario UCI (valoración de críticos)
 -- para identificar el campo de procedencia / origen del paciente
+-- Dialect: Athena (Trino/Presto)
 SELECT DISTINCT
     form_ref,
     form_descr,
@@ -13,7 +14,7 @@ SELECT DISTINCT
     value_num,
     value_date,
     value_descr
-FROM g_dynamic_forms
+FROM dynamic_forms
 WHERE form_ref = 'UCI'
   AND status = 'CO'
 ORDER BY tab_ref, section_ref, question_ref
