@@ -29,6 +29,13 @@ Your task: Create SQL queries from natural language questions. If I ask you for 
 - **Always use the Athena (Trino / Presto) SQL dialect**. Do **not** use MySQL / MariaDB-only syntax.
 - Table names do **not** have the `g_` prefix. Use `episodes`, `movements`, `labs`, `rc`, `diagnostics`, etc.
 - Dictionary tables keep the `dic_` prefix (e.g. `dic_diagnostic`, `dic_lab`, `dic_ou_med`).
+- **MANDATORY — Always fully-qualify every table with the schema `datascope_gestor_prod.` before the table name.** Athena needs the schema (a.k.a. "database" in Glue) qualifier in front of each table reference, in **every** `FROM`, `JOIN`, `INSERT INTO`, subquery, or CTE source. **Do this both for fact tables and for dictionary tables (`dic_*`).** Examples:
+    - ✅ `FROM datascope_gestor_prod.movements`
+    - ✅ `JOIN datascope_gestor_prod.dic_lab ON ...`
+    - ✅ `FROM datascope_gestor_prod.episodes e LEFT JOIN datascope_gestor_prod.demographics d ON e.patient_ref = d.patient_ref`
+    - ❌ `FROM movements`  (missing schema — query will fail or hit the wrong catalog)
+    - ❌ `JOIN dic_lab ON ...`  (missing schema)
+  Never rely on a default schema being set on the Metabase / Athena connection — write the qualifier explicitly every single time. CTE names defined inside the same query (`WITH cohort AS (...)`) do **not** need the prefix; only physical tables do.
 
 #### Athena / Trino dialect cheatsheet (use these, NOT the MySQL equivalents):
 
@@ -94,7 +101,7 @@ Your task: Create SQL queries from natural language questions. If I ask you for 
 SELECT DISTINCT
     surgery_code,
     surgery_code_descr
-FROM surgery
+FROM datascope_gestor_prod.surgery
 WHERE surgery_code_descr LIKE '%cataract%';
 ```
 
@@ -145,7 +152,7 @@ Not every pair of tables can be joined by the "obvious" key. Read the table's de
 -- Correct pattern for joining rc to an episode-level cohort
 SELECT c.patient_ref, c.episode_ref, r.rc_sap_ref, r.result_num, r.result_date
 FROM cohort c
-JOIN rc r
+JOIN datascope_gestor_prod.rc r
   ON r.patient_ref = c.patient_ref
  AND r.result_date >= c.start_date
  AND r.result_date <  COALESCE(c.end_date, current_timestamp)
@@ -1386,7 +1393,7 @@ TEMP:Temperatura
 ```sql
 WITH diagnosis_search AS (
     SELECT DISTINCT patient_ref, episode_ref, diag_descr
-    FROM diagnostics
+    FROM datascope_gestor_prod.diagnostics
     WHERE diag_descr LIKE '%diabetes%'
 )
 SELECT * FROM diagnosis_search;
@@ -1403,7 +1410,7 @@ WITH lab_results AS (
         result_num,
         units,
         extrac_date
-    FROM labs
+    FROM datascope_gestor_prod.labs
     WHERE extrac_date >= timestamp '2024-01-01 00:00:00'
       AND extrac_date <  timestamp '2025-01-01 00:00:00'
       AND lab_sap_ref = 'LAB110'  -- Urea
@@ -1421,7 +1428,7 @@ WITH patient_episodes AS (
         e.episode_type_ref,
         e.start_date,
         e.end_date
-    FROM episodes e
+    FROM datascope_gestor_prod.episodes e
 ),
 patient_info AS (
     SELECT
@@ -1429,7 +1436,7 @@ patient_info AS (
         d.birth_date,
         d.sex,
         d.natio_descr
-    FROM demographics d
+    FROM datascope_gestor_prod.demographics d
 )
 SELECT
     pe.*,
@@ -1452,7 +1459,7 @@ WITH prescriptions_cte AS (
         atc_ref,
         dose,
         unit
-    FROM prescriptions
+    FROM datascope_gestor_prod.prescriptions
     WHERE atc_ref LIKE '%J01%'  -- Antibacterials
 ),
 administrations_cte AS (
@@ -1463,7 +1470,7 @@ administrations_cte AS (
         administration_date,
         quantity,
         quantity_unit
-    FROM administrations
+    FROM datascope_gestor_prod.administrations
 )
 SELECT
     p.*,
@@ -1485,7 +1492,7 @@ WITH micro_positive AS (
         micro_ref,
         micro_descr,
         antibiogram_ref
-    FROM micro
+    FROM datascope_gestor_prod.micro
     WHERE positive = 'X'
 ),
 antibiogram_results AS (
@@ -1494,7 +1501,7 @@ antibiogram_results AS (
         antibiogram_ref,
         antibiotic_descr,
         sensitivity
-    FROM antibiograms
+    FROM datascope_gestor_prod.antibiograms
 )
 SELECT
     mp.*,
@@ -1527,7 +1534,7 @@ FROM (
     'Trasplante cardiaco' AS tipo_trasplante,
     year(start_date) AS anio,
     COUNT(DISTINCT patient_ref) AS total_trasplantes
-  FROM procedures
+  FROM datascope_gestor_prod.procedures
   WHERE start_date >= timestamp '2015-01-01 00:00:00'
     AND start_date <  timestamp '2025-01-01 00:00:00'
     AND (code LIKE '37.51%' OR code LIKE '02YA%')
@@ -1539,7 +1546,7 @@ FROM (
     'Trasplante de cornea' AS tipo_trasplante,
     year(start_date) AS anio,
     COUNT(DISTINCT patient_ref) AS total_trasplantes
-  FROM procedures
+  FROM datascope_gestor_prod.procedures
   WHERE start_date >= timestamp '2015-01-01 00:00:00'
     AND start_date <  timestamp '2025-01-01 00:00:00'
     AND code LIKE '11.6%'
@@ -1551,7 +1558,7 @@ FROM (
     'Trasplante de medula osea/celulas madre' AS tipo_trasplante,
     year(start_date) AS anio,
     COUNT(DISTINCT patient_ref) AS total_trasplantes
-  FROM procedures
+  FROM datascope_gestor_prod.procedures
   WHERE start_date >= timestamp '2015-01-01 00:00:00'
     AND start_date <  timestamp '2025-01-01 00:00:00'
     AND code LIKE '41.0%'
@@ -1563,7 +1570,7 @@ FROM (
     'Trasplante de pancreas' AS tipo_trasplante,
     year(start_date) AS anio,
     COUNT(DISTINCT patient_ref) AS total_trasplantes
-  FROM procedures
+  FROM datascope_gestor_prod.procedures
   WHERE start_date >= timestamp '2015-01-01 00:00:00'
     AND start_date <  timestamp '2025-01-01 00:00:00'
     AND (code LIKE '52.8%' OR code LIKE '0FYG%')
@@ -1575,7 +1582,7 @@ FROM (
     'Trasplante hepatico' AS tipo_trasplante,
     year(start_date) AS anio,
     COUNT(DISTINCT patient_ref) AS total_trasplantes
-  FROM procedures
+  FROM datascope_gestor_prod.procedures
   WHERE start_date >= timestamp '2015-01-01 00:00:00'
     AND start_date <  timestamp '2025-01-01 00:00:00'
     AND (code LIKE '50.5%' OR code LIKE '0FY0%')
@@ -1587,7 +1594,7 @@ FROM (
     'Trasplante renal' AS tipo_trasplante,
     year(start_date) AS anio,
     COUNT(DISTINCT patient_ref) AS total_trasplantes
-  FROM procedures
+  FROM datascope_gestor_prod.procedures
   WHERE start_date >= timestamp '2015-01-01 00:00:00'
     AND start_date <  timestamp '2025-01-01 00:00:00'
     AND (code LIKE '55.6%' OR code LIKE '0TY0%' OR code LIKE '0TY1%')
@@ -1609,21 +1616,21 @@ WITH surgeries AS (
         s.start_date,
         s.end_date,
         s.operating_room
-    FROM surgery s
+    FROM datascope_gestor_prod.surgery s
 ),
 surgery_teams AS (
     SELECT
         st.surgery_ref,
         st.task_descr,
         st.employee
-    FROM surgery_team st
+    FROM datascope_gestor_prod.surgery_team st
 ),
 surgery_events AS (
     SELECT
         sts.surgery_ref,
         sts.event_descr,
         sts.event_timestamp
-    FROM surgery_timestamps sts
+    FROM datascope_gestor_prod.surgery_timestamps sts
 )
 SELECT
     su.*,
@@ -1647,7 +1654,7 @@ WITH episode_cohort AS (
         episode_ref,
         start_date,
         end_date
-    FROM episodes
+    FROM datascope_gestor_prod.episodes
     WHERE episode_type_ref = 'HOSP'
       AND start_date >= timestamp '2024-01-01 00:00:00'
       AND start_date <  timestamp '2025-01-01 00:00:00'
@@ -1662,7 +1669,7 @@ rc_during_episode AS (
         r.units,
         r.result_date
     FROM episode_cohort c
-    JOIN rc r
+    JOIN datascope_gestor_prod.rc r
       ON  r.patient_ref = c.patient_ref
       -- Temporal window: rc.result_date must fall inside the episode
       AND r.result_date >= c.start_date
@@ -1685,7 +1692,8 @@ Key points:
 -- =============================================================================
 -- Hospitalisation ward stays with predominant unit assignment.
 -- Units: E073, I073 | Year: 2024
--- Schema (Athena): movements, demographics, exitus, prescriptions
+-- Schema (Athena): all tables fully-qualified as datascope_gestor_prod.<table>
+--   (movements, demographics, exitus, prescriptions)
 -- Structure: one CTE per conceptual stage, named for readability.
 --   1. all_related_moves  -> movements touching the target units
 --   2. flagged_starts     -> flag the first movement of each new stay
@@ -1707,7 +1715,7 @@ WITH all_related_moves AS (
         start_date,
         end_date,
         COALESCE(end_date, current_timestamp) AS effective_end_date
-    FROM movements
+    FROM datascope_gestor_prod.movements
     WHERE ou_loc_ref IN ('E073','I073')
       AND start_date <= timestamp '2024-12-31 23:59:59'
       AND COALESCE(end_date, current_timestamp) >= timestamp '2024-01-01 00:00:00'
@@ -1839,11 +1847,11 @@ SELECT DISTINCT
     END AS exitus_during_stay,
     ex.exitus_date
 FROM cohort c
-LEFT JOIN demographics d
+LEFT JOIN datascope_gestor_prod.demographics d
     ON c.patient_ref = d.patient_ref
-LEFT JOIN exitus ex
+LEFT JOIN datascope_gestor_prod.exitus ex
     ON c.patient_ref = ex.patient_ref
-INNER JOIN prescriptions p
+INNER JOIN datascope_gestor_prod.prescriptions p
     ON  c.patient_ref = p.patient_ref
     AND c.episode_ref = p.episode_ref
     AND p.start_drug_date BETWEEN c.admission_date
