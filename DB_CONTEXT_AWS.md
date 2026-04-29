@@ -4,10 +4,7 @@
 
 **Privacy**: All example rows in this document use synthetic data only (placeholder IDs 90xxxxx/80xxxxx, year 2099, generic descriptions). No real identifiers or dates are included.
 
-**Migration note**: This version targets the new AWS-hosted DataNex instance, queried through **Amazon Athena** (Trino / Presto SQL engine) via the Metabase API (`connection.py` → `execute_query`). Two things change vs. the previous MariaDB version:
-
-1. **SQL dialect is Athena (Trino/Presto)** — not MySQL/MariaDB.
-2. **Tables no longer carry the `g_` prefix** (e.g. `g_episodes` → `episodes`, `g_labs` → `labs`, `g_rc` → `rc`). Dictionary tables (`dic_*`) keep their name.
+**Migration note**: This version targets the new AWS-hosted DataNex instance, queried through **Amazon Athena** (Trino / Presto SQL engine) via the Metabase API (`connection.py` → `execute_query`) if executed from Python scripts. If used in a Chatbot interface, just give the SQL code. 
 
 ## Instructions for LLM
 
