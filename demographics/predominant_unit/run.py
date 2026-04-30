@@ -12,7 +12,7 @@ from pathlib import Path
 _REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 
-from demographics._bed_occupancy import compute_bed_occupancy
+from demographics._bed_occupancy import compute_bed_occupancy_nominal
 from demographics._config import FAKE_BED_PLACE_REFS_E073
 from demographics._loader import load_cohort
 from demographics._metrics import compute_summary
@@ -67,10 +67,10 @@ def main():
 
     units_in_cohort = sorted(df["ou_loc_ref"].dropna().unique())
     print(
-        f"Calculando ocupaci\u00f3n emp\u00edrica de camas {units_in_cohort} "
+        f"Calculando ocupaci\u00f3n nominal de camas {units_in_cohort} "
         f"{min_year}-{max_year}\u2026"
     )
-    bed_occupancy = compute_bed_occupancy(
+    bed_occupancy = compute_bed_occupancy_nominal(
         units=units_in_cohort,
         min_year=min_year,
         max_year=max_year,

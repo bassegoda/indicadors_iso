@@ -17,7 +17,7 @@ import pandas as pd
 _REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 
-from demographics._bed_occupancy import compute_bed_occupancy
+from demographics._bed_occupancy import compute_bed_occupancy_nominal
 from demographics._config import FAKE_BED_PLACE_REFS_E073
 from demographics._loader import load_cohort
 from demographics._metrics import compute_summary
@@ -73,10 +73,10 @@ def main():
     print(f"  Unidades en cohorte: {available_units}")
 
     print(
-        f"Calculando ocupaci\u00f3n emp\u00edrica de camas {available_units} "
+        f"Calculando ocupaci\u00f3n nominal de camas {available_units} "
         f"{min_year}-{max_year}\u2026"
     )
-    bed_occupancy = compute_bed_occupancy(
+    bed_occupancy = compute_bed_occupancy_nominal(
         units=available_units,
         min_year=min_year,
         max_year=max_year,

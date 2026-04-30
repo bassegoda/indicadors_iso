@@ -2,6 +2,8 @@ from typing import Optional
 
 import pandas as pd
 
+from demographics._bed_capacity_eras import COMBINED_UNIT_LABEL
+
 ABS_CLINIC = [
     "2A", "2B", "2C", "2D", "2E",
     "3A", "3B", "3C", "3D", "3E",
@@ -19,6 +21,9 @@ _ROW_DEFS = [
     ("n_stays",   "N estancias",                                 "N estancias",                   "demo",               "bold"),
     ("n_patients","N pacientes",                                 "N pacientes",                   "demo",               "bold"),
     ("occupancy", "Ocupaci\u00f3n de camas (%)",                 "Ocupaci\u00f3n de camas",       "demo",               ""),
+    # (*) en la columna de ocupaci\u00f3n indica que ese a\u00f1o incluye
+    # meses de la \u00e9poca COVID (2020-03 \u2192 2022-02): durante ese
+    # tramo E073 e I073 se reportan agregadas como UCI sobre 12 camas.
     ("age",       "Edad, mediana [IQR]",                         "Edad, mediana [IQR]",           "demo",               ""),
     ("male",      "Sexo masculino (n, %)",                       "Sexo masculino",                "demo",               "indent"),
     ("female",    "Sexo femenino (n, %)",                        "Sexo femenino",                 "demo",               "indent"),
@@ -146,13 +151,26 @@ def compute_summary(
         u for u in df["ou_loc_ref"].dropna().unique().tolist()
     ) if "ou_loc_ref" in df.columns else []
 
-    # Restringir bed_occupancy a las unidades de la cohorte y precomputar
-    # totales globales numerador/denominador por año (para que un report
-    # `per_unit` use sólo su unidad y `predominant_unit` sume ambas).
+    # Filtrado y agregación de la ocupación de camas. El bed_occupancy
+    # esperado proviene de `compute_bed_occupancy_nominal()` y trae:
+    #   effective_unit ∈ {"E073", "I073", "UCI"}, year, regimen, used, avail.
+    # En la época `covid` E073 e I073 se colapsan en "UCI" (12 camas), así
+    # que para una cohorte que toque cualquiera de las dos unidades hay
+    # que aceptar también las filas "UCI". Marcamos los años que incluyen
+    # algún tramo COVID con un asterisco; la nota a pie de tabla explica
+    # que durante esa época el etiquetado por unidad no es interpretable.
     occupancy_by_year: dict[int, str] = {}
     occupancy_total_text: str = ""
     if bed_occupancy is not None and not bed_occupancy.empty and units_in_cohort:
-        occ = bed_occupancy[bed_occupancy["unit"].isin(units_in_cohort)].copy()
+        unit_col = (
+            "effective_unit"
+            if "effective_unit" in bed_occupancy.columns
+            else "unit"
+        )
+        allowed_units = set(units_in_cohort)
+        if any(u in {"E073", "I073"} for u in units_in_cohort):
+            allowed_units.add(COMBINED_UNIT_LABEL)
+        occ = bed_occupancy[bed_occupancy[unit_col].isin(allowed_units)].copy()
         if not occ.empty:
             occ["year"] = pd.to_numeric(occ["year"], errors="coerce").astype("Int64")
             occ["bed_hours_used"] = pd.to_numeric(
@@ -161,20 +179,31 @@ def compute_summary(
             occ["bed_hours_available"] = pd.to_numeric(
                 occ["bed_hours_available"], errors="coerce"
             ).fillna(0.0)
-            yearly = occ.groupby("year", as_index=False).agg(
-                used=("bed_hours_used", "sum"),
-                avail=("bed_hours_available", "sum"),
-            )
+            has_regimen = "regimen" in occ.columns
+            agg = {
+                "used": ("bed_hours_used", "sum"),
+                "avail": ("bed_hours_available", "sum"),
+            }
+            if has_regimen:
+                agg["covid_in_year"] = (
+                    "regimen", lambda s: bool((s == "covid").any())
+                )
+            yearly = occ.groupby("year", as_index=False).agg(**agg)
             for _, row in yearly.iterrows():
                 year_int = int(row["year"])
                 avail = float(row["avail"])
                 used = float(row["used"])
                 if avail > 0:
-                    occupancy_by_year[year_int] = f"{used / avail * 100:.1f}%"
+                    txt = f"{used / avail * 100:.1f}%"
+                    if has_regimen and bool(row.get("covid_in_year", False)):
+                        txt += " *"
+                    occupancy_by_year[year_int] = txt
             total_used = float(yearly["used"].sum())
             total_avail = float(yearly["avail"].sum())
             if total_avail > 0:
                 occupancy_total_text = f"{total_used / total_avail * 100:.1f}%"
+                if has_regimen and bool(yearly["covid_in_year"].any()):
+                    occupancy_total_text += " *"
 
     rows = {
         name: {

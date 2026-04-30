@@ -312,6 +312,7 @@ def generate_html(
         <li><strong>Mortalidad a 30/90 d\u00edas:</strong> acumulada desde la fecha de ingreso (incluye muertes intrahospitalarias).</li>
         <li><strong>Cirrosis:</strong> diagn\u00f3stico ICD-9/ICD-10 en cualquier episodio del paciente (condici\u00f3n cr\u00f3nica).</li>
         <li><strong>Reingresos:</strong> siguiente ingreso en E073/I073 dentro del plazo indicado tras el alta.</li>
+        <li><strong>Ocupaci\u00f3n de camas:</strong> numerador = horas-cama ocupadas (suma de solapamientos de cada movimiento con cada mes, excluyendo la cama auxiliar de procedimientos de E073). Denominador = camas nominales \u00d7 horas del mes seg\u00fan la \u00e9poca: I073=4 y E073=8 hasta 2020-02; UCI agregada=12 entre 2020-03 y 2022-03 (\u00e9poca COVID); I073=4 y E073=10 desde 2022-04. <em>(*)</em> en un a\u00f1o indica que incluye meses de la \u00e9poca COVID, durante la cual el etiquetado E073/I073 no es interpretable (camas reasignadas administrativamente y <code>place_ref</code> pseudo-anonimizados): el % se calcula sobre la UCI agregada y puede superar el 100% en periodos de expansi\u00f3n.</li>
         <li><strong>Total:</strong> pacientes \u00fanicos se cuentan una vez; porcentajes se calculan sobre la suma de los denominadores anuales.</li>
     </ul>
     <p class="timestamp">Informe generado el {now_str}</p>
