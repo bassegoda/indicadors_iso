@@ -293,7 +293,19 @@ def compute_summary(
         all_los.extend(los.tolist())
         rows["los"]["values"][year] = _format_median_iqr(los)
 
-        cirr = pd.to_numeric(sub["has_cirrhosis"], errors="coerce").fillna(0)
+        # "Cirrosis" excluye episodios con trasplante hepático: estos
+        # pacientes ingresan electivamente para trasplante y su mortalidad
+        # depende del trasplante, no de la cirrosis. Si el snapshot no
+        # trae la columna `liver_transplant_during_episode` (snapshot
+        # antiguo), se mantiene el comportamiento anterior.
+        cirr_dx = pd.to_numeric(sub["has_cirrhosis"], errors="coerce").fillna(0)
+        if "liver_transplant_during_episode" in sub.columns:
+            tx = pd.to_numeric(
+                sub["liver_transplant_during_episode"], errors="coerce"
+            ).fillna(0)
+            cirr = ((cirr_dx == 1) & (tx == 0)).astype(int)
+        else:
+            cirr = (cirr_dx == 1).astype(int)
         has_cirr = int((cirr == 1).sum())
         total_cirr += has_cirr
         rows["cirr"]["values"][year] = _fmt_n_pct(has_cirr, n)

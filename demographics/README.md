@@ -9,8 +9,9 @@ demographics/
 ├── _loader.py                       # carga del snapshot + augmentación sintética 2025
 ├── _metrics.py                      # cálculos (compartido por ambas variantes)
 ├── _report.py                       # generación HTML/CSV (compartido)
-├── _bed_capacity_sql.py             # SQL parametrizada de capacidad/uso por mes
-├── _bed_occupancy.py                # agrega meses al año + cache CSV
+├── _bed_capacity_sql.py             # SQL parametrizada de uso mensual por place_ref
+├── _bed_occupancy.py                # legacy + nominal: agrega meses al año + cache CSV
+├── _bed_capacity_eras.py            # tabla de épocas (capacidad nominal por unidad)
 ├── _config.py                       # FAKE_BED_PLACE_REFS_E073 (cama falsa a excluir)
 ├── helper_identify_fake_bed.sql     # query auxiliar para identificar la cama falsa
 ├── README.md                        # este archivo
@@ -127,20 +128,55 @@ Los dos informes responden a preguntas distintas. Las cifras **no son intercambi
 
 ### Sobre la fila "Ocupación de camas (%)"
 
-> **Cambio de método (abril 2026):** la ocupación ya no se calcula contra una dotación fija de camas (8/10 en E073, 4 en I073). Antes daba > 100 % en 2021 porque la dotación variaba mes a mes durante COVID. Ahora se deriva **empíricamente** de `datascope_gestor_prod.movements`, mes a mes y agregada al año.
+> **Cambio de método (mayo 2026):** se sustituye el denominador empírico (`n_place_refs_activos × horas_del_mes`) por una **capacidad nominal por época**. El denominador empírico respiraba con el numerador y daba lecturas contraintuitivas durante COVID y en transiciones administrativas (camas reasignadas entre unidades, codificación cambiada, etc.). La nueva versión declara la dotación nominal por (unidad, época) y agrega E073+I073 en una unidad sintética "UCI" durante el periodo COVID.
+
+#### Por qué un denominador nominal
+
+El `place_ref` está pseudo-anonimizado, por lo que **no podemos** mapear "cama física" ↔ "place_ref" a lo largo del tiempo. Durante COVID-19 una cama que normalmente era I073 podía aparecer codificada como E073 (y viceversa). El método anterior sumaba esa cama tanto al numerador como al denominador del lado donde aparecía, lo que hacía que en años COVID la ocupación bajara aparentemente a ~71 % en E073 (con denominadores inflados por camas transitorias) y desaparecieran meses enteros de I073 (porque ningún `place_ref` aparecía codificado como I073 esos meses). Más detalle: ver el patrón mensual en `output/_bed_capacity_E073-I073_*.csv`.
+
+#### Capacidad nominal por época (`_bed_capacity_eras.py`)
+
+```
+2018-01-01 → 2020-02-29  →  I073 = 4 camas, E073 = 8 camas         (stable)
+2020-03-01 → 2022-03-31  →  UCI agregada = 12 camas                 (covid)
+2022-04-01 → futuro      →  I073 = 4 camas, E073 = 10 camas         (stable)
+```
+
+La frontera final del régimen `covid` se fija en **2022-03-31** (no 2022-02-28) porque los datos mensuales muestran que en marzo 2022 E073 todavía operaba con 14 camas activas (configuración COVID extendida) y I073 estaba siendo reactivada parcialmente. La transición operativa real ocurrió en abril 2022.
+
+Las épocas son editables en `NOMINAL_CAPACITY_HISTORY` cuando se valide nueva información clínica.
 
 #### Cómo se calcula ahora
 
-La fila se calcula completamente fuera de la cohorte clínica (no depende de `hours_stay`, ni del filtro de prescripciones, ni de la augmentación sintética 2025). El flujo está en `demographics/_bed_capacity_sql.py` + `demographics/_bed_occupancy.py` y se ejecuta una vez por run desde `predominant_unit/run.py` y `per_unit/run.py`.
+El flujo está en `demographics/_bed_capacity_sql.py` + `demographics/_bed_occupancy.py` + `demographics/_bed_capacity_eras.py` y se ejecuta una vez por run desde `predominant_unit/run.py` y `per_unit/run.py` mediante `compute_bed_occupancy_nominal(...)`.
 
-Por cada `(unidad, año, mes)`:
+1. **Numerador (`bed_hours_used`)** — sin cambios respecto al método anterior. Suma de los minutos solapados entre cada movimiento y los límites del mes, dividido por 60. Excluye la cama falsa de E073 (ver sección abajo). Una estancia que cruza el 31-dic se reparte automáticamente entre los dos años.
+2. **Mapeo `(year, month, raw_unit) → (effective_unit, nominal_beds, regimen)`** vía `lookup_capacity_for_month(...)`:
+   - En régimen `stable`: `effective_unit = raw_unit`, `nominal_beds = nominal de la unidad`.
+   - En régimen `covid`: cualquier `raw_unit ∈ {E073, I073}` colapsa en `effective_unit = "UCI"` con 12 camas.
+3. **Numerador colapsado** — para meses en régimen `covid`, los `bed_hours_used` de E073 y I073 se **suman** en la fila UCI; en `stable` cada unidad va por separado.
+4. **Denominador (`bed_hours_available`)** = `nominal_beds × horas_del_mes`. **No depende** del numerador.
+5. **Agregación anual** — `% anual = Σ_meses(bed_hours_used) / Σ_meses(bed_hours_available) × 100`. Si un año cruza dos épocas (p.ej. 2020 = stable Ene-Feb + covid Mar-Dic; 2022 = covid Ene-Mar + stable Abr-Dic), las filas se suman antes de agregar al año.
 
-- **Numerador (`bed_hours_used`)** = suma de los minutos solapados entre cada movimiento y los límites del mes, dividido por 60. Una estancia que cruza el 31-dic se reparte automáticamente entre los dos años.
-- **Denominador (`bed_hours_available`)** = `n_camas_activas_ese_mes × horas_del_mes`, donde `n_camas_activas` es el `count distinct` de `place_ref` con al menos un minuto de presencia en la unidad ese mes.
+En el informe `predominant_unit` (cohorte E073+I073) se incluyen las filas con `effective_unit ∈ {E073, I073, UCI}`. En `per_unit/E073` se incluyen `{E073, UCI}` (UCI cubre los meses COVID donde la división por unidad no es interpretable). Análogo para `per_unit/I073`.
 
-`% anual = Σ_meses(bed_hours_used) / Σ_meses(bed_hours_available) × 100`
+#### Marcador `*` en el HTML/CSV
 
-En el informe `predominant_unit` (combinado), las filas de E073 e I073 se suman por mes antes de agregar al año. En `per_unit`, sólo se usa la unidad concreta del informe.
+Cualquier año que incluya **al menos un mes de la época COVID** se marca con un asterisco en la fila "Ocupación de camas (%)". La nota a pie del HTML aclara que durante esa época E073 e I073 se reportan agregadas como UCI sobre 12 camas, y que en periodos de expansión real el % puede superar el 100 %.
+
+#### Exclusión de meses con DW incompleto
+
+Cuando la cohorte se rellena por bootstrap-sampling (Nov-Dic 2025 mientras los datos no aterrizan en el data warehouse), `compute_bed_occupancy_nominal(...)` excluye **simétricamente** esos meses tanto del numerador como del denominador. El % anual de 2025 se calcula sobre los meses con datos completos (equivalente a anualizar la ocupación observada en lo cargado). Por defecto se autodetecta importando `SYNTHETIC_DATE_RANGE` desde `_loader.py`; se puede sobrescribir con `exclude_months=...` o desactivar con `exclude_months=[]`.
+
+> **Por diseño:** en el HTML/CSV no se marca esta exclusión (no se muestra `†`, no hay nota a pie). El cálculo se ajusta silenciosamente para que las cifras 2025 sean comparables con años completos.
+
+#### Aviso de diagnóstico
+
+Cuando `max_active_place_refs` (cuántos `place_ref` distintos vio el SQL en algún mes) se desvía > 20 % del nominal, `_print_capacity_diagnostics(...)` imprime un aviso en consola — útil para detectar:
+
+- camas auxiliares no excluidas (numerador inflado),
+- migraciones administrativas en curso (caso 2025 Nov-Dic con codificación nueva),
+- épocas con boundaries desalineadas (caso pre-mayo 2026 cuando la frontera covid estaba en 2022-02-28 y E073 marzo 2022 disparaba el aviso).
 
 #### Exclusión de la cama falsa de E073
 
@@ -156,19 +192,53 @@ Para excluirla del numerador y del denominador:
 FAKE_BED_PLACE_REFS_E073: list[int] = [123456]  # rellenar con los place_ref reales
 ```
 
-Si la lista está vacía, el cálculo simplemente no excluye nada (la cama falsa contribuirá tanto al numerador — sus horas — como al denominador — como una cama "activa" más, lo cual amortigua su efecto pero no lo anula del todo).
+Con el método nominal, esta cama ya no entra en el denominador (los nominales son fijos), pero sí podía contaminar el numerador si no se filtraba en SQL. El filtro se mantiene para consistencia y para que el método legacy (`compute_bed_occupancy`) siga siendo correcto.
 
 #### Cache
 
-El resultado de la query se cachea en `demographics/output/_bed_capacity_<units>_<min>-<max>.csv` para no volver a consultar Athena en cada ejecución. Si cambia la lista `FAKE_BED_PLACE_REFS_E073` o se quiere refrescar, basta con borrar ese archivo o pasar `force_refresh=True` a `compute_bed_occupancy(...)`.
+El resultado de la query SQL mensual se cachea en `demographics/output/_bed_capacity_<units>_<min>-<max>.csv` para no volver a consultar Athena en cada ejecución. **Importante:** ese CSV contiene los datos mensuales por `place_ref`, NO la agregación anual con épocas. La lógica de épocas se aplica en Python sobre la cache, así que cambiar `NOMINAL_CAPACITY_HISTORY` o las exclusiones (`exclude_months`) **no requiere refrescar la cache**. Sólo hay que refrescarla cuando cambia algo del SQL o de la lista `FAKE_BED_PLACE_REFS_E073`. Para forzar refresco: borrar el archivo o pasar `force_refresh=True` a `compute_bed_occupancy_nominal(...)`.
+
+#### Versión legacy
+
+`compute_bed_occupancy(...)` (denominador empírico) sigue presente en `_bed_occupancy.py` para diagnóstico. **No se usa en los runners** y no se debería usar para reportar. Útil únicamente para reproducir cálculos antiguos o detectar discrepancias.
 
 #### Limitaciones a tener en cuenta
 
-- **Estancias todavía abiertas** se cuentan hasta `current_timestamp` (un movimiento sin `end_date` se considera ocupando cama hasta ahora). Esto es coherente con la realidad y afecta sobre todo al año en curso.
-- **Ocupación física:** una estancia de 3 días suma 72 h al numerador aunque parte del tiempo el paciente físicamente no esté en la cama (pruebas, baño, etc.). Es la métrica estándar de "carga de cama".
-- **Camas que no aparecen en `movements`:** si en un mes una cama existe pero no se usó nunca, no se cuenta como activa y no entra en el denominador. En la práctica, en una unidad con alta ocupación todas las camas operativas dejan rastro cada mes; en una unidad infrautilizada el método puede subestimar ligeramente el denominador.
-- **2025 Nov-Dic:** la BBDD dejó de cargar movimientos a finales de 2025. La ocupación de 2025 refleja sólo los meses con datos reales en `movements`. La augmentación sintética del cohort (filas `SYN2025-…`) **no afecta** a la ocupación porque ésta se calcula desde `movements`, no desde el cohort.
+- **Estancias todavía abiertas** se cuentan hasta `current_timestamp` (un movimiento sin `end_date` se considera ocupando cama hasta ahora). Coherente con la realidad y afecta sobre todo al año en curso.
+- **Ocupación física vs administrativa:** una estancia de 3 días suma 72 h al numerador aunque parte del tiempo el paciente no esté físicamente en la cama (pruebas, baño, etc.). Es la métrica estándar de "carga de cama".
+- **Pseudo-anonimización del `place_ref`:** durante COVID este es el motivo de fondo para agregar E073+I073 en UCI: no podemos seguir físicamente cada cama. Si en el futuro la base diera trazabilidad cama-física ↔ place_ref histórico, se podría desagregar la época COVID.
 - **Independencia de filtros clínicos:** numerador y denominador miran la unidad entera, no sólo las estancias con prescripción. Eso hace que la ocupación represente "% de horas-cama de la unidad realmente ocupadas" y no "% de horas-cama atribuibles a la cohorte filtrada".
+
+### Sobre las filas de cirrosis y mortalidad en cirrosis
+
+> **Cambio (mayo 2026):** los pacientes con **trasplante hepático realizado durante el episodio** se excluyen de la cohorte de cirrosis (filas "Cirrosis (n, %)" y "Mortalidad cirrosis - en estancia / 30 d / 90 d"). Antes, mantenerlos diluía el denominador con pacientes electivos de baja mortalidad y **infraestimaba** la mortalidad atribuible a la cirrosis subyacente.
+
+#### Detección del trasplante
+
+En las queries `predominant_unit/_sql.py`, `per_unit/_sql.py` y los `cohort_query_2019-2025.sql` correspondientes, el CTE `liver_transplant_episodes` busca el episodio en `datascope_gestor_prod.procedures` con código:
+
+- **ICD-10-PCS** `0FY0%` — trasplante de hígado (allog./sing./xeno-).
+- **ICD-9-CM Vol 3** `50.5%` y `505%` — `50.51` (auxiliar), `50.59` (otro), aceptando ambas variantes con y sin punto.
+
+El JOIN al cohorte es por `(patient_ref, episode_ref)` — el trasplante debe estar registrado **dentro de ese mismo episodio**, no en cualquier otro del paciente. Esto evita confundir un paciente trasplantado en un ingreso anterior con un trasplante actual.
+
+La query exporta una columna nueva `liver_transplant_during_episode` (1/0).
+
+#### Aplicación en `_metrics.py`
+
+```python
+cirr_dx = sub["has_cirrhosis"]
+tx       = sub["liver_transplant_during_episode"]
+cirr     = (cirr_dx == 1) & (tx == 0)
+```
+
+`cirr` es la cohorte usada tanto para "Cirrosis (n, %)" como para `sub_cirr = sub[cirr == 1]` que alimenta las tres filas de "Mortalidad cirrosis". Si el snapshot no incluye la columna `liver_transplant_during_episode` (cohorte exportada antes del cambio), el código cae al comportamiento anterior — **regenerar el snapshot** desde Metabase para activar el filtro.
+
+#### Implicación clínica
+
+Los pacientes con trasplante:
+- **Sí** se cuentan en "N estancias", "N pacientes", LOS, demografía, AISBE, mortalidad global, mortalidad no-AISBE, etc. (siguen siendo episodios reales de la unidad).
+- **No** se cuentan en la fila "Cirrosis" ni en sus mortalidades específicas. El propósito de esa fila es caracterizar el subgrupo cuya mortalidad refleja la enfermedad hepática crónica, no el postoperatorio del trasplante.
 
 ### Y los datos sintéticos de 2025
 
@@ -310,7 +380,8 @@ print(df.loc[df["synthetic"], "year_admission"].value_counts())
 | `had_transfer` | `Yes/No` en `predominant_unit`; siempre `No` en `per_unit`. |
 | `year_admission`, `age_at_admission`, `sex`, `nationality`, `natio_ref`, `health_area`, `postcode` | Demografía. |
 | `exitus_during_stay`, `exitus_date` | Mortalidad intrahospitalaria + 30/90 d (`_metrics.py`). |
-| `has_cirrhosis`, `readmission_24h`, `readmission_72h` | Indicadores clínicos. |
+| `has_cirrhosis`, `readmission_24h`, `readmission_72h` | Indicadores clínicos. `has_cirrhosis = 1` si el paciente tiene un diagnóstico ICD-9/ICD-10 de cirrosis en cualquier episodio (condición crónica). |
+| `liver_transplant_during_episode` | `1` si el episodio incluye un procedimiento ICD-10-PCS `0FY0…` o ICD-9-CM `50.5x`. Usado en `_metrics.py` para excluir a estos pacientes de la cohorte de cirrosis (no se cuentan ni en "Cirrosis (n, %)" ni en sus mortalidades). |
 | `procedencia_codigo`, `procedencia` | `dynamic_forms` (UCI form, PROCE_MALA), última valoración por episodio. |
 | `from_other_hospital` | `1` si `value_text IN ('20-Altre hospital-', '20-Otro hospital-')`. El formulario UCI migró del catalán al castellano hacia septiembre de 2022 (ver `dynamic_forms/queries/06_diag_proce_mala_e073_i073_yearly.sql`). |
 | `synthetic` | Añadida por `_loader.py`; `True` en filas sintéticas, `False` en reales. |
@@ -319,5 +390,6 @@ print(df.loc[df["synthetic"], "year_admission"].value_counts())
 
 - El filtro `still_admitted == "No"` se aplica en `_metrics.compute_summary` para excluir estancias todavía abiertas del análisis agregado.
 - Las fechas (`admission_date`, `exitus_date`) llegan como strings con offsets mixtos (CET/CEST). El parseo se hace con `pd.to_datetime(..., utc=True)` para que `.dt.total_seconds()` funcione en `_metrics._mortality`.
-- Las unidades E073/I073 están **hardcodeadas** en ambos `_sql.py` y en las SQL exportadas. Para analizar otras unidades, hay que editar los cuatro archivos. El cálculo empírico de camas también las usa (vía `compute_bed_occupancy(units=...)` en los `run.py`).
-- La fila **"Ocupación de camas (%)"** se deriva en `_metrics.compute_summary` a partir del DataFrame que produce `_bed_occupancy.compute_bed_occupancy()`, que a su vez consulta `datascope_gestor_prod.movements` directamente. No es una columna producida por la SQL del cohort. Por eso aparece en el HTML/CSV de resumen pero no en el CSV de cohorte. Ver sección "Sobre la fila Ocupación de camas" para los detalles del cálculo y la exclusión de la cama falsa de E073.
+- Las unidades E073/I073 están **hardcodeadas** en ambos `_sql.py` y en las SQL exportadas. Para analizar otras unidades, hay que editar los cuatro archivos. La capacidad nominal de camas también las usa (vía `compute_bed_occupancy_nominal(units=...)` en los `run.py`); además habría que añadir las épocas correspondientes en `_bed_capacity_eras.NOMINAL_CAPACITY_HISTORY`.
+- La fila **"Ocupación de camas (%)"** se deriva en `_metrics.compute_summary` a partir del DataFrame que produce `_bed_occupancy.compute_bed_occupancy_nominal()`, que combina la query mensual de `datascope_gestor_prod.movements` con la tabla de épocas en `_bed_capacity_eras.py`. No es una columna producida por la SQL del cohort. Por eso aparece en el HTML/CSV de resumen pero no en el CSV de cohorte. Ver sección "Sobre la fila Ocupación de camas" para los detalles del cálculo, las épocas, la agregación UCI durante COVID y la exclusión de la cama falsa de E073.
+- La fila **"Cirrosis (n, %)"** y las tres de "Mortalidad cirrosis" excluyen los episodios con trasplante hepático (`liver_transplant_during_episode = 1`). El filtro requiere que el snapshot CSV haya sido generado con la query actualizada que añade la CTE `liver_transplant_episodes`. Ver sección "Sobre las filas de cirrosis y mortalidad en cirrosis".

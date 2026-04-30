@@ -125,6 +125,20 @@ cirrhosis_dx AS (
         code LIKE '571.8%' OR
         code LIKE '571.9%'
 ),
+-- Episodios con trasplante hepático realizado durante el episodio.
+-- Usados después para excluir a estos pacientes de la cohorte de
+-- "cirrosis": ingresan electivamente para trasplante y su mortalidad
+-- depende del proceso del trasplante, no de la cirrosis subyacente.
+liver_transplant_episodes AS (
+    SELECT DISTINCT patient_ref, episode_ref
+    FROM datascope_gestor_prod.procedures
+    WHERE
+        -- ICD-10-PCS: 0FY0... (trasplante de hígado, allog./sing./xeno.)
+        code LIKE '0FY0%' OR
+        -- ICD-9-CM Vol 3: 50.5x (con o sin punto)
+        code LIKE '50.5%' OR
+        code LIKE '505%'
+),
 -- Procedencia del paciente antes del ingreso (formulario UCI, PROCE_MALA)
 -- Se queda con la última valoración por episodio (la más reciente en form_date)
 procedencia_episodio AS (
@@ -188,6 +202,9 @@ SELECT DISTINCT
         WHEN dx.patient_ref IS NOT NULL THEN 1 ELSE 0
     END AS has_cirrhosis,
     CASE
+        WHEN lt.patient_ref IS NOT NULL THEN 1 ELSE 0
+    END AS liver_transplant_during_episode,
+    CASE
         WHEN cw.next_admission_date IS NOT NULL
              AND date_diff(
                  'hour', cw.effective_discharge_date, cw.next_admission_date
@@ -217,6 +234,9 @@ LEFT JOIN datascope_gestor_prod.demographics d
     ON cw.patient_ref = d.patient_ref
 LEFT JOIN cirrhosis_dx dx
     ON cw.patient_ref = dx.patient_ref
+LEFT JOIN liver_transplant_episodes lt
+    ON cw.patient_ref = lt.patient_ref
+    AND cw.episode_ref = lt.episode_ref
 LEFT JOIN datascope_gestor_prod.exitus ex
     ON cw.patient_ref = ex.patient_ref
 LEFT JOIN procedencia_episodio proc
