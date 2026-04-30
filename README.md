@@ -17,7 +17,7 @@ cd indicadors_iso
 pip install -r requirements.txt
 
 # 4. Ejecuta cualquier script
-python demographics/ward_stays_demo.py
+python demographics/predominant_unit/run.py
 ```
 
 ## Estructura del Proyecto
@@ -26,16 +26,13 @@ Cada subcarpeta contiene análisis específicos de diferentes indicadores:
 
 | Carpeta | Descripción |
 |---------|-------------|
-| **admissions/** | Identificación de ingresos reales en unidades de hospitalización. Incluye `hosp_ward_longest_stay.py` (por unidad predominante). [Ver documentación detallada →](admissions/README.md) |
 | **data_quality/** | Comparación de completitud de datos entre dos años (`completeness_2024_vs_2025.py`) sobre `movements` y `labs`: totales, YTD, serie mensual y diaria (heatmap), filas/episodio, episodios huérfanos, frescura de `load_date` y desglose por unidad/facility/parámetro de lab. Salidas: CSVs + reporte HTML con gráficas en `data_quality/output/` |
-| **demographics/** | Tabla demográfica y de resultados de estancias en E073+I073 (`ward_stays_demo.py`). Estructura modular: `_sql.py` (consulta SQL), `_metrics.py` (cálculo de métricas), `_report.py` (generación HTML/CSV). Salidas: cohorte completa + tabla resumen en CSV y HTML en `demographics/output/` |
+| **demographics/** | Tabla demográfica y de resultados de estancias en E073+I073 (`predominant_unit/run.py` y `per_unit/run.py`). Estructura modular: `_sql.py` (consulta SQL), `_metrics.py` (cálculo de métricas), `_report.py` (generación HTML/CSV). Salidas: cohorte completa + tabla resumen en CSV y HTML en `demographics/output/` |
 | **deliris/** | Indicadores CAM-ICU / delirio en UCI. [Documentación →](deliris/README.md) |
 | **drg/** | Informe de complejidad asistencial basado en DRGs (Diagnosis-Related Groups): genera un PDF multipágina con indicadores de severidad (SOI), riesgo de mortalidad (ROM) y peso DRG (Case Mix Index) |
 | **dynamic_forms/** | Consultas SQL sobre formularios dinámicos (`dynamic_forms`). Ejecución con `run_queries.py`; consultas en `queries/`, salida CSV en `dynamic_forms/output/`. [Ver README →](dynamic_forms/README.md) |
-| **necropsy/** | Análisis de provisions de necropsias y autopsias — busca códigos relacionados directamente en la base de datos |
 | **nutritions/** | Análisis de nutrición enteral y parenteral |
 | **sepsis3/** | Query SQL para identificación de pacientes con sepsis según criterios Sepsis-3 (SOFA score ≥ 2 + sospecha de infección) |
-| **snisp/** | Análisis de incidentes (`analysis_2025.py`) |
 
 Cada análisis genera sus resultados en una subcarpeta `output/` dentro de su respectiva carpeta.
 
@@ -94,8 +91,8 @@ pip install -r requirements.txt
 Cada script se ejecuta de forma independiente desde la raíz del proyecto:
 
 ```bash
-python demographics/ward_stays_demo.py
-python admissions/hosp_ward_longest_stay.py
+python demographics/predominant_unit/run.py
+python demographics/per_unit/run.py
 python data_quality/completeness_2024_vs_2025.py
 python deliris/run_sql.py deliris/camicu_compliance.sql
 python deliris/run_sql.py deliris/camicu_positivity.sql
@@ -104,7 +101,6 @@ python deliris/run_sql.py deliris/camicu_daily_coverage_excl_deep_rass.sql
 python deliris/camicu_plots.py
 python nutritions/nutritions.py
 python drg/drg_complexity_report.py
-python necropsy/necropsias_autopsias.py
 python dynamic_forms/run_queries.py --list
 ```
 

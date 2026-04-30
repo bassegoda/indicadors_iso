@@ -28,7 +28,6 @@ Each module is run directly — no build step:
 ```bash
 python demographics/predominant_unit/run.py   # 1 informe combinado (E073+I073, unidad predominante)
 python demographics/per_unit/run.py           # 2 informes (E073 e I073 por separado, sin agrupar traslados)
-python admissions/hosp_ward_longest_stay.py   # prompts for years and units
 python drg/drg_complexity_report.py           # outputs PDF + CSV
 python dynamic_forms/run_queries.py --list
 python dynamic_forms/run_queries.py --query <name>
@@ -54,7 +53,7 @@ There are no tests, linters, or build tools configured.
 
   Both pipelines share `_loader.py`, which (a) prefers a manually-exported snapshot CSV (Metabase API truncates Python results to 2000 rows) and (b) augments missing 2025 data via bootstrap-sampling, with the target = mean stays of the previous 3 years (per-unit when applicable). See `demographics/README.md` for details.
 
-Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plots and cohort definitions; others (necropsy, sepsis3, snisp, nutritions) often collapse into a single script.
+Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plots and cohort definitions; other focused modules include `sepsis3` and `nutritions`.
 
 **`data_quality/`** — ETL completeness cross-year comparison over `movements` and `labs`. Same `_sql.py` / `_metrics.py` / `_report.py` split as demographics, but `_report.py` also embeds matplotlib charts (line, heatmap, bars) as base64 PNGs into a standalone HTML file.
 
@@ -62,7 +61,7 @@ Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plo
 
 ## SQL Conventions
 
-The database runs on **AWS Athena (Trino/Presto SQL dialect)** — not MySQL. Tables must be schema-qualified with `datascope_gestor_prod.` (e.g. `datascope_gestor_prod.movements`). Tables no longer carry the `g_` prefix (e.g. `g_episodes` → `episodes`). Dictionary tables keep `dic_` prefix. SQL queries use extensive CTEs and window functions (`LAG`, `LEAD`, `ROW_NUMBER`). The predominant-unit logic (assign a stay to the unit where the patient spent the most time) is a recurring pattern shared across demographics, admissions, and drg modules.
+The database runs on **AWS Athena (Trino/Presto SQL dialect)** — not MySQL. Tables must be schema-qualified with `datascope_gestor_prod.` (e.g. `datascope_gestor_prod.movements`). Tables no longer carry the `g_` prefix (e.g. `g_episodes` → `episodes`). Dictionary tables keep `dic_` prefix. SQL queries use extensive CTEs and window functions (`LAG`, `LEAD`, `ROW_NUMBER`). The predominant-unit logic (assign a stay to the unit where the patient spent the most time) is a recurring pattern shared across demographics and drg modules.
 
 **`DB_CONTEXT_AWS.md`** (root) is the authoritative database schema reference for the AWS/Athena instance. Read it before writing new SQL — it documents all relevant tables (without the `g_` prefix), ETL rules, ICD mappings, and the Athena (Trino/Presto) SQL dialect to use instead of MySQL. For code lookups (ICD, DRG, provisions, etc.), query the database directly via `execute_query` instead of using local dictionaries.
 
