@@ -29,6 +29,9 @@ _CSS = """
     --section-mortality-noaisbe: #f3f4f6;
     --section-mortality-noaisbe-text: #374151;
     --section-mortality-noaisbe-accent: #6b7280;
+    --section-mortality-otherhosp: #fff7ed;
+    --section-mortality-otherhosp-text: #9a3412;
+    --section-mortality-otherhosp-accent: #f97316;
 }
 
 * { box-sizing: border-box; }
@@ -37,13 +40,13 @@ body {
     font-family: var(--font-sans);
     color: var(--color-text);
     margin: 0;
-    padding: 40px;
+    padding: 16px;
     background: #f9fafb;
     line-height: 1.5;
 }
 
 .container {
-    max-width: 1300px;
+    max-width: min(1700px, calc(100vw - 32px));
     margin: 0 auto;
     background: var(--color-bg);
     border-radius: 12px;
@@ -55,11 +58,7 @@ body {
 .report-header {
     padding: 32px 40px 24px;
     border-bottom: 1px solid var(--color-border);
-    position: sticky;
-    top: 0;
-    z-index: 10;
     background: var(--color-bg);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
 .report-header h1 {
     font-size: 22px;
@@ -87,11 +86,8 @@ table {
 }
 
 thead th {
-    position: sticky;
-    top: var(--thead-top, 0px);
-    z-index: 2;
     background: var(--color-bg-header);
-    padding: 12px 16px;
+    padding: 12px 10px;
     text-align: center;
     font-weight: 600;
     font-size: 13px;
@@ -101,10 +97,8 @@ thead th {
 }
 thead th:first-child {
     text-align: left;
-    min-width: 220px;
-    position: sticky;
-    left: 0;
-    z-index: 3;
+    min-width: 200px;
+    padding-left: 16px;
     background: var(--color-bg-header);
 }
 thead th.col-total {
@@ -115,7 +109,7 @@ thead th.col-total {
 
 /* Section header rows */
 tr.section-header td {
-    padding: 10px 16px;
+    padding: 10px 16px 10px 16px;
     font-weight: 700;
     font-size: 13px;
     text-transform: uppercase;
@@ -137,20 +131,21 @@ tr.section-mortality-cirr td { background: var(--section-mortality-cirr); color:
 tr.section-mortality-cirr td:first-child { border-left-color: var(--section-mortality-cirr-accent); }
 tr.section-mortality-noaisbe td { background: var(--section-mortality-noaisbe); color: var(--section-mortality-noaisbe-text); }
 tr.section-mortality-noaisbe td:first-child { border-left-color: var(--section-mortality-noaisbe-accent); }
+tr.section-mortality-otherhosp td { background: var(--section-mortality-otherhosp); color: var(--section-mortality-otherhosp-text); }
+tr.section-mortality-otherhosp td:first-child { border-left-color: var(--section-mortality-otherhosp-accent); }
 
 /* Data rows */
 tbody td {
-    padding: 9px 16px;
+    padding: 9px 10px;
     text-align: center;
     border-bottom: 1px solid var(--color-border);
     white-space: nowrap;
 }
 tbody td:first-child {
     text-align: left;
+    padding-left: 16px;
+    padding-right: 12px;
     color: var(--color-text);
-    position: sticky;
-    left: 0;
-    z-index: 1;
     background: var(--color-bg);
 }
 tbody td.col-total {
@@ -171,18 +166,7 @@ tbody tr:hover td.col-total {
 /* Row styles */
 tr.row-bold td:first-child { font-weight: 700; }
 tr.row-bold td { font-weight: 600; }
-tr.row-indent td:first-child { padding-left: 36px; color: var(--color-text-muted); }
-
-/* Sticky data row (N estancias) */
-tr.row-sticky td {
-    position: sticky;
-    top: var(--sticky-row-top, 0px);
-    z-index: 2;
-    background: var(--color-bg);
-    border-bottom: 2px solid var(--color-border-thick);
-}
-tr.row-sticky td:first-child { z-index: 3; }
-tr.row-sticky td.col-total { background: var(--color-bg-total); }
+tr.row-indent td:first-child { padding-left: 32px; color: var(--color-text-muted); }
 
 /* Footer */
 .report-footer {
@@ -218,7 +202,6 @@ tr.row-sticky td.col-total { background: var(--color-bg-total); }
     .report-header { padding: 20px; }
     table { font-size: 10px; min-width: 0; }
     thead th, tbody td { padding: 5px 8px; }
-    thead th:first-child, tbody td:first-child { position: static; }
     thead { display: table-header-group; }
     .report-footer { padding: 16px 20px; }
     @page { size: landscape; margin: 1cm; }
@@ -256,6 +239,7 @@ def generate_html(
     years: list[int],
     title: str,
     output_path: Path,
+    subtitle: str = "Hospital Cl\u00ednic de Barcelona \u2014 Unidades E073, I073",
 ) -> None:
     """Generate a professional HTML report from structured summary data."""
 
@@ -307,7 +291,7 @@ def generate_html(
 
 <div class="report-header">
     <h1>{title}</h1>
-    <p class="subtitle">Hospital Cl\u00ednic de Barcelona &mdash; Unidades E073, I073</p>
+    <p class="subtitle">{subtitle}</p>
 </div>
 
 <div class="table-wrapper">
@@ -334,20 +318,6 @@ def generate_html(
 </div>
 
 </div>
-<script>
-(function () {{
-    function updateStickyOffset() {{
-        var header = document.querySelector('.report-header');
-        var thead = document.querySelector('thead');
-        var headerH = header ? header.offsetHeight : 0;
-        var theadH = thead ? thead.offsetHeight : 0;
-        document.documentElement.style.setProperty('--thead-top', headerH + 'px');
-        document.documentElement.style.setProperty('--sticky-row-top', (headerH + theadH) + 'px');
-    }}
-    document.addEventListener('DOMContentLoaded', updateStickyOffset);
-    window.addEventListener('resize', updateStickyOffset);
-}})();
-</script>
 </body>
 </html>"""
 

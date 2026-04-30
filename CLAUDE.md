@@ -26,8 +26,8 @@ pip install -r requirements.txt
 Each module is run directly — no build step:
 
 ```bash
-python demographics/ward_stays_demo.py        # prompts for year range, outputs CSV + HTML
-python demographics/cirrhosis_comparison.py
+python demographics/predominant_unit/run.py   # 1 informe combinado (E073+I073, unidad predominante)
+python demographics/per_unit/run.py           # 2 informes (E073 e I073 por separado, sin agrupar traslados)
 python admissions/hosp_ward_longest_stay.py   # prompts for years and units
 python drg/drg_complexity_report.py           # outputs PDF + CSV
 python dynamic_forms/run_queries.py --list
@@ -47,6 +47,12 @@ There are no tests, linters, or build tools configured.
 - `_metrics.py` — statistical calculations on the resulting DataFrame
 - `_report.py` — CSV and HTML/PDF output
 - `<main_script>.py` — orchestrates the pipeline, handles interactive prompts
+
+**`demographics/`** has two co-existing pipelines as subfolders sharing `_loader.py`/`_metrics.py`/`_report.py`:
+  - `predominant_unit/` — current logic. Movements between E073/I073 in the same episode are merged and assigned to the unit with the most time. One combined report.
+  - `per_unit/` — new logic. A transfer between units splits the stay into two separate rows. Generates one HTML/CSV per unit. Readmission excludes intra-episode transfers.
+
+  Both pipelines share `_loader.py`, which (a) prefers a manually-exported snapshot CSV (Metabase API truncates Python results to 2000 rows) and (b) augments missing 2025 data via bootstrap-sampling, with the target = mean stays of the previous 3 years (per-unit when applicable). See `demographics/README.md` for details.
 
 Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plots and cohort definitions; others (necropsy, sepsis3, snisp, nutritions) often collapse into a single script.
 

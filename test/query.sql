@@ -1,2 +1,3 @@
 SELECT *
-FROM datascope_gestor_prod.demographics;
+FROM datascope_gestor_prod.labs
+LIMIT 50000;

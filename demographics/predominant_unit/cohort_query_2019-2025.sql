@@ -1,4 +1,14 @@
-SQL_TEMPLATE = """
+-- =====================================================================
+-- Cohorte demografía + clínica E073/I073 (2019-2025) — snapshot temporal
+-- =====================================================================
+-- Pegar tal cual en Metabase (Native query, AWS Athena/Trino).
+-- Resultado esperado: una fila por estancia agrupada (unidad predominante)
+-- con prescripción iniciada durante la estancia.
+-- Generado a partir de demographics/_sql.py con min_year=2019, max_year=2025.
+-- Tras ejecutar, exportar como CSV y guardarlo en:
+--     demographics/predominant_unit/cohort_2019-2025.csv
+-- =====================================================================
+
 WITH all_related_moves AS (
     SELECT
         patient_ref,
@@ -9,8 +19,8 @@ WITH all_related_moves AS (
         COALESCE(end_date, current_timestamp) AS effective_end_date
     FROM datascope_gestor_prod.movements
     WHERE ou_loc_ref IN ('E073','I073')
-      AND start_date <= timestamp '{max_year}-12-31 23:59:59'
-      AND COALESCE(end_date, current_timestamp) >= timestamp '{min_year}-01-01 00:00:00'
+      AND start_date <= timestamp '2025-12-31 23:59:59'
+      AND COALESCE(end_date, current_timestamp) >= timestamp '2019-01-01 00:00:00'
       AND place_ref IS NOT NULL
       AND COALESCE(end_date, current_timestamp) > start_date
 ),
@@ -87,7 +97,7 @@ cohort AS (
         AND g.episode_ref = p.episode_ref
         AND g.stay_id = p.stay_id
     GROUP BY g.patient_ref, g.episode_ref, g.stay_id, p.assigned_unit
-    HAVING year(MIN(g.start_date)) BETWEEN {min_year} AND {max_year}
+    HAVING year(MIN(g.start_date)) BETWEEN 2019 AND 2025
 ),
 prescription_filtered AS (
     SELECT DISTINCT
@@ -124,6 +134,27 @@ cirrhosis_dx AS (
         code LIKE '571.6%' OR
         code LIKE '571.8%' OR
         code LIKE '571.9%'
+),
+-- Procedencia del paciente antes del ingreso (formulario UCI, PROCE_MALA)
+-- Se queda con la última valoración por episodio (la más reciente en form_date)
+procedencia_episodio AS (
+    SELECT patient_ref, episode_ref, value_text, value_descr
+    FROM (
+        SELECT
+            patient_ref,
+            episode_ref,
+            value_text,
+            value_descr,
+            ROW_NUMBER() OVER (
+                PARTITION BY patient_ref, episode_ref
+                ORDER BY form_date DESC
+            ) AS rn
+        FROM datascope_gestor_prod.dynamic_forms
+        WHERE form_ref = 'UCI'
+          AND question_ref = 'PROCE_MALA'
+          AND status = 'CO'
+    ) x
+    WHERE rn = 1
 )
 SELECT DISTINCT
     cw.patient_ref,
@@ -179,7 +210,18 @@ SELECT DISTINCT
                  'hour', cw.effective_discharge_date, cw.next_admission_date
              ) <= 72
         THEN 1 ELSE 0
-    END AS readmission_72h
+    END AS readmission_72h,
+    proc.value_text AS procedencia_codigo,
+    proc.value_descr AS procedencia,
+    CASE
+        -- El formulario UCI cambió del catalán al castellano hacia
+        -- septiembre de 2022. Aceptamos ambas variantes para que la
+        -- serie 2019-2025 sea homogénea.
+        WHEN proc.value_text IN (
+            '20-Altre hospital-',
+            '20-Otro hospital-'
+        ) THEN 1 ELSE 0
+    END AS from_other_hospital
 FROM cohort_with_next cw
 LEFT JOIN datascope_gestor_prod.demographics d
     ON cw.patient_ref = d.patient_ref
@@ -187,5 +229,7 @@ LEFT JOIN cirrhosis_dx dx
     ON cw.patient_ref = dx.patient_ref
 LEFT JOIN datascope_gestor_prod.exitus ex
     ON cw.patient_ref = ex.patient_ref
+LEFT JOIN procedencia_episodio proc
+    ON cw.patient_ref = proc.patient_ref
+    AND cw.episode_ref = proc.episode_ref
 ORDER BY cw.admission_date;
-"""

@@ -1,3 +1,5 @@
+from typing import Optional
+
 import pandas as pd
 
 ABS_CLINIC = [
@@ -16,12 +18,14 @@ CP_CLINIC = [
 _ROW_DEFS = [
     ("n_stays",   "N estancias",                                 "N estancias",                   "demo",               "bold"),
     ("n_patients","N pacientes",                                 "N pacientes",                   "demo",               "bold"),
+    ("occupancy", "Ocupaci\u00f3n de camas (%)",                 "Ocupaci\u00f3n de camas",       "demo",               ""),
     ("age",       "Edad, mediana [IQR]",                         "Edad, mediana [IQR]",           "demo",               ""),
     ("male",      "Sexo masculino (n, %)",                       "Sexo masculino",                "demo",               "indent"),
     ("female",    "Sexo femenino (n, %)",                        "Sexo femenino",                 "demo",               "indent"),
     ("spain",     "Nacionalidad espa\u00f1ola (n, %)",           "Nacionalidad espa\u00f1ola",    "demo",               "indent"),
     ("other_nat", "Otras nacionalidades (n, %)",                 "Otras nacionalidades",          "demo",               "indent"),
     ("aisbe",     "Pacientes AISBE (n, %)",                      "Pacientes AISBE",               "demo",               ""),
+    ("other_hosp","Procedencia otro hospital (n, %)",            "Procedencia otro hospital",     "demo",               ""),
     ("los",       "Estancia (d\u00edas), mediana [IQR]",         "Estancia (d\u00edas), mediana [IQR]", "clinical",    ""),
     ("cirr",      "Cirrosis (n, %)",                             "Cirrosis",                      "clinical",           ""),
     ("readm24",   "Reingreso 24h (n, %)",                        "Reingreso 24h",                 "clinical",           ""),
@@ -35,14 +39,18 @@ _ROW_DEFS = [
     ("mn_stay",   "Mortalidad no AISBE - en estancia (n, %)",    "En estancia",                   "mortality-noaisbe",  ""),
     ("mn_30",     "Mortalidad no AISBE - 30 d\u00edas (n, %)",   "A 30 d\u00edas",               "mortality-noaisbe",  ""),
     ("mn_90",     "Mortalidad no AISBE - 90 d\u00edas (n, %)",   "A 90 d\u00edas",               "mortality-noaisbe",  ""),
+    ("mo_stay",   "Mortalidad otro hospital - en estancia (n, %)","En estancia",                  "mortality-otherhosp","" ),
+    ("mo_30",     "Mortalidad otro hospital - 30 d\u00edas (n, %)","A 30 d\u00edas",              "mortality-otherhosp","" ),
+    ("mo_90",     "Mortalidad otro hospital - 90 d\u00edas (n, %)","A 90 d\u00edas",              "mortality-otherhosp","" ),
 ]
 
 _SECTION_DEFS = [
-    ("demo",              "Demograf\u00eda",          "demo"),
-    ("clinical",          "Cl\u00ednica",             "clinical"),
-    ("mortality",         "Mortalidad global",        "mortality"),
-    ("mortality-cirr",    "Mortalidad en cirrosis",   "mortality-cirr"),
-    ("mortality-noaisbe", "Mortalidad en no AISBE",   "mortality-noaisbe"),
+    ("demo",                "Demograf\u00eda",                       "demo"),
+    ("clinical",            "Cl\u00ednica",                          "clinical"),
+    ("mortality",           "Mortalidad global",                     "mortality"),
+    ("mortality-cirr",      "Mortalidad en cirrosis",                "mortality-cirr"),
+    ("mortality-noaisbe",   "Mortalidad en no AISBE",                "mortality-noaisbe"),
+    ("mortality-otherhosp", "Mortalidad procedencia otro hospital",  "mortality-otherhosp"),
 ]
 
 
@@ -83,8 +91,8 @@ def _mortality(sub: pd.DataFrame) -> dict:
 
     deaths_stay = int((sub["exitus_during_stay"] == "Yes").sum())
 
-    admission_dt = pd.to_datetime(sub["admission_date"], errors="coerce")
-    exitus_dt = pd.to_datetime(sub["exitus_date"], errors="coerce")
+    admission_dt = pd.to_datetime(sub["admission_date"], errors="coerce", utc=True)
+    exitus_dt = pd.to_datetime(sub["exitus_date"], errors="coerce", utc=True)
     valid = exitus_dt.notna() & admission_dt.notna()
     delta = (exitus_dt - admission_dt).dt.total_seconds() / 86400
 
@@ -102,8 +110,20 @@ def _mortality(sub: pd.DataFrame) -> dict:
     }
 
 
-def compute_summary(df: pd.DataFrame) -> tuple[list[dict], list[int]]:
+def compute_summary(
+    df: pd.DataFrame,
+    bed_occupancy: Optional[pd.DataFrame] = None,
+) -> tuple[list[dict], list[int]]:
     """Compute all metrics once and return structured sections + years list.
+
+    Args:
+        df: cohort DataFrame.
+        bed_occupancy: optional DataFrame returned by
+            `demographics._bed_occupancy.compute_bed_occupancy(...)` with
+            columns `unit`, `year`, `bed_hours_used`, `bed_hours_available`,
+            `pct`. If provided, the "Ocupación de camas" row is filled
+            from this table (empirical, monthly aggregated). If None or
+            empty, that row is left blank.
 
     Returns:
         (sections, years) where sections is a list of section dicts suitable
@@ -122,6 +142,40 @@ def compute_summary(df: pd.DataFrame) -> tuple[list[dict], list[int]]:
 
     years = sorted(df["year_admission"].dropna().unique())
 
+    units_in_cohort: list[str] = sorted(
+        u for u in df["ou_loc_ref"].dropna().unique().tolist()
+    ) if "ou_loc_ref" in df.columns else []
+
+    # Restringir bed_occupancy a las unidades de la cohorte y precomputar
+    # totales globales numerador/denominador por año (para que un report
+    # `per_unit` use sólo su unidad y `predominant_unit` sume ambas).
+    occupancy_by_year: dict[int, str] = {}
+    occupancy_total_text: str = ""
+    if bed_occupancy is not None and not bed_occupancy.empty and units_in_cohort:
+        occ = bed_occupancy[bed_occupancy["unit"].isin(units_in_cohort)].copy()
+        if not occ.empty:
+            occ["year"] = pd.to_numeric(occ["year"], errors="coerce").astype("Int64")
+            occ["bed_hours_used"] = pd.to_numeric(
+                occ["bed_hours_used"], errors="coerce"
+            ).fillna(0.0)
+            occ["bed_hours_available"] = pd.to_numeric(
+                occ["bed_hours_available"], errors="coerce"
+            ).fillna(0.0)
+            yearly = occ.groupby("year", as_index=False).agg(
+                used=("bed_hours_used", "sum"),
+                avail=("bed_hours_available", "sum"),
+            )
+            for _, row in yearly.iterrows():
+                year_int = int(row["year"])
+                avail = float(row["avail"])
+                used = float(row["used"])
+                if avail > 0:
+                    occupancy_by_year[year_int] = f"{used / avail * 100:.1f}%"
+            total_used = float(yearly["used"].sum())
+            total_avail = float(yearly["avail"].sum())
+            if total_avail > 0:
+                occupancy_total_text = f"{total_used / total_avail * 100:.1f}%"
+
     rows = {
         name: {
             "label": html_label,
@@ -129,7 +183,7 @@ def compute_summary(df: pd.DataFrame) -> tuple[list[dict], list[int]]:
             "values": {},
             "total": "",
             "style": style,
-            "sticky": name == "n_stays",
+            "sticky": False,
         }
         for name, csv_label, html_label, _section, style in _ROW_DEFS
     }
@@ -141,11 +195,13 @@ def compute_summary(df: pd.DataFrame) -> tuple[list[dict], list[int]]:
     total_male = total_female = 0
     total_spain = total_other_nat = 0
     total_aisbe = total_n_pat = 0
+    total_other_hosp = 0
     all_los: list = []
     total_cirr = total_readm24 = total_readm72 = 0
     t_mg = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
     t_mc = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
     t_mn = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
+    t_mo = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
 
     for year in years:
         sub = df[df["year_admission"] == year]
@@ -163,6 +219,8 @@ def compute_summary(df: pd.DataFrame) -> tuple[list[dict], list[int]]:
         all_patients.update(patients["patient_ref"].tolist())
         total_n_pat += n_pat
         rows["n_patients"]["values"][year] = str(n_pat)
+
+        rows["occupancy"]["values"][year] = occupancy_by_year.get(int(year), "")
 
         ages = pd.to_numeric(sub["age_at_admission"], errors="coerce").dropna()
         all_ages.extend(ages.tolist())
@@ -191,6 +249,16 @@ def compute_summary(df: pd.DataFrame) -> tuple[list[dict], list[int]]:
         n_aisbe = int(is_aisbe.sum())
         total_aisbe += n_aisbe
         rows["aisbe"]["values"][year] = _fmt_n_pct(n_aisbe, n_pat)
+
+        if "from_other_hospital" in patients.columns:
+            other_hosp_col = pd.to_numeric(
+                patients["from_other_hospital"], errors="coerce"
+            ).fillna(0)
+            n_other_hosp = int((other_hosp_col == 1).sum())
+        else:
+            n_other_hosp = 0
+        total_other_hosp += n_other_hosp
+        rows["other_hosp"]["values"][year] = _fmt_n_pct(n_other_hosp, n_pat)
 
         los = pd.to_numeric(sub["days_stay"], errors="coerce").dropna()
         all_los.extend(los.tolist())
@@ -240,15 +308,33 @@ def compute_summary(df: pd.DataFrame) -> tuple[list[dict], list[int]]:
         t_mn["d90"] += mort_n["deaths_90"]
         t_mn["n"] += mort_n["n"]
 
+        if "from_other_hospital" in sub.columns:
+            stay_other_hosp = pd.to_numeric(
+                sub["from_other_hospital"], errors="coerce"
+            ).fillna(0)
+            sub_other_hosp = sub[stay_other_hosp == 1]
+        else:
+            sub_other_hosp = sub.iloc[0:0]
+        mort_o = _mortality(sub_other_hosp)
+        rows["mo_stay"]["values"][year] = mort_o["stay_fmt"]
+        rows["mo_30"]["values"][year] = mort_o["d30_fmt"]
+        rows["mo_90"]["values"][year] = mort_o["d90_fmt"]
+        t_mo["stay"] += mort_o["deaths_stay"]
+        t_mo["d30"] += mort_o["deaths_30"]
+        t_mo["d90"] += mort_o["deaths_90"]
+        t_mo["n"] += mort_o["n"]
+
     # Fill totals
     rows["n_stays"]["total"] = str(total_stays)
     rows["n_patients"]["total"] = str(len(all_patients))
+    rows["occupancy"]["total"] = occupancy_total_text
     rows["age"]["total"] = _format_median_iqr(pd.Series(all_ages)) if all_ages else ""
     rows["male"]["total"] = _fmt_n_pct(total_male, total_n_pat)
     rows["female"]["total"] = _fmt_n_pct(total_female, total_n_pat)
     rows["spain"]["total"] = _fmt_n_pct(total_spain, total_n_pat)
     rows["other_nat"]["total"] = _fmt_n_pct(total_other_nat, total_n_pat)
     rows["aisbe"]["total"] = _fmt_n_pct(total_aisbe, total_n_pat)
+    rows["other_hosp"]["total"] = _fmt_n_pct(total_other_hosp, total_n_pat)
     rows["los"]["total"] = _format_median_iqr(pd.Series(all_los)) if all_los else ""
     rows["cirr"]["total"] = _fmt_n_pct(total_cirr, total_stays)
     rows["readm24"]["total"] = _fmt_n_pct(total_readm24, total_stays)
@@ -262,6 +348,9 @@ def compute_summary(df: pd.DataFrame) -> tuple[list[dict], list[int]]:
     rows["mn_stay"]["total"] = _fmt_n_pct(t_mn["stay"], t_mn["n"])
     rows["mn_30"]["total"] = _fmt_n_pct(t_mn["d30"], t_mn["n"])
     rows["mn_90"]["total"] = _fmt_n_pct(t_mn["d90"], t_mn["n"])
+    rows["mo_stay"]["total"] = _fmt_n_pct(t_mo["stay"], t_mo["n"])
+    rows["mo_30"]["total"] = _fmt_n_pct(t_mo["d30"], t_mo["n"])
+    rows["mo_90"]["total"] = _fmt_n_pct(t_mo["d90"], t_mo["n"])
 
     # Assemble sections
     sections = []
