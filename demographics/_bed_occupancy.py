@@ -1,22 +1,14 @@
 """Cálculo de ocupación de camas por (unidad efectiva, año).
 
-Hay dos versiones:
+`compute_bed_occupancy_nominal()` — única versión activa. Denominador
+fijado por la tabla de épocas en `demographics/_bed_capacity_eras.py`.
+Durante la época `covid` los movimientos en E073 e I073 se agregan en
+la unidad sintética "UCI" (12 camas nominales), sorteando el
+reetiquetado COVID-19.
 
-* `compute_bed_occupancy()` — versión empírica histórica. Denominador
-  derivado del nº de `place_ref` activos cada mes. Sigue disponible para
-  diagnóstico y comparación, pero **no debería usarse para reportar**:
-  durante COVID y transiciones administrativas el denominador respira
-  con el numerador y los % salen distorsionados.
-
-* `compute_bed_occupancy_nominal()` — versión recomendada (la usan los
-  scripts `run.py`). Denominador fijado por la tabla de épocas en
-  `demographics/_bed_capacity_eras.py`. Durante la época `covid` los
-  movimientos en E073 e I073 se agregan en la unidad sintética "UCI"
-  (12 camas nominales), sorteando el reetiquetado COVID-19.
-
-Ambas comparten el SQL mensual (`_bed_capacity_sql.py`) y la cache CSV.
-La cama falsa de E073 (auxiliar de procedimientos) se excluye en el
-SQL — ver `_config.py`.
+El SQL mensual está en `_bed_capacity_sql.py`; los resultados mensuales
+se cachean en CSV bajo `demographics/output/`. La cama falsa de E073
+(auxiliar de procedimientos) se excluye en el SQL — ver `_config.py`.
 """
 
 from __future__ import annotations
@@ -29,8 +21,6 @@ import pandas as pd
 from demographics._bed_capacity_sql import query_bed_capacity
 from demographics._bed_capacity_eras import (
     COMBINED_UNIT_LABEL,
-    PRE_COVID_TOTAL_BEDS,
-    hours_in_year,
     lookup_capacity_for_month,
 )
 
@@ -95,49 +85,6 @@ def load_or_query_monthly(
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
     return df
-
-
-def compute_bed_occupancy(
-    units: Iterable[str],
-    min_year: int,
-    max_year: int,
-    fake_bed_place_refs: Optional[Iterable[int]] = None,
-    force_refresh: bool = False,
-    verbose: bool = True,
-) -> pd.DataFrame:
-    """[LEGACY] Ocupación anual con denominador empírico.
-
-    Mantenida para diagnóstico. Para informes usar
-    `compute_bed_occupancy_nominal`. El % aquí es
-    `Σ used / Σ (n_active_place_refs × hours_in_month) × 100`.
-    """
-    monthly = load_or_query_monthly(
-        units=units,
-        min_year=min_year,
-        max_year=max_year,
-        fake_bed_place_refs=fake_bed_place_refs,
-        force_refresh=force_refresh,
-        verbose=verbose,
-    )
-    if monthly.empty:
-        return monthly
-
-    grouped = (
-        monthly.groupby(["unit", "year"], as_index=False)
-        .agg(
-            bed_hours_used=("bed_hours_used", "sum"),
-            bed_hours_available=("bed_hours_available", "sum"),
-            n_months_with_data=("month", "nunique"),
-            max_n_active_place_refs=("n_active_place_refs", "max"),
-        )
-    )
-    grouped["pct"] = grouped.apply(
-        lambda r: (r["bed_hours_used"] / r["bed_hours_available"] * 100)
-        if r["bed_hours_available"] > 0 else float("nan"),
-        axis=1,
-    )
-    grouped["year"] = grouped["year"].astype(int)
-    return grouped
 
 
 def _default_incomplete_months() -> set[tuple[int, int]]:

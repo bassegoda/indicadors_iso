@@ -35,6 +35,10 @@ _ROW_DEFS = [
     ("cirr",      "Cirrosis (n, %)",                             "Cirrosis",                      "clinical",           ""),
     ("readm24",   "Reingreso 24h (n, %)",                        "Reingreso 24h",                 "clinical",           ""),
     ("readm72",   "Reingreso 72h (n, %)",                        "Reingreso 72h",                 "clinical",           ""),
+    ("sofa_all",  "SOFA al ingreso, mediana [IQR]",              "SOFA al ingreso, mediana [IQR]", "clinical",          ""),
+    ("sofa_full", "SOFA cobertura completa 6/6 (n, %)",          "SOFA cobertura 6/6",            "clinical",           "indent"),
+    ("sofa_cirr", "SOFA cirrosis, mediana [IQR]",                "SOFA cirrosis",                 "clinical",           "indent"),
+    ("sofa_oh",   "SOFA otro hospital, mediana [IQR]",           "SOFA otro hospital",            "clinical",           "indent"),
     ("mg_stay",   "Mortalidad global - en estancia (n, %)",      "En estancia",                   "mortality",          ""),
     ("mg_30",     "Mortalidad global - 30 d\u00edas (n, %)",     "A 30 d\u00edas",               "mortality",          ""),
     ("mg_90",     "Mortalidad global - 90 d\u00edas (n, %)",     "A 90 d\u00edas",               "mortality",          ""),
@@ -124,11 +128,11 @@ def compute_summary(
     Args:
         df: cohort DataFrame.
         bed_occupancy: optional DataFrame returned by
-            `demographics._bed_occupancy.compute_bed_occupancy(...)` with
-            columns `unit`, `year`, `bed_hours_used`, `bed_hours_available`,
-            `pct`. If provided, the "Ocupación de camas" row is filled
-            from this table (empirical, monthly aggregated). If None or
-            empty, that row is left blank.
+            `demographics._bed_occupancy.compute_bed_occupancy_nominal(...)`
+            with columns `effective_unit`, `year`, `regimen`,
+            `bed_hours_used`, `bed_hours_available`, `pct`. If provided,
+            the "Ocupación de camas" row is filled from this table. If
+            None or empty, that row is left blank.
 
     Returns:
         (sections, years) where sections is a list of section dicts suitable
@@ -227,6 +231,20 @@ def compute_summary(
     total_other_hosp = 0
     all_los: list = []
     total_cirr = total_readm24 = total_readm72 = 0
+    # `has_sofa` controla si las filas SOFA aparecen en el reporting.
+    # Para una unidad que no es UCI (p.ej. I073) la cohorte enriquecida
+    # SÍ trae la columna `sofa_total` tras el merge, pero todos los
+    # valores son NaN — así que comprobamos que haya AL MENOS un valor
+    # real para no ensuciar el informe con filas vacías.
+    has_sofa = (
+        "sofa_total" in df.columns
+        and pd.to_numeric(df["sofa_total"], errors="coerce").notna().any()
+    )
+    all_sofa: list = []
+    all_sofa_cirr: list = []
+    all_sofa_oh: list = []
+    total_sofa_n = 0
+    total_sofa_full = 0
     t_mg = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
     t_mc = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
     t_mn = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
@@ -319,6 +337,37 @@ def compute_summary(
             else:
                 total_readm72 += count
 
+        # SOFA al ingreso. La columna `sofa_total` solo viene presente si
+        # se ha mergeado la cohorte SOFA (per_unit/run.py). Para subgrupos
+        # cirrosis y procedencia "otro hospital" reusamos las máscaras ya
+        # calculadas más arriba (`cirr` y `from_other_hospital`).
+        if has_sofa:
+            sofa_year = pd.to_numeric(sub["sofa_total"], errors="coerce")
+            sofa_valid = sofa_year.dropna()
+            rows["sofa_all"]["values"][year] = _format_median_iqr(sofa_valid)
+            all_sofa.extend(sofa_valid.tolist())
+            total_sofa_n += int(sofa_valid.size)
+
+            if "sofa_components_available" in sub.columns:
+                comp = pd.to_numeric(
+                    sub["sofa_components_available"], errors="coerce"
+                ).fillna(0)
+                full = int((comp == 6).sum())
+                total_sofa_full += full
+                rows["sofa_full"]["values"][year] = _fmt_n_pct(full, n)
+
+            sofa_cirr = sofa_year[(cirr == 1).values].dropna()
+            rows["sofa_cirr"]["values"][year] = _format_median_iqr(sofa_cirr)
+            all_sofa_cirr.extend(sofa_cirr.tolist())
+
+            if "from_other_hospital" in sub.columns:
+                stay_oh = pd.to_numeric(
+                    sub["from_other_hospital"], errors="coerce"
+                ).fillna(0)
+                sofa_oh = sofa_year[(stay_oh == 1).values].dropna()
+                rows["sofa_oh"]["values"][year] = _format_median_iqr(sofa_oh)
+                all_sofa_oh.extend(sofa_oh.tolist())
+
         mort = _mortality(sub)
         rows["mg_stay"]["values"][year] = mort["stay_fmt"]
         rows["mg_30"]["values"][year] = mort["d30_fmt"]
@@ -380,6 +429,17 @@ def compute_summary(
     rows["cirr"]["total"] = _fmt_n_pct(total_cirr, total_stays)
     rows["readm24"]["total"] = _fmt_n_pct(total_readm24, total_stays)
     rows["readm72"]["total"] = _fmt_n_pct(total_readm72, total_stays)
+    if has_sofa:
+        rows["sofa_all"]["total"] = (
+            _format_median_iqr(pd.Series(all_sofa)) if all_sofa else ""
+        )
+        rows["sofa_full"]["total"] = _fmt_n_pct(total_sofa_full, total_stays)
+        rows["sofa_cirr"]["total"] = (
+            _format_median_iqr(pd.Series(all_sofa_cirr)) if all_sofa_cirr else ""
+        )
+        rows["sofa_oh"]["total"] = (
+            _format_median_iqr(pd.Series(all_sofa_oh)) if all_sofa_oh else ""
+        )
     rows["mg_stay"]["total"] = _fmt_n_pct(t_mg["stay"], t_mg["n"])
     rows["mg_30"]["total"] = _fmt_n_pct(t_mg["d30"], t_mg["n"])
     rows["mg_90"]["total"] = _fmt_n_pct(t_mg["d90"], t_mg["n"])
@@ -393,13 +453,19 @@ def compute_summary(
     rows["mo_30"]["total"] = _fmt_n_pct(t_mo["d30"], t_mo["n"])
     rows["mo_90"]["total"] = _fmt_n_pct(t_mo["d90"], t_mo["n"])
 
-    # Assemble sections
+    # Assemble sections — si la cohorte no trae datos SOFA mergeados
+    # (p.ej. unidades no UCI), filtramos las filas SOFA para no
+    # ensuciar el informe con celdas vacías.
+    skip_rows: set[str] = set()
+    if not has_sofa:
+        skip_rows.update({"sofa_all", "sofa_full", "sofa_cirr", "sofa_oh"})
+
     sections = []
     for section_key, section_title, css_class in _SECTION_DEFS:
         section_rows = [
             rows[name]
             for name, _csv, _html, sk, _style in _ROW_DEFS
-            if sk == section_key
+            if sk == section_key and name not in skip_rows
         ]
         sections.append({
             "section": section_title,

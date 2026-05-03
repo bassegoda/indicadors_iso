@@ -6,7 +6,7 @@ Análisis demográfico y clínico de las estancias en las unidades **E073** e **
 
 ```
 demographics/
-├── _loader.py                       # carga del snapshot + augmentación sintética 2025
+├── _loader.py                       # descarga año a año desde Metabase + augmentación sintética 2025
 ├── _metrics.py                      # cálculos (compartido por ambas variantes)
 ├── _report.py                       # generación HTML/CSV (compartido)
 ├── _bed_capacity_sql.py             # SQL parametrizada de uso mensual por place_ref
@@ -18,15 +18,17 @@ demographics/
 │
 ├── predominant_unit/                  ← Variante 1
 │   ├── _sql.py                          plantilla SQL parametrizable
-│   ├── cohort_query_2019-2025.sql       SQL standalone para Metabase
-│   ├── cohort_2019-2025.csv             snapshot (gitignored, generar manualmente)
 │   └── run.py                           punto de entrada
 │
-├── per_unit/                          ← Variante 2
+├── per_unit/                          ← Variante 2 (incorpora SOFA al ingreso)
 │   ├── _sql.py
-│   ├── cohort_query_2019-2025.sql
-│   ├── cohort_2019-2025.csv             snapshot (gitignored)
 │   └── run.py
+│
+├── sofa/                              ← Submódulo SOFA al ingreso (consumido por per_unit)
+│   ├── _config.py
+│   ├── _sql.py
+│   ├── _metrics.py
+│   └── README.md
 │
 └── output/
     ├── predominant_unit/                outputs HTML/CSV de la variante 1
@@ -192,15 +194,11 @@ Para excluirla del numerador y del denominador:
 FAKE_BED_PLACE_REFS_E073: list[int] = [123456]  # rellenar con los place_ref reales
 ```
 
-Con el método nominal, esta cama ya no entra en el denominador (los nominales son fijos), pero sí podía contaminar el numerador si no se filtraba en SQL. El filtro se mantiene para consistencia y para que el método legacy (`compute_bed_occupancy`) siga siendo correcto.
+Con el método nominal, esta cama ya no entra en el denominador (los nominales son fijos), pero sí podía contaminar el numerador si no se filtraba en SQL. El filtro se mantiene para que el numerador refleje sólo camas asistenciales reales.
 
 #### Cache
 
 El resultado de la query SQL mensual se cachea en `demographics/output/_bed_capacity_<units>_<min>-<max>.csv` para no volver a consultar Athena en cada ejecución. **Importante:** ese CSV contiene los datos mensuales por `place_ref`, NO la agregación anual con épocas. La lógica de épocas se aplica en Python sobre la cache, así que cambiar `NOMINAL_CAPACITY_HISTORY` o las exclusiones (`exclude_months`) **no requiere refrescar la cache**. Sólo hay que refrescarla cuando cambia algo del SQL o de la lista `FAKE_BED_PLACE_REFS_E073`. Para forzar refresco: borrar el archivo o pasar `force_refresh=True` a `compute_bed_occupancy_nominal(...)`.
-
-#### Versión legacy
-
-`compute_bed_occupancy(...)` (denominador empírico) sigue presente en `_bed_occupancy.py` para diagnóstico. **No se usa en los runners** y no se debería usar para reportar. Útil únicamente para reproducir cálculos antiguos o detectar discrepancias.
 
 #### Limitaciones a tener en cuenta
 
@@ -215,7 +213,7 @@ El resultado de la query SQL mensual se cachea en `demographics/output/_bed_capa
 
 #### Detección del trasplante
 
-En las queries `predominant_unit/_sql.py`, `per_unit/_sql.py` y los `cohort_query_2019-2025.sql` correspondientes, el CTE `liver_transplant_episodes` busca el episodio en `datascope_gestor_prod.procedures` con código:
+En las queries `predominant_unit/_sql.py` y `per_unit/_sql.py`, el CTE `liver_transplant_episodes` busca el episodio en `datascope_gestor_prod.procedures` con código:
 
 - **ICD-10-PCS** `0FY0%` — trasplante de hígado (allog./sing./xeno-).
 - **ICD-9-CM Vol 3** `50.5%` y `505%` — `50.51` (auxiliar), `50.59` (otro), aceptando ambas variantes con y sin punto.
@@ -232,7 +230,7 @@ tx       = sub["liver_transplant_during_episode"]
 cirr     = (cirr_dx == 1) & (tx == 0)
 ```
 
-`cirr` es la cohorte usada tanto para "Cirrosis (n, %)" como para `sub_cirr = sub[cirr == 1]` que alimenta las tres filas de "Mortalidad cirrosis". Si el snapshot no incluye la columna `liver_transplant_during_episode` (cohorte exportada antes del cambio), el código cae al comportamiento anterior — **regenerar el snapshot** desde Metabase para activar el filtro.
+`cirr` es la cohorte usada tanto para "Cirrosis (n, %)" como para `sub_cirr = sub[cirr == 1]` que alimenta las tres filas de "Mortalidad cirrosis".
 
 #### Implicación clínica
 
@@ -242,77 +240,74 @@ Los pacientes con trasplante:
 
 ### Y los datos sintéticos de 2025
 
-Independientemente de la variante, las cifras de **noviembre y diciembre de 2025 no son reales**: la BBDD no había cargado esos datos cuando se generó este reporting. Se han añadido filas sintéticas (bootstrap-sampling de los meses reales de 2025) hasta alcanzar la media de los tres años previos. Detalles técnicos en la sección "Workaround temporal (2)" más abajo.
+Independientemente de la variante, las cifras de **noviembre y diciembre de 2025 no son reales**: la BBDD no había cargado esos datos cuando se generó este reporting. Se han añadido filas sintéticas (bootstrap-sampling de los meses reales de 2025) hasta alcanzar la media de los tres años previos. Detalles técnicos en la sección "Augmentación sintética 2025" más abajo.
 
 ⚠ **Para una audiencia clínica:**
 - Las **proporciones** de 2025 (% mortalidad, % cirrosis, % AISBE, etc.) son fiables porque las filas sintéticas replican las reales — no introducen pacientes con perfiles nuevos.
 - Las **cifras absolutas** de 2025 son una *estimación* de cómo habría sido el año completo si los volúmenes se mantuvieran como en 2022-2024. **No son la actividad real registrada.**
-- Cuando lleguen los datos reales habrá que regenerar el snapshot; el sistema dejará de inyectar sintéticos automáticamente.
+- Cuando la BBDD vuelva a cargar Nov-Dic 2025 el sistema dejará de inyectar sintéticos automáticamente (en cuanto `n_real ≥ target`).
 
 ---
 
-## Ejecución
+## Cómo ejecutar
 
 ```bash
 python demographics/predominant_unit/run.py
-python demographics/per_unit/run.py
+python demographics/per_unit/run.py        # E073 + I073, con SOFA al ingreso
 ```
 
-Cada uno pide rango de años (default `2019-2025`) y produce los archivos en `demographics/output/<variante>/`.
+Cada script pide rango de años (default `2019-2025`) y vuelca CSV + HTML en `demographics/output/<variante>/`. La cohorte se descarga al vuelo desde Metabase, no hay snapshots ni CSV manuales que mantener.
 
-> **Nota:** el rango por defecto excluye 2018 — quedó fuera para homogeneizar la serie temporal. Si necesitas analizar 2018, pasa `2018-2025` al prompt y regenera el snapshot CSV con la SQL ajustada.
+> **Nota:** el rango por defecto excluye 2018 — quedó fuera para homogeneizar la serie temporal. Si necesitas analizar 2018, pasa `2018-2025` al prompt y se descarga sin tocar código.
+
+### Qué hace cada runner
+
+| Runner | Cohorte | SOFA | Output |
+|---|---|---|---|
+| `predominant_unit/run.py` | E073+I073 agrupados (1 estancia / episodio) | No | 1 informe combinado |
+| `per_unit/run.py` | E073 e I073 separados (traslado = 2 estancias) | Sí, mergeado por estancia | 1 informe por unidad |
+
+Ambos reusan `_loader.py` (descarga año a año), `_metrics.py` (cálculo de tabla) y `_report.py` (HTML/CSV). `per_unit` además invoca `demographics/sofa/` para puntuar el SOFA al ingreso y mergearlo en su cohorte.
 
 ---
 
-## Workaround temporal (1) — Snapshot CSV en lugar de query Python
+## Carga de datos: por qué año a año
 
-> **Estado:** activo desde abril 2026.
+`connection.execute_query()` está topado a **2000 filas por respuesta** (límite silencioso del backend Metabase). Para cohortes mayores (E073+I073 2019-2025 ≈ 4 900 estancias) el loader **trocea por años** vía `connection.execute_query_yearly` — cada anualidad cabe holgadamente bajo el tope.
 
-### Por qué
+`_loader.load_cohort(min_year, max_year, sql_template, synthetic_group_col, skip_synthetic)` rellena `{min_year}` / `{max_year}` con el mismo año en cada chunk, lanza `execute_query` por anualidad y concatena. Si algún año se acerca al tope, el helper avisa por consola para que cortes a granularidad más fina (mes / unidad).
 
-`connection.execute_query()` (la conexión Python a Metabase) está **truncando los resultados a 2000 filas**, lo que rompe el análisis 2019–2025 de cualquiera de las dos variantes. Mientras se resuelve el problema con DataNex / Metabase, trabajamos contra un **snapshot CSV** generado manualmente desde la web de Metabase.
+### Cuando se levante el tope de 2000 filas
 
-### Cómo regenerar un snapshot
+Cuando DataNex / Metabase deje de truncar a 2000 filas (o la API exponga un parámetro `:row-limit` configurable), el troceo por años se podrá retirar:
 
-Para cada variante (`predominant_unit/` y `per_unit/`):
+1. **`connection.py`** — `execute_query_yearly` puede quedarse como utilidad genérica, o eliminarse si no se usa en otros sitios. El reemplazo natural es una sola llamada `execute_query(sql)` con la plantilla rellenada con el rango completo.
+2. **`demographics/_loader.py`** — sustituir el bloque
+   ```python
+   df = execute_query_yearly(
+       lambda year: sql_template.format(min_year=year, max_year=year),
+       min_year, max_year, label="cohort",
+   )
+   ```
+   por
+   ```python
+   df = execute_query(sql_template.format(min_year=min_year, max_year=max_year))
+   ```
+   Mantener el resto del flujo (augmentación sintética 2025) sin cambios.
+3. **`demographics/per_unit/run.py`** — `load_sofa_cohort()` aplica el mismo cambio para `render_sofa_sql(min_year, max_year, icu_subset, …)` en una única llamada.
+4. **Documentación** — actualizar esta sección para reflejar que la consulta es ahora atómica.
 
-1. Abrir Metabase (https://metabase.clinic.cat) → nuevo "Native query" sobre la base AWS Athena.
-2. Pegar el contenido íntegro de `cohort_query_2019-2025.sql` de la subcarpeta correspondiente.
-3. Ejecutar (debe devolver varios miles de filas).
-4. Exportar el resultado como **CSV** ("Download full results" → CSV).
-5. Renombrar y guardarlo en:
-   - `demographics/predominant_unit/cohort_2019-2025.csv`
-   - `demographics/per_unit/cohort_2019-2025.csv`
-
-> El nombre `cohort_2019-2025.csv` es exacto: el loader lo busca por path absoluto. El CSV está cubierto por la regla global `*.csv` del `.gitignore`.
-
-### Cómo lo usa el código
-
-`_loader.load_cohort(snapshot_path, min_year, max_year, sql_template, synthetic_group_col)` resuelve la fuente de datos automáticamente:
-
-- **Si existe** el snapshot → lo lee, filtra por `year_admission ∈ [min_year, max_year]` y, si el rango incluye 2025, aplica la augmentación (ver workaround 2).
-- **Si NO existe** → ejecuta `sql_template.format(...)` contra Metabase via `connection.execute_query`. Esto solo funciona si el resultado cabe en <2000 filas.
-
-### Cómo volver al modo query Python cuando se arregle
-
-Borrar el(los) snapshot(s):
-
-```bash
-rm demographics/predominant_unit/cohort_2019-2025.csv
-rm demographics/per_unit/cohort_2019-2025.csv
-```
-
-A partir del siguiente run, el loader ejecuta la query directamente. Sin tocar código.
+No hay otros sitios donde el troceo esté hardcodeado: ambos runners delegan en `_loader.load_cohort` / `load_sofa_cohort`.
 
 ---
 
-## Workaround temporal (2) — Augmentación sintética 2025
+## Augmentación sintética 2025
 
 > **Estado:** activo desde abril 2026, mientras la BBDD no termine de cargar Nov-Dic 2025.
 
 ### Por qué
 
-La base de datos dejó de cargar a finales de octubre / principios de noviembre de 2025. El snapshot real cubre ~10 meses. Para que el reporting sea visualmente comparable con 2024 (año completo) y los porcentajes de 2025 no aparezcan distorsionados por un denominador chico, el loader **rellena** la cohorte 2025 mediante bootstrap-sampling.
+La base de datos dejó de cargar a finales de octubre / principios de noviembre de 2025. La cohorte real cubre ~10 meses. Para que el reporting sea visualmente comparable con 2024 (año completo) y los porcentajes de 2025 no aparezcan distorsionados por un denominador chico, el loader **rellena** la cohorte 2025 mediante bootstrap-sampling.
 
 ### Política de target (cuántas filas añadir)
 
@@ -350,7 +345,7 @@ SYNTHETIC_LOOKBACK_YEARS = 3
 
 ### Cómo desactivar la augmentación
 
-Cuando la BBDD vuelva a cargar Nov-Dic 2025: regenerar el snapshot real. Si `n_real >= target`, el loader avisa y no añade nada (sin tocar código).
+Cuando la BBDD vuelva a cargar Nov-Dic 2025 el bootstrap se desactiva solo: si `n_real >= target`, el loader avisa y no añade nada (sin tocar código).
 
 Si quieres desactivarlo de forma explícita: poner `SYNTHETIC_LOOKBACK_YEARS = 0` o eliminar la llamada a `augment_synthetic_2025` en `load_cohort`.
 
@@ -392,4 +387,4 @@ print(df.loc[df["synthetic"], "year_admission"].value_counts())
 - Las fechas (`admission_date`, `exitus_date`) llegan como strings con offsets mixtos (CET/CEST). El parseo se hace con `pd.to_datetime(..., utc=True)` para que `.dt.total_seconds()` funcione en `_metrics._mortality`.
 - Las unidades E073/I073 están **hardcodeadas** en ambos `_sql.py` y en las SQL exportadas. Para analizar otras unidades, hay que editar los cuatro archivos. La capacidad nominal de camas también las usa (vía `compute_bed_occupancy_nominal(units=...)` en los `run.py`); además habría que añadir las épocas correspondientes en `_bed_capacity_eras.NOMINAL_CAPACITY_HISTORY`.
 - La fila **"Ocupación de camas (%)"** se deriva en `_metrics.compute_summary` a partir del DataFrame que produce `_bed_occupancy.compute_bed_occupancy_nominal()`, que combina la query mensual de `datascope_gestor_prod.movements` con la tabla de épocas en `_bed_capacity_eras.py`. No es una columna producida por la SQL del cohort. Por eso aparece en el HTML/CSV de resumen pero no en el CSV de cohorte. Ver sección "Sobre la fila Ocupación de camas" para los detalles del cálculo, las épocas, la agregación UCI durante COVID y la exclusión de la cama falsa de E073.
-- La fila **"Cirrosis (n, %)"** y las tres de "Mortalidad cirrosis" excluyen los episodios con trasplante hepático (`liver_transplant_during_episode = 1`). El filtro requiere que el snapshot CSV haya sido generado con la query actualizada que añade la CTE `liver_transplant_episodes`. Ver sección "Sobre las filas de cirrosis y mortalidad en cirrosis".
+- La fila **"Cirrosis (n, %)"** y las tres de "Mortalidad cirrosis" excluyen los episodios con trasplante hepático (`liver_transplant_during_episode = 1`, columna producida por la CTE `liver_transplant_episodes` en cada `_sql.py`). Ver sección "Sobre las filas de cirrosis y mortalidad en cirrosis".

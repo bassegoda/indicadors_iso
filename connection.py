@@ -152,3 +152,62 @@ def execute_query(query, verbose=True):
         print(f"Éxito en {time.time() - start:.2f}s")
     return df
 
+
+# Tope silencioso del backend Metabase. Si una query devuelve >= 2000 filas,
+# la respuesta queda truncada sin error. Avisamos al acercarnos para que el
+# llamante slicee a granularidad más fina (mes, unidad).
+METABASE_SILENT_ROW_CAP = 2000
+
+
+def execute_query_yearly(
+    render_sql,
+    min_year,
+    max_year,
+    *,
+    label="query",
+    row_warn_threshold=METABASE_SILENT_ROW_CAP - 100,
+    verbose=False,
+):
+    """Ejecuta `render_sql(year)` año a año y concatena los resultados.
+
+    Pensado para esquivar el tope silencioso de 2000 filas de Metabase
+    sin tener que mantener snapshots CSV manualmente. La función no
+    pagina dentro de un año: si una sola anualidad supera el tope hay
+    que cortar más fino aguas arriba (por unidad, por mes…). Cuando
+    detectamos un chunk con >= `row_warn_threshold` filas avisamos para
+    que el llamante actúe.
+
+    Args:
+        render_sql: callable `int -> str` que devuelve el SQL para un
+            año concreto.
+        min_year, max_year: rango inclusivo a recorrer.
+        label: etiqueta para los logs (p.ej. "cohort", "SOFA").
+        row_warn_threshold: límite por chunk a partir del cual emitimos
+            aviso. Por defecto, 100 filas por debajo del tope silencioso.
+        verbose: si True, propaga `verbose=True` a cada `execute_query`.
+
+    Returns:
+        Un DataFrame concatenado, o vacío si todos los chunks vinieron
+        vacíos. Conserva el orden cronológico (años ascendentes).
+    """
+    chunks = []
+    total = 0
+    for year in range(int(min_year), int(max_year) + 1):
+        sql = render_sql(year)
+        df = execute_query(sql, verbose=verbose)
+        n = len(df)
+        total += n
+        marker = ""
+        if n >= row_warn_threshold:
+            marker = (
+                f"  ⚠️  {n} filas — cerca del tope silencioso "
+                f"({METABASE_SILENT_ROW_CAP}). Cortar este año a mayor "
+                "granularidad (mes / unidad) si esperas más datos."
+            )
+        print(f"  [{label}] {year}: {n} filas{marker}")
+        if n:
+            chunks.append(df)
+    if not chunks:
+        return pd.DataFrame()
+    print(f"  [{label}] total: {total} filas en {max_year - min_year + 1} años.")
+    return pd.concat(chunks, ignore_index=True)

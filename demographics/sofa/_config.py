@@ -9,9 +9,20 @@ que regenerar los CSVs y revisar este fichero.
 """
 
 # ---------------------------------------------------------------------------
-# UCIs Hospital Clínic — mismas que `deliris/camicu_compliance.sql`
+# Unidades intensivas / semi-intensivas Hospital Clínic.
+#
+# `E0xx` son las UCIs propiamente dichas (mismas que
+# `deliris/camicu_compliance.sql`). Añadimos `I073` — la unidad
+# semi-intensiva digestiva — porque opera con monitorización completa
+# (labs frecuentes, registro de constantes, vasopresores) y queremos
+# poder reportar SOFA al ingreso también ahí. Si se incorporan más
+# unidades semi-intensivas en el futuro habría que añadirlas aquí y
+# validar la cobertura de los 6 componentes.
 # ---------------------------------------------------------------------------
-ICU_UNITS = ["E016", "E103", "E014", "E015", "E037", "E057", "E073", "E043"]
+ICU_UNITS = [
+    "E016", "E103", "E014", "E015", "E037", "E057", "E073", "E043",
+    "I073",
+]
 
 # ---------------------------------------------------------------------------
 # Ventana temporal — SOFA al ingreso = peor valor en las primeras 24 h.

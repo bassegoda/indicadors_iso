@@ -12,6 +12,7 @@ from pathlib import Path
 _REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 
+
 from demographics._bed_occupancy import compute_bed_occupancy_nominal
 from demographics._config import FAKE_BED_PLACE_REFS_E073
 from demographics._loader import load_cohort
@@ -19,8 +20,6 @@ from demographics._metrics import compute_summary
 from demographics._report import generate_html, to_dataframe
 from demographics.predominant_unit._sql import SQL_TEMPLATE
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-SNAPSHOT_CSV = SCRIPT_DIR / "cohort_2019-2025.csv"
 OUTPUT_DIR = _REPO_ROOT / "demographics" / "output" / "predominant_unit"
 
 
@@ -42,7 +41,6 @@ def main():
 
     print(f"Consultando cohorte (predominant_unit) {years_str}…")
     df = load_cohort(
-        snapshot_path=SNAPSHOT_CSV,
         min_year=min_year,
         max_year=max_year,
         sql_template=SQL_TEMPLATE,

@@ -39,7 +39,7 @@ There are no tests, linters, or build tools configured.
 
 ## Architecture
 
-**`connection.py`** (root) — shared database layer via Metabase API. Use `execute_query(query, verbose=True)` which returns a pandas DataFrame. Handles `.env` discovery across Windows/macOS OneDrive paths automatically. Authenticates against Metabase, resolves the database by name, and executes native SQL queries.
+**`connection.py`** (root) — shared database layer via Metabase API. Use `execute_query(query, verbose=True)` for a single SQL string returning a DataFrame, or `execute_query_yearly(render_sql, min_year, max_year, label="…")` to dodge Metabase's silent 2000-row truncation by chunking year-by-year (`render_sql` is a `int -> str` callable). Both handle `.env` discovery across Windows/macOS OneDrive paths automatically and authenticate against Metabase.
 
 **Module pattern** (demographics is the canonical example):
 - `_sql.py` — SQL template (typically a large CTE chain)
@@ -51,9 +51,9 @@ There are no tests, linters, or build tools configured.
   - `predominant_unit/` — current logic. Movements between E073/I073 in the same episode are merged and assigned to the unit with the most time. One combined report.
   - `per_unit/` — new logic. A transfer between units splits the stay into two separate rows. Generates one HTML/CSV per unit. Readmission excludes intra-episode transfers.
 
-  Both pipelines share `_loader.py`, which (a) prefers a manually-exported snapshot CSV (Metabase API truncates Python results to 2000 rows) and (b) augments missing 2025 data via bootstrap-sampling, with the target = mean stays of the previous 3 years (per-unit when applicable). See `demographics/README.md` for details.
+  Both pipelines share `_loader.py`, which (a) downloads the cohort year-by-year via `execute_query_yearly` to dodge Metabase's silent 2000-row cap, and (b) augments missing 2025 data via bootstrap-sampling, with the target = mean stays of the previous 3 years (per-unit when applicable). See `demographics/README.md` for details.
 
-**`sofa/`** — SOFA original (Vincent 1996) at ICU admission. Single Athena query aggregates the 6 components in the first 24 h (one row per stay, per-unit), Python computes the score. Sources by component documented in `sofa/README.md`. Snapshot pattern (Metabase web → `sofa/snapshots/`) for >2000-row cohorts.
+**`demographics/sofa/`** — SOFA original (Vincent 1996) at ICU admission. Athena query aggregates the 6 components in the first 24 h (one row per stay, per-unit), Python computes the score. Sources by component documented in `demographics/sofa/README.md`. Fetched year-by-year via `execute_query_yearly`. Consumed only as a library by `demographics/per_unit/run.py`, which merges the score into the cohort and adds SOFA rows (global, cirrosis, otro hospital) to the report for both E073 (UCI) and I073 (semi-intensive digestive). The `predominant_unit` pipeline does **not** use SOFA (the predominant-unit aggregation is incompatible with the per-stay 24h window).
 
 Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plots and cohort definitions; **nutritions** — enteral/parenteral nutrition analysis.
 

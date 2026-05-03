@@ -19,15 +19,19 @@ Metabase.
 ## Estructura del módulo
 
 ```
-sofa/
+demographics/sofa/
 ├── _config.py     Códigos de lab/rc, regex de fármacos, lista de UCIs, ventana 24 h
 ├── _sql.py        Query Athena única que devuelve 1 fila por estancia con los 6 componentes agregados
-├── _metrics.py    Funciones score_* (0-4 por componente) + compute_sofa()
-├── _report.py     CSV cohorte + CSV resumen + HTML autocontenido
-├── run.py         Orquestador interactivo con prompts
-├── snapshots/     CSVs descargados manualmente desde Metabase web (input)
-└── output/        CSV/HTML generados por run.py (output)
+└── _metrics.py    Funciones score_* (0-4 por componente) + compute_sofa()
 ```
+
+Este módulo se consume como **dependencia de
+`demographics/per_unit/run.py`**: ahí se descarga la cohorte SOFA año a
+año vía Metabase, se calcula el score por estancia y se mergea en la
+cohorte demográfica para enriquecer el reporting (mediana SOFA global,
+subgrupo cirrosis y subgrupo procedencia "otro hospital"). No existe
+un orquestador SOFA standalone — se usa siempre vía el pipeline
+per_unit.
 
 ---
 
@@ -158,70 +162,41 @@ Además de los 6 componentes, el CSV de cohorte incluye:
 
 ---
 
-## UCIs incluidas
+## Unidades incluidas
 
-Definidas en `_config.ICU_UNITS`, mismas que `deliris/camicu_compliance.sql`:
+Definidas en `_config.ICU_UNITS`:
 
 ```
-E016, E103, E014, E015, E037, E057, E073, E043
+E016, E103, E014, E015, E037, E057, E073, E043, I073
 ```
+
+Las `E0xx` son UCIs propiamente dichas (lista alineada con
+`deliris/camicu_compliance.sql`). `I073` es la unidad semi-intensiva
+digestiva: opera con monitorización completa (labs frecuentes,
+constantes, vasopresores) por lo que el SOFA al ingreso es clínicamente
+informativo y se reporta también ahí.
 
 ---
 
-## Cómo lanzar el pipeline
+## Cómo se usa
 
-### Opción A — Snapshot desde Metabase (recomendado para todas las UCIs)
-
-La conexión Metabase API limita la respuesta a 2000 filas. Para 8 UCIs
-× 1 año son ~3000 filas, así que hay que descargar el CSV completo
-manualmente.
-
-1. **Genera el SQL renderizado**:
-   ```bash
-   python -c "from sofa._sql import render_sql; from sofa._config import ICU_UNITS; \
-              print(render_sql(2024, 2024, ICU_UNITS, 24))" > /tmp/sofa_2024.sql
-   ```
-2. **Pega `/tmp/sofa_2024.sql` en una pregunta SQL de Metabase** (DataNex / Athena).
-3. **Run**, espera, `...` → **Download full results** → CSV.
-4. **Renombra y mueve** el CSV a:
-   ```
-   sofa/snapshots/sofa_snapshot_2024.csv
-   ```
-5. **Lanza el pipeline**:
-   ```bash
-   python sofa/run.py
-   ```
-   Periodo: `2024` · Unidades: Enter (todas).
-
-   El script detecta el snapshot, lo carga, filtra y genera el reporting.
-
-### Opción B — Vía API (solo cohortes pequeñas)
-
-Si vas a procesar 1 unidad o un periodo corto y la cohorte cabrá en
-2000 filas:
-
-```bash
-python sofa/run.py
-```
-- Periodo: p.ej. `2024`
-- Unidades: p.ej. `E073` (1 unidad, ~466 estancias en 2024)
-
-El script lanzará la query directamente. Si recibe ≥2000 filas y no
-hay snapshot, avisa de posible truncamiento.
+El SOFA se calcula automáticamente al lanzar
+`python demographics/per_unit/run.py`. La query se ejecuta **año a año**
+vía Metabase API (`connection.execute_query_yearly`): cada anualidad
+para E073/I073 es ≤ ~500 filas, muy por debajo del tope silencioso de
+2000 filas de Metabase. El loader avisa por consola si algún año se
+aproxima al tope para que decidas trocear más fino (mes / unidad).
 
 ---
 
 ## Outputs
 
-`sofa/output/sofa_cohort_<periodo>.csv` — 1 fila por estancia con
-todas las variables clínicas + 6 componentes SOFA + total.
-
-`sofa/output/sofa_summary_<periodo>.csv` — resumen por (unidad, año)
-con n estancias, % con cobertura completa, mediana / IQR de SOFA total
-y % exitus.
-
-`sofa/output/sofa_summary_<periodo>.html` — informe autocontenido con
-tablas y nota explicativa de limitaciones.
+El SOFA mergeado se vuelca al CSV de cohorte de per_unit
+(`demographics/output/per_unit/ward_stays_cohort_<periodo>_E073.csv`,
+columnas `sofa_total`, `sofa_components_available`, `sofa_resp`, …) y
+al reporte HTML (`ward_stays_summary_<periodo>_E073.html`) como filas
+nuevas en la sección *Clínica*: SOFA global, cobertura 6/6, subgrupo
+cirrosis y subgrupo otro hospital.
 
 ---
 

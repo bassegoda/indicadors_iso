@@ -1,21 +1,18 @@
 """Cargador de cohorte para demographics.
 
-Workaround temporal (1) — Snapshot CSV:
-    La conexión Metabase API desde Python está limitando los resultados
-    a 2000 filas. Como salida temporal, los pipelines (`predominant_unit`
-    y `per_unit`) cargan un snapshot CSV generado manualmente desde la
-    web de Metabase usando su `cohort_query_2019-2025.sql`. Si el CSV no
-    existe se hace fallback a `connection.execute_query` con la plantilla
-    SQL pasada por el script.
+La cohorte se descarga directamente de Metabase **año a año** vía
+`connection.execute_query_yearly` para esquivar el tope silencioso de
+2000 filas por respuesta. Cada anualidad de E073+I073 cabe holgadamente
+bajo ese tope.
 
-Workaround temporal (2) — Augmentación sintética 2025:
+Augmentación sintética 2025:
     La BBDD dejó de cargar a finales de 2025, por lo que falta Nov-Dic.
     Para mantener un reporting visualmente comparable con 2024 (año
     completo), se rellena 2025 mediante bootstrap-sampling sobre las
     estancias 2025 reales. El **objetivo de filas** es la **media de los
-    tres años previos** (2022-2024 cuando se reporta 2025). Si el
-    cohort tiene varias unidades y se pasa `synthetic_group_col`,
-    el target se calcula y aplica por grupo (p.ej. una media propia para
+    tres años previos** (2022-2024 cuando se reporta 2025). Si la
+    cohorte tiene varias unidades y se pasa `synthetic_group_col`, el
+    target se calcula y aplica por grupo (p.ej. una media propia para
     E073 y otra para I073).
 
     Las filas sintéticas:
@@ -29,8 +26,9 @@ Workaround temporal (2) — Augmentación sintética 2025:
         las cuentas de mortalidad 30/90 d siguen coherentes.
       - Marcan `still_admitted = "No"` y `synthetic = True`.
 
-    Cuando lleguen los datos reales: regenerar el snapshot. Si el
-    `n_real >= target`, el loader avisa y no inyecta nada.
+    Cuando lleguen los datos reales el bootstrap deja de añadir filas
+    automáticamente: si `n_real >= target`, el loader avisa y no inyecta
+    nada.
 """
 from __future__ import annotations
 
@@ -60,70 +58,57 @@ SYNTHETIC_LOOKBACK_YEARS = 3  # promedio sobre los 3 años previos
 # Loader principal
 # ---------------------------------------------------------------------------
 def load_cohort(
-    snapshot_path: Path,
     min_year: int,
     max_year: int,
-    sql_template: Optional[str] = None,
+    sql_template: str,
     synthetic_group_col: Optional[str] = None,
+    skip_synthetic: bool = False,
 ) -> pd.DataFrame:
-    """Carga la cohorte desde el snapshot CSV (o cae al fallback SQL).
+    """Descarga la cohorte de Metabase año a año y la concatena.
 
-    Tras filtrar por años, si el rango incluye 2025 aplica la
+    Si el rango incluye 2025 y `skip_synthetic=False`, aplica además la
     augmentación sintética con target = media de las estancias en
     `SYNTHETIC_LOOKBACK_YEARS` años previos.
 
     Args:
-        snapshot_path: ruta al CSV exportado de Metabase.
-        min_year, max_year: rango de filtrado por `year_admission`.
-        sql_template: plantilla SQL con `{min_year}`/`{max_year}` para el
-            fallback cuando el snapshot no existe.
-        synthetic_group_col: si se pasa (p.ej. "ou_loc_ref"), el target y
-            el bootstrap se calculan por grupo. Si es None, se aplican de
-            forma global a toda la cohorte 2025.
+        min_year, max_year: rango (inclusivo) por `year_admission`.
+        sql_template: plantilla SQL con `{min_year}` / `{max_year}` —
+            la función la rellena con el mismo año en ambos campos para
+            cada chunk.
+        synthetic_group_col: si se pasa (p.ej. "ou_loc_ref"), el target
+            y el bootstrap se calculan por grupo. Si es None, se aplican
+            de forma global a toda la cohorte 2025.
+        skip_synthetic: si True, no aplica la augmentación y devuelve
+            solo filas reales. Útil para pipelines que primero
+            enriquecen la cohorte (p.ej. mergear SOFA) y luego invocan
+            `compute_3y_mean_target` + `augment_synthetic_2025`
+            manualmente sobre el resultado enriquecido.
     """
-    if snapshot_path.exists():
-        print(f"[loader] Usando snapshot local: {snapshot_path.name}")
-        df_full = pd.read_csv(snapshot_path)
-
-        if "year_admission" not in df_full.columns:
-            raise ValueError(
-                f"El snapshot {snapshot_path.name} no contiene 'year_admission'. "
-                "Regenerar con la SQL correspondiente."
-            )
-
-        year_col = pd.to_numeric(df_full["year_admission"], errors="coerce")
-        mask = (year_col >= min_year) & (year_col <= max_year)
-        df = df_full.loc[mask].copy()
-        print(
-            f"[loader] {len(df)} filas tras filtrar por años "
-            f"{min_year}-{max_year} (de {len(df_full)} totales)."
-        )
-
-        if min_year <= SYNTHETIC_YEAR <= max_year:
-            target = compute_3y_mean_target(
-                df_full,
-                year_now=SYNTHETIC_YEAR,
-                n_years=SYNTHETIC_LOOKBACK_YEARS,
-                group_col=synthetic_group_col,
-            )
-            df = augment_synthetic_2025(
-                df, target=target, group_col=synthetic_group_col
-            )
-        return df
-
-    if sql_template is None:
-        raise FileNotFoundError(
-            f"Snapshot {snapshot_path} no existe y no se pasó `sql_template` para hacer fallback."
-        )
-
     print(
-        f"[loader] Snapshot {snapshot_path.name} no encontrado: "
-        "ejecutando query contra Metabase…"
+        f"[loader] descargando cohorte año a año desde Metabase "
+        f"({min_year}-{max_year})…"
     )
     sys.path.insert(0, str(_REPO_ROOT))
-    from connection import execute_query
+    from connection import execute_query_yearly
 
-    return execute_query(sql_template.format(min_year=min_year, max_year=max_year))
+    df = execute_query_yearly(
+        lambda year: sql_template.format(min_year=year, max_year=year),
+        min_year,
+        max_year,
+        label="cohort",
+    )
+
+    if not skip_synthetic and min_year <= SYNTHETIC_YEAR <= max_year and not df.empty:
+        target = compute_3y_mean_target(
+            df,
+            year_now=SYNTHETIC_YEAR,
+            n_years=SYNTHETIC_LOOKBACK_YEARS,
+            group_col=synthetic_group_col,
+        )
+        df = augment_synthetic_2025(
+            df, target=target, group_col=synthetic_group_col
+        )
+    return df
 
 
 # ---------------------------------------------------------------------------
