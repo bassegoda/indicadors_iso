@@ -32,7 +32,8 @@ Cada subcarpeta contiene análisis específicos de diferentes indicadores:
 | **drg/** | Informe de complejidad asistencial basado en DRGs (Diagnosis-Related Groups): genera un PDF multipágina con indicadores de severidad (SOI), riesgo de mortalidad (ROM) y peso DRG (Case Mix Index) |
 | **dynamic_forms/** | Consultas SQL sobre formularios dinámicos (`dynamic_forms`). Ejecución con `run_queries.py`; consultas en `queries/`, salida CSV en `dynamic_forms/output/`. [Ver README →](dynamic_forms/README.md) |
 | **nutritions/** | Análisis de nutrición enteral y parenteral |
-| **sepsis3/** | Query SQL para identificación de pacientes con sepsis según criterios Sepsis-3 (SOFA score ≥ 2 + sospecha de infección) |
+| **sofa/** | Cálculo del SOFA original (Vincent 1996) al ingreso en UCI: peor valor de cada componente en las primeras 24 h, una fila por estancia (per-unit). Pipeline completo `_sql.py` / `_metrics.py` / `_report.py` / `run.py`. [Ver README →](sofa/README.md) |
+| **dictionaries/** | Catálogos de DataNex descargados como CSV (lab, rc, dynamic_forms, prescriptions, administrations, perfusions, procedures) por familia de indicador (p.ej. `dictionaries/sofa/`). Sirven para hacer grep en local de los `_ref` necesarios sin lanzar queries exploratorias. Cada subcarpeta lleva sus SQL de regeneración (`0X_*.sql`). |
 
 Cada análisis genera sus resultados en una subcarpeta `output/` dentro de su respectiva carpeta.
 
@@ -102,6 +103,7 @@ python deliris/camicu_plots.py
 python nutritions/nutritions.py
 python drg/drg_complexity_report.py
 python dynamic_forms/run_queries.py --list
+python sofa/run.py
 ```
 
 Los scripts solicitan interactivamente los parámetros necesarios (año, unidades, etc.) y generan los resultados en la carpeta `output/` correspondiente.

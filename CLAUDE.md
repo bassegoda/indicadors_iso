@@ -53,7 +53,9 @@ There are no tests, linters, or build tools configured.
 
   Both pipelines share `_loader.py`, which (a) prefers a manually-exported snapshot CSV (Metabase API truncates Python results to 2000 rows) and (b) augments missing 2025 data via bootstrap-sampling, with the target = mean stays of the previous 3 years (per-unit when applicable). See `demographics/README.md` for details.
 
-Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plots and cohort definitions; other focused modules include `sepsis3` and `nutritions`.
+**`sofa/`** — SOFA original (Vincent 1996) at ICU admission. Single Athena query aggregates the 6 components in the first 24 h (one row per stay, per-unit), Python computes the score. Sources by component documented in `sofa/README.md`. Snapshot pattern (Metabase web → `sofa/snapshots/`) for >2000-row cohorts.
+
+Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plots and cohort definitions; **nutritions** — enteral/parenteral nutrition analysis.
 
 **`data_quality/`** — ETL completeness cross-year comparison over `movements` and `labs`. Same `_sql.py` / `_metrics.py` / `_report.py` split as demographics, but `_report.py` also embeds matplotlib charts (line, heatmap, bars) as base64 PNGs into a standalone HTML file.
 
