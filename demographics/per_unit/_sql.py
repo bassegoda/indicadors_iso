@@ -13,8 +13,10 @@ SQL_TEMPLATE = """
 --   - Año de ingreso en el rango.
 --   - Al menos una prescripción durante la estancia.
 --
--- Reingresos: definidos como la siguiente admisión del mismo paciente
--- en un EPISODIO DISTINTO (ignora transferencias intra-episodio).
+-- Reingresos 24/72 h: siguiente admisión del mismo paciente a la
+-- **misma** ou_loc_ref dentro del **mismo** episodio (p. ej. UCI →
+-- planta → misma UCI). Ventana desde effective_discharge_date. No
+-- cuenta reingreso tras cierre de episodio (nuevo episode_ref).
 -- =====================================================================
 WITH all_related_moves AS (
     SELECT
@@ -84,35 +86,14 @@ prescription_filtered AS (
         AND p.start_drug_date BETWEEN c.admission_date
             AND c.effective_discharge_date
 ),
--- Reingreso: siguiente admisión del paciente en un EPISODIO distinto.
--- Calculamos LEAD a nivel de episodio (no de estancia) para no contar
--- los traslados intra-episodio como reingresos.
-episode_starts AS (
-    SELECT
-        patient_ref,
-        episode_ref,
-        MIN(admission_date) AS episode_start
-    FROM prescription_filtered
-    GROUP BY patient_ref, episode_ref
-),
-episode_lead AS (
-    SELECT
-        patient_ref,
-        episode_ref,
-        episode_start,
-        LEAD(episode_start) OVER (
-            PARTITION BY patient_ref ORDER BY episode_start
-        ) AS next_episode_start
-    FROM episode_starts
-),
 cohort_with_next AS (
     SELECT
         c.*,
-        e.next_episode_start AS next_admission_date
+        LEAD(c.admission_date) OVER (
+            PARTITION BY c.patient_ref, c.episode_ref, c.ou_loc_ref
+            ORDER BY c.admission_date, c.stay_id
+        ) AS next_admission_date
     FROM prescription_filtered c
-    LEFT JOIN episode_lead e
-        ON c.patient_ref = e.patient_ref
-        AND c.episode_ref = e.episode_ref
 ),
 cirrhosis_dx AS (
     SELECT DISTINCT patient_ref
@@ -198,11 +179,13 @@ SELECT DISTINCT
     CASE WHEN lt.patient_ref IS NOT NULL THEN 1 ELSE 0 END AS liver_transplant_during_episode,
     CASE
         WHEN cw.next_admission_date IS NOT NULL
+             AND date_diff('hour', cw.effective_discharge_date, cw.next_admission_date) >= 0
              AND date_diff('hour', cw.effective_discharge_date, cw.next_admission_date) <= 24
         THEN 1 ELSE 0
     END AS readmission_24h,
     CASE
         WHEN cw.next_admission_date IS NOT NULL
+             AND date_diff('hour', cw.effective_discharge_date, cw.next_admission_date) >= 0
              AND date_diff('hour', cw.effective_discharge_date, cw.next_admission_date) <= 72
         THEN 1 ELSE 0
     END AS readmission_72h,

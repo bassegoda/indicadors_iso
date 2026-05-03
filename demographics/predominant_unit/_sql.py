@@ -102,8 +102,9 @@ prescription_filtered AS (
 cohort_with_next AS (
     SELECT
         c.*,
-        LEAD(admission_date) OVER (
-            PARTITION BY patient_ref ORDER BY admission_date
+        LEAD(c.admission_date) OVER (
+            PARTITION BY c.patient_ref, c.episode_ref, c.ou_loc_ref
+            ORDER BY c.admission_date, c.stay_id
         ) AS next_admission_date
     FROM prescription_filtered c
 ),
@@ -208,11 +209,17 @@ SELECT DISTINCT
         WHEN cw.next_admission_date IS NOT NULL
              AND date_diff(
                  'hour', cw.effective_discharge_date, cw.next_admission_date
+             ) >= 0
+             AND date_diff(
+                 'hour', cw.effective_discharge_date, cw.next_admission_date
              ) <= 24
         THEN 1 ELSE 0
     END AS readmission_24h,
     CASE
         WHEN cw.next_admission_date IS NOT NULL
+             AND date_diff(
+                 'hour', cw.effective_discharge_date, cw.next_admission_date
+             ) >= 0
              AND date_diff(
                  'hour', cw.effective_discharge_date, cw.next_admission_date
              ) <= 72

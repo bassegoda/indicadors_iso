@@ -42,7 +42,7 @@ demographics/
 | Agrupamiento | Movimientos consecutivos entre E073 e I073 dentro del mismo episodio se **agrupan en una sola estancia**. | Cada unidad genera estancias **independientes**. Un traslado E073→I073 cuenta como **dos estancias** distintas. |
 | Asignación a unidad | A la unidad donde el paciente pasó **más tiempo** (con desempate por primera unidad). | A la unidad real del movimiento (por construcción cada estancia = 1 unidad). |
 | `had_transfer` | `Yes` si la estancia visitó >1 unidad antes de agruparse. | Siempre `No` (las estancias agrupan una sola unidad). |
-| Reingresos 24/72 h | Siguiente estancia del mismo paciente en E073/I073. | Siguiente estancia del mismo paciente en un **episodio distinto** (excluye traslados intra-episodio). |
+| Reingresos 24/72 h | Siguiente estancia en la **misma** unidad predominante (`ou_loc_ref`), **mismo** episodio, entre `effective_discharge_date` y la nueva admisión (incluye paso por planta u otras ubicaciones). No cuenta reingreso administrativo en **nuevo** `episode_ref`. | **Misma** regla por estancia real (E073 o I073), sin unidad predominante. |
 | Output | **1** HTML/CSV combinado E073+I073. | **2** HTML/CSV, uno por unidad. |
 | Filtro común (cama asignada, año, prescripción) | Idéntico. | Idéntico. |
 
@@ -109,7 +109,7 @@ Los dos informes responden a preguntas distintas. Las cifras **no son intercambi
 - **Estancias artificialmente cortas.** Un traslado a las 2 horas crea un "ingreso" en E073 de 2 horas. Esto **reduce la mediana de estancia** del informe de E073 (donde antes habría una estancia más larga al combinar ambas unidades) y puede dar la falsa impresión de "altas precoces". En realidad fue un traslado.
 - **Mortalidad por estancia infraestima en la unidad de partida.** Como en el Caso 2, la unidad donde el paciente NO falleció (porque fue trasladado vivo) no contabiliza el éxito; aunque clínicamente su atención inicial fue parte del proceso. La mortalidad a 30 y 90 días, en cambio, no tiene este sesgo: se calculan desde la admisión y solo dependen de que el paciente muera dentro de la ventana, no de en qué unidad ocurra.
 - **30-day / 90-day mortality contabilizada DOS veces** entre informes para los pacientes trasladados. Si la Sra. López fallece a los 12 días de su ingreso en E073 (5 días E073 + 1 día I073 + recuperación, recaída y muerte el día 12), tanto el "ingreso E073" como el "ingreso I073" cumplen mortalidad a 30 d. **Cada informe la cuenta como 1 muerte.** Si calculáis por separado y sumáis, contaréis dos muertes para una persona.
-- **Reingresos a corto plazo conservadores.** El cálculo excluye los traslados intra-episodio (lo cual es correcto: no son reingresos). Pero también significa que **un paciente trasladado E073→I073 que vuelve a casa el mismo día y reingresa en E073 24 horas después** sí se cuenta como reingreso (episodio nuevo). Coherente con la definición clínica habitual.
+- **Reingresos 24/72 h intra-episodio.** Cuentan los que **vuelven a la misma unidad** (E073 o I073) dentro del **mismo** episodio antes de 24/72 h desde el fin de la estancia (p. ej. alta de UCI a planta y nuevo ingreso en UCI). **No** cuentan si el nuevo ingreso abre un `episode_ref` distinto. Un traslado E073→I073 no activa reingreso en ninguno de los dos informes por fila (son `ou_loc_ref` distintas); el reingreso se mide por **vuelta a la misma** unidad.
 - **Pacientes únicos por unidad ≠ unión.** El "N pacientes" del informe E073 + el del informe I073 no es la cohorte total. Para cifras agregadas del servicio entero, usad `predominant_unit`.
 
 ### Recomendaciones rápidas según la pregunta
@@ -125,7 +125,7 @@ Los dos informes responden a preguntas distintas. Las cifras **no son intercambi
 | ¿Cuál es la mortalidad intrahospitalaria de mi unidad? | **Ambos**, con cuidado. `per_unit` infraestima si trasladáis a pacientes terminales. `predominant_unit` la atribuye a la unidad de mayor permanencia, no a la unidad donde ocurrió el éxito. | Triangulad. Si las cifras son muy distintas, suele señalar un patrón de traslado pre-éxitus. |
 | ¿Cuál es la mortalidad del paciente atendido (a 30/90 días)? | `predominant_unit` | Más interpretable: una muerte = una persona; sin riesgo de doble conteo. |
 | ¿Cuántos pacientes proceden de otro hospital? | `predominant_unit` | A nivel de paciente único sin solapamientos. |
-| Tasa de reingreso del servicio | `predominant_unit` | Tradicionalmente se reporta a nivel de episodio, no de unidad. |
+| Tasa de reingreso UCI (misma unidad, mismo episodio) | `predominant_unit` | Vista combinada E073+I073 con unidad predominante por estancia; en `per_unit` desglosado por unidad. |
 | ¿Cuántos traslados internos se producen entre nuestras unidades? | `predominant_unit` (campo `had_transfer`) | Cada estancia indica si hubo o no traslado intra-servicio. |
 
 ### Sobre la fila "Ocupación de camas (%)"
@@ -375,7 +375,8 @@ print(df.loc[df["synthetic"], "year_admission"].value_counts())
 | `had_transfer` | `Yes/No` en `predominant_unit`; siempre `No` en `per_unit`. |
 | `year_admission`, `age_at_admission`, `sex`, `nationality`, `natio_ref`, `health_area`, `postcode` | Demografía. |
 | `exitus_during_stay`, `exitus_date` | Mortalidad intrahospitalaria + 30/90 d (`_metrics.py`). |
-| `has_cirrhosis`, `readmission_24h`, `readmission_72h` | Indicadores clínicos. `has_cirrhosis = 1` si el paciente tiene un diagnóstico ICD-9/ICD-10 de cirrosis en cualquier episodio (condición crónica). |
+| `has_cirrhosis` | Indicador clínico de cirrosis. `has_cirrhosis = 1` si el paciente tiene un diagnóstico ICD-9/ICD-10 de cirrosis en cualquier episodio (condición crónica). |
+| `readmission_24h`, `readmission_72h` | `1` si existe una **siguiente** estancia en la **misma** `ou_loc_ref` dentro del **mismo** `episode_ref` con admisión a ≤24/72 h desde `effective_discharge_date` de esta estancia. |
 | `liver_transplant_during_episode` | `1` si el episodio incluye un procedimiento ICD-10-PCS `0FY0…` o ICD-9-CM `50.5x`. Usado en `_metrics.py` para excluir a estos pacientes de la cohorte de cirrosis (no se cuentan ni en "Cirrosis (n, %)" ni en sus mortalidades). |
 | `procedencia_codigo`, `procedencia` | `dynamic_forms` (UCI form, PROCE_MALA), última valoración por episodio. |
 | `from_other_hospital` | `1` si `value_text IN ('20-Altre hospital-', '20-Otro hospital-')`. El formulario UCI migró del catalán al castellano hacia septiembre de 2022 (ver `dynamic_forms/queries/06_diag_proce_mala_e073_i073_yearly.sql`). |
