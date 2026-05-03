@@ -1,4 +1,4 @@
-"""Salida CSV + HTML básica del reporting SOFA-2."""
+"""Salida CSV + HTML básica del reporting SOFA."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -40,7 +40,7 @@ td:first-child, th:first-child {{ text-align: left; }}
 .note {{ color: #666; font-size: 0.9em; margin-top: 24px; }}
 </style></head><body>
 <h1>{title}</h1>
-<p>Pacientes UCI Hospital Clínic — SOFA-2 al ingreso (peor valor en las
+<p>Pacientes UCI Hospital Clínic — SOFA al ingreso (peor valor en las
 primeras 24 h desde admission_date).</p>
 
 <h2>Resumen por unidad y año</h2>

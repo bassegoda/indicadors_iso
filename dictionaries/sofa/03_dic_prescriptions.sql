@@ -4,11 +4,11 @@
 -- Reconstruimos el diccionario de fármacos desde `prescriptions` con
 -- DISTINCT sobre (atc_ref, atc_descr, drug_ref, drug_descr, unit, ruta).
 -- Sin filtro semántico fino: nos bajamos las familias ATC que pueden
--- intervenir en SOFA-2 (vasoactivos, sedantes/relajantes para soporte
+-- intervenir en SOFA (vasoactivos, sedantes/relajantes para soporte
 -- ventilatorio, diuréticos para contexto renal). El filtro fino lo hago
 -- en local.
 --
--- IMPORTANTE: para SOFA-2 al ingreso usaremos `administrations` y
+-- IMPORTANTE: para SOFA al ingreso usaremos `administrations` y
 -- `perfusions` (lo que REALMENTE se administra), no `prescriptions`.
 -- Este diccionario sirve sólo de referencia / fuente de descripción de
 -- los fármacos, ya que `administrations` y `perfusions` no traen ATC.
@@ -25,7 +25,7 @@
 --
 -- Cómo usarlo:
 --   1. Ejecuta en Metabase (Athena).
---   2. Descarga a `dictionaries/sofa2/dic_prescriptions.csv`.
+--   2. Descarga a `dictionaries/sofa/dic_prescriptions.csv`.
 -- =====================================================================
 SELECT
     atc_ref,

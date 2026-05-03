@@ -1,17 +1,17 @@
 -- =====================================================================
--- Diccionario LAB completo (para luego filtrar SOFA-2 en local)
+-- Diccionario LAB completo (para luego filtrar SOFA en local)
 -- =====================================================================
 -- Las tablas `dic_*` ya no existen en datascope_gestor_prod, así que
 -- reconstruimos el diccionario desde la propia tabla `labs` con DISTINCT
 -- sobre (lab_sap_ref, lab_descr, units). Sin filtro semántico: nos
--- bajamos TODO el diccionario y la búsqueda de los códigos SOFA-2 la
+-- bajamos TODO el diccionario y la búsqueda de los códigos SOFA la
 -- hacemos en local sobre el CSV.
 --
 -- Cómo usarlo:
 --   1. Ejecuta la query en Metabase (Athena).
 --   2. Si pasa de 2000 filas, descarga el CSV completo desde la UI
 --      ("..." -> Download full results) a:
---        dictionaries/sofa2/dic_lab_full.csv
+--        dictionaries/sofa/dic_lab_full.csv
 --   3. Avísame cuando esté el CSV y hago el grep en local para extraer
 --      los códigos de PaO2, PaCO2, plaquetas, bilirrubina, creatinina,
 --      lactato, etc.

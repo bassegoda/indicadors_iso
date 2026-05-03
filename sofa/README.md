@@ -1,8 +1,14 @@
-# SOFA-2 al ingreso en UCI
+# SOFA al ingreso en UCI
 
-Pipeline para calcular la puntuación SOFA (Sequential Organ Failure
-Assessment) al ingreso para cada estancia en una UCI del Hospital
-Clínic, a partir de DataNex (AWS / Athena) vía Metabase.
+Pipeline para calcular la puntuación **SOFA original (Vincent et al.,
+*Intensive Care Med* 1996;22:707-10)** al ingreso para cada estancia en
+una UCI del Hospital Clínic, a partir de DataNex (AWS / Athena) vía
+Metabase.
+
+> ⚠️ **No es el "SOFA 2.0" propuesto por Moreno et al. en 2023.** Esta
+> implementación usa los cortes y componentes del SOFA clásico. La
+> versión actualizada (que añadiría SpO2/FiO2, lactato y AKI-stage
+> KDIGO) queda pendiente como posible v2.
 
 > **SOFA al ingreso** = peor valor de cada componente en las **primeras
 > 24 h** desde la fecha de admisión a UCI. Rango por componente: 0-4
@@ -13,7 +19,7 @@ Clínic, a partir de DataNex (AWS / Athena) vía Metabase.
 ## Estructura del módulo
 
 ```
-sofa2/
+sofa/
 ├── _config.py     Códigos de lab/rc, regex de fármacos, lista de UCIs, ventana 24 h
 ├── _sql.py        Query Athena única que devuelve 1 fila por estancia con los 6 componentes agregados
 ├── _metrics.py    Funciones score_* (0-4 por componente) + compute_sofa()
@@ -144,7 +150,7 @@ Además de los 6 componentes, el CSV de cohorte incluye:
 
 | Columna | Origen | Uso |
 |---|---|---|
-| `weight_kg` | `dynamic_forms` form `UCI` question `PES`, primer registro válido en ventana 24h (rango 30-250 kg) | Reservado para v2 (cálculo dosis vasopresor en mcg/kg/min). |
+| `weight_kg` | `rc.result_num` con `rc_sap_ref IN ('PESO','PESO_SECO')`, primer registro válido en ventana 24h (rango 30-250 kg). Fallback: `dynamic_forms` form `UCI` question `PES`. | Reservado para v2 (cálculo dosis vasopresor en mcg/kg/min). `PESO_SECO` es especialmente útil en cirróticos con ascitis. |
 | `sofa_form_*` (resp/coag/liver/cardio/neuro/renal) | `dynamic_forms` form `SOFA` questions `SOFA_*` | Validación cruzada contra puntuación SOFA precalculada por la enfermería. **Cobertura observada en 2024: 0% en TODAS las UCIs** — el form existe pero no se rellena en producción. |
 | `exitus_during_stay` | `exitus.exitus_date` entre admission y discharge | Para curvas de mortalidad por SOFA. |
 | `age_at_admission`, `sex` | `demographics` | Demografía. |
@@ -172,18 +178,18 @@ manualmente.
 
 1. **Genera el SQL renderizado**:
    ```bash
-   python -c "from sofa2._sql import render_sql; from sofa2._config import ICU_UNITS; \
-              print(render_sql(2024, 2024, ICU_UNITS, 24))" > /tmp/sofa2_2024.sql
+   python -c "from sofa._sql import render_sql; from sofa._config import ICU_UNITS; \
+              print(render_sql(2024, 2024, ICU_UNITS, 24))" > /tmp/sofa_2024.sql
    ```
-2. **Pega `/tmp/sofa2_2024.sql` en una pregunta SQL de Metabase** (DataNex / Athena).
+2. **Pega `/tmp/sofa_2024.sql` en una pregunta SQL de Metabase** (DataNex / Athena).
 3. **Run**, espera, `...` → **Download full results** → CSV.
 4. **Renombra y mueve** el CSV a:
    ```
-   sofa2/snapshots/sofa2_snapshot_2024.csv
+   sofa/snapshots/sofa_snapshot_2024.csv
    ```
 5. **Lanza el pipeline**:
    ```bash
-   python sofa2/run.py
+   python sofa/run.py
    ```
    Periodo: `2024` · Unidades: Enter (todas).
 
@@ -195,7 +201,7 @@ Si vas a procesar 1 unidad o un periodo corto y la cohorte cabrá en
 2000 filas:
 
 ```bash
-python sofa2/run.py
+python sofa/run.py
 ```
 - Periodo: p.ej. `2024`
 - Unidades: p.ej. `E073` (1 unidad, ~466 estancias en 2024)
@@ -207,14 +213,14 @@ hay snapshot, avisa de posible truncamiento.
 
 ## Outputs
 
-`sofa2/output/sofa2_cohort_<periodo>.csv` — 1 fila por estancia con
+`sofa/output/sofa_cohort_<periodo>.csv` — 1 fila por estancia con
 todas las variables clínicas + 6 componentes SOFA + total.
 
-`sofa2/output/sofa2_summary_<periodo>.csv` — resumen por (unidad, año)
+`sofa/output/sofa_summary_<periodo>.csv` — resumen por (unidad, año)
 con n estancias, % con cobertura completa, mediana / IQR de SOFA total
 y % exitus.
 
-`sofa2/output/sofa2_summary_<periodo>.html` — informe autocontenido con
+`sofa/output/sofa_summary_<periodo>.html` — informe autocontenido con
 tablas y nota explicativa de limitaciones.
 
 ---
@@ -265,12 +271,12 @@ ingreso (mediana 7), etc.
 
 Los códigos `lab_sap_ref` / `rc_sap_ref` / fármacos provienen de:
 
-- `dictionaries/sofa2/dic_labs.csv`
-- `dictionaries/sofa2/dic_rc.csv`
-- `dictionaries/sofa2/dic_dynamic_forms.csv`
-- `dictionaries/sofa2/dic_administrations.csv`
-- `dictionaries/sofa2/dic_perfusions.csv`
-- `dictionaries/sofa2/dic_prescriptions.csv`
+- `dictionaries/sofa/dic_labs.csv`
+- `dictionaries/sofa/dic_rc.csv`
+- `dictionaries/sofa/dic_dynamic_forms.csv`
+- `dictionaries/sofa/dic_administrations.csv`
+- `dictionaries/sofa/dic_perfusions.csv`
+- `dictionaries/sofa/dic_prescriptions.csv`
 
-Generados por los SQL `dictionaries/sofa2/0X_*.sql` (ejecutados en
+Generados por los SQL `dictionaries/sofa/0X_*.sql` (ejecutados en
 Metabase y descargados como CSV completo).

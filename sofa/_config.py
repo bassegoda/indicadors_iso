@@ -1,7 +1,10 @@
-"""Códigos y constantes para el cálculo del SOFA-2 al ingreso en UCI.
+"""Códigos y constantes para el cálculo del SOFA al ingreso en UCI.
+
+Score implementado: **SOFA original** (Vincent JL et al. Intensive Care
+Med 1996;22:707-10). NO es el SOFA 2.0 (Moreno 2023).
 
 Todos los códigos vienen identificados desde los CSVs en
-`dictionaries/sofa2/`. Si DataNex añade nuevos lab/rc/drug refs habrá
+`dictionaries/sofa/`. Si DataNex añade nuevos lab/rc/drug refs habrá
 que regenerar los CSVs y revisar este fichero.
 """
 
@@ -40,8 +43,14 @@ GCS_TOTAL_FORM = "UCI"
 GCS_TOTAL_QUESTION = "GLASG_P"
 
 # ---------------------------------------------------------------------------
-# Peso (`dynamic_forms`) — necesario para mcg/kg/min en versiones futuras.
+# Peso del paciente — necesario para mcg/kg/min en versiones futuras.
+# Fuente preferida: `rc.rc_sap_ref` IN ('PESO','PESO_SECO').
+#   * PESO       = peso medido a pie de cama.
+#   * PESO_SECO  = peso "seco" estimado (sin sobrecarga hídrica).
+#                  Especialmente útil en cirróticos con ascitis (E073).
+# Fallback: `dynamic_forms` form 'UCI', question 'PES'.
 # ---------------------------------------------------------------------------
+RC_WEIGHT = ("PESO", "PESO_SECO")
 WEIGHT_FORM = "UCI"
 WEIGHT_QUESTION = "PES"
 

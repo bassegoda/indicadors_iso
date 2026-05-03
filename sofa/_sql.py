@@ -1,4 +1,4 @@
-"""SQL único que construye la cohorte UCI + agregados SOFA-2 al ingreso.
+"""SQL único que construye la cohorte UCI + agregados SOFA al ingreso.
 
 Devuelve **una fila por estancia** (per-unit, sin agrupar traslados),
 con los peores valores de cada componente SOFA en las primeras 24 h.
@@ -14,7 +14,7 @@ Parámetros de plantilla:
 
 SQL_TEMPLATE = r"""
 -- =====================================================================
--- SOFA-2 al ingreso — cohorte UCI + agregados por componente (24 h)
+-- SOFA al ingreso — cohorte UCI + agregados por componente (24 h)
 -- Dialect: Athena (Trino/Presto)
 -- =====================================================================
 
@@ -213,8 +213,28 @@ vasoactive_agg AS (
     GROUP BY patient_ref, episode_ref, ou_loc_ref, stay_id
 ),
 
--- 6. Peso del paciente (`UCI` form, question `PES`).
-weight_in_window AS (
+-- 6. Peso del paciente. Preferimos `rc.PESO` / `rc.PESO_SECO` (registro
+--    a pie de cama, alta cobertura). Fallback a `dynamic_forms.UCI.PES`
+--    para los pocos casos sin registro en rc.
+--    rc.episode_ref es NULL → join SOLO por patient_ref + ventana.
+weight_from_rc AS (
+    SELECT
+        cw.patient_ref, cw.episode_ref, cw.ou_loc_ref, cw.stay_id,
+        r.result_num AS weight_kg,
+        ROW_NUMBER() OVER (
+            PARTITION BY cw.patient_ref, cw.episode_ref, cw.ou_loc_ref, cw.stay_id
+            ORDER BY r.result_date ASC
+        ) AS rn
+    FROM cohort_window cw
+    JOIN datascope_gestor_prod.rc r
+        ON r.patient_ref = cw.patient_ref
+       AND r.result_date >= cw.admission_date
+       AND r.result_date <  cw.window_end
+    WHERE r.rc_sap_ref IN ('PESO','PESO_SECO')
+      AND r.result_num IS NOT NULL
+      AND r.result_num BETWEEN 30 AND 250
+),
+weight_from_form AS (
     SELECT
         cw.patient_ref, cw.episode_ref, cw.ou_loc_ref, cw.stay_id,
         df.value_num AS weight_kg,
@@ -235,9 +255,12 @@ weight_in_window AS (
       AND df.value_num BETWEEN 30 AND 250
 ),
 weight_agg AS (
-    SELECT patient_ref, episode_ref, ou_loc_ref, stay_id, weight_kg
-    FROM weight_in_window
-    WHERE rn = 1
+    SELECT
+        cw.patient_ref, cw.episode_ref, cw.ou_loc_ref, cw.stay_id,
+        COALESCE(wr.weight_kg, wf.weight_kg) AS weight_kg
+    FROM cohort_window cw
+    LEFT JOIN weight_from_rc   wr ON wr.patient_ref = cw.patient_ref AND wr.episode_ref = cw.episode_ref AND wr.ou_loc_ref = cw.ou_loc_ref AND wr.stay_id = cw.stay_id AND wr.rn = 1
+    LEFT JOIN weight_from_form wf ON wf.patient_ref = cw.patient_ref AND wf.episode_ref = cw.episode_ref AND wf.ou_loc_ref = cw.ou_loc_ref AND wf.stay_id = cw.stay_id AND wf.rn = 1
 ),
 
 -- 7. SOFA precalculado en `dynamic_forms` (gold standard parcial).

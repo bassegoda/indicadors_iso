@@ -11,13 +11,13 @@
 -- prescriptions por (patient_ref, episode_ref, treatment_ref) y
 -- agrupa por (drug_ref, drug_descr, atc_ref, atc_descr).
 --
--- Es la base para identificar vasopresores en infusión para el SOFA-2
+-- Es la base para identificar vasopresores en infusión para el SOFA
 -- cardiovascular (necesario para clasificar a dosis bajas vs altas
 -- de noradrenalina, etc.).
 --
 -- Cómo usarlo:
 --   1. Ejecuta en Metabase (Athena).
---   2. Descarga a `dictionaries/sofa2/dic_perfusions.csv`.
+--   2. Descarga a `dictionaries/sofa/dic_perfusions.csv`.
 --
 -- Notas:
 --   * Filtramos por `start_date >= 2018`.

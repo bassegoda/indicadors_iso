@@ -2,18 +2,18 @@
 -- Diccionario ADMINISTRATIONS (lo que REALMENTE se administra)
 -- =====================================================================
 -- `administrations` no trae ATC propio, pero sí `drug_ref`, `drug_descr`,
--- `route_ref` y `quantity_unit`. Para SOFA-2 al ingreso (primeras 24 h)
+-- `route_ref` y `quantity_unit`. Para SOFA al ingreso (primeras 24 h)
 -- esta tabla es la fuente correcta para fármacos en bolo / pauta fija
 -- (más fiel que `prescriptions`).
 --
 -- Para vasopresores en infusión continua, mejor cruzar con `perfusions`
 -- (ver 05_dic_perfusions.sql). Aquí nos bajamos el catálogo de fármacos
 -- realmente administrados, sin filtro semántico, y luego en local
--- identifico los relevantes para SOFA-2.
+-- identifico los relevantes para SOFA.
 --
 -- Cómo usarlo:
 --   1. Ejecuta en Metabase (Athena).
---   2. Descarga a `dictionaries/sofa2/dic_administrations.csv`.
+--   2. Descarga a `dictionaries/sofa/dic_administrations.csv`.
 --
 -- Notas:
 --   * Filtramos `given IS NULL` para coger sólo administraciones

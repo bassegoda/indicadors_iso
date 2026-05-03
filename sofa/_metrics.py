@@ -1,4 +1,8 @@
-"""Cálculo del SOFA-2 al ingreso a partir del DataFrame agregado por SQL.
+"""Cálculo del SOFA al ingreso a partir del DataFrame agregado por SQL.
+
+Score implementado: **SOFA original** (Vincent JL et al. Intensive Care
+Med 1996;22:707-10). Cortes y reglas de la tabla original. NO es el
+SOFA 2.0 (Moreno 2023).
 
 Cada función `score_*` devuelve un entero 0-4 según la tabla SOFA, o
 `pd.NA` si los datos son insuficientes para evaluar el componente.
@@ -178,7 +182,7 @@ def compute_sofa(df: pd.DataFrame) -> pd.DataFrame:
 # Resúmenes agregados por unidad / año
 # ---------------------------------------------------------------------------
 def summarize_by_unit_year(df: pd.DataFrame) -> pd.DataFrame:
-    """Devuelve estadísticos del SOFA-2 por (ou_loc_ref, year_admission)."""
+    """Devuelve estadísticos del SOFA por (ou_loc_ref, year_admission)."""
     grp = df.groupby(["ou_loc_ref", "year_admission"], dropna=False)
     summary = grp.agg(
         n_stays=("sofa_total", "size"),
