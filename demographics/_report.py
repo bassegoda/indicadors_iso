@@ -240,6 +240,10 @@ def generate_html(
     title: str,
     output_path: Path,
     subtitle: str = "Hospital Cl\u00ednic de Barcelona \u2014 Unidades E073, I073",
+    stay_note: str = (
+        "movimientos consecutivos agrupados con tolerancia de 5 min; "
+        "unidad predominante por tiempo."
+    ),
 ) -> None:
     """Generate a professional HTML report from structured summary data."""
 
@@ -305,7 +309,7 @@ def generate_html(
     <h3>Notas metodol\u00f3gicas</h3>
     <ul>
         <li><strong>Unidades analizadas:</strong> E073, I073 (movimientos con place_ref v\u00e1lido).</li>
-        <li><strong>Estancia:</strong> movimientos consecutivos agrupados con tolerancia de 5 min; unidad predominante por tiempo.</li>
+        <li><strong>Estancia:</strong> {stay_note}</li>
         <li><strong>Filtro de prescripci\u00f3n:</strong> solo estancias con al menos una prescripci\u00f3n activa durante la estancia.</li>
         <li><strong>Sexo y nacionalidad:</strong> calculados a nivel de paciente \u00fanico (no de estancia).</li>
         <li><strong>AISBE:</strong> pacientes con \u00e1rea b\u00e1sica de salud del \u00e1rea de influencia del hospital o c\u00f3digo postal correspondiente.</li>

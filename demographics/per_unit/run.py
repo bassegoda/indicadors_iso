@@ -244,6 +244,12 @@ def main():
                 f"Hospital Clínic de Barcelona — Unidad {unit} (per-unit, "
                 "estancias separadas por unidad)"
             ),
+            stay_note=(
+                "movimientos consecutivos agrupados con tolerancia de 5 min "
+                "dentro de la misma unidad; si un paciente se traslada de "
+                "E073 a I073 (o viceversa) dentro del mismo episodio, "
+                "cuenta como dos estancias distintas."
+            ),
         )
 
     print(f"\nListo. Archivos guardados en {OUTPUT_DIR}/")
