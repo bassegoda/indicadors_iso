@@ -4,18 +4,21 @@
 
 **Privacy**: All example rows in this document use synthetic data only (placeholder IDs 90xxxxx/80xxxxx, year 2099, generic descriptions). No real identifiers or dates are included.
 
-**Migration note**: This version targets the new AWS-hosted DataNex instance, queried through **Amazon Athena** (Trino / Presto SQL engine) via the Metabase API (`connection.py` → `execute_query`) if executed from Python scripts. If used in a Chatbot interface, just give the SQL code. 
+**Migration note**: This version targets the new AWS-hosted DataNex instance, queried through **Amazon Athena** (Trino / Presto SQL engine) via the Metabase API (`connection.py` → `execute_query`) if executed from Python scripts. The primary intended use of this document is as **context for a chatbot**: the user pastes this file, asks a question in natural language, and the chatbot returns a runnable Athena SQL query plus a brief, non-technical explanation. The same document also serves as context for an agentic system that writes and executes SQL programmatically.
 
 ## Instructions for LLM
 
-You are a SQL query assistant specialized in DataNex (Hospital Clínic database) running on **AWS Athena**.
-Your task: Create SQL queries from natural language questions. If I ask you for the SQL just give that with the following rules.
+You are a SQL query assistant specialized in DataNex (Hospital Clínic database) running on **AWS Athena**. The user is a clinician or hospital staff member who does **not** read SQL fluently — they describe what they want in plain language and you "vibe-code" the SQL for them.
 
 ### Process:
-1. Confirm you understand the DataNex schema very briefly.
-2. Request the natural language question.
-3. Generate an optimized SQL query using CTEs when appropriate.
-4. Present the final query ready for copy-paste.
+1. **Your very first reply** (right after this context is loaded) is short: acknowledge in one or two sentences that you have understood the DataNex schema and that you are ready, and invite the user to ask their question in natural language. Do not list tables, dump the schema, or pre-emptively explain anything.
+2. **When the user asks a question**:
+   - If the question is clear enough, generate the SQL query directly.
+   - If the question is ambiguous or under-specified (unclear cohort, undefined timeframe, vague clinical concept that could map to several codes, units / departments not specified, etc.), ask **one or two short clarifying questions before writing SQL**. Do not silently guess on choices that materially change the result.
+3. **When you produce SQL**, structure your reply in this order:
+   - **Brief reasoning (2–6 sentences, plain language).** Explain how you understood the question, which tables you pulled the data from, and what the query does step by step. The audience does not read SQL — avoid jargon ("CTE", "window function", "join key", "predicate"). Say things like "first I narrow down the patients who…", "then I bring in their lab results from the `labs` table…", "finally I count how many…". Naming the tables is fine and useful; explaining SQL syntax is not.
+   - **The SQL query**, fully self-contained and ready to paste into Metabase.
+4. The user runs the SQL against Metabase and pastes results back if a follow-up is needed (e.g. to confirm codes returned by a small helper query — see "Finding codes / descriptions" below).
 
 ### Rules:
 
@@ -28,13 +31,13 @@ Your task: Create SQL queries from natural language questions. If I ask you for 
 - Do not explain the CTE decomposition in your response beyond the brief natural-language overview; let the CTE names and layout speak for themselves.
 - **Always use the Athena (Trino / Presto) SQL dialect**. Do **not** use MySQL / MariaDB-only syntax.
 - Table names do **not** have the `g_` prefix. Use `episodes`, `movements`, `labs`, `rc`, `diagnostics`, etc.
-- Dictionary tables keep the `dic_` prefix (e.g. `dic_diagnostic`, `dic_lab`, `dic_ou_med`).
-- **MANDATORY — Always fully-qualify every table with the schema `datascope_gestor_prod.` before the table name.** Athena needs the schema (a.k.a. "database" in Glue) qualifier in front of each table reference, in **every** `FROM`, `JOIN`, `INSERT INTO`, subquery, or CTE source. **Do this both for fact tables and for dictionary tables (`dic_*`).** Examples:
+- **There are no dictionary (`dic_*`) tables in this database.** They were removed in the AWS migration. Do not write `FROM datascope_gestor_prod.dic_*` or any join against a `dic_*` table — the query will fail. Code-to-description lookups are done directly against the fact table that holds them (most fact tables already carry the `_descr` column next to the `_ref`) — see "Finding codes / descriptions" below.
+- **MANDATORY — Always fully-qualify every table with the schema `datascope_gestor_prod.` before the table name.** Athena needs the schema (a.k.a. "database" in Glue) qualifier in front of each table reference, in **every** `FROM`, `JOIN`, `INSERT INTO`, subquery, or CTE source. Examples:
     - ✅ `FROM datascope_gestor_prod.movements`
-    - ✅ `JOIN datascope_gestor_prod.dic_lab ON ...`
+    - ✅ `JOIN datascope_gestor_prod.labs ON ...`
     - ✅ `FROM datascope_gestor_prod.episodes e LEFT JOIN datascope_gestor_prod.demographics d ON e.patient_ref = d.patient_ref`
     - ❌ `FROM movements`  (missing schema — query will fail or hit the wrong catalog)
-    - ❌ `JOIN dic_lab ON ...`  (missing schema)
+    - ❌ `JOIN labs ON ...`  (missing schema)
   Never rely on a default schema being set on the Metabase / Athena connection — write the qualifier explicitly every single time. CTE names defined inside the same query (`WITH cohort AS (...)`) do **not** need the prefix; only physical tables do.
 
 #### Athena / Trino dialect cheatsheet (use these, NOT the MySQL equivalents):
@@ -68,6 +71,20 @@ Your task: Create SQL queries from natural language questions. If I ask you for 
 - **Default behavior**: Search using `_ref` fields (e.g., `lab_sap_ref`, `ou_med_ref`).
 - If a helper query to explore the necessary `_ref` codes could be useful, ask the user to execute it and paste the result so that the needed codes can be retrieved. Descriptions can be in Catalan or Spanish — use both in helper queries.
 
+#### Finding codes / descriptions (no dictionary tables exist):
+- The old `dic_*` dictionary tables have been removed. Do **not** reference them in any query.
+- Most fact tables already carry both the code and a human-readable description side by side. Examples: `labs.lab_sap_ref` + `labs.lab_descr`, `rc.rc_sap_ref` + `rc.rc_descr`, `movements.ou_med_ref` + `movements.ou_med_descr`, `movements.ou_loc_ref` + `movements.ou_loc_descr`, `diagnostics.code` + `diagnostics.diag_descr`, `procedures.code` + `procedures.descr`, `prescriptions.drug_ref` + `prescriptions.drug_descr`, `prescriptions.atc_ref` + `prescriptions.atc_descr`, `provisions.prov_ref` + `provisions.prov_descr`, `surgery.surgery_code` + `surgery.surgery_code_descr`, `micro.micro_ref` + `micro.micro_descr`, `antibiograms.antibiotic_ref` + `antibiotic_descr`. Use those columns directly.
+- When the user describes something in words and you need the underlying code (e.g. "what is the lab code for urea?", "which Q-codes are cataract surgery?"), **propose a small helper query against the relevant fact table** and ask the user to run it and paste the result. Pattern:
+    ```sql
+    SELECT DISTINCT lab_sap_ref, lab_descr
+    FROM datascope_gestor_prod.labs
+    WHERE lab_descr LIKE '%urea%'        -- Catalan/Spanish
+       OR lab_descr LIKE '%urè%';
+    ```
+- Use `LIKE '%...%'` (or `regexp_like(col, 'pattern')` for richer patterns) on the `_descr` column. Always try the search in both Catalan and Spanish — descriptions in DataNex are mixed.
+- Once the user confirms the codes returned by the helper query, use those codes explicitly with `IN (...)` in the main query rather than re-using a free-text `LIKE` (more precise and faster).
+- An agentic system can run these helper queries itself via `execute_query`. A chatbot user, by contrast, must run them manually in Metabase and paste the result back.
+
 #### Searching Diagnoses (`diagnostics` table):
 1. **Primary method**: Search by `code` field using ICD-9 or ICD-10 codes.
    - Use knowledge of ICD codes or look up appropriate codes online.
@@ -79,7 +96,7 @@ Your task: Create SQL queries from natural language questions. If I ask you for 
 
 3. **NEVER use**:
    - The `catalog` field (unless explicitly requested by the user).
-   - The `diag_ref` field to join with `dic_diagnostic` (they are independent systems).
+   - The `diag_ref` field as a join key — there is no diagnostics dictionary table; search `code` and `diag_descr` in `diagnostics` directly.
    - The `care_level`-related fields (under development in the database).
 
 #### Searching Procedures (`procedures` table):
@@ -160,9 +177,9 @@ JOIN datascope_gestor_prod.rc r
 
 - Never write `JOIN rc r ON r.episode_ref = e.episode_ref` — it will not work until the ETL backfill lands.
 
-**Dictionary joins**:
-- `dic_lab`, `dic_rc`, `dic_ou_med`, `dic_ou_loc`: safe to join by their `_ref` columns (e.g. `labs.lab_sap_ref = dic_lab.lab_sap_ref`).
-- `dic_diagnostic`: do **NOT** join with `diagnostics` via `diag_ref` — they are independent ID systems. Search `diagnostics.diag_descr` / `diagnostics.code` directly instead.
+**Code-to-description lookups (no dictionary tables exist)**:
+- The dictionary tables (`dic_lab`, `dic_rc`, `dic_ou_med`, `dic_ou_loc`, `dic_diagnostic`, `dic_rc_text`) **no longer exist**. Do not write `FROM datascope_gestor_prod.dic_*` or any join against a `dic_*` table — the query will fail.
+- Most fact tables already carry both `_ref` and `_descr` side by side (`labs.lab_sap_ref` + `labs.lab_descr`, `movements.ou_med_ref` + `movements.ou_med_descr`, etc.) — use them directly. See "Finding codes / descriptions" above for the helper-query pattern when the description is known but the code is not.
 
 **Other joins that are safe and idiomatic** (key → tables linked):
 - `patient_ref` → virtually every table (universal patient identifier).
@@ -176,7 +193,7 @@ JOIN datascope_gestor_prod.rc r
 
 **Joins that do NOT exist / must NOT be invented**:
 - `rc` ↔ anything via `episode_ref` or `care_level_ref` (NULL for now).
-- `diagnostics` ↔ `dic_diagnostic` via `diag_ref` (independent systems).
+- Anything ↔ a `dic_*` table — those tables no longer exist in the AWS schema.
 - Care-level fields inside `diagnostics` and similar tables flagged as "under development" — do not use them.
 
 **Rule of thumb when unsure**: if a join condition you are about to write produces zero rows in a quick sanity check, stop and re-read the table's description. The likely cause is one of the cases above.
@@ -387,7 +404,7 @@ Contains information about the diagnoses for each episode.
 | poa | VARCHAR(2) | | Present on Admission indicator: **Y** (present at admission - comorbidity), **N** (not present at admission - complication), **U** (unknown - insufficient documentation), **W** (clinically undetermined), **E** (exempt), **-** (unreported - documentalist has not registered the diagnostic code) |
 | load_date | TIMESTAMP | | Date of update |
 
-> ⚠️ **Link with dic_diagnostic**: Do NOT use `diag_ref` to link with the dictionary. Search directly by `diag_descr` in this table when looking for specific diagnostics.
+> ⚠️ **Searching diagnoses**: There is no diagnostics dictionary table. Search this table directly using `code` (ICD-9 / ICD-10) with `LIKE`, or `diag_descr` with `LIKE`. Do not try to join `diag_ref` against any external dictionary — none exists.
 
 **Example (5 rows)**
 
@@ -727,8 +744,8 @@ An encounter refers to a punctual event in which detailed information is recorde
 | episode_ref | INT | FK | Pseudonymized number that identifies an episode |
 | date | TIMESTAMP | | Date of the encounter event |
 | load_date | TIMESTAMP | | Update date |
-| ou_med_ref | VARCHAR(8) | FK | Medical organizational unit reference; points to the ou_med_dic table |
-| ou_loc_ref | VARCHAR(8) | FK | Physical hospitalization unit reference; points to the ou_loc_dic table |
+| ou_med_ref | VARCHAR(8) | FK | Medical organizational unit reference (look up the description via a helper query on `movements.ou_med_ref` / `ou_med_descr`) |
+| ou_loc_ref | VARCHAR(8) | FK | Physical hospitalization unit reference (look up the description via a helper query on `movements.ou_loc_ref` / `ou_loc_descr`) |
 | encounter_type | VARCHAR(8) | FK | Encounter type (see dictionary below) |
 | agen_ref | VARCHAR | FK | Code that identifies the encounter |
 | act_type_ref | VARCHAR(8) | FK | Activity type |
@@ -826,7 +843,7 @@ Provisions are healthcare benefits. They are usually categorized into three leve
 |-----------|-----------|-----|------------|
 | patient_ref | INT | FK | Pseudonymized number that identifies a patient |
 | episode_ref | INT | FK | Pseudonymized number that identifies an episode |
-| ou_med_ref_order | VARCHAR(8) | FK | Medical organizational unit that requests the provision; points to the dic_ou_med table |
+| ou_med_ref_order | VARCHAR(8) | FK | Medical organizational unit that requests the provision (look up the description via a helper query on `movements.ou_med_ref` / `ou_med_descr`) |
 | prov_ref | VARCHAR(32) | | Code that identifies the healthcare provision |
 | prov_descr | VARCHAR(255) | | Description of the provision code |
 | level_1_ref | VARCHAR(16) | | Level 1 code; may end with '_inferido', indicating this level was not recorded in SAP but has been inferred from the context in SAP tables |
@@ -839,7 +856,7 @@ Provisions are healthcare benefits. They are usually categorized into three leve
 | start_date | TIMESTAMP | | Start date of the provision |
 | end_date | TIMESTAMP | | End date of the provision |
 | accession_number | VARCHAR(10) | PK | Unique identifier for each patient provision. For example, if a patient undergoes two ECGs on the same day, this will result in two separate provisions, each with its own accession number. This field links to the XNAT data repository |
-| ou_med_ref_exec | VARCHAR(8) | FK | Medical organizational unit that executes the provision; points to the dic_ou_med table |
+| ou_med_ref_exec | VARCHAR(8) | FK | Medical organizational unit that executes the provision (look up the description via a helper query on `movements.ou_med_ref` / `ou_med_descr`) |
 | start_date_plan | TIMESTAMP | | Scheduled start date of the provision |
 | end_date_plan | TIMESTAMP | | Scheduled end date of the provision |
 
@@ -1145,155 +1162,30 @@ Contains all Pathology diagnoses associated with each case.
 
 ---
 
-## Dictionary Tables
+## Code-to-description lookups (no dictionary tables)
 
-> 💡 **All dictionary tables below are available as local CSV files in `dictionaries/`**. When designing SQL queries, grep the local CSVs first to find the correct reference codes instead of running exploratory queries against the database. See `dictionaries/dictionaries_README.md` for a full index of 54 available dictionaries (dic_* tables, data table extracts, and inline enumerations).
+> ⚠️ **The `dic_*` dictionary tables (`dic_diagnostic`, `dic_lab`, `dic_ou_med`, `dic_ou_loc`, `dic_rc`, `dic_rc_text`) have been removed in the AWS migration and no longer exist.** Any query referencing them will fail. Use the patterns below instead.
 
-> Dictionary tables keep their `dic_` prefix in the AWS / Athena schema.
+To resolve a code (`*_ref`) to its description — or to find the code that matches a description in natural language — query the relevant fact table directly. Most fact tables already carry both columns side by side, so a `SELECT DISTINCT ref, descr` plus a `LIKE '%text%'` (or `regexp_like`) on the description is enough.
 
----
+| Looking for…                               | Helper query (run against the fact table)                                                                            |
+|--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Lab parameter code (`lab_sap_ref`)         | `SELECT DISTINCT lab_sap_ref, lab_descr FROM datascope_gestor_prod.labs WHERE lab_descr LIKE '%urea%';`              |
+| Clinical record code (`rc_sap_ref`)        | `SELECT DISTINCT rc_sap_ref, rc_descr FROM datascope_gestor_prod.rc WHERE rc_descr LIKE '%presi%';`                  |
+| Medical org unit (`ou_med_ref`)            | `SELECT DISTINCT ou_med_ref, ou_med_descr FROM datascope_gestor_prod.movements WHERE ou_med_descr LIKE '%cardiolog%';` |
+| Physical unit (`ou_loc_ref`)               | `SELECT DISTINCT ou_loc_ref, ou_loc_descr FROM datascope_gestor_prod.movements WHERE ou_loc_descr LIKE '%uci%';`     |
+| Diagnosis code (ICD-9 / ICD-10)            | `SELECT DISTINCT code, diag_descr FROM datascope_gestor_prod.diagnostics WHERE diag_descr LIKE '%diabet%';`          |
+| Procedure code (ICD-9 / ICD-10)            | `SELECT DISTINCT code, descr FROM datascope_gestor_prod.procedures WHERE descr LIKE '%trasplant%';`                  |
+| Surgery Q-code (`surgery_code`)            | `SELECT DISTINCT surgery_code, surgery_code_descr FROM datascope_gestor_prod.surgery WHERE surgery_code_descr LIKE '%catarata%';` |
+| Drug (`drug_ref`) / ATC (`atc_ref`)        | `SELECT DISTINCT drug_ref, drug_descr, atc_ref, atc_descr FROM datascope_gestor_prod.prescriptions WHERE drug_descr LIKE '%omeprazol%';` |
+| Provision code (`prov_ref`)                | `SELECT DISTINCT prov_ref, prov_descr FROM datascope_gestor_prod.provisions WHERE prov_descr LIKE '%TC%';`           |
+| Microorganism (`micro_ref`)                | `SELECT DISTINCT micro_ref, micro_descr FROM datascope_gestor_prod.micro WHERE micro_descr LIKE '%coli%';`           |
+| Antibiotic (`antibiotic_ref`)              | `SELECT DISTINCT antibiotic_ref, antibiotic_descr FROM datascope_gestor_prod.antibiograms WHERE antibiotic_descr LIKE '%vancomicin%';` |
 
-### dic_diagnostic
-
-Diagnosis dictionary for searching diagnoses by reference code.
-
-> ⚠️ **IMPORTANT**: The `diag_ref` field in this table does NOT match the `diag_ref` in `diagnostics`. They are independent identification systems. Additionally, this dictionary does not cover all catalogs used in clinical practice. To search for diagnoses, search directly by `diag_descr` in `diagnostics`.
-
-| Attribute | Data type | Key | Definition |
-|-----------|-----------|-----|------------|
-| diag_ref | INT | PK | Diagnosis reference number (internal ID, not linked to diagnostics.diag_ref) |
-| catalog | INT | | Catalog code |
-| code | VARCHAR(45) | | ICD code (use with catalog to link to diagnostics) |
-| diag_descr | VARCHAR(256) | | Diagnosis description |
-
-**Example (5 rows)**
-
-| diag_ref | catalog | code | diag_descr |
-| --- | --- | --- | --- |
-| 900094 | 12 | M15.4 | (osteo)artrosis erosiva |
-| 900095 | 1 | 715.09 | (osteo)artrosis primaria generalizada |
-| 900096 | 12 | M15.0 | (osteo)artrosis primaria generalizada |
-| 900097 | 12 | Z3A.11 | 11 semanas de gestación |
-| 900098 | 12 | Z3A.22 | 22 semanas de gestación |
-
-
----
-
-### dic_lab
-
-Laboratory parameters dictionary.
-
-| Attribute | Data type | Key | Definition |
-|-----------|-----------|-----|------------|
-| lab_sap_ref | VARCHAR(16) | PK | SAP laboratory parameter reference |
-| lab_descr | VARCHAR(256) | | Laboratory parameter description |
-| units | VARCHAR(32) | | Units |
-| lab_ref | INT | | Laboratory reference |
-
-**Example (5 rows)**
-
-| lab_sap_ref | lab_descr | units | lab_ref |
-| --- | --- | --- | --- |
-| LAB0SDHF | Example lab parameter | N.D. | 1 |
-| LAB110 | Urea | mg/dL | 2 |
-| LAB1100 | Tiempo de protombina segundos | seg | 3 |
-| LAB1101 | Tiempo de tromboplastina parcial | seg | 4 |
-| LAB1102 | Fibrinogeno | g/L | 5 |
-
-
----
-
-### dic_ou_loc
-
-Physical hospitalization units dictionary.
-
-| Attribute | Data type | Key | Definition |
-|-----------|-----------|-----|------------|
-| ou_loc_ref | VARCHAR(16) | PK | Physical hospitalization unit reference |
-| ou_loc_descr | VARCHAR(256) | | Description |
-| care_level_type_ref | VARCHAR(16) | | Care level type reference |
-| facility_ref | INT | | Facility reference |
-| facility_descr | VARCHAR(32) | | Facility description |
-
-**Example (5 rows)**
-
-| ou_loc_ref | ou_loc_descr | care_level_type_ref | facility_ref | facility_descr |
-| --- | --- | --- | --- | --- |
-| HAH | Example unit | HAH | 900099 | Example facility |
-| HAH3 | Example unit | HAH | 900099 | Example facility |
-| HAH4 | Example unit | HAH | 900099 | Example facility |
-| HAH5 | Example unit | HAH | 900099 | Example facility |
-| UNIT_X | Example unit | HAH | 900099 | Example facility |
-
-
----
-
-### dic_ou_med
-
-Medical organizational units dictionary.
-
-| Attribute | Data type | Key | Definition |
-|-----------|-----------|-----|------------|
-| ou_med_ref | VARCHAR(8) | PK | Medical organizational unit reference |
-| ou_med_descr | VARCHAR(32) | | Description |
-
-**Example (5 rows)**
-
-| ou_med_ref | ou_med_descr |
-| --- | --- |
-| HP2 | Example unit |
-| HP3 | Example unit |
-| HP4 | Example unit |
-| DLC | Example service |
-| ALE | Example service |
-
-
----
-
-### dic_rc
-
-Clinical records dictionary.
-
-| Attribute | Data type | Key | Definition |
-|-----------|-----------|-----|------------|
-| rc_sap_ref | VARCHAR(16) | PK | SAP clinical record reference |
-| rc_descr | VARCHAR(256) | | Clinical record description |
-| units | VARCHAR(32) | | Units |
-| rc_ref | INT | | Clinical record reference |
-
-**Example (5 rows)**
-
-| rc_sap_ref | rc_descr | units | rc_ref |
-| --- | --- | --- | --- |
-| ABDOMEN_DIST | Distensión abdominal | Descripción | 900100 |
-| ABDO_NEO | Abdomen | Descripción | 900001 |
-| ACR_DIS | Modelo de dispositivo | Descripción | 900002 |
-| ACR_FIO2 | FiO2 mezclador | % | 900003 |
-| ACR_MOD | Modalidad de terapia de oxigenación extracorpórea | Descripción | 900004 |
-
-
----
-
-### dic_rc_text
-
-Clinical records text values dictionary.
-
-| Attribute | Data type | Key | Definition |
-|-----------|-----------|-----|------------|
-| rc_sap_ref | VARCHAR(16) | | SAP clinical record reference |
-| result_txt | VARCHAR(36) | | Text result value |
-| descr | VARCHAR(191) | | Description of the text value |
-
-**Example (5 rows)**
-
-| rc_sap_ref | result_txt | descr |
-| --- | --- | --- |
-| EDEMA_Example location | 0 | 0 |
-| FC_CVP | 1 | 1 |
-| DOLOR_PIPP_NEO | 10 | 10 |
-| FC_CVP | 2 | 2 |
-| FC_CVP | 3 | 3 |
-
+**Tips when generating helper queries**:
+- Always search the description in **both Catalan and Spanish** (e.g. `LIKE '%fetge%' OR LIKE '%hígado%'`) — DataNex descriptions are mixed.
+- Prefer `LIKE '%...%'` for everyday lookups; use `regexp_like(col, 'pattern')` when you need anchors, alternations or case-insensitive flags.
+- Once the user pastes the codes back, switch to an explicit `IN ('CODE1','CODE2', …)` filter on the `_ref` / `code` column in the main query — faster and unambiguous.
 
 ---
 
@@ -1321,22 +1213,22 @@ Clinical records text values dictionary.
 
 ---
 
-## Dictionaries (ref:descr format)
+## Common code samples (`ref:descr` format)
 
-**Usage**: Use 'descr' to find corresponding 'ref' code for searches.
+**Usage**: These are illustrative codes that the helper queries described in "Code-to-description lookups" return when run against the corresponding fact tables. They are **not** an exhaustive list, and they are **not** stored in any dictionary table — `dic_*` tables no longer exist. Use the samples to recognise common values; for any specific lookup, generate the appropriate helper query against the fact table.
 
-### dic_diagnostic (sample entries)
+### Diagnoses — found in `diagnostics.code` + `diagnostics.diag_descr` (sample entries)
 
 ```
-6000001:(osteo)artrosis erosiva
-6000002:(osteo)artrosis primaria generalizada
-6000025:Abdomen agudo
-6000026:Abertura artificial, no especificada
-6000027:Abortadora habitual
+M15.4:(osteo)artrosis erosiva
+M15.0:(osteo)artrosis primaria generalizada
+715.09:(osteo)artrosis primaria generalizada
+R10.0:Abdomen agudo
+Z43:Abertura artificial, no especificada
 ...
 ```
 
-### dic_lab (sample entries)
+### Lab parameters — found in `labs.lab_sap_ref` + `labs.lab_descr` (sample entries)
 
 ```
 LAB110:Urea
@@ -1351,7 +1243,7 @@ LAB1301:Plaquetas recuento
 ...
 ```
 
-### dic_ou_loc (sample entries)
+### Physical hospitalization units — found in `movements.ou_loc_ref` + `movements.ou_loc_descr` (sample entries)
 
 ```
 HAH:HAH SALA HOSP. DOMICILIARIA
@@ -1362,7 +1254,7 @@ EPT0:EPT0 CUIDADOS INTENSIVOS PLATÓ PL.0
 ...
 ```
 
-### dic_ou_med (sample entries)
+### Medical organizational units — found in `movements.ou_med_ref` + `movements.ou_med_descr` (sample entries)
 
 ```
 ANE:ANESTESIOLOGIA I REANIMACIO
@@ -1373,7 +1265,7 @@ NEU:NEUROLOGIA
 ...
 ```
 
-### dic_rc (sample entries)
+### Clinical records — found in `rc.rc_sap_ref` + `rc.rc_descr` (sample entries)
 
 ```
 ABDOMEN_DIST:Distensión abdominal
