@@ -15,10 +15,26 @@ sys.path.insert(0, str(_REPO_ROOT))
 
 from demographics._bed_occupancy import compute_bed_occupancy_nominal
 from demographics._config import FAKE_BED_PLACE_REFS_E073
-from demographics._loader import load_cohort
+from demographics._loader import (
+    SYNTHETIC_LOOKBACK_YEARS,
+    SYNTHETIC_YEAR,
+    augment_synthetic_2025,
+    compute_3y_mean_target,
+    load_cohort,
+)
 from demographics._metrics import compute_summary
 from demographics._report import generate_html, to_dataframe
+from demographics.autopsy._loader import (
+    load_autopsy_cohort,
+    merge_predominant as merge_autopsy_predominant,
+)
+from demographics.nutrition._loader import (
+    load_nutrition_cohort,
+    merge_predominant as merge_nutrition_predominant,
+)
 from demographics.predominant_unit._sql import SQL_TEMPLATE
+
+UNITS = ["E073", "I073"]
 
 OUTPUT_DIR = _REPO_ROOT / "demographics" / "output" / "predominant_unit"
 
@@ -45,7 +61,29 @@ def main():
         max_year=max_year,
         sql_template=SQL_TEMPLATE,
         synthetic_group_col=None,
+        skip_synthetic=True,
     )
+
+    print(f"Consultando nutrición enteral / parenteral {years_str}…")
+    nutrition_df = load_nutrition_cohort(min_year, max_year, UNITS)
+    df = merge_nutrition_predominant(df, nutrition_df)
+
+    print(f"Consultando autopsias / necropsias {years_str}…")
+    autopsy_df = load_autopsy_cohort(min_year, max_year, UNITS)
+    df = merge_autopsy_predominant(df, autopsy_df)
+
+    # Augmentación sintética 2025: se aplica AHORA, después del merge de
+    # nutrición, para que las filas sintéticas hereden los flags
+    # `received_*` y los `hours_to_*` del template (igual patrón que en
+    # `per_unit/run.py` con SOFA + nutrición).
+    if min_year <= SYNTHETIC_YEAR <= max_year:
+        target = compute_3y_mean_target(
+            df,
+            year_now=SYNTHETIC_YEAR,
+            n_years=SYNTHETIC_LOOKBACK_YEARS,
+            group_col=None,
+        )
+        df = augment_synthetic_2025(df, target=target, group_col=None)
 
     n_total = len(df)
     n_open = int((df["still_admitted"] == "Yes").sum())

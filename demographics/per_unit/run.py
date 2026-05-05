@@ -33,6 +33,14 @@ from demographics._loader import (
 )
 from demographics._metrics import compute_summary
 from demographics._report import generate_html, to_dataframe
+from demographics.autopsy._loader import (
+    load_autopsy_cohort,
+    merge_per_unit as merge_autopsy_per_unit,
+)
+from demographics.nutrition._loader import (
+    load_nutrition_cohort,
+    merge_per_unit as merge_nutrition_per_unit,
+)
 from demographics.per_unit._sql import SQL_TEMPLATE
 from demographics.sofa._config import ICU_UNITS, WINDOW_HOURS
 from demographics.sofa._metrics import compute_sofa
@@ -176,10 +184,19 @@ def main():
     sofa_df = load_sofa_cohort(min_year, max_year, UNITS)
     df = merge_sofa(df, sofa_df)
 
-    # Augmentación sintética 2025 — se hace AHORA, después del merge SOFA,
-    # para que las filas sintéticas hereden los valores SOFA del template
-    # (`_make_synthetic_rows` clona toda la fila incluyendo `sofa_*` y
-    # solo sobrescribe IDs y fechas).
+    print(f"Consultando nutrición enteral / parenteral {years_str}…")
+    nutrition_df = load_nutrition_cohort(min_year, max_year, UNITS)
+    df = merge_nutrition_per_unit(df, nutrition_df)
+
+    print(f"Consultando autopsias / necropsias {years_str}…")
+    autopsy_df = load_autopsy_cohort(min_year, max_year, UNITS)
+    df = merge_autopsy_per_unit(df, autopsy_df)
+
+    # Augmentación sintética 2025 — se hace AHORA, después de los merges
+    # de SOFA y nutrición, para que las filas sintéticas hereden valores
+    # SOFA y flags/tiempos de nutrición del template (`_make_synthetic_rows`
+    # clona toda la fila incluyendo `sofa_*`, `received_*`, `hours_to_*`
+    # y solo sobrescribe IDs y fechas).
     if min_year <= SYNTHETIC_YEAR <= max_year:
         target = compute_3y_mean_target(
             df,

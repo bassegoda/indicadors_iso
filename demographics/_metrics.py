@@ -39,9 +39,14 @@ _ROW_DEFS = [
     ("sofa_full", "SOFA cobertura completa 6/6 (n, %)",          "SOFA cobertura 6/6",            "clinical",           "indent"),
     ("sofa_cirr", "SOFA cirrosis, mediana [IQR]",                "SOFA cirrosis",                 "clinical",           "indent"),
     ("sofa_oh",   "SOFA otro hospital, mediana [IQR]",           "SOFA otro hospital",            "clinical",           "indent"),
+    ("nutr_ent",   "Nutrición enteral (n, %)",                "Nutrición enteral",         "nutrition",          ""),
+    ("nutr_par",   "Nutrición parenteral (n, %)",             "Nutrición parenteral",      "nutrition",          ""),
+    ("nutr_t_ent", "Tiempo a inicio enteral (h), mediana [IQR]",   "Tiempo a inicio enteral (h)",   "nutrition",          "indent"),
+    ("nutr_t_par", "Tiempo a inicio parenteral (h), mediana [IQR]","Tiempo a inicio parenteral (h)","nutrition",          "indent"),
     ("mg_stay",   "Mortalidad global - en estancia (n, %)",      "En estancia",                   "mortality",          ""),
     ("mg_30",     "Mortalidad global - 30 d\u00edas (n, %)",     "A 30 d\u00edas",               "mortality",          ""),
     ("mg_90",     "Mortalidad global - 90 d\u00edas (n, %)",     "A 90 d\u00edas",               "mortality",          ""),
+    ("autopsy",   "Autopsia/necropsia en \u00e9xitus (n, %)",         "Autopsia/necropsia en \u00e9xitus",  "mortality",          "indent"),
     ("mc_stay",   "Mortalidad cirrosis - en estancia (n, %)",    "En estancia",                   "mortality-cirr",     ""),
     ("mc_30",     "Mortalidad cirrosis - 30 d\u00edas (n, %)",   "A 30 d\u00edas",               "mortality-cirr",     ""),
     ("mc_90",     "Mortalidad cirrosis - 90 d\u00edas (n, %)",   "A 90 d\u00edas",               "mortality-cirr",     ""),
@@ -56,6 +61,7 @@ _ROW_DEFS = [
 _SECTION_DEFS = [
     ("demo",                "Demograf\u00eda",                       "demo"),
     ("clinical",            "Cl\u00ednica",                          "clinical"),
+    ("nutrition",           "Nutrici\u00f3n",                        "nutrition"),
     ("mortality",           "Mortalidad global",                     "mortality"),
     ("mortality-cirr",      "Mortalidad en cirrosis",                "mortality-cirr"),
     ("mortality-noaisbe",   "Mortalidad en no AISBE",                "mortality-noaisbe"),
@@ -245,6 +251,14 @@ def compute_summary(
     all_sofa_oh: list = []
     total_sofa_n = 0
     total_sofa_full = 0
+    has_nutrition = (
+        "received_enteral" in df.columns or "received_parenteral" in df.columns
+    )
+    total_nutr_ent = total_nutr_par = 0
+    all_t_ent: list = []
+    all_t_par: list = []
+    has_autopsy = "received_autopsy" in df.columns
+    total_autopsy = total_exitus_for_autopsy = 0
     t_mg = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
     t_mc = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
     t_mn = {"stay": 0, "d30": 0, "d90": 0, "n": 0}
@@ -368,6 +382,39 @@ def compute_summary(
                 rows["sofa_oh"]["values"][year] = _format_median_iqr(sofa_oh)
                 all_sofa_oh.extend(sofa_oh.tolist())
 
+        if has_nutrition:
+            if "received_enteral" in sub.columns:
+                ent_flag = pd.to_numeric(
+                    sub["received_enteral"], errors="coerce"
+                ).fillna(0)
+                ent_count = int((ent_flag == 1).sum())
+                total_nutr_ent += ent_count
+                rows["nutr_ent"]["values"][year] = _fmt_n_pct(ent_count, n)
+
+                if "hours_to_enteral" in sub.columns:
+                    t_ent = pd.to_numeric(
+                        sub["hours_to_enteral"], errors="coerce"
+                    ).dropna()
+                    t_ent = t_ent[t_ent >= 0]
+                    rows["nutr_t_ent"]["values"][year] = _format_median_iqr(t_ent)
+                    all_t_ent.extend(t_ent.tolist())
+
+            if "received_parenteral" in sub.columns:
+                par_flag = pd.to_numeric(
+                    sub["received_parenteral"], errors="coerce"
+                ).fillna(0)
+                par_count = int((par_flag == 1).sum())
+                total_nutr_par += par_count
+                rows["nutr_par"]["values"][year] = _fmt_n_pct(par_count, n)
+
+                if "hours_to_parenteral" in sub.columns:
+                    t_par = pd.to_numeric(
+                        sub["hours_to_parenteral"], errors="coerce"
+                    ).dropna()
+                    t_par = t_par[t_par >= 0]
+                    rows["nutr_t_par"]["values"][year] = _format_median_iqr(t_par)
+                    all_t_par.extend(t_par.tolist())
+
         mort = _mortality(sub)
         rows["mg_stay"]["values"][year] = mort["stay_fmt"]
         rows["mg_30"]["values"][year] = mort["d30_fmt"]
@@ -376,6 +423,17 @@ def compute_summary(
         t_mg["d30"] += mort["deaths_30"]
         t_mg["d90"] += mort["deaths_90"]
         t_mg["n"] += mort["n"]
+
+        if has_autopsy:
+            ex_mask = sub["exitus_during_stay"] == "Yes"
+            n_exitus = int(ex_mask.sum())
+            autop_flag = pd.to_numeric(
+                sub["received_autopsy"], errors="coerce"
+            ).fillna(0)
+            n_autopsy = int(((autop_flag == 1) & ex_mask).sum())
+            total_autopsy += n_autopsy
+            total_exitus_for_autopsy += n_exitus
+            rows["autopsy"]["values"][year] = _fmt_n_pct(n_autopsy, n_exitus)
 
         sub_cirr = sub[cirr == 1]
         mort_c = _mortality(sub_cirr)
@@ -440,6 +498,19 @@ def compute_summary(
         rows["sofa_oh"]["total"] = (
             _format_median_iqr(pd.Series(all_sofa_oh)) if all_sofa_oh else ""
         )
+    if has_nutrition:
+        rows["nutr_ent"]["total"] = _fmt_n_pct(total_nutr_ent, total_stays)
+        rows["nutr_par"]["total"] = _fmt_n_pct(total_nutr_par, total_stays)
+        rows["nutr_t_ent"]["total"] = (
+            _format_median_iqr(pd.Series(all_t_ent)) if all_t_ent else ""
+        )
+        rows["nutr_t_par"]["total"] = (
+            _format_median_iqr(pd.Series(all_t_par)) if all_t_par else ""
+        )
+    if has_autopsy:
+        rows["autopsy"]["total"] = _fmt_n_pct(
+            total_autopsy, total_exitus_for_autopsy
+        )
     rows["mg_stay"]["total"] = _fmt_n_pct(t_mg["stay"], t_mg["n"])
     rows["mg_30"]["total"] = _fmt_n_pct(t_mg["d30"], t_mg["n"])
     rows["mg_90"]["total"] = _fmt_n_pct(t_mg["d90"], t_mg["n"])
@@ -459,6 +530,10 @@ def compute_summary(
     skip_rows: set[str] = set()
     if not has_sofa:
         skip_rows.update({"sofa_all", "sofa_full", "sofa_cirr", "sofa_oh"})
+    if not has_nutrition:
+        skip_rows.update({"nutr_ent", "nutr_par", "nutr_t_ent", "nutr_t_par"})
+    if not has_autopsy:
+        skip_rows.add("autopsy")
 
     sections = []
     for section_key, section_title, css_class in _SECTION_DEFS:

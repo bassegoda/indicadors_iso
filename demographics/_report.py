@@ -20,6 +20,9 @@ _CSS = """
     --section-clinical: #eef2f7;
     --section-clinical-text: #1e3a5f;
     --section-clinical-accent: #3b82f6;
+    --section-nutrition: #ecfdf5;
+    --section-nutrition-text: #065f46;
+    --section-nutrition-accent: #10b981;
     --section-mortality: #fef2f2;
     --section-mortality-text: #991b1b;
     --section-mortality-accent: #ef4444;
@@ -125,6 +128,8 @@ tr.section-demo td { background: var(--section-demo); color: var(--section-demo-
 tr.section-demo td:first-child { border-left-color: var(--section-demo-accent); }
 tr.section-clinical td { background: var(--section-clinical); color: var(--section-clinical-text); }
 tr.section-clinical td:first-child { border-left-color: var(--section-clinical-accent); }
+tr.section-nutrition td { background: var(--section-nutrition); color: var(--section-nutrition-text); }
+tr.section-nutrition td:first-child { border-left-color: var(--section-nutrition-accent); }
 tr.section-mortality td { background: var(--section-mortality); color: var(--section-mortality-text); }
 tr.section-mortality td:first-child { border-left-color: var(--section-mortality-accent); }
 tr.section-mortality-cirr td { background: var(--section-mortality-cirr); color: var(--section-mortality-cirr-text); }
@@ -315,7 +320,9 @@ def generate_html(
         <li><strong>AISBE:</strong> pacientes con \u00e1rea b\u00e1sica de salud del \u00e1rea de influencia del hospital o c\u00f3digo postal correspondiente.</li>
         <li><strong>Mortalidad a 30/90 d\u00edas:</strong> acumulada desde la fecha de ingreso (incluye muertes intrahospitalarias).</li>
         <li><strong>Cirrosis:</strong> diagn\u00f3stico ICD-9/ICD-10 en cualquier episodio del paciente (condici\u00f3n cr\u00f3nica). <strong>Excluidos los pacientes con trasplante hep\u00e1tico realizado durante el episodio</strong> (ICD-10-PCS <code>0FY0\u2026</code>, ICD-9-CM <code>50.5x</code>): ingresan electivamente para trasplante y su mortalidad depende del proceso del trasplante, no de la cirrosis subyacente; mantenerlos en la cohorte infraestimaba la mortalidad atribuible a cirrosis.</li>
+        <li><strong>Autopsia/necropsia:</strong> proporción de éxitus en estancia (denominador) con al menos una provisión de autopsia/necropsia ligada al episodio (mismo <code>patient_ref</code> + <code>episode_ref</code>, <code>start_date</code> de la provisión &ge; <code>admission_date</code> de la estancia). Identificación por <strong>regex</strong> sobre <code>provisions.prov_descr</code>: incluye <code>(?i)necr[oó]psia|autopsia</code> (cubre <em>autopsia</em>, <em>autopsia mort subita</em>, <em>estudi neuropatologic post-mortem (autopsia)</em>, <em>necropsia</em>); <strong>excluye</strong> <code>(?i)fetal|neonatal</code> (autopsias fetales/neonatales fuera de scope). Cuando un paciente se traslada entre unidades del mismo episodio, la autopsia se atribuye solo a la estancia donde ocurrió el éxitus.</li>
         <li><strong>Reingresos:</strong> siguiente ingreso en E073/I073 dentro del plazo indicado tras el alta.</li>
+        <li><strong>Nutrición:</strong> una estancia se cuenta como "con nutrición enteral" o "con nutrición parenteral" si existe al menos una prescripción del tipo correspondiente cuyo <code>start_drug_date</code> cae dentro de la ventana de la estancia. Si recibe ambas, se cuenta en las dos filas (no excluyentes). Identificación por <code>drug_descr</code> (el ATC no es fiable: en perfusiones suele ser el del diluyente — sodio cloruro parenteral — y en las filas reales de nutrición está vacío). Patrones aceptados: enteral = <code>NUTRICION ENTERAL</code> + <code>NUTRICOM*</code>; parenteral = <code>NUTRICION PARENTERAL*</code> / <code>NUTRICIÓN PARENTERAL*</code>. Excluidos: <code>AGUA ENTERAL</code>, <code>ORDENES NUTRICION</code>, hierro y otros minerales parenterales. <strong>Tiempo a inicio</strong> = horas entre <code>admission_date</code> de la estancia y <code>start_drug_date</code> de la primera prescripción de ese tipo dentro de la estancia.</li>
         <li><strong>SOFA al ingreso:</strong> SOFA original (Vincent 1996) calculado sobre las primeras 24 h desde la entrada a la unidad. Solo se evalúa en unidades de UCI (p.ej. E073). Componentes faltantes suman 0 al total; la fila <em>SOFA cobertura completa 6/6</em> indica qué fracción de estancias tienen los 6 componentes evaluables. Subgrupos <em>cirrosis</em> y <em>otro hospital</em> usan las mismas definiciones que las filas correspondientes de mortalidad. Detalle metodológico en <code>demographics/sofa/README.md</code>.</li>
         <li><strong>Ocupaci\u00f3n de camas:</strong> numerador = horas-cama ocupadas (suma de solapamientos de cada movimiento con cada mes, excluyendo la cama auxiliar de procedimientos de E073). Denominador = camas nominales \u00d7 horas del mes seg\u00fan la \u00e9poca: I073=4 y E073=8 hasta 2020-02; UCI agregada=12 entre 2020-03 y 2022-03 (\u00e9poca COVID); I073=4 y E073=10 desde 2022-04. <em>(*)</em> en un a\u00f1o indica que incluye meses de la \u00e9poca COVID, durante la cual el etiquetado E073/I073 no es interpretable (camas reasignadas administrativamente y <code>place_ref</code> pseudo-anonimizados): el % se calcula sobre la UCI agregada y puede superar el 100% en periodos de expansi\u00f3n.</li>
         <li><strong>Total:</strong> pacientes \u00fanicos se cuentan una vez; porcentajes se calculan sobre la suma de los denominadores anuales.</li>
