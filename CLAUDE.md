@@ -33,9 +33,13 @@ python dynamic_forms/run_queries.py --list
 python dynamic_forms/run_queries.py --query <name>
 python dynamic_forms/run_queries.py --all
 python data_quality/completeness_2024_vs_2025.py  # prompts for (y1,y2) + YTD cutoff; ETL completeness report
+python deliris/run_sql.py deliris/<query>.sql # CAM-ICU compliance / positivity / coverage
+python deliris/camicu_plots.py                # CAM-ICU plots from previously generated CSVs
+python nutritions/nutritions.py               # nutrición enteral/parenteral
+python micro/rectal_mdr/run.py                # aislamientos rectal-MDR por unidad (E073, I073)
 ```
 
-There are no tests, linters, or build tools configured.
+The only test is `tests/check_metabase_row_cap.py` (sanity check for Metabase's silent 2000-row truncation). No linters or build tools are configured.
 
 ## Architecture
 
@@ -55,9 +59,16 @@ There are no tests, linters, or build tools configured.
 
 **`demographics/sofa/`** — SOFA original (Vincent 1996) at ICU admission. Athena query aggregates the 6 components in the first 24 h (one row per stay, per-unit), Python computes the score. Sources by component documented in `demographics/sofa/README.md`. Fetched year-by-year via `execute_query_yearly`. Consumed only as a library by `demographics/per_unit/run.py`, which merges the score into the cohort and adds SOFA rows (global, cirrosis, otro hospital) to the report for both E073 (UCI) and I073 (semi-intensive digestive). The `predominant_unit` pipeline does **not** use SOFA (the predominant-unit aggregation is incompatible with the per-stay 24h window).
 
-Simpler modules: **deliris** — see `deliris/README.md` for CAM-ICU SQL/CSV/plots and cohort definitions; **nutritions** — enteral/parenteral nutrition analysis.
+**`demographics/autopsy/`** and **`demographics/nutrition/`** — library-only sibling submodules consumed by both `demographics/per_unit/run.py` and `demographics/predominant_unit/run.py`. Each exposes `load_*_cohort(min_year, max_year, units)` (year-by-year via `execute_query_yearly`) plus `merge_per_unit` / `merge_predominant` helpers. Per-unit grain joins on `[patient_ref, episode_ref, ou_loc_ref, stay_id]`; predominant-unit grain joins on `[patient_ref, episode_ref]` with episode-level aggregation (e.g. `received_enteral` = OR across stays, `nutr_enteral_start` = MIN). For nutrition, `hours_to_enteral` must be recomputed against the admission_date of the *predominant-unit* row after the merge, since it can predate the per-unit admission_date when the nutrition started after a transfer.
+
+Simpler modules:
+- **`deliris/`** — CAM-ICU compliance / positivity / daily coverage. Each indicator is a standalone `.sql` file run via `run_sql.py`; plots from the resulting CSVs via `camicu_plots.py`. See `deliris/README.md`.
+- **`nutritions/`** — enteral/parenteral nutrition analysis (single-script `nutritions.py`).
+- **`micro/rectal_mdr/`** — rectal MDR isolates restricted to E073/I073 stays (per-unit grain, with `place_ref`). Year-by-year download, one CSV per unit.
 
 **`data_quality/`** — ETL completeness cross-year comparison over `movements` and `labs`. Same `_sql.py` / `_metrics.py` / `_report.py` split as demographics, but `_report.py` also embeds matplotlib charts (line, heatmap, bars) as base64 PNGs into a standalone HTML file.
+
+**`dictionaries/`** (root) — local CSV/SQL catalogs of DataNex reference tables (e.g. `dictionaries/sofa/` holds the SQL that regenerates `dic_lab`, `dic_rc`, `dic_prescriptions`, etc. for the SOFA family). Use these to grep for `*_ref` codes locally instead of running exploratory queries; rerun the numbered SQLs to refresh.
 
 **Output** goes to `<module>/output/` directories, which are gitignored.
 
