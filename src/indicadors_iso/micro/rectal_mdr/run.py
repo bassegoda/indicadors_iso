@@ -13,18 +13,13 @@ Salida:
 """
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-
 import pandas as pd
 
-_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(_REPO_ROOT))
+from indicadors_iso._paths import REPO_ROOT, module_output_dir
+from indicadors_iso.connection import execute_query_yearly
+from indicadors_iso.micro.rectal_mdr._sql import SQL_TEMPLATE
 
-from connection import execute_query_yearly  # noqa: E402
-from micro.rectal_mdr._sql import SQL_TEMPLATE  # noqa: E402
-
-OUTPUT_DIR = _REPO_ROOT / "micro" / "output"
+OUTPUT_DIR = module_output_dir("micro", "rectal_mdr")
 UNITS = ["E073", "I073"]
 
 
@@ -69,7 +64,7 @@ def main() -> None:
         sub = df[df["ou_loc_ref"] == unit].copy()
         out_path = OUTPUT_DIR / f"rectal_mdr_{unit}_{min_year}-{max_year}.csv"
         sub.to_csv(out_path, index=False)
-        print(f"  [{unit}] {len(sub)} filas -> {out_path.relative_to(_REPO_ROOT)}")
+        print(f"  [{unit}] {len(sub)} filas -> {out_path.relative_to(REPO_ROOT)}")
 
 
 if __name__ == "__main__":

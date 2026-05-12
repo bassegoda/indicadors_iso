@@ -1,5 +1,5 @@
 otros/
-output/
+/output/
 **/output/
 data/
 deliris/*.png
@@ -15,3 +15,8 @@ venv/
 # Python cache
 __pycache__/
 *.pyc
+
+# Packaging
+*.egg-info/
+build/
+dist/

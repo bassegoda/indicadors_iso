@@ -16,14 +16,13 @@ import argparse
 import sys
 from pathlib import Path
 
-# Añadir raíz del proyecto para importar connection
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+from indicadors_iso._paths import module_output_dir
+from indicadors_iso.connection import execute_query
 
 # Rutas
 DYNAMIC_FORMS_DIR = Path(__file__).resolve().parent
 QUERIES_DIR = DYNAMIC_FORMS_DIR / "queries"
-OUTPUT_DIR = DYNAMIC_FORMS_DIR / "output"
+OUTPUT_DIR = module_output_dir("dynamic_forms")
 
 
 def get_available_queries():
@@ -40,8 +39,6 @@ def get_query_name(sql_path: Path) -> str:
 
 def run_query(sql_path: Path, verbose: bool = True):
     """Ejecuta una query SQL y devuelve el DataFrame."""
-    from connection import execute_query
-
     sql = sql_path.read_text(encoding="utf-8")
     return execute_query(sql, verbose=verbose)
 

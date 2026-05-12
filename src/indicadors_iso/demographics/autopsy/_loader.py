@@ -1,14 +1,10 @@
 """Loader y mergers para indicadores de autopsia/necropsia."""
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-
 import pandas as pd
 
-from demographics.autopsy._sql import render_sql
-
-_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+from indicadors_iso.connection import execute_query_yearly
+from indicadors_iso.demographics.autopsy._sql import render_sql
 
 AUTOPSY_JOIN_KEYS_PER_UNIT = ["patient_ref", "episode_ref", "ou_loc_ref", "stay_id"]
 AUTOPSY_JOIN_KEYS_PREDOMINANT = ["patient_ref", "episode_ref"]
@@ -29,8 +25,6 @@ def load_autopsy_cohort(
         f"[autopsy] descargando autopsias/necropsias año a año desde Metabase "
         f"({min_year}-{max_year}, {list(units)})…"
     )
-    sys.path.insert(0, str(_REPO_ROOT))
-    from connection import execute_query_yearly
 
     df = execute_query_yearly(
         lambda year: render_sql(year, year, units=units),

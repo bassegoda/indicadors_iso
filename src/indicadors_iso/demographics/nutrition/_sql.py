@@ -23,7 +23,7 @@ dos consultas SQL casi idénticas.
 """
 from __future__ import annotations
 
-from demographics.nutrition._config import (
+from indicadors_iso.demographics.nutrition._config import (
     enteral_predicate,
     parenteral_predicate,
 )

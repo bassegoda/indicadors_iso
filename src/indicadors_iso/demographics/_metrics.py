@@ -2,7 +2,7 @@ from typing import Optional
 
 import pandas as pd
 
-from demographics._bed_capacity_eras import COMBINED_UNIT_LABEL
+from indicadors_iso.demographics._bed_capacity_eras import COMBINED_UNIT_LABEL
 
 ABS_CLINIC = [
     "2A", "2B", "2C", "2D", "2E",

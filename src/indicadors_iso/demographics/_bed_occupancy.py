@@ -18,13 +18,14 @@ from typing import Iterable, Optional
 
 import pandas as pd
 
-from demographics._bed_capacity_sql import query_bed_capacity
-from demographics._bed_capacity_eras import (
+from indicadors_iso._paths import module_output_dir
+from indicadors_iso.demographics._bed_capacity_eras import (
     COMBINED_UNIT_LABEL,
     lookup_capacity_for_month,
 )
+from indicadors_iso.demographics._bed_capacity_sql import query_bed_capacity
 
-_CACHE_DIR = Path(__file__).resolve().parent / "output"
+_CACHE_DIR = module_output_dir("demographics", "_bed_capacity_cache")
 
 
 def _cache_path(units: Iterable[str], min_year: int, max_year: int) -> Path:

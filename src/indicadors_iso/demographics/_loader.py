@@ -33,14 +33,12 @@ Augmentación sintética 2025:
 from __future__ import annotations
 
 import random
-import sys
 from datetime import datetime, timedelta
-from pathlib import Path
 from typing import Optional, Union
 
 import pandas as pd
 
-_REPO_ROOT = Path(__file__).resolve().parent.parent
+from indicadors_iso.connection import execute_query_yearly
 
 # ---------------------------------------------------------------------------
 # Augmentación sintética 2025 — TEMPORAL
@@ -88,8 +86,6 @@ def load_cohort(
         f"[loader] descargando cohorte año a año desde Metabase "
         f"({min_year}-{max_year})…"
     )
-    sys.path.insert(0, str(_REPO_ROOT))
-    from connection import execute_query_yearly
 
     df = execute_query_yearly(
         lambda year: sql_template.format(min_year=year, max_year=year),

@@ -21,7 +21,6 @@ Output:
 """
 
 import sys
-from pathlib import Path
 from datetime import datetime
 
 import matplotlib.pyplot as plt
@@ -31,15 +30,10 @@ import pandas as pd
 from matplotlib.backends.backend_pdf import PdfPages
 from matplotlib.gridspec import GridSpec
 
-# ── Connection setup (same as extract_ward_stays.py) ──────────────────────
-SCRIPT_DIR = Path(__file__).resolve().parent
-ROOT_DIR = SCRIPT_DIR.parent
-sys.path.insert(0, str(ROOT_DIR))
+from indicadors_iso._paths import module_output_dir
+from indicadors_iso.connection import execute_query
 
-from connection import execute_query
-
-OUTPUT_DIR = SCRIPT_DIR / "output"
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = module_output_dir("drg")
 
 
 # ══════════════════════════════════════════════════════════════════════════

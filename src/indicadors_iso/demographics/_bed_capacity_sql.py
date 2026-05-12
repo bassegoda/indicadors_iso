@@ -137,12 +137,7 @@ def query_bed_capacity(
     Columnas: unit, year, month, hours_in_month, bed_hours_used,
     n_active_place_refs, bed_hours_available.
     """
-    import sys
-    from pathlib import Path
-
-    repo_root = Path(__file__).resolve().parent.parent
-    sys.path.insert(0, str(repo_root))
-    from connection import execute_query  # noqa: E402
+    from indicadors_iso.connection import execute_query
 
     sql = build_sql(units, min_year, max_year, fake_bed_place_refs)
     df = execute_query(sql, verbose=verbose)

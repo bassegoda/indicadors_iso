@@ -6,37 +6,31 @@ y se asignan a la unidad donde el paciente pasó más tiempo. Genera UN
 único informe combinado para E073 + I073.
 """
 
-import sys
-from pathlib import Path
-
-_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(_REPO_ROOT))
-
-
-from demographics._bed_occupancy import compute_bed_occupancy_nominal
-from demographics._config import FAKE_BED_PLACE_REFS_E073
-from demographics._loader import (
+from indicadors_iso._paths import module_output_dir
+from indicadors_iso.demographics._bed_occupancy import compute_bed_occupancy_nominal
+from indicadors_iso.demographics._config import FAKE_BED_PLACE_REFS_E073
+from indicadors_iso.demographics._loader import (
     SYNTHETIC_LOOKBACK_YEARS,
     SYNTHETIC_YEAR,
     augment_synthetic_2025,
     compute_3y_mean_target,
     load_cohort,
 )
-from demographics._metrics import compute_summary
-from demographics._report import generate_html, to_dataframe
-from demographics.autopsy._loader import (
+from indicadors_iso.demographics._metrics import compute_summary
+from indicadors_iso.demographics._report import generate_html, to_dataframe
+from indicadors_iso.demographics.autopsy._loader import (
     load_autopsy_cohort,
     merge_predominant as merge_autopsy_predominant,
 )
-from demographics.nutrition._loader import (
+from indicadors_iso.demographics.nutrition._loader import (
     load_nutrition_cohort,
     merge_predominant as merge_nutrition_predominant,
 )
-from demographics.predominant_unit._sql import SQL_TEMPLATE
+from indicadors_iso.demographics.predominant_unit._sql import SQL_TEMPLATE
 
 UNITS = ["E073", "I073"]
 
-OUTPUT_DIR = _REPO_ROOT / "demographics" / "output" / "predominant_unit"
+OUTPUT_DIR = module_output_dir("demographics", "predominant_unit")
 
 
 def parse_year_input(text: str) -> tuple[int, int]:

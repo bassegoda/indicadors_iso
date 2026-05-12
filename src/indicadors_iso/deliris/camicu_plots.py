@@ -14,15 +14,19 @@ Writes to ./plots/:
   - camicu_daily_coverage_excl_deep_rass_by_icu.png
 """
 
-import pandas as pd
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import numpy as np
-from pathlib import Path
+import pandas as pd
 
-BASE_DIR = Path(__file__).parent
-OUTPUT_DIR = BASE_DIR / "plots"
-OUTPUT_DIR.mkdir(exist_ok=True)
+from indicadors_iso._paths import module_output_dir
+
+# CAM-ICU CSVs are produced by `deliris/run_sql.py` into the centralized
+# output dir. Plots go into a `plots/` subfolder next to them.
+BASE_DIR = module_output_dir("deliris")
+OUTPUT_DIR = module_output_dir("deliris", "plots")
 
 MAX_YEAR = 2025
 

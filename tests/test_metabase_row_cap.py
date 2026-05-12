@@ -2,23 +2,17 @@
 Comprueba si la API de Metabase sigue truncando resultados a 2000 filas.
 
 Uso:
-    python tests/check_metabase_row_cap.py
-    python tests/check_metabase_row_cap.py --year 2024 --probe-limit 5000
+    pytest tests/test_metabase_row_cap.py            # ejecución como test
+    python tests/test_metabase_row_cap.py            # ejecución directa con argparse
+    python tests/test_metabase_row_cap.py --year 2024 --probe-limit 5000
 """
 
 from __future__ import annotations
 
 import argparse
 import sys
-from pathlib import Path
 
-# Permite importar módulos desde la raíz del repositorio al ejecutar:
-# python tests/check_metabase_row_cap.py
-ROOT_DIR = Path(__file__).resolve().parents[1]
-if str(ROOT_DIR) not in sys.path:
-    sys.path.insert(0, str(ROOT_DIR))
-
-from connection import METABASE_SILENT_ROW_CAP, execute_query
+from indicadors_iso.connection import METABASE_SILENT_ROW_CAP, execute_query
 
 
 def build_count_query(year: int) -> str:

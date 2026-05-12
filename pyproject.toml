@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "indicadors_iso"
+version = "0.1.0"
+description = "Clinical quality indicators for Hospital Clínic de Barcelona (Metabase + DataNex on AWS Athena)."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Octavi" }]
+dependencies = [
+    "matplotlib>=3.10",
+    "numpy>=2.0",
+    "pandas>=2.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.32",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"indicadors_iso.deliris" = ["sql/*.sql"]
+"indicadors_iso.dynamic_forms" = ["queries/*.sql"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["output", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

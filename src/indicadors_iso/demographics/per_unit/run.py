@@ -14,39 +14,34 @@ mergea en la cohorte para enriquecer el reporting (mediana global,
 subgrupo cirrosis y subgrupo procedencia "otro hospital").
 """
 
-import sys
-from pathlib import Path
-
 import pandas as pd
 
-_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(_REPO_ROOT))
-
-from demographics._bed_occupancy import compute_bed_occupancy_nominal
-from demographics._config import FAKE_BED_PLACE_REFS_E073
-from demographics._loader import (
+from indicadors_iso._paths import module_output_dir
+from indicadors_iso.demographics._bed_occupancy import compute_bed_occupancy_nominal
+from indicadors_iso.demographics._config import FAKE_BED_PLACE_REFS_E073
+from indicadors_iso.demographics._loader import (
     SYNTHETIC_LOOKBACK_YEARS,
     SYNTHETIC_YEAR,
     augment_synthetic_2025,
     compute_3y_mean_target,
     load_cohort,
 )
-from demographics._metrics import compute_summary
-from demographics._report import generate_html, to_dataframe
-from demographics.autopsy._loader import (
+from indicadors_iso.demographics._metrics import compute_summary
+from indicadors_iso.demographics._report import generate_html, to_dataframe
+from indicadors_iso.demographics.autopsy._loader import (
     load_autopsy_cohort,
     merge_per_unit as merge_autopsy_per_unit,
 )
-from demographics.nutrition._loader import (
+from indicadors_iso.demographics.nutrition._loader import (
     load_nutrition_cohort,
     merge_per_unit as merge_nutrition_per_unit,
 )
-from demographics.per_unit._sql import SQL_TEMPLATE
-from demographics.sofa._config import ICU_UNITS, WINDOW_HOURS
-from demographics.sofa._metrics import compute_sofa
-from demographics.sofa._sql import render_sql as render_sofa_sql
+from indicadors_iso.demographics.per_unit._sql import SQL_TEMPLATE
+from indicadors_iso.demographics.sofa._config import ICU_UNITS, WINDOW_HOURS
+from indicadors_iso.demographics.sofa._metrics import compute_sofa
+from indicadors_iso.demographics.sofa._sql import render_sql as render_sofa_sql
 
-OUTPUT_DIR = _REPO_ROOT / "demographics" / "output" / "per_unit"
+OUTPUT_DIR = module_output_dir("demographics", "per_unit")
 
 UNITS = ["E073", "I073"]
 

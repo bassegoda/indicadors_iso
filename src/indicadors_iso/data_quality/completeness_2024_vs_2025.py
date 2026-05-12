@@ -11,19 +11,14 @@ report to ``data_quality/output/``.
 
 from __future__ import annotations
 
-import sys
 from datetime import date
-from pathlib import Path
 
 import pandas as pd
 
-root_dir = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(root_dir))
-
-from connection import execute_query  # noqa: E402
-from data_quality import _sql  # noqa: E402
-from data_quality import _metrics  # noqa: E402
-from data_quality._report import generate_html  # noqa: E402
+from indicadors_iso._paths import module_output_dir
+from indicadors_iso.connection import execute_query
+from indicadors_iso.data_quality import _metrics, _sql
+from indicadors_iso.data_quality._report import generate_html
 
 
 def _parse_years(text: str, default: tuple[int, int]) -> tuple[int, int]:
@@ -162,8 +157,7 @@ def main() -> None:
     )
 
     # --- Output ---
-    output_dir = Path(__file__).parent / "output"
-    output_dir.mkdir(exist_ok=True)
+    output_dir = module_output_dir("data_quality")
     tag = f"{y1}_vs_{y2}"
 
     def _csv(df: pd.DataFrame, name: str) -> None:

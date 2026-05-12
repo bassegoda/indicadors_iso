@@ -16,15 +16,15 @@ Tests estadísticos:
 """
 from __future__ import annotations
 
-from pathlib import Path
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy.stats import chi2_contingency, linregress
 
-_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-OUT_DIR = _REPO_ROOT / "micro" / "output"
+from indicadors_iso._paths import REPO_ROOT, module_output_dir
+
+_REPO_ROOT = REPO_ROOT
+OUT_DIR = module_output_dir("micro", "rectal_mdr")
 
 UNITS = ["E073", "I073"]
 TOP_N = 10

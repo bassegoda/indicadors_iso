@@ -2,19 +2,12 @@
 Análisis de nutrición enteral y parenteral
 """
 
-import sys
-from pathlib import Path
 import pandas as pd
 
-# Añadir el directorio raíz al path
-project_root = Path(__file__).parent.parent
-sys.path.append(str(project_root))
+from indicadors_iso._paths import module_output_dir
+from indicadors_iso.connection import execute_query
 
-from connection import execute_query
-
-# Configurar carpeta de output
-OUTPUT_DIR = Path(__file__).resolve().parent / "output"
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = module_output_dir("nutritions")
 
 # Configuración de pandas
 pd.set_option('display.max_columns', None)

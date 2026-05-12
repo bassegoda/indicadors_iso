@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from data_quality._metrics import MONTH_NAMES_ES
+from indicadors_iso.data_quality._metrics import MONTH_NAMES_ES
 
 
 _CSS = """

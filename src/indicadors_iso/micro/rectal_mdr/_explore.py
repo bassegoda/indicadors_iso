@@ -19,18 +19,16 @@ Salidas en `micro/output/exploratory/`:
 from __future__ import annotations
 
 import re
-import sys
-from pathlib import Path
 
 import pandas as pd
 
-_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(_REPO_ROOT))
+from indicadors_iso._paths import REPO_ROOT, module_output_dir
+from indicadors_iso.connection import execute_query
 
-from connection import execute_query  # noqa: E402
+OUT_DIR = module_output_dir("micro", "rectal_mdr")
+EXP_DIR = module_output_dir("micro", "rectal_mdr", "exploratory")
 
-OUT_DIR = _REPO_ROOT / "micro" / "output"
-EXP_DIR = OUT_DIR / "exploratory"
+_REPO_ROOT = REPO_ROOT  # kept for relative_to() prints below
 
 # Enterobacterales del top-10 (post-merge K. pneumoniae complex, etc.)
 ENTERO_RAW_TO_NORM = {
